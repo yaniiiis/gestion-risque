@@ -1,0 +1,27 @@
+<h3 class="DialogTitle" mat-dialog-title>Ajouter Un domaine</h3>
+<div mat-dialog-content>
+  <form class="addForm" [formGroup]="formGroup">
+    <input
+      class="formInput"
+      type="text"
+      placeholder="Nom"
+      name="name"
+      formControlName="name"
+    />
+    <span *ngIf="name.touched && name.invalid" class="span-error">
+      Champ invalid
+    </span>
+  </form>
+</div>
+<div class="myActionsContainer">
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button
+    mat-button
+    cdkFocusInitial
+    [mat-dialog-close]="name.value"
+    class="deleteAction"
+    [disabled]="formGroup.invalid"
+  >
+    Ajouter
+  </button>
+</div>

@@ -1,0 +1,12 @@
+.textarea-container .comment-submit {
+    translate: -20px -60px;
+  }
+
+  .textarea-container textarea {
+    height: 150px!important;
+    padding-right: 130px!important;
+  }
+
+  .form-floating>.form-control-plaintext~label, .form-floating>.form-control:focus~label, .form-floating>.form-control:not(:placeholder-shown)~label, .form-floating>.form-select~label {
+    transform: scale(.85) translateY(-3rem) translateX(.15rem);
+  }

@@ -1,0 +1,76 @@
+
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <div class="yz_container">
+          <table>
+            <thead>
+              <th class="theed__th--indicateur">Indicateur</th>
+              <th *ngFor="let date of header">{{ date }}</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let element of data">
+                <td class="tbody__td--label">{{ element.label }}</td>
+                <td class="tbody__td" *ngFor="let value of element.value">
+                  <tr class="tbody__td__tr yz_green">
+                    {{
+                      value < element.min ? value.toString() + element.unit : ""
+                    }}
+                  </tr>
+                  <tr class="tbody__td__tr yz_yellow">
+                    {{
+                      value >= element.min && value <= element.limit
+                        ? value.toString() + element.unit
+                        : ""
+                    }}
+                  </tr>
+                  <tr class="tbody__td__tr yz_red">
+                    {{
+                      value > element.limit
+                        ? value.toString() + element.unit
+                        : ""
+                    }}
+                  </tr>
+                </td>
+                <td class="tbody__td--limit">{{ element.limit }}</td>
+                <td class="tbody__td--trigger">
+                  <tr class="tbody__td__tr yz_green">
+                    <td class="tbody__td--compareValues">
+                      < {{ element.min + element.unit }}
+                    </td>
+                    <td class="tbody__td--colors yz_bgGreen"></td>
+                  </tr>
+                  <tr class="tbody__td__tr yz_yellow">
+                    <td class="tbody__td--compareValues">
+                      {{ element.limit + element.unit }} -
+                      {{ element.min + element.unit }}
+                    </td>
+                    <td class="tbody__td--colors yz_bgYellow"></td>
+                  </tr>
+                  <tr class="tbody__td__tr yz_red">
+                    <td class="tbody__td--compareValues">
+                      > {{ element.limit + element.unit }}
+                    </td>
+                    <td class="tbody__td--colors yz_bgRed"></td>
+                  </tr>
+                </td>
+                <td class="tbody__td--commentaire">
+                  {{ element.commentaire }}
+                </td>
+              </tr>
+            </tbody>
+            <tfoot></tfoot>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card-body">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<a class="button" target="_blank" href="https://angular.io/api/common/DatePipe">
+    More info in Docs DatePipe
+  </a>
+  <table width="100%">
+    <tr>
+      <th colspan="2">Test format Date Angular v.{{ version }}</th>
+    </tr>
+    <tr>
+      <th>Date</th>
+      <th>Format</th>
+    </tr>
+    <tr>
+      <th class="sub" colspan="2">Model Date ({{ dateNow }})</th>
+    </tr>
+    <tr *ngFor="let format of formatsDateTest">
+      <td>{{ dateNow | date: format }}</td>
+      <td>{{ format }}</td>
+    </tr>
+    <tr>
+      <th class="sub" colspan="2">Model string ISO ({{ dateNowISO }})</th>
+    </tr>
+    <tr *ngFor="let format of formatsDateTest">
+      <td>{{ dateNowISO | date: format }}</td>
+      <td>{{ format }}</td>
+    </tr>
+    <tr>
+      <th class="sub" colspan="2">
+        Model Number Milliseconds ({{ dateNowMilliseconds }})
+      </th>
+    </tr>
+    <tr *ngFor="let format of formatsDateTest">
+      <td>{{ dateNowMilliseconds | date: format }}</td>
+      <td>{{ format }}</td>
+    </tr>
+  </table>
+  
+

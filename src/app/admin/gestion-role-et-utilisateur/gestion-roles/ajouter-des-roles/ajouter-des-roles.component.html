@@ -1,0 +1,112 @@
+<style>
+    .card .card-header {
+        background: var(--theme-color)!important;
+    }
+</style>
+<div class="main-content" >
+    <div class="container-fluid">
+         <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Ajouter un role </h4>
+                    </div>
+                    <div class="card-body">
+                     
+                              <form  [formGroup]="AddRoleForm" (ngSubmit)="onSubmit()" name="new-role-name">
+                                
+                                <div class="row">
+                                  <div class="col-lg-12">
+                                    <div class="form-group">
+                                      <label for="roleName">  nom de role </label>
+                                      <input type="text" class="form-control" formControlName="roleName"  name="roleName" ngModel roleName/>
+                                      <p
+                                      class="text-danger"
+                                      *ngIf="(AddRoleForm.controls.roleName.touched || submitted) && AddRoleForm.controls.roleName.errors?.required"
+                                    >
+                                      champs obligatoire
+                                    </p>
+                                    <p
+                                      class="text-danger"
+                                      *ngIf="(AddRoleForm.controls.roleName.touched  || submitted) && AddRoleForm.controls.roleName.errors?.minlength"
+                                    >
+                                      pas moin de 4 caracteres
+                                    </p>
+                                    <p
+                                      class="text-danger"
+                                      *ngIf="(AddRoleForm.controls.roleName.touched || submitted) && AddRoleForm.controls.roleName.errors?.maxlength"
+                                    >
+                                      pas plus de 15 caracteres
+                                    </p>
+                                    </div>
+                                  </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6"> 
+                                    <ng-container  *ngIf="permissions$ | async as result"
+                                  [ngSwitch]="result.dataState">
+                        
+                                  <ng-container
+                                  *ngSwitchCase="DataStateEnum.LOADING"
+                                >
+                                <div class="d-flex justify-content-center">
+                                  <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
+                                </div>
+                                </ng-container>
+                                <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+                                  <label for="permission"> Permissions </label>
+                                  <div class="dropdown">
+                                 
+                                    <button class="btn btn-social dropdown-toggle  w-100" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Sélectionner des permissions
+                                    </button>
+                                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton"   >
+                         
+                                          <a class="dropdown-item"  *ngFor="let permissions of result.data" >
+                                            <div class="form-check permissions-checkboxes" >
+                                              <label class="form-check-label mr-3">
+                                                  <input class="form-check-input "  (change)="changeenvent($event, permission)"    type="checkbox" value="{{permissions.id}}" >
+                                                 {{permissions.namepermission}}
+                                                  <span class="form-check-sign">
+                                                      <span class="check"></span>
+                                                  </span>
+                                              </label>
+                                            </div>
+                                          </a>
+                                      </div> 
+                                    </div>
+                                   
+                                  </ng-container>
+                                  </ng-container></div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 ">
+                                  <ng-container  *ngIf="Niveaux$ | async as result"
+                                  [ngSwitch]="result.dataState">
+                        
+                                  <ng-container
+                                  *ngSwitchCase="DataStateEnum.LOADING"
+                                >
+                                <div class="d-flex justify-content-center">
+                                  <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                  </div>
+                                </div>
+                                </ng-container>
+                                <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+                                    <div class="form-group" >
+                                      <label for="niveau"> niveaux </label>
+                                      <select class="form-select" formControlName='niveau' name="niveau" ngModel niveau >
+                                        <option  *ngFor="let niveaux of result.data" value="{{niveaux.idNiv}}"  >{{niveaux.niveauNumber}}</option>
+                        
+                                      </select>
+                                    </div>
+                                  </ng-container>
+                                  </ng-container>
+                                  </div>
+                                  </div>
+                                  
+
+                                    <button class="btn btn-default align-content-center btn-sm " type="submit"  >sauvegarder</button>
+                                  </form>
+                                                        
+            </div>
+          

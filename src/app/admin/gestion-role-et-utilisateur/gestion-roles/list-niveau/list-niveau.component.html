@@ -1,0 +1,65 @@
+<style>
+    .card .card-header {
+      background: var(--theme-color) !important;
+    }
+  
+    
+  </style>
+  
+  <div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-plain">
+            <div class="card-header card-header-danger">
+              <h4 class="card-title">La liste des niveaux</h4>
+            </div>
+  
+            <div class="card-body">
+           
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-striped ">
+                      <thead class="text-dark">
+                        <th>id</th>
+                        <th>Nom de niveau</th>
+                        <th>Numero de niveau</th>
+                        <th>Modifier</th>
+                        <th>Supprimer</th>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let p of Niveaux">
+                          <td >{{ p.idNiv }}</td>
+                          <td >{{ p.nameNiveau }}</td>
+                          <td >{{ p.niveauNumber }}</td>
+                       
+                          <td>
+                            <button
+                              class="btn btn-default btn-sm"
+                              data-bs-toggle="modal"
+                              data-bs-target="#staticBackdrop"
+                              (click)="updateNiveau( p)"
+                            >
+                              modifier
+                            </button>
+                          </td>
+                          <td>
+                            <button
+                              class="btn btn-danger btn-sm"
+                              (click)="onDeleteNiveau(p)"
+                            >
+                              supprimer
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    
+                    </table>
+                  </div>
+            </div>
+          </div>
+        </div>
+  
+        <app-update-niveau [niveau]="niveau" ></app-update-niveau>
+      </div>
+    </div>
+  

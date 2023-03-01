@@ -1,0 +1,39 @@
+<!-- <style>
+   
+   .navbar{
+    background-color: var(--theme-color)!important;
+    padding: 5px!important;
+    border-radius: 12px;
+}
+
+  
+  </style> -->
+  
+  <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div class="container">
+     
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item" *ngFor="let item of getItems()" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="[item.path]" >{{item.menuItem}}</a>
+          </li>
+       
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+ 
+
+  <!-- <nav class="navbar navbar-expand-lg  navbar-light navbar-top "style="position: relative ; margin-top:-30px;" >
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse left-sidebar" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item" *ngFor="let item of getItems()" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="[item.path]" >{{item.menuItem}}</a>
+          </li>
+       
+        </ul>
+      </div>
+    </div>
+  </nav> -->

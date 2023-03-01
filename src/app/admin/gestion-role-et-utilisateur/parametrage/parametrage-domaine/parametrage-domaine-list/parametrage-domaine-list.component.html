@@ -1,0 +1,26 @@
+<div class="myContainer">
+  <div (clickOutside)="outsideClick()">
+    <input
+      type="text"
+      placeholder="Ajouter domaine"
+      #domaineInput
+      class="list_input"
+      value="{{ inputValue }}"
+      (keyup)="inputKeyup(domaineInput.value)"
+      (click)="toggleListDomaine()"
+    />
+    <div class="list_content" #domaineList *ngIf="isListDomaineOpen">
+      <div class="list_item" *ngFor="let item of domaineListToDisplay" #itemDiv>
+        <span class="item_name" #itemText>{{ item }}</span>
+        <mat-checkbox
+          #itemCheckbox
+          color="primary"
+          (change)="checkboxChange($event, item)"
+          [checked]="checked(item)"
+        ></mat-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <div (click)="openAddDomaineDialog()" class="addDiv">+</div>
+</div>

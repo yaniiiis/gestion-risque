@@ -1,0 +1,68 @@
+<h3 class="DialogTitle" mat-dialog-title>Ajouter au {{ data.key }}</h3>
+<div mat-dialog-content>
+  <form class="addForm" [formGroup]="formGroup">
+    <div class="form-div">
+      <input
+        class="formInput"
+        type="text"
+        placeholder="Code"
+        formControlName="code"
+        name="code"
+      />
+      <span *ngIf="code.touched && code.invalid" class="span-error">
+        <p *ngIf="code.errors?.exist; else other">
+          Ce code exist déja dans ce domaine
+        </p>
+        <ng-template #other> <p>Ce code est invalid</p> </ng-template>
+      </span>
+    </div>
+
+    <div class="form-div">
+      <textarea
+        formControlName="description"
+        rows="5"
+        class="formTextarea"
+        type="text"
+        placeholder="Description"
+        name="description"
+      ></textarea>
+      <span
+        *ngIf="description.touched && description.invalid"
+        class="span-error"
+      >
+        Ce champ est invalid
+      </span>
+    </div>
+
+    <div class="form-div">
+      <input
+        class="formInput"
+        type="date"
+        placeholder="Date"
+        formControlName="date"
+        name="date"
+      />
+      <span *ngIf="date.touched && date.invalid" class="span-error">
+        Ce champ est invalid
+      </span>
+    </div>
+  </form>
+</div>
+<div class="myActionsContainer">
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button
+    mat-button
+    cdkFocusInitial
+    [mat-dialog-close]="{
+      id: 0,
+      domainName: data.key,
+      domainCode: code.value,
+      description: description.value,
+      dateFin: date.value
+    }"
+    class="deleteAction"
+    [disabled]="formGroup.invalid"
+  >
+    Ajouter
+  </button>
+</div>

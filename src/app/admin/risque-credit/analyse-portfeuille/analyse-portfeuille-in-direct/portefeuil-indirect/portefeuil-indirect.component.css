@@ -1,0 +1,36 @@
+.portefeuilIndirect {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100vh;
+}
+
+.portefeuilIndirect_row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.portefeuilnDirect_row_comment {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  padding-top: 80px;
+  width: 100%;
+}
+
+.portefeuilInDirect_row_comment_title {
+  font-size: 20px;
+  line-height: 28px;
+  width: 320px;
+}
+
+.portefeuilInDirect_row_comment_content {
+  background-color: rgb(243 244 246);
+  padding: 20px;
+  border: solid;
+  border-width: 1px;
+  border-color: gray;
+  border-radius: 5px;
+}

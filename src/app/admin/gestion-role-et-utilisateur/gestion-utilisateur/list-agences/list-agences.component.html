@@ -1,0 +1,55 @@
+<!-- <style>
+    .card .card-header {
+        background: var(--theme-color)!important;
+    }
+</style> -->
+
+<div class="main-content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card card-plain">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title">La liste des agences</h4>
+            </div>
+  
+            <div class="card-body">
+           
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-striped ">
+                      <thead class="text-dark">
+                                    <th class=" hidden-xs">
+                                        id
+                                    </th>
+                                    <th>
+                                        Nom de l'agence
+                                    </th>
+                                    <th>
+                                        Description
+                                    </th>
+                                   
+                                    <th>
+                                      Modifier
+                                    </th>
+                                    <th>
+                                        Supprimer
+                                    </th>
+                                </thead>
+                                <tbody  >
+                                    <tr *ngFor="let p of agences">
+                                        <td >{{p.id}}</td>
+                                       <td >{{p.agenceName}}</td>
+                                       <td >{{p.description}}</td>
+                                      
+                                     <td>  <button class="btn btn-default btn-sm align-items-center"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="onUpdateAgence(p)"> modifier</button></td>
+                                       <td><button class="btn btn-danger  btn-sm align-items-center" (click)="onDeleteAgence(p)"> supprimer</button></td>
+                                    </tr>
+                                 
+                                </tbody>
+                            </table>
+                        </div>
+          
+            </div>
+        </div>
+    </div>
+    <app-update-agence [agence]="agence"></app-update-agence>

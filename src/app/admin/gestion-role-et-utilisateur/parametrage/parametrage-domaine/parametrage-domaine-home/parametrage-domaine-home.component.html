@@ -1,0 +1,8 @@
+<div>
+  <app-parametrage-domaine-list></app-parametrage-domaine-list>
+  <app-parametrage-domaine-table
+    *ngFor="let item of domaineMap | keyvalue"
+    [key]="item.key"
+    [domains]="item.value"
+  ></app-parametrage-domaine-table>
+</div>

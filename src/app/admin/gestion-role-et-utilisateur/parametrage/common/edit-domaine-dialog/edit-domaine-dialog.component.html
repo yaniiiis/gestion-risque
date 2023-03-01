@@ -1,0 +1,67 @@
+<h3 class="DialogTitle" mat-dialog-title>
+  Modfier {{ data.domaine.domainCode }}
+</h3>
+<div mat-dialog-content>
+  <form class="addForm" [formGroup]="formGroup">
+    <div class="form-div">
+      <input
+        class="formInput"
+        type="text"
+        placeholder="Code"
+        formControlName="code"
+        name="code"
+      />
+      <span *ngIf="code.touched && code.invalid" class="span-error">
+        Ce champ est invalid
+      </span>
+    </div>
+
+    <div class="form-div">
+      <textarea
+        formControlName="description"
+        rows="5"
+        class="formTextarea"
+        type="text"
+        placeholder="Description"
+        name="description"
+      ></textarea>
+      <span
+        *ngIf="description.touched && description.invalid"
+        class="span-error"
+      >
+        Ce champ est invalid
+      </span>
+    </div>
+
+    <div class="form-div">
+      <input
+        class="formInput"
+        type="date"
+        placeholder="Date"
+        formControlName="date"
+        name="date"
+      />
+      <span *ngIf="date.touched && date.invalid" class="span-error">
+        Ce champ est invalid
+      </span>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions class="myActionsContainer">
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button
+    mat-button
+    [disabled]="formGroup.invalid"
+    cdkFocusInitial
+    [mat-dialog-close]="{
+      id: data.domaine.id,
+      domainName: data.domaine.domainName,
+      domainCode: code.value,
+      description: description.value,
+      dateFin: date.value
+    }"
+    class="deleteAction"
+  >
+    Modifier
+  </button>
+</div>

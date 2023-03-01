@@ -1,0 +1,100 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    #staticBackdrop {
+      background: rgba(0, 0, 0, 0.49) !important;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+      backdrop-filter: blur(8.2px) !important;
+      -webkit-backdrop-filter: blur(8.2px) !important;
+    }
+  
+   
+  </style>
+  
+  <div
+    class="modal fade update-role-modal"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" >
+      <div class="modal-content"  >
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modifier un role </h5>
+          <button
+            type="button"
+            class="btn-close closeModal" data-bs-dismiss="modal" aria-label="Close" (click)="onCloseModal()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form  name="update-role-data"  [formGroup]="UpdateRoleForm" >
+            <div class="form-group">
+            <input
+            type="text"
+            class="form-control"
+            formArrayName="id"
+            [hidden]="true"
+          />
+        </div>
+            <div class="form-group">
+              <label for="Role Name"> Role Name </label>
+              <input type="text" class="form-control" formControlName="name" value="{{ role?.name ? role.name : '' }}"/>
+            </div>
+  
+
+            <div class="form-group" >
+              <label for="niveaux"> Niveaux </label>
+              <select class="form-select" formControlName='niveaux' >
+                <option *ngFor="let niveau of Niveaux" value="{{niveau.idNiv}}"  selected={{niveau.idNiv}} >{{niveau.niveauNumber}}</option>
+  
+              </select>
+            </div>
+
+
+              <div class="form-group">               
+              <button class="btn btn-social dropdown-toggle btn-sm  w-100" type="button" id="dropdownMenuButton"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sélectionner des permissions
+              </button>
+              <div class="dropdown-menu pl-5" aria-labelledby="dropdownMenuButton"   >
+            <div *ngFor="let permission of permissions">
+              <input type="checkbox" formArrayName="permission"  value="{{permission.id}}" (change)="changeenvent($event)"  class="permissionCheckbox"/>       {{permission.namepermission}}
+             </div>
+             </div>
+             </div>
+
+
+          </form>
+  
+        </div>
+        <div class="modal-footer">
+          <button
+          (click)="onCloseModal()"
+          type="button"
+            type="button"
+            class="btn btn-secondary btn-sm closeModal"
+            data-bs-dismiss="modal"
+         
+                  >
+            Close
+          </button>
+          <button type="button" class="btn btn-default btn-sm" (click)="save()">
+            Enregistrer
+          </button>
+      </div>
+      </div>
+    </div>
+  </div>

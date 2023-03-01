@@ -1,0 +1,70 @@
+<style>
+    #staticBackdrop {
+      background: rgba(0, 0, 0, 0.49) !important;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+      backdrop-filter: blur(8.2px) !important;
+      -webkit-backdrop-filter: blur(8.2px) !important;
+    }
+  </style>
+  
+  
+  <div
+    class="modal fade update-niveau-modal"
+    id="staticBackdrop"
+    data-bs-backdrop="static"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="staticBackdropLabel"
+    aria-hidden="true"
+  
+  >
+    <div class="modal-dialog" >
+      <div class="modal-content"  >
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modifier un niveau </h5>
+          <button
+            type="button"
+            class="btn-close closeModal" data-bs-dismiss="modal" aria-label="Close"     (click)="onCloseModal()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form  name="update-niveau-data"  [formGroup]="updateNiveauForm" >
+            <div class="form-group">
+            <input
+            type="text"
+            class="form-control"
+            formArrayName="idNiv"
+            [hidden]="true"
+          />
+        </div>
+            <div class="form-group">
+              <label for="nameNiveau"> nom de niveau </label>
+              <input type="text" class="form-control" formControlName="nameNiveau" name="nameNiveau"  value="{{niveau?.nameNiveau}}" [ngModel]="niveau?.nameNiveau"/>
+            </div>
+  
+            <div class="form-group">
+              <label for="niveauNumber"> numéro de niveau </label>
+              <input type="text" class="form-control" formControlName="niveauNumber" name="niveauNumber" value="{{niveau?.niveauNumber}}"  [ngModel]="niveau?.niveauNumber"/>
+            </div>
+            
+          </form>
+  
+        </div>
+        <div class="modal-footer">
+          <button
+          (click)="onCloseModal()"
+          type="button"
+            type="button"
+            class="btn btn-secondary closeModal"
+            data-bs-dismiss="modal"
+         
+                  >
+            Close
+          </button>
+          <button type="button" class="btn btn-default" (click)="save()">
+            Enregistrer
+          </button>
+      </div>
+      </div>
+    </div>
+  </div>

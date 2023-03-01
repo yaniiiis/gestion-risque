@@ -1,0 +1,52 @@
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Selectionner une date</mat-label>
+    <input
+      matInput
+      [(ngModel)]="selectedDate"
+      [matDatepicker]="picker"
+      (dateInput)="addEvent('input', $event)"
+      (dateChange)="addEvent('change', $event)"
+    />
+    <mat-hint>DD/MM/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+
+<div class="container">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <table class="table">
+          <thead>
+            <th>Secteur d’activité</th>
+            <th>{{ selectedDateNmoinsUn }}</th>
+            <th>{{ selectedDate }}</th>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let d of data">
+              <td>{{ d[0] }}</td>
+              <td style="font-weight: bold">
+                {{ d[1] }}
+              </td>
+              <td style="font-weight: bold">
+                {{ d[2] }}
+              </td>
+            </tr>
+            <tr *ngFor="let d of data1">
+              <td>Total</td>
+              <td style="font-weight: bold">
+                {{ d[0] }}
+              </td>
+              <td style="font-weight: bold">
+                {{ d[1] }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

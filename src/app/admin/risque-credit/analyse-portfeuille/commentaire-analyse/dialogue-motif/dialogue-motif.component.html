@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+  <p>Quel est le motif de rejet?</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Veuillez taper un motif</mat-label>
+    <textarea matInput [(ngModel)]="data.motif"> </textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button mat-button (click)="onOkClick()" [mat-dialog-close]="data.motif" cdkFocusInitial>Ok</button>
+</div>

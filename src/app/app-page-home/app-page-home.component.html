@@ -1,0 +1,129 @@
+<style>
+  i#visibilityLoginPassword{
+    color: #bfbbbb;
+    transform: translate(20px, -30px);
+  cursor: pointer;
+  }
+
+  .input-group{
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  </style>
+
+<div class="body">
+  <!-- Background Video-->
+  <video
+    class="bg-video"
+    playsinline="playsinline"
+    autoplay="autoplay"
+    muted="muted"
+    loop="loop"
+  >
+    <source
+      src="../../assets/imgHomePage/pexels-mikhail-nilov-7735816.mp4"
+      type="video/mp4"
+    />
+  </video>
+  <!-- Masthead-->
+  <div class="masthead">
+    <div class="masthead-content text-white">
+      <div class="container-fluid px-4 px-lg-0 d-flex flex-column">
+        <h1 class="fst-italic lh-1 mb-4">Gestion des risques V 1.0</h1>
+        <p class="mb-5">Application en cours de réalisation</p>
+
+        <form id="contactForm" [formGroup]="LoginForm" (ngSubmit)="onSubmit()">
+          <!-- Email address input-->
+          <div class="row input-group-newsletter d-flex flex-column">
+            <div class="col mb-2">
+              <div class="form-group">
+                <label for="name"> Username </label>
+                <input
+                  class="form-control rounded-3"
+                  id="Username"
+                  type="text"
+                  placeholder="Enter un Username"
+                  aria-label="Enter un Username"
+                  formControlName="username"
+                  name="username"
+                  ngModel
+                />
+
+                <p
+                class="text-danger fs-6"
+                *ngIf="(LoginForm.controls.username.touched || submitted) && LoginForm.controls.username.errors?.required"
+              >
+                Champs obligatoire
+              </p>
+              <p
+                class="text-danger fs-6"
+                *ngIf="(LoginForm.controls.username.touched  || submitted) && LoginForm.controls.username.errors?.minlength"
+              >
+                Pas moin de 4 caractères
+              </p>
+              <p
+                class="text-danger fs-6"
+                *ngIf="(LoginForm.controls.username.touched || submitted) && LoginForm.controls.username.errors?.maxlength"
+              >
+                Pas plus de 15 caractères
+              </p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="name"> Password </label>
+              <div class="input-group">
+                <input
+                  class="form-control rounded-3"
+                  id="password"
+                  type="password"
+                  placeholder="Enter votre Password "
+                  aria-label="Enter Password "
+                  name="password"
+                  formControlName="password"
+                  ngModel
+                /><i class="fa fa-eye" id="visibilityLoginPassword" ></i>
+              </div>
+
+              <p
+              class="text-danger fs-6"
+              *ngIf="(LoginForm.controls.password.touched || submitted) && LoginForm.controls.password.errors?.required"
+            >
+              Champs obligatoire
+            </p>
+            </div>
+
+            <div class="col-auto mt-2 d-flex flex-row">
+              <button
+                class="btn btn-primary"
+                type="submit"
+                [disabled]="LoginForm.invalid"
+              >
+               Se connecter
+              </button>
+              <a class="ml-5 mt-10 text-primary" routerLink="/ForgotPassword"
+                >Mot de passe oublié ?</a
+              >
+            </div>
+            <div
+              *ngIf="errorMessage !== null"
+              class="alert alert-danger mt-5 center"
+              role="alert"
+            >
+              {{ this.errorMessage }}
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="social-icons">
+    <div
+      class="d-flex flex-row flex-lg-column justify-content-center align-items-center h-100 mt-3 mt-lg-0"
+    >
+      <a class="btn btn-dark m-3" href="#!"><i class="fa fa-twitter"></i></a>
+      <a class="btn btn-dark m-3" href="#!"><i class="fa fa-facebook-f"></i></a>
+      <a class="btn btn-dark m-3" href="#!"><i class="fa fa-instagram"></i></a>
+    </div>
+  </div>
+</div>

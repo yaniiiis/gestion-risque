@@ -1,0 +1,92 @@
+<!-- <style>
+  .card .card-header {
+    background: var(--theme-color) !important;
+  }
+</style> -->
+
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card card-plain">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Actions de justice</h4>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card-body">
+            <mat-form-field appearance="fill">
+              <mat-label>Selectionner une date</mat-label>
+              <input
+                matInput [(ngModel)]="selectedDate"
+                [matDatepicker]="picker"
+                (dateInput)="addEvent('input', $event)"
+                (dateChange)="addEvent('change', $event)"
+              />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <table class="table table-bordered table-striped">
+              <thead>
+                <th class="text-center p-1" *ngFor="let head of Head">
+                  {{ head }}
+                </th>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let dataTable of Data"
+                  class="text-center text-dark fw-normal"
+                >
+                  <td>
+                    {{ dataTable[0] | date : "dd-MM-yyyy" }}
+                  </td>
+                  <td>
+                    {{ dataTable[1] }}
+                  </td>
+                  <td>
+                    {{ dataTable[2] }}
+                  </td>
+                  <td>
+                    {{ dataTable[3] }}
+                  </td>
+                  <td>
+                    {{ dataTable[4] }}
+                  </td>
+
+                  <td>
+                    {{ dataTable[5] }}
+                  </td>
+                  <td>
+                    {{ dataTable[6] }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="form-floating mt-5 textarea-container">
+              <textarea
+                class="form-control"
+                placeholder="Commentaire Analyste"
+                id="floatingTextarea2"
+                style="
+                  height: 100px;
+                  padding: 30px;
+                  background-color: #f9f9f9;
+                  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+                "
+              ></textarea>
+              <label class="text-bold text-dark" for="floatingTextarea2 "
+                >Commentaire Analyste</label
+              >
+              <button class="comment-submit btn btn-default pull-right">
+                Envoyer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

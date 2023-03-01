@@ -1,0 +1,851 @@
+  <div class="container">
+      <div class="form-group">
+          <div class="dropselect">
+            <!-- <mat-form-field appearance="fill">
+              <mat-label>Unité</mat-label>
+              <mat-select [(ngModel)]="selectedUnit">
+                <mat-option *ngFor="let unite of unites" [value]="unite.value">
+                  {{ unite.viewValue }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> -->
+            <mat-form-field appearance="fill">
+              <mat-label>Year</mat-label>
+              <input
+                matInput
+                [matDatepicker]="dp"
+                [formControl]="date"
+                (ngModelChange)="addEvent('change', $event)"
+              />
+              <mat-hint>YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dp"
+              ></mat-datepicker-toggle>
+              <mat-datepicker
+                #dp
+                startView="multi-year"
+                (yearSelected)="setMonthAndYear($event, dp)"
+                panelClass="example-month-picker"
+              >
+              </mat-datepicker>
+            </mat-form-field>
+
+            <button
+              class="btn btn-default btn-sm dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Date arreter
+            </button>
+
+            <div
+              class="dropdown-menu text-center"
+              aria-labelledby="dropdownMenuButton"
+            >
+              <div *ngFor="let t of filterAvailablePeriods">
+                <label for="{{ t }}">
+                  <input
+                    type="checkbox"
+                    id="check{{ t.datereporte }}"
+                    (change)="stateChanged($event, t)"
+                    [checked]="t.checked"
+                    [value]="t.datereporte"
+                    
+                  />
+                  {{ t.datereporte | date :'dd/MM/yyyy'}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <button
+            class="btn btn-default btn-sm"
+            (click)="genrerRapportAnalysePortefeuilleDirect()"
+          >
+            Générer Rapport
+          </button>
+
+          <button
+            class="btn btn-default btn-sm"
+            (click)="graphePortefeuilDirect()"
+          >
+            Graphiques
+          </button>
+          <button class="btn btn-default btn-sm" (click)="commentaireAnalyse()">
+            Commentaire
+          </button>
+        </div>
+      
+
+     
+        <div class="row">
+          <table class="table table-bordered table-striped">
+            <col />
+            <colgroup span="2"></colgroup>
+            <colgroup span="2"></colgroup>
+
+            <tr class="head">
+              <td rowspan="2"></td>
+
+              <th
+                *ngFor="let head of headers"
+                [attr.colspan]="slectedPeriods.length + 1"
+                scope="colgroup"
+              >
+                {{ head }}
+              </th>
+            </tr>
+            <tr class="head">
+              <!--credit partculier-->
+              <th scope="col">
+                {{ lastYear ? lastYear + "-12-31" : years + "-12-31" }}
+              </th>
+              <th scope="col" *ngFor="let sel of slectedPeriods">
+                {{ sel.datereporte | date :'dd/MM/yyyy' }}
+              </th>
+              <!--credit entreprise-->
+              <th scope="col">
+                {{ lastYear ? lastYear + "-12-31" : years + "-12-31" }}
+              </th>
+              <th scope="col" *ngFor="let sel of slectedPeriods">
+                {{ sel.datereporte | date :'dd/MM/yyyy' }}
+              </th>
+
+              <!--total-->
+              <th scope="col">
+                {{ lastYear ? lastYear + "-12-31" : years + "-12-31" }}
+              </th>
+              <th scope="col" *ngFor="let sel of slectedPeriods">
+                {{ sel.datereporte | date :'dd/MM/yyyy' }}
+              </th>
+              <!--montant-->
+              <th scope="col">Montant</th>
+              <th scope="col">%</th>
+            </tr>
+
+            <!--ligne one Total credits Direct -->
+            <tr>
+              <th scope="row">Total credits Direct</th>
+              <td>
+                {{
+                  creditReportFix.creditParticulier.creditTotaldirect
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                    
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditParticulier.creditTotaldirect
+                  | bigNumber : formule
+                  | number:'4.1-2'  
+                }}
+              </td>
+              <td>
+                {{
+                  creditReportFix.creditEntreprise.creditTotaldirect
+                  | bigNumber : formule
+                  | number:'4.1-2' 
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditEntreprise.creditTotaldirect
+                  | bigNumber : formule
+                  | number:'4.1-2' 
+                }}
+              </td>
+
+              <!--Total-->
+              <td>
+                {{
+                  creditReportFix.totalFix.creditTotaldirect
+                  | bigNumber : formule
+                  | number:'4.1-2'  
+                }}
+              </td>
+              <td *ngFor="let total of creditReportTotal">
+                {{
+                  total.creditTotaldirect
+                  | bigNumber : formule
+                  | number:'4.1-2'  
+                }}
+              </td>
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.variationMontant
+                    .creditTotaldirect
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                }}
+              </td>
+              <!--Pourcentage-->
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.resultPourcentage
+                    .creditTotaldirect
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                   
+                }}
+              </td>
+            </tr>
+
+            <!--ligne22 Creances doutouse-->
+            <tr>
+              <th scope="row">Creances doutouse</th>
+              <td>
+                {{
+                  creditReportFix.creditParticulier.creanceDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                  
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditParticulier.creanceDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                  
+                }}
+              </td>
+              <!--credit entrepise-->
+              <td>
+                {{
+                  creditReportFix.creditEntreprise.creanceDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                 
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditEntreprise.creanceDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                  
+                }}
+              </td>
+              <!---Total-->
+              <td>
+                {{
+                  creditReportFix.totalFix.creanceDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                  
+                }}
+              </td>
+              <td *ngFor="let total of creditReportTotal">
+                {{
+                  total.creanceDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                    
+                }}
+              </td>
+              <!--Montant-->
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.variationMontant
+                    .creanceDouteuse
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                  
+                }}
+              </td>
+              <!--pourcentage-->
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.resultPourcentage
+                    .creanceDouteuse
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                 
+                }}
+              </td>
+            </tr>
+            <!--Creances courantes-->
+            <tr>
+              <th scope="row">Créances courantes</th>
+              <td>
+                {{
+                  creditReportFix.creditParticulier.creanceCourant
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditParticulier.creanceCourant
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <!--credit entreprise-->
+              <td>
+                {{
+                  creditReportFix.creditEntreprise.creanceCourant
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditEntreprise.creanceCourant
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                 
+                }}
+              </td>
+
+              <!--Total-->
+              <td>
+                {{
+                  creditReportFix.totalFix.creanceCourant
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                 
+                }}
+              </td>
+              <td *ngFor="let total of creditReportTotal">
+                {{
+                  total.creanceCourant
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                    
+                }}
+              </td>
+
+              <!--Montant-->
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.variationMontant.creanceCourant
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                    
+                }}
+              </td>
+              <!--Pourcentage-->
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.resultPourcentage
+                    .creanceCourant
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                    
+                }}
+              </td>
+            </tr>
+            <!--Interet Reservee-->
+            <tr>
+              <th scope="row">Intérêts réservés</th>
+              <td>
+                {{
+                  creditReportFix.creditParticulier.interetReserve
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditParticulier.interetReserve
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                    
+                }}
+              </td>
+              <!--Credit entreprise-->
+              <td>
+                {{
+                  creditReportFix.creditEntreprise.interetReserve
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditEntreprise.interetReserve
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <!--Total-->
+              <td>
+                {{
+                  creditReportFix.totalFix.interetReserve
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngFor="let total of creditReportTotal">
+                {{
+                  total.interetReserve
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                    
+                }}
+              </td>
+
+              <!--Montant-->
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.variationMontant.interetReserve
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                    
+                }}
+              </td>
+
+              <!--****Pourcentatge******-->
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.resultPourcentage
+                    .interetReserve
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                  
+                }}
+              </td>
+            </tr>
+            <!--Provisions-->
+            <tr>
+              <th scope="row">Provisions</th>
+              <td>
+                {{
+                  creditReportFix.creditParticulier.provisions
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditParticulier.provisions
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                }}
+              </td>
+
+              <!--credit entreprise-->
+              <td>
+                {{
+                  creditReportFix.creditEntreprise.provisions
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                    
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditEntreprise.provisions
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <!--Total-->
+              <td>
+                {{
+                  creditReportFix.totalFix.provisions
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                 
+                }}
+              </td>
+              <td *ngFor="let total of creditReportTotal">
+                {{
+                  total.provisions
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                  
+                }}
+              </td>
+              <!--Monatnt-->
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.variationMontant.provisions
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                  
+                }}
+              </td>
+              <!--****Pourcentatge******-->
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.resultPourcentage.provisions
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                  
+                }}
+              </td>
+            </tr>
+            <!--Taux de créances douteuses-->
+            <tr>
+              <th scope="row">Taux de créances douteuses</th>
+              <td>
+                {{
+                  creditReportFix.creditParticulier.tauxCreanceDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods" class="table-borderless">
+                {{
+                  sel.creditParticulier.tauxCreanceDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <!--**************credit Entreprise****************-->
+              <td>
+                {{
+                  creditReportFix.creditEntreprise.tauxCreanceDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditEntreprise.tauxCreanceDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td>
+                {{
+                  creditReportFix.totalFix.tauxCreanceDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                    
+                }}
+              </td>
+              <td *ngFor="let total of creditReportTotal">
+                {{
+                  total.tauxCreanceDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                  
+                }}
+              </td>
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.variationMontant
+                    .tauxCreanceDouteuse
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.resultPourcentage
+                    .tauxCreanceDouteuse
+                    | bigNumber : formule
+                  | number:'4.1-2'
+                }}
+              </td>
+            </tr>
+            <!--Taux de couverture-->
+            <tr>
+              <th scope="row">Taux de couverture</th>
+              <td>
+                {{
+                  creditReportFix.creditParticulier.tauxOuverture
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditParticulier.tauxOuverture
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                  
+                }}
+              </td>
+              <td>
+                {{
+                  creditReportFix.creditEntreprise.tauxOuverture
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                  
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditEntreprise.tauxOuverture
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                    
+                }}
+              </td>
+              <!--Total-->
+              <td>
+                {{
+                  creditReportFix.totalFix.tauxOuverture
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                    
+                }}
+              </td>
+              <td *ngFor="let total of creditReportTotal">
+                {{
+                  total.tauxOuverture
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                
+                }}
+              </td>
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.variationMontant.tauxOuverture
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                  
+                }}
+              </td>
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.resultPourcentage.tauxOuverture
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+            </tr>
+            <!--Intérêts réservés des créances douteuses-->
+            <tr>
+              <th scope="row">Intérêts réservés des créances douteuses</th>
+              <td>
+                {{
+                  creditReportFix.creditParticulier
+                    .interetreservesCreancesDouteuse
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                  
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditParticulier.interetreservesCreancesDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td>
+                {{
+                  creditReportFix.creditEntreprise
+                    .interetreservesCreancesDouteuse
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                  
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditEntreprise.interetreservesCreancesDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                    
+                }}
+              </td>
+              <td>
+                {{
+                  creditReportFix.totalFix.interetreservesCreancesDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngFor="let total of creditReportTotal">
+                {{
+                  total.interetreservesCreancesDouteuse
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                  
+                }}
+              </td>
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.variationMontant
+                    .interetreservesCreancesDouteuse
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                  
+                }}
+              </td>
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.resultPourcentage
+                    .interetreservesCreancesDouteuse
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                   
+                }}
+              </td>
+            </tr>
+            <!--Créances douteuses net d'intérêts réservés-->
+            <tr>
+              <th scope="row">Créances douteuses net d'intérêts réservés</th>
+              <td>
+                {{
+                  creditReportFix.creditParticulier.creanceDouteuseNets
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditParticulier.creanceDouteuseNets
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                  
+                }}
+              </td>
+              <td>
+                {{
+                  creditReportFix.creditEntreprise.creanceDouteuseNets
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                  
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditEntreprise.creanceDouteuseNets
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td>
+                {{
+                  creditReportFix.totalFix.creanceDouteuseNets
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngFor="let total of creditReportTotal">
+                {{
+                  total.creanceDouteuseNets
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                  
+                }}
+              </td>
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.variationMontant
+                    .creanceDouteuseNets
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.resultPourcentage
+                    .creanceDouteuseNets
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                 
+                }}
+              </td>
+            </tr>
+            <!--Crédit Direct Net d'intérêts réservés-->
+            <tr>
+              <th scope="row">Crédit Direct Net d'intérêts réservés</th>
+              <td>
+                {{
+                  creditReportFix.creditParticulier
+                    .creditDirectNetInteretReserve
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditParticulier.creditDirectNetInteretReserve
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                 
+                }}
+              </td>
+              <td>
+                {{
+                  creditReportFix.creditEntreprise.creditDirectNetInteretReserve
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngFor="let sel of slectedPeriods">
+                {{
+                  sel.creditEntreprise.creditDirectNetInteretReserve
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                 
+                }}
+              </td>
+
+              <td>
+                {{
+                  creditReportFix.totalFix.creditDirectNetInteretReserve
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngFor="let total of creditReportTotal">
+                {{
+                  total.creditDirectNetInteretReserve
+                  | bigNumber : formule
+                  | number:'4.1-2'
+                   
+                }}
+              </td>
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.variationMontant
+                    .creditDirectNetInteretReserve
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                    
+                }}
+              </td>
+              <td *ngIf="slectedPeriods.length > 0">
+                {{
+                  creditReportAnalysePortfeuille.resultPourcentage
+                    .creditDirectNetInteretReserve
+                    | bigNumber : formule
+                    | number:'4.1-2'
+                    
+                }}
+              </td>
+            </tr>
+          </table>        
+      </div>
+    </div>
+

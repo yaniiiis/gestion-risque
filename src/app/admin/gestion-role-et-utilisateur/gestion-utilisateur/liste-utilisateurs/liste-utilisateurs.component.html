@@ -1,0 +1,104 @@
+<!-- <style>
+    .card .card-header {
+        background: var(--theme-color)!important;
+    }
+</style> -->
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">La liste des utilisateurs</h4>
+                    </div>
+                    <div class="card-body"   >
+
+                    <ng-container   *ngIf="users$ | async as result"
+                    [ngSwitch]="result.dataState">
+
+                  
+                        <ng-container
+                        *ngSwitchCase="DataStateEnum.LOADING"
+                      >
+                      <div class="d-flex justify-content-center">
+                        <div class="spinner-border" role="status">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                      </div>
+                      </ng-container>
+
+                      <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+                        <div class="col-12 text-center">
+                          <div class="alert alert-danger">
+                            {{ result.erroMessage }}
+                          </div>
+                        </div>
+                      </ng-container>
+
+                         <ng-container *ngSwitchCase="DataStateEnum.LOADED"> 
+                         
+                        <div class="table-responsive" >
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <th class=" hidden-xs">
+                                        id
+                                    </th>
+                                    <th>
+                                        Nom
+                                    </th>
+                                    <th>
+                                        Prenom
+                                    </th>
+                                    <th>
+                                        Username
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th>
+                                        Agence
+                                    </th>
+                                    <th>
+                                        Role
+                                    </th>
+                                    <th>
+                                        Permissions
+                                    </th>
+                                    <th>
+                                      Modifier
+                                    </th>
+                                    <th>
+                                        Supprimer
+                                    </th>
+                                </thead>
+                                <tbody  >
+                                    <tr *ngFor="let p of  result.data">
+                                        <td >{{p.id}}</td>
+                                       <td >{{p.nom}}</td>
+                                       <td >{{p.prenom}}</td>
+                                       <td >{{p.username}}</td>
+                                       <td >{{p.email}}</td>
+                                       <td >{{p.agence ? p.agence.agenceName : (empty) }}</td>
+                                       <td >{{p.roles.name}}</td>
+                                       <td >
+                                        <select class="form-select w-fit-content">
+                                            <option *ngFor="let permission of p.roles.permissions">{{permission.namepermission}}</option>
+                                        </select>
+                                       </td>
+                                     <td>  <button class="btn btn-default btn-sm"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="update(p)"> modifier</button></td>
+                                       <td><button class="btn btn-danger btn-sm " (click)="onDeleteUser(p)"> supprimer</button></td>
+                                    </tr>
+                                 
+                                </tbody>
+                            </table>
+                        </div>
+                    </ng-container>
+                    
+                </ng-container> 
+            </div>
+        </div>
+    </div>
+    <app-update-user-modal [user]="user"></app-update-user-modal>
+    
+          

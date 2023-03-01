@@ -1,0 +1,279 @@
+<div class="container">
+  <div class="form-group">
+    <button
+      class="btn btn-default pull-right"
+      (click)="graphePortefeuilinDirect()"
+    >
+      Graphiques
+    </button>
+    <!-- <select name="formule" id="formule" (change)="changeFormule($event)">
+      <option value="empty">rien</option>
+      <option value="Mln">Millions</option>
+      <option value="Mld">Milliards</option>
+    </select>-->
+
+    <div class="dropselect">
+      <mat-form-field appearance="fill">
+        <mat-label>Year</mat-label>
+        <input
+          matInput
+          [matDatepicker]="dp"
+          [formControl]="date"
+          (ngModelChange)="addEvent('change', $event)"
+        />
+        <mat-hint>YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker
+          #dp
+          startView="multi-year"
+          (yearSelected)="setMonthAndYear($event, dp)"
+          panelClass="example-month-picker"
+        >
+        </mat-datepicker>
+      </mat-form-field>
+      <button
+        class="btn btn-default btn-sm dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Date arreter
+      </button>
+      <div class="dropdown-menu pl-5" aria-labelledby="dropdownMenuButton">
+        <div *ngFor="let t of filterAvailablePeriods">
+          <label for="{{ t }}">
+            <input
+              type="checkbox"
+              id="check{{ t.datereporte }}"
+              (change)="stateChanged($event, t)"
+              [checked]="t.checked"
+              [value]="t.datereporte"
+            />{{ t.datereporte | date : "yyyy-MM-dd" }}
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table table-bordered table-striped">
+      <col />
+      <colgroup span="2"></colgroup>
+      <colgroup span="2"></colgroup>
+      <tr class="head">
+        <td rowspan="2"></td>
+        <th
+          *ngFor="let head of header"
+          [attr.colspan]="PeriodeDyna.length + 1"
+          scope="colgroup"
+        >
+          {{ head }}
+        </th>
+      </tr>
+      <tr class="head">
+        <!--Engagement HB-->
+
+        <th scope="col">
+          {{ lastYear ? lastYear + "-12-31" : years + "-12-31" }}
+        </th>
+        <th scope="col" *ngFor="let d of PeriodeDyna">
+          {{ d | date : "yyyy-MM-dd" }}
+        </th>
+        <!--Deport de garantie-->
+        <th scope="col">
+          {{ lastYear ? lastYear + "-12-31" : years + "-12-31" }}
+        </th>
+        <th scope="col" *ngFor="let d of PeriodeDyna">
+          {{ d | date : "yyyy-MM-dd" }}
+        </th>
+        <!--engagement net periode-->
+        <th scope="col">
+          {{ lastYear ? lastYear + "-12-31" : years + "-12-31" }}
+        </th>
+        <th scope="col" *ngFor="let d of PeriodeDyna">
+          {{ d | date : "yyyy-MM-dd" }}
+        </th>
+        <!--variation montant et pourcentatge-->
+        <th scope="col">Montant</th>
+        <th scope="col">%</th>
+      </tr>
+      <!--Ouverture de lettre de crédit-->
+      <tr class="">
+        <th scope="row">Ouverture de lettre de crédit</th>
+        <td>
+          {{
+            indirectfix.engagementHb.ouvertureLettreCredit
+              | bigNumber : formule
+              | number : "4.1-2" : "fr"
+          }}
+        </td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{
+            indirect.engagementhb.ouvertureLettreCredit
+              | number : "4.1-2" : "fr"
+          }}
+        </td>
+        <td>
+          {{
+            indirectfix.depotsgarantie.ouvertureLettreCredit
+              | number : "4.1-2" : "fr"
+          }}
+        </td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{
+            indirect.depotsgarantie.ouvertureLettreCredit
+              | number : "4.1-2" : "fr"
+          }}
+        </td>
+        <td>
+          {{
+            indirectfix.totalfix.ouvertureLettreCredit | number : "4.1-2" : "fr"
+          }}
+        </td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{
+            indirect.totalDynamic.ouvertureLettreCredit
+              | number : "4.1-2" : "fr"
+          }}
+        </td>
+        <td>
+          {{ resultVariation.ouvertureLettreCredit | number : "4.1-5" : "fr" }}
+        </td>
+        <td>
+          {{
+            resultPourcentage.ouvertureLettreCredit | number : "4.1-2" : "fr"
+          }}
+        </td>
+      </tr>
+      <!-- Cautions-->
+      <tr class="">
+        <th scope="row">Cautions</th>
+        <td>
+          {{ indirectfix.engagementHb.cautions | number : "4.1-2" : "fr" }}
+        </td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{ indirect.engagementhb.cautions | number : "4.1-2" : "fr" }}
+        </td>
+        <td>
+          {{ indirectfix.depotsgarantie.cautions | number : "4.1-2" : "fr" }}
+        </td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{ indirect.depotsgarantie.cautions | number : "4.1-2" : "fr" }}
+        </td>
+        <td>
+          {{ indirectfix.totalfix.cautions | number : "4.1-2" : "fr" }}
+        </td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{ indirect.totalDynamic.cautions | number : "4.1-2" : "fr" }}
+        </td>
+        <td>{{ resultVariation.cautions | number : "4.1-2" : "fr" }}</td>
+        <!--poucentage -->
+        <td>
+          {{ resultPourcentage.cautions | number : "4.1-2" : "fr" }}
+        </td>
+        <!-- Aval-->
+      </tr>
+      <tr class="">
+        <th scope="row">Aval</th>
+        <td>
+          {{ indirectfix.engagementHb.aval | number : "4.1-2" : "fr" }}
+        </td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{ indirect.engagementhb.aval | number : "4.1-2" : "fr" }}
+        </td>
+        <td>
+          {{ indirectfix.depotsgarantie.aval | number : "4.1-2" : "fr" }}
+        </td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{ indirect.depotsgarantie.aval | number : "4.1-2" : "fr" }}
+        </td>
+        <td>{{ indirectfix.totalfix.aval | number : "4.1-2" : "fr" }}</td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{ indirect.totalDynamic.aval | number : "4.1-2" : "fr" }}
+        </td>
+        <td>{{ resultVariation.aval | number : "4.1-2" : "fr" }}</td>
+        <!--poucentage -->
+        <td>{{ resultPourcentage.aval | number : "4.1-2" : "fr" }}</td>
+      </tr>
+      <!--Obligations cautionnées de douane-->
+      <tr class="">
+        <th>Obligations cautionnées de douane</th>
+        <td>
+          {{
+            indirectfix.engagementHb.obligationCautionneeDuanee
+              | number : "4.1-2" : "fr"
+          }}
+        </td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{
+            indirect.engagementhb.obligationCautionneeDuanee
+              | number : "4.1-2" : "fr"
+          }}
+        </td>
+        <td>
+          {{
+            indirectfix.depotsgarantie.obligationCautionneeDuanee
+              | number : "4.1-2" : "fr"
+          }}
+        </td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{
+            indirect.depotsgarantie.obligationCautionneeDuanee
+              | number : "4.1-2" : "fr"
+          }}
+        </td>
+        <td>
+          {{
+            indirectfix.totalfix.obligationCautionneeDuanee
+              | number : "4.1-2" : "fr"
+          }}
+        </td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{
+            indirect.totalDynamic.obligationCautionneeDuanee
+              | number : "4.1-2" : "fr"
+          }}
+        </td>
+        <td>
+          {{
+            resultVariation.obligationCautionneeDuanee | number : "4.1-2" : "fr"
+          }}
+        </td>
+        <td>
+          {{
+            resultPourcentage.obligationCautionneeDuanee
+              | number : "4.1-2" : "fr"
+          }}
+        </td>
+      </tr>
+      <!--Total-->
+      <tr class="">
+        <th>Total</th>
+        <td>
+          {{ totalIndirect.engagementhbTotal | number : "4.1-2" : "fr" }}
+        </td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{ indirect.totalEngagement | number : "4.1-2" : "fr" }}
+        </td>
+        <td>
+          {{ totalIndirect.depotsgarantieTotal | number : "4.1-2" : "fr" }}
+        </td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{ indirect.totalDepotsgarantie | number : "4.1-2" : "fr" }}
+        </td>
+        <td>{{ totalIndirect.totalFix }}</td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{ indirect.totalDynOfTotal | number : "4.1-2" : "fr" }}
+        </td>
+        <td *ngFor="let indirect of indirectDynamicArray">
+          {{ indirectDynamic.resultVariationTotal | number : "4.1-2" : "fr" }}
+        </td>
+        <td>
+          {{ indirectDynamic.resultPourcentageTotal | number : "4.1-2" : "fr" }}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

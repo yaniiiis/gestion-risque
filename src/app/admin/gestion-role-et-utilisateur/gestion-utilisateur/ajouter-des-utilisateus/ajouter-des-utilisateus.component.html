@@ -1,0 +1,181 @@
+
+<div class="main-content" >
+    <div class="container-fluid">
+         <div class="card card-plain">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title ">Ajouter Un Utilisateur </h4>
+                    </div>
+                    <div class="card-body">
+                            <div class="container ">
+                              <form  [formGroup]="AddUserForm" (ngSubmit)="onSubmit()">
+                                
+                                    <div class="form-group">
+                                      <label for="nom"> Nom </label>
+                                      <input type="text" class="form-control" formControlName="nom"  name="nom" ngModel nom/>
+                                      <p
+                                      class="text-danger"
+                                      *ngIf="(AddUserForm.controls.nom.touched || submitted)  && AddUserForm.controls.nom.errors?.required"
+                                    >
+                                      champs obligatoire
+                                    </p>
+                                    <p
+                                      class="text-danger"
+                                      *ngIf="(AddUserForm.controls.nom.touched || submitted)  && AddUserForm.controls.nom.errors?.minlength"
+                                    >
+                                      pas moin de 4 caracteres
+                                    </p>
+                                    <p
+                                      class="text-danger"
+                                      *ngIf="(AddUserForm.controls.nom.touched || submitted)  && AddUserForm.controls.nom.errors?.maxlength"
+                                    >
+                                      pas plus de 15 caracteres
+                                    </p>
+                                    </div>
+                          
+                                    <div class="form-group">
+                                      <label for="prenom"> Prenom </label>
+                                      <input type="text" class="form-control" formControlName="prenom" name="prenom" ngModel prenom/>
+                                      <p
+                                      class="text-danger"
+                                      *ngIf="(AddUserForm.controls.prenom.touched || submitted)  && AddUserForm.controls.prenom.errors?.required"
+                                    >
+                                      champs obligatoire
+                                    </p>
+                                    <p
+                                      class="text-danger"
+                                      *ngIf="(AddUserForm.controls.prenom.touched || submitted)  && AddUserForm.controls.prenom.errors?.minlength"
+                                    >
+                                      pas moin de 4 caracteres
+                                    </p>
+                                    <p
+                                      class="text-danger"
+                                      *ngIf="(AddUserForm.controls.prenom.touched || submitted)  && AddUserForm.controls.prenom.errors?.maxlength"
+                                    >
+                                      pas plus de 15 caracteres
+                                    </p> 
+                                    </div>
+                          
+                                    <div class="form-group">
+                                      <label for="username"> Username </label>
+                                      <input type="text" class="form-control" formControlName="username" name="username" ngModel username/>
+                                      <p
+                                      class="text-danger"
+                                      *ngIf="(AddUserForm.controls.username.touched || submitted)  && AddUserForm.controls.username.errors?.required"
+                                    >
+                                      champs obligatoire
+                                    </p>
+                                    <p
+                                      class="text-danger"
+                                      *ngIf="(AddUserForm.controls.username.touched || submitted)  && AddUserForm.controls.username.errors?.minlength"
+                                    >
+                                      pas moin de 4 caracteres
+                                    </p>
+                                    <p
+                                      class="text-danger"
+                                      *ngIf="(AddUserForm.controls.username.touched || submitted)  && AddUserForm.controls.username.errors?.maxlength"
+                                    >
+                                      pas plus de 15 caracteres
+                                    </p> 
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="password"> password </label>
+                                      <input type="text" class="form-control" formControlName="password"  name="password" ngModel password/>
+                                      <p
+                                      class="text-danger"
+                                      *ngIf="(AddUserForm.controls.password.touched || submitted)  && AddUserForm.controls.password.errors?.required"
+                                    >
+                                      champs obligatoire
+                                    </p>
+                                    <p
+                                      class="text-danger"
+                                      *ngIf="(AddUserForm.controls.password.touched || submitted)  && AddUserForm.controls.password.errors?.minlength"
+                                    >
+                                      pas moin de 4 caracteres
+                                    </p>
+                                    <p
+                                      class="text-danger"
+                                      *ngIf="(AddUserForm.controls.password.touched || submitted)  && AddUserForm.controls.password.errors?.maxlength"
+                                    >
+                                      pas plus de 15 caracteres
+                                    </p> 
+                                    </div>
+                          
+                                    <div class="form-group">
+                                      <label for="email"> Email </label>
+                                      <input type="text" class="form-control" formControlName="email" name="email" ngModel email/>
+                                      <p
+                                      class="text-danger"
+                                      *ngIf="(AddUserForm.controls.email.touched || submitted)  && AddUserForm.controls.email.errors?.required"
+                                    >
+                                      champs obligatoire
+                                    </p>
+                                    <p
+                                      class="text-danger"
+                                      *ngIf="(AddUserForm.controls.email.touched || submitted)  && AddUserForm.controls.email.errors?.email"
+                                    >
+                                     Respecter le format de l'email
+                                    </p>
+                                  
+                                      </div>
+                          
+                                    <ng-container  *ngIf="roles$ | async as result"
+                                    [ngSwitch]="result.dataState">
+                          
+                                    <ng-container
+                                    *ngSwitchCase="DataStateEnum.LOADING"
+                                  >
+                                  <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status">
+                                      <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                  </div>
+                                  </ng-container>
+                                 
+                                  <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+                                      <div class="form-group" >
+                                        <label for="role"> Role </label>
+                                        <select class="form-select" formControlName='roles' name="roles" ngModel roles >
+                                          <option  *ngFor="let role of result.data" value="{{role.id}}" [selected]="role.id" >{{role.name}}</option>
+                          
+                                        </select>
+                                      </div>
+                                    </ng-container>
+
+                                    </ng-container>
+                          
+                                    <ng-container  *ngIf="agences$ | async as result"
+                                    [ngSwitch]="result.dataState">
+                          
+                                    <ng-container
+                                    *ngSwitchCase="DataStateEnum.LOADING"
+                                  >
+                                  <div class="d-flex justify-content-center">
+                                    <div class="spinner-border" role="status">
+                                      <span class="visually-hidden">Loading...</span>
+                                    </div>
+                                  </div>
+                                  </ng-container>
+                                  <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+                                      <div class="form-group" >
+                                        <label for="agences"> agence </label>
+                                        <select class="form-select" formControlName='agence' name="agence" ngModel agence >
+                                          <option  *ngFor="let agence of result.data" value="{{agence.id}}" [selected]="agence.id"  >{{agence.agenceName}}</option>
+                          
+                                        </select>
+                                      </div>
+                                    </ng-container>
+                                    </ng-container>
+
+                                    <button class="btn btn-default align-content-center btn-sm " type="submit"   >sauvegarder</button>
+                                  </form>
+                                  <div
+                                  *ngIf="errorMessage !== null"
+                                  class="alert alert-danger mt-5 center "
+                                  role="alert"
+                                >
+                                  {{ errorMessage }}
+                                </div>
+                            </div>
+                            
+            </div>
+          

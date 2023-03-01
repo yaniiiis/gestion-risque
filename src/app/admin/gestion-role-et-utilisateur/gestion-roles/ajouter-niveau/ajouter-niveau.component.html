@@ -1,0 +1,79 @@
+
+<style>
+
+.card .card-header {
+  background: var(--theme-color)!important;
+}
+</style>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header card-header-danger">
+        <h4 class="card-title">Ajouter un niveau</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="AddNivForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="nameNiveau"> Nom de niveau </label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="nameNiveau"
+              name="nameNiveau"
+              ngModel
+              nameNiveau
+            />
+            <p
+              class="text-danger"
+              *ngIf="(AddNivForm.controls.nameNiveau.touched || submitted) && AddNivForm.controls.nameNiveau.errors?.required"
+            >
+              champs obligatoire
+            </p>
+            <p
+              class="text-danger"
+              *ngIf="(AddNivForm.controls.nameNiveau.touched  || submitted) && AddNivForm.controls.nameNiveau.errors?.minlength"
+            >
+              pas moin de 4 caracteres
+            </p>
+            <p
+              class="text-danger"
+              *ngIf="(AddNivForm.controls.nameNiveau.touched || submitted) && AddNivForm.controls.nameNiveau.errors?.maxlength"
+            >
+              pas plus de 15 caracteres
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label for="niveauNumber"> niveauNumber </label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="niveauNumber"
+              name="niveauNumber"
+              ngModel
+              niveauNumber
+            />
+            <p
+              class="text-danger"
+              *ngIf="(AddNivForm.controls.niveauNumber.touched || submitted) && AddNivForm.controls.niveauNumber.errors?.required"
+            >
+              champs obligatoire
+            </p>
+          
+          </div>
+
+          <button class="btn btn-default align-content-center btn-sm" type="submit" [disabled]="AddNivForm.invalid">
+            sauvegarder
+          </button>
+        </form>
+        <div
+          *ngIf="errorMessage !== null"
+          class="alert alert-danger mt-5 center"
+          role="alert"
+        >
+          {{ errorMessage }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

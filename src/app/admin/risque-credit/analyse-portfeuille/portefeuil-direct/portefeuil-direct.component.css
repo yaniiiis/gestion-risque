@@ -1,0 +1,57 @@
+.portefeuilDirect {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  /* height: 100vh; */
+}
+
+.portefeuilDirect_row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.portefeuilDirect_row_comment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  width: 550px;
+  border: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: gray;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  margin-left: 10px;
+  margin-right: 10px;
+  box-shadow: 3px 3px 9px -3px rgba(28, 28, 28, 0.75);
+  -webkit-box-shadow: 3px 3px 9px -3px rgba(28, 28, 28, 0.75);
+  -moz-box-shadow: 3px 3px 9px -3px rgba(28, 28, 28, 0.75);
+}
+
+.portefeuilDirect_row_comment_title {
+  font-size: 20px;
+  line-height: 28px;
+  padding-bottom: 20px;
+}
+.portefeuilDirect_row_comment_content {
+  background-color: #f7f7f7;
+  padding: 20px;
+  width: 100%;
+  border: none;
+}
+.comment_area {
+  height: 450px;
+}
+textarea::placeholder {
+  color: rgb(25, 25, 26);
+}
+.container-xl,
+.container-lg,
+.container-md,
+.container-sm,
+.container {
+  max-width: max-content !important;
+}

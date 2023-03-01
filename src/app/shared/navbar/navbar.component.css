@@ -1,0 +1,7 @@
+.d-none{
+    display: none;
+}
+.d-red{
+    background-color: rgb(218, 218, 140);
+    color: rgb(235, 119, 52);
+}

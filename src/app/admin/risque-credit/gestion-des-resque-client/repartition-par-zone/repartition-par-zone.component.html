@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-body ourClass">
+        <table class="table">
+          <thead>
+            <tr>
+              <div>
+                <mat-form-field appearance="fill">
+                  <mat-label>Selectionner une date</mat-label>
+                  <input
+                    matInput
+                    [(ngModel)]="selectedDate1"
+                    [matDatepicker]="picker1"
+                    (dateInput)="addEvent1('input', $event)"
+                    (dateChange)="addEvent1('change', $event)"
+                  />
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="picker1"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let d of tdata1">
+              <td>{{ d[1] }}</td>
+              <td style="font-weight: bold">
+                {{ d[0] }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <div>
+                <mat-form-field appearance="fill">
+                  <mat-label>Selectionner une date</mat-label>
+                  <input
+                    matInput
+                    [(ngModel)]="selectedDate2"
+                    [matDatepicker]="picker2"
+                    (dateInput)="addEvent2('input', $event)"
+                    (dateChange)="addEvent2('change', $event)"
+                  />
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="picker2"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let d of tdata2">
+              <td>{{ d[1] }}</td>
+              <td style="font-weight: bold">
+                {{ d[0] }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <div>
+                <mat-form-field appearance="fill">
+                  <mat-label>Selectionner une date</mat-label>
+                  <input
+                    matInput
+                    [(ngModel)]="selectedDate3"
+                    [matDatepicker]="picker3"
+                    (dateInput)="addEvent3('input', $event)"
+                    (dateChange)="addEvent3('change', $event)"
+                  />
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="picker3"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker3></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let d of tdata3">
+              <td>{{ d[1] }}</td>
+              <td style="font-weight: bold">
+                {{ d[0] }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

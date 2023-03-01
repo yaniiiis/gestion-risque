@@ -1,0 +1,13 @@
+.navbar .navbar-collapse.collapse.slide, .navbar .navbar-collapse.collapse.in.slide, .navbar .navbar-collapse.collapsing.slide {
+    background-color: var(--theme-color)!important;
+    background: var(--theme-color)!important;
+}
+
+.navbar .navbar-collapse.collapse a, .navbar .navbar-collapse.collapse.in a, .navbar .navbar-collapse.collapsing a {
+    color: white!important;
+    opacity: 1!important;
+}
+.navbar .navbar-collapse.collapse::after, .navbar .navbar-collapse.collapse.in::after, .navbar .navbar-collapse.collapsing::after {
+    background-color: transparent!important;
+    background: transparent!important;
+}

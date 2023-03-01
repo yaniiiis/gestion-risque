@@ -1,0 +1,45 @@
+.my-rapport-form {
+  padding: 6px;
+}
+
+.my-form-row {
+  display: flex;
+  flex-direction: column;
+  padding: 3px;
+  width: 200px;
+}
+
+.my-form-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.my-rapport-form-input-list {
+  position: relative;
+  outline: none;
+  border: 0.5px solid rgb(184, 181, 181);
+  border-radius: 5px;
+  width: 200px;
+}
+
+.my-form-textarea {
+  outline: none;
+  border: 0.5px solid rgb(184, 181, 181);
+  border-radius: 5px;
+  width: 200px;
+}
+
+.my-form-submit-button {
+  width: 200px;
+  border: 0.5px solid rgb(184, 181, 181);
+  border-radius: 5px;
+  background-color: blue;
+  color: white;
+}
+
+.form-keyValueOperation {
+  display: flex;
+}
+.keyValueOperation-input {
+  flex: 1;
+}

@@ -1,0 +1,103 @@
+<div class="main-content">
+  <div class="container">
+    <div class="card">
+      <div class="card-title"><p>Add Parameter Portfeuille Indirect</p></div>
+      <form [formGroup]="AddUserForm" (ngSubmit)="onSubmit()">
+        <div class="inputcntainer">
+          <div class="clausecode">
+            <label for=""> Types :</label>
+            <div class="input_and_button">
+              <select
+                name="types"
+                id="types"
+                formControlName="types"
+                name="types"
+                ngModel
+                types
+              >
+                <option value="">selectionner un types</option>
+                <option value="Depots de garanties engagements HB">
+                  Dépôts de garanties engagements HB
+                </option>
+                <option value="Engagement HB">Engagement HB</option>
+              </select>
+
+              <div class="imageclass">
+                <a href=""
+                  ><img
+                    src="assets/imgHomePage/publication-instagram.png"
+                    alt=""
+                /></a>
+              </div>
+            </div>
+          </div>
+          <div class="clausecode1">
+            <label for=""> Code :</label>
+            <select name="" id="">
+              <option value="">selectionner un Code</option>
+              <option value="Ouverture de lettre de crédit">
+                Ouverture de lettre de crédit
+              </option>
+              <option value="Cautions">Cautions</option>
+              <option value="Aval">Aval</option>
+              <option value="Obligations cautionnées de douane">
+                Obligations cautionnées de douane
+              </option>
+            </select>
+          </div>
+
+          <div class="clausecode2">
+            <label for=""> Description :</label>
+            <input type="text" name="description" />
+          </div>
+          <div class="clausecode1">
+            <label for=""> select clause :</label>
+            <select name="" id="">
+              <option value="">selectionner clause</option>
+              <option value="nominalExposure">NOMINAL_EXPOSURE</option>
+              <option value="cashColValue">VALEUR CASH</option>
+              cashColValue
+            </select>
+          </div>
+
+          <div class="clausecode2">
+            <label for=""> key :</label>
+            <select name="" id="">
+              <option value="">selectionner key</option>
+              <option value="glSubhead">glSubheadB</option>
+              <option value="mainProductDesc">mainProductDesc</option>
+            </select>
+          </div>
+          <div class="divrows">
+            <label for=""> values:</label>
+            <select name="" id="">
+              <option value="">selectionner une valeur</option>
+              <option value="">Depots de garanties engagements HB</option>
+              <option value="">Depots de garanties engagements HB</option>
+            </select>
+          </div>
+          <div class="divrows">
+            <label for=""> operation:</label>
+            <select name="" id="">
+              <option value="">selectionner une operation</option>
+              <option value="=">egal à</option>
+              <option value=">">superieur</option>
+              <option value="<">inferieur</option>
+              <option value="like">like</option>
+            </select>
+          </div>
+
+          <div class="divrows">
+            <label for=""> operand:</label>
+            <mat-radio-group aria-label="Select an option">
+              <mat-radio-button value="true">and</mat-radio-button>
+              <mat-radio-button value="false">or</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+
+        <button class="btn btn-default" type="submit">Add</button>
+      </form>
+    </div>
+  </div>
+</div>

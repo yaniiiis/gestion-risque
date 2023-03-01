@@ -1,0 +1,49 @@
+.DialogTitle {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.addForm {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-div {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.formInput {
+  width: 350px;
+  height: 45px;
+  padding: 6px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  /* -webkit-box-shadow: 0px 1px 16px 1px rgba(156, 142, 142, 0.75);
+  -moz-box-shadow: 0px 1px 16px 1px rgba(156, 142, 142, 0.75); */
+  border-radius: 8px;
+  border: none;
+}
+
+.formTextarea {
+  width: 350px;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  padding: 6px;
+  /* -webkit-box-shadow: 0px 1px 16px 1px rgba(156, 142, 142, 0.75);
+  -moz-box-shadow: 0px 1px 16px 1px rgba(156, 142, 142, 0.75); */
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+}
+
+.myActionsContainer {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+}
+
+.span-error {
+  color: red;
+  font-size: 13px;
+}

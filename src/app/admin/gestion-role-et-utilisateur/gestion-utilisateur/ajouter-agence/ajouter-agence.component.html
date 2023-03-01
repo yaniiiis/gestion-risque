@@ -1,0 +1,88 @@
+<!-- <style>
+  .card .card-header {
+      background: var(--theme-color)!important;
+  }
+</style> -->
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Ajouter une agence</h4>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="AddAgenceForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="nomAgence"> Nom de l'agence </label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="agenceName"
+              name="agenceName"
+              ngModel
+              agenceName
+            />
+            <p
+              class="text-danger"
+              *ngIf="(AddAgenceForm.controls.agenceName.touched || submitted) && AddAgenceForm.controls.agenceName.errors?.required"
+            >
+              champs obligatoire
+            </p>
+            <p
+              class="text-danger"
+              *ngIf="(AddAgenceForm.controls.agenceName.touched || submitted)  && AddAgenceForm.controls.agenceName.errors?.minlength"
+            >
+              pas moin de 4 caracteres
+            </p>
+            <p
+              class="text-danger"
+              *ngIf="(AddAgenceForm.controls.agenceName.touched || submitted)  && AddAgenceForm.controls.agenceName.errors?.maxlength"
+            >
+              pas plus de 15 caracteres
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label for="Description"> Description </label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="description"
+              name="description"
+              ngModel
+              description
+            />
+            <p
+              class="text-danger"
+              *ngIf="(AddAgenceForm.controls.description.touched || submitted)  && AddAgenceForm.controls.description.errors?.required"
+            >
+              champs obligatoire
+            </p>
+            <p
+              class="text-danger"
+              *ngIf="(AddAgenceForm.controls.description.touched || submitted)  && AddAgenceForm.controls.description.errors?.minlength"
+            >
+              pas moin de 4 caracteres
+            </p>
+            <p
+              class="text-danger"
+              *ngIf="(AddAgenceForm.controls.description.touched || submitted)  && AddAgenceForm.controls.description.errors?.maxlength"
+            >
+              pas plus de 15 caracteres
+            </p>
+          </div>
+
+          <button class="btn btn-default align-content-center btn-sm" type="submit">
+            sauvegarder
+          </button>
+        </form>
+        <div
+          *ngIf="errorMessage !== null"
+          class="alert alert-danger mt-5 center"
+          role="alert"
+        >
+          {{ errorMessage }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
