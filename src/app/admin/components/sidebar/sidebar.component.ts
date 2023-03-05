@@ -13,6 +13,7 @@ export interface RouteInfo {
     icontype: string;
     collapse?: string;
     children?: ChildrenItems[];
+    forAdmin: boolean,
 }
 
 export interface ChildrenItems {
@@ -27,13 +28,15 @@ export const ROUTES: RouteInfo[] = [{
         path: '/Admin/dashboard',
         title: 'Mon espace',
         type: 'link',
-        icontype: 'dashboard'
+        icontype: 'dashboard',
+        forAdmin: true
     },{
         path: '/Admin',
         title: 'Administrateur',
         type: 'sub',
         icontype: 'apps',
         collapse: 'Admin',
+        forAdmin: true,
         children: [
             {path: 'GestionUtilisateur', title: 'Gestion des utilisateur', ab:'B'},
             {path: 'GestionDesRoles', title: 'Gestion Des Rôles', ab:'GS'},
@@ -45,6 +48,7 @@ export const ROUTES: RouteInfo[] = [{
         icontype: "payments",
         type: 'sub',
         collapse: 'RisqueCredit',
+        forAdmin: false,
         children: [
           {
             path: "AnalysePortfeuille",
@@ -80,6 +84,7 @@ export const ROUTES: RouteInfo[] = [{
         icontype: "Task",
         type: "sub",
         collapse: 'RisqueLiquidite',
+        forAdmin: false,
         children: [
           {
             path: "AnalyseDesDepots",
@@ -114,6 +119,7 @@ export const ROUTES: RouteInfo[] = [{
         icontype: "Task",
         type: "sub",
         collapse: 'RisqueDeChange',
+        forAdmin: false,
         children: [
           {
             path: "EvaluationDesTAuxDeCharges",
@@ -143,6 +149,7 @@ export const ROUTES: RouteInfo[] = [{
         icontype: "Task",
         type: "sub",
         collapse: 'RisqueDeMarche',
+        forAdmin: false,
         children: [
           {
             path: "Invertissements",
@@ -212,5 +219,11 @@ export class SidebarComponent implements OnInit {
             bool = true;
         }
         return bool;
+    }
+    getRoutes() {
+      let user = new User(this.storageService.getUser());
+      let IsAdmine = user.hasRole("Admin");
+      //let isAdmin = this.storageSer.userIsAdmin()
+      return ROUTES.filter((item) => (!IsAdmine && item.forAdmin ? false : true));
     }
 }

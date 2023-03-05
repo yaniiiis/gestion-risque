@@ -134,10 +134,17 @@
                                   <ng-container *ngSwitchCase="DataStateEnum.LOADED">
                                       <div class="form-group" >
                                         <label for="role"> Role </label>
-                                        <select class="form-select" formControlName='roles' name="roles" ngModel roles >
+                                        <!-- <select class="form-select" formControlName='roles' name="roles" ngModel roles >
                                           <option  *ngFor="let role of result.data" value="{{role.id}}" [selected]="role.id" >{{role.name}}</option>
                           
-                                        </select>
+                                        </select> -->
+                                        <mat-form-field appearance="fill">
+                                            <select matNativeControl (change)="selectRole($event)">
+                                            <option value=""></option>
+                                            <option *ngFor="let role of result.data" [value]="role.id"
+                                                    [selected]="role.id">{{ role.name }}</option>
+                                          </select>
+                                        </mat-form-field>
                                       </div>
                                     </ng-container>
 
@@ -158,10 +165,17 @@
                                   <ng-container *ngSwitchCase="DataStateEnum.LOADED">
                                       <div class="form-group" >
                                         <label for="agences"> agence </label>
-                                        <select class="form-select" formControlName='agence' name="agence" ngModel agence >
+                                        <!-- <select class="form-select" formControlName='agence' name="agence" ngModel agence >
                                           <option  *ngFor="let agence of result.data" value="{{agence.id}}" [selected]="agence.id"  >{{agence.agenceName}}</option>
                           
+                                        </select> -->
+                                        <mat-form-field appearance="fill">
+                                          <select matNativeControl (change)="selectAgence($event)">
+                                          <option value=""></option>
+                                          <option *ngFor="let agence of result.data" [value]="agence.id"
+                                                  [selected]="agence.id">{{ agence.name }}</option>
                                         </select>
+                                      </mat-form-field>
                                       </div>
                                     </ng-container>
                                     </ng-container>

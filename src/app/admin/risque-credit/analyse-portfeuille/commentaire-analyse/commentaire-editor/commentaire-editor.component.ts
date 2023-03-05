@@ -50,14 +50,14 @@ export class CommentaireEditorComponent implements OnInit {
     moment.locale('us');
     var today = moment().format("DD-MM-YYYYTHH:mm:SS[Z]")
     // var dd = String(today.getDate()+1).padStart(2, '0');
-    // var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+     var mm = moment().month() + 1;
     // var yyyy = today.getFullYear();
     
     //var todaymilis = Date.parse(today) ;
+    console.log('Month : '+ mm)
 
-    
      let analyseId : Number;
-      this.analyseService.getAnalyseIdByMonthAndType('2', '1').subscribe({
+      this.analyseService.getAnalyseIdByMonthAndType(mm, '1').subscribe({
         next: (data) => {
           console.log(data)
           analyseId = Number.parseInt(data.id) ;

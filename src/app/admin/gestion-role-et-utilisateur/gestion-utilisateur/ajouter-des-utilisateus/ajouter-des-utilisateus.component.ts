@@ -32,6 +32,8 @@ export class AjouterDesUtilisateusComponent implements OnInit {
   public agences$?: Observable<AppDataState<Agence[]>> | null = null;
   errorMessage: string | null = null;
   submitted: boolean = false;
+  roles;
+  agence;
   ngOnInit(): void {
     this.AddUserForm = this.formBuilder.group({
       nom: new FormControl("", [
@@ -86,10 +88,21 @@ export class AjouterDesUtilisateusComponent implements OnInit {
     );
   }
 
+  selectRole(event: Event) {
+    this.roles= (event.target as HTMLSelectElement).value;
+      
+  }
+  selectAgence(event: Event) {
+    this.agence= (event.target as HTMLSelectElement).value;
+      
+  }
   onSubmit() {
     if (this.AddUserForm.valid) {
-      let roles = { id: this.AddUserForm.value.roles };
-      let agence = { id: this.AddUserForm.value.agence };
+    //  let roles = { id: this.AddUserForm.value.roles };
+    //
+    let roles = this.roles;
+    let agence = this.agence;
+      //let agence = { id: this.AddUserForm.value.agence };
       console.log(this.AddUserForm);
 
       let FormData = {

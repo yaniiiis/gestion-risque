@@ -111,10 +111,15 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
   public dateYear!: FormGroup;
   reportD!: REportD;
 
+ 
+  uniteControl = new FormControl<Unite | null>(null, Validators.required);
+  selectFormControl = new FormControl('', Validators.required);
   unites: Unite[] = [
     { value: "D", viewValue: "Dinars" },
     { value: "ML", viewValue: "Milliard de dinars" },
   ];
+  divUnit: number = 1;
+
 
   
 
@@ -137,6 +142,8 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
     if (this.selectedYear === undefined) {
       this.selectedYear = String(this.years + 1);
     }
+    this.servicesRepo.selectedUnit = 'ML';
+   
   }
 
   // filte by year and get report fix
@@ -147,6 +154,11 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
     //get all date filterby year
     this.handelGetAllReportDate();
     this.handelGetCreditPeriodFixe();
+  }
+
+  selectUnit(event: Event) {
+    this.selectedUnit= (event.target as HTMLSelectElement).value;
+    this.servicesRepo.selectedUnit = this.selectedUnit;
   }
 
   handelGetAllReportDate() {
@@ -169,8 +181,16 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
           this.servicesRepo
             .getCreditParticulierParPeriode(this.dateTransforme)
             .subscribe({
-              next: (data) => {
-                a1.creditParticulier = data;
+              next: (response) => {
+                response.creanceCourant = response.creanceCourant / this.divUnit;
+                response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
+                response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
+                response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
+                response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
+                response.interetReserve = response.interetReserve / this.divUnit;
+                response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
+                response.provisions = response.provisions / this.divUnit;
+                a1.creditParticulier = response;
               },
               error: (err) => {
                 this.errormessage = err.error.message;
@@ -179,8 +199,16 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
           this.servicesRepo
             .getCreditEntreParPeriode(this.dateTransforme)
             .subscribe({
-              next: (data) => {
-                a1.creditEntreprise = data;
+              next: (response) => {
+                response.creanceCourant = response.creanceCourant / this.divUnit;
+                response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
+                response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
+                response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
+                response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
+                response.interetReserve = response.interetReserve / this.divUnit;
+                response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
+                response.provisions = response.provisions / this.divUnit;
+                a1.creditEntreprise = response;
               },
               error: (err) => {
                 this.errormessage = err.error.message;
@@ -275,16 +303,22 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
   }
 
   handelGetCreditPeriodFixe() {
+    console.log("unit : "+this.selectedUnit)
+    if (this.selectedUnit==="D")
+    this.divUnit = 1
+    else  this.divUnit = 1000000000
     this.creditReportFix.datereportfix = {};
     if (this.lastYear === undefined) {
       this.creditReportFix.datereportfix = this.years + "-12-31";
       this.servicesRepo
         .getCreditParticulierParPeriode(this.years + "-12-31")
         .subscribe((response) => {
+          response.creanceCourant = 0;
           this.creditReportFix.creditParticulier = response;
           this.servicesRepo
             .getCreditEntreParPeriode(this.lastYear + "-12-31")
             .subscribe((response) => {
+              response.creanceCourant = 0;
               this.creditReportFix.creditEntreprise = response;
               this.creditReportFix.totalFix = {};
               this.getTotalForPeriod(
@@ -304,12 +338,33 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
       this.servicesRepo
         .getCreditParticulierParPeriode(this.lastYear + "-12-31")
         .subscribe((response) => {
+          response.creanceCourant = response.creanceCourant / this.divUnit;
+          response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
+          response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
+          response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
+          response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
+          response.interetReserve = response.interetReserve / this.divUnit;
+          response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
+          response.provisions = response.provisions / this.divUnit;
+          response.tauxCreanceDouteuse = response.tauxCreanceDouteuse / this.divUnit;
+          response.tauxOuverture = response.tauxOuverture / this.divUnit;
           this.creditReportFix.creditParticulier = response;
           this.servicesRepo
             .getCreditEntreParPeriode(this.lastYear + "-12-31")
             .subscribe((response) => {
+              response.creanceCourant = response.creanceCourant / this.divUnit;
+              response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
+              response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
+              response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
+              response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
+              response.interetReserve = response.interetReserve / this.divUnit;
+              response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
+              response.provisions = response.provisions / this.divUnit;
+              response.tauxCreanceDouteuse = response.tauxCreanceDouteuse / this.divUnit;
+              response.tauxOuverture = response.tauxOuverture / this.divUnit;
               this.creditReportFix.creditEntreprise = response;
               this.creditReportFix.totalFix = {};
+                           
               this.getTotalForPeriod(
                 this.creditReportFix.creditParticulier,
                 this.creditReportFix.creditEntreprise,
@@ -325,6 +380,7 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
     }
     console.log("prtf ", this.creditReportAnalysePortfeuille);
   }
+ 
 
   getTotalForPeriod(arg1: any, arg2: any, result: any, operation: any) {
     result.creditTotaldirect = operation(
@@ -521,6 +577,7 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
     return table;
   }
 
+  
   getSomme(params: any, arg: any) {
     var reslt = params + arg;
     return reslt;

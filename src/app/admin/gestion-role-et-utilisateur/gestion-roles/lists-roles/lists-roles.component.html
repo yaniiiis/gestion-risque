@@ -1,17 +1,17 @@
-<style>
+<!-- <style>
   .card .card-header {
     background: var(--theme-color) !important;
   }  
-</style>
+</style> -->
 
-<div class="main-content">
+<!-- <div class="main-content">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
         <div class="card card-plain">
-          <div class="card-header card-header-danger">
-            <h4 class="card-title">La Liste Des roles</h4>
-          </div>
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">Liste ees rôles</h4>
+          </div> -->
 
           <div class="card-body">
             <ng-container
@@ -51,7 +51,7 @@
                         <td >{{ p.id }}</td>
                         <td >{{ p.name }}</td>
                         <td >
-                          <select class="form-select w-fit-content">
+                          <select class="btn">
                               <option *ngFor="let permission of p.permissions">{{permission.namepermission}}</option>
                           </select>
                          </td>
@@ -86,10 +86,10 @@
               </ng-container>
             </ng-container>
           </div>
-        </div>
-      </div>
+        <!-- </div>
+      </div> -->
 
       <app-modal-update-role [role]="role" [perms]="permIDs" [currentPermissions]="currentPermissions"  ></app-modal-update-role>
-    </div>
+    <!-- </div>
   </div>
-</div>
+</div> -->

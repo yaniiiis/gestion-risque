@@ -17,7 +17,7 @@ export class AnalysePortfeuilleServicesService {
       Authorization: "Bearer " + this.storageSer.getToken,
     }),
   };
-
+  selectedUnit!: string;
   constructor(private http: HttpClient, private storageSer: StorageSService) {}
 
   public getPeriode(datelast: any, p: number): Observable<any> {

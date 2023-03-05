@@ -82,9 +82,16 @@
                                        <td >{{p.agence ? p.agence.agenceName : (empty) }}</td>
                                        <td >{{p.roles.name}}</td>
                                        <td >
-                                        <select class="form-select w-fit-content">
+                                        <!-- <select class="form-select w-fit-content">
                                             <option *ngFor="let permission of p.roles.permissions">{{permission.namepermission}}</option>
-                                        </select>
+                                        </select> -->
+                                        <mat-form-field appearance="fill">
+                                            <select matNativeControl>
+                                            <option value=""></option>
+                                            <option *ngFor="let permission of p.roles.permissions" [value]="permission.id"
+                                                    [selected]="permission.id">{{permission.namepermission}}</option>
+                                          </select>
+                                        </mat-form-field>
                                        </td>
                                      <td>  <button class="btn btn-default btn-sm"  data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="update(p)"> modifier</button></td>
                                        <td><button class="btn btn-danger btn-sm " (click)="onDeleteUser(p)"> supprimer</button></td>

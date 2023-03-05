@@ -1,15 +1,5 @@
-<style>
-  .card .card-header {
-    background: var(--theme-color) !important;
-  }
-</style>
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="card">
-      <div class="card-header card-header-danger">
-        <h4 class="card-title">Ajouter une Permission</h4>
-      </div>
-      <div class="card-body">
+
+
         <div class="container">
           <form
             name="permForm"
@@ -31,7 +21,7 @@
                 <div class="form-group">
                   <label for="privileges"> privileges </label>
                   <select
-                    class="form-select"
+                  class="btn"
                     formControlName="privileges"
                     name="privileges"
                   >
@@ -61,7 +51,7 @@
                 <div class="form-group">
                   <label for="ressources"> ressources </label>
                   <select
-                    class="form-select"
+                    class="btn"
                     formControlName="ressources"
                     name="ressources"
                   >
@@ -91,7 +81,5 @@
             {{ errorMessage }}
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+     
+
