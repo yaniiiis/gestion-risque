@@ -560,6 +560,9 @@ node_modules
 .angular/cache/14.2.10/babel-webpack/ff344bd738e04a23fddc3bc9f2ee2d31.json
 .angular/cache/14.2.10/babel-webpack/ffe67ccb401ba8d94f81855f8610898f.json
 
+environments/environment.prod.ts
+environments/environment.ts
 dist
 .angular
 .gitignore
+

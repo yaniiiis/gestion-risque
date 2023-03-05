@@ -59,5 +59,15 @@ export class CommentaireService {
       });
   }
 
+  findCurrentCommentaireByDate(roleId, year, month) {
+       
+    return this.httpClient
+       .get<Commentaire>(environment.baseUrl + "/findCurrentCommentaireByDate/" + roleId +  "/" + year + "/" + month, {
+         headers: new HttpHeaders({
+           "Content-Type": "application/json",
+         }),
+       });
+   }
+
   
 }
