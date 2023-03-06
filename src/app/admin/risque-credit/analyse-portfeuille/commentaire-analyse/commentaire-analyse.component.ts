@@ -207,6 +207,8 @@ export class CommentaireAnalyseComponent implements OnInit {
   
    if (this.storageSer.userHasGenererRapport())
    this.disabledGenerateReport = false;
+    
+  
   }
 
   // filte by year and get report fix
@@ -712,11 +714,27 @@ export class CommentaireAnalyseComponent implements OnInit {
  accepter(){
   moment.locale('fr');
   var today = moment().format("DD-MM-YYYYTHH:mm:SS[Z]")
-  
+  var year = moment().year();
+  var month = moment().month() + 1;
   
   this.commentaireService.accepter(this.idCommentaireSub).subscribe({
     next: () => {
-       
+    //  this.commentaireService.updateCommentaireSub(commentaire) 
+    this.commentaireSubordonne = this.commentaireService.findCommentaireSubordonneByDate(this.storageSer.getUser().roles.id, year, month);
+    
+    this.commentaireSubordonne.subscribe({
+       next: (data) => {
+         if(data!=null){
+         this.commentaireSub = data.commentaire
+         this.idCommentaireSub = data.id
+         this.commentaireSubAccepte = (data.acceptedOn==undefined && data.rejectedOn==undefined)?false:true;
+         this.commentaireSubRejete = (data.rejectedOn==undefined && data.acceptedOn==undefined)?false:true;
+         }
+            },
+        error: (error) =>{
+         console.log(error.error.text)
+        }    
+       });
       alert("Commentaire Accepté ! ");
               },
     error: (error) => {

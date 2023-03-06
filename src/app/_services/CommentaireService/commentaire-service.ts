@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable, Subject } from "rxjs";
 import { environment } from "src/environments/environment";
-import { Observable } from "rxjs";
 import { StorageSService } from "../storageService/storage-s.service";
 const baseUrl = environment.baseUrl;
 
@@ -21,6 +21,8 @@ commentaire: any
 })
 export class CommentaireService {
   commentaireAnalyse: any;
+  currentCommentaire: Subject<Commentaire> = new Subject<Commentaire>();
+  commentaireSub: Subject<Commentaire> = new Subject<Commentaire>();
   constructor(private httpClient: HttpClient, private storageSer: StorageSService) {}
 
   public enregistrer(formData: any) {
@@ -32,7 +34,7 @@ export class CommentaireService {
     });
   }
 
-  public accepter(id: any) {
+  public  accepter(id: any) : Observable<any>{
     return this.httpClient.post(baseUrl + "/accepterCommentaire/"+id, {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
@@ -59,7 +61,7 @@ export class CommentaireService {
       });
   }
 
-  findCurrentCommentaireByDate(roleId, year, month) {
+findCurrentCommentaireByDate(roleId, year, month) {
        
     return this.httpClient
        .get<Commentaire>(environment.baseUrl + "/findCurrentCommentaireByDate/" + roleId +  "/" + year + "/" + month, {
@@ -68,6 +70,12 @@ export class CommentaireService {
          }),
        });
    }
+   
+   updateCurrentCommentaire(commentaire: Commentaire){
+    this.currentCommentaire.next(commentaire);
+   }
 
-  
+   updateCommentaireSub(commentaire: Commentaire){
+    this.commentaireSub.next(commentaire);
+   }
 }
