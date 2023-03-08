@@ -143,7 +143,7 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
       this.selectedYear = String(this.years + 1);
     }
     this.servicesRepo.selectedUnit = 'ML';
-   
+    this.servicesRepo.currentAnalyseType = 1;
   }
 
   // filte by year and get report fix

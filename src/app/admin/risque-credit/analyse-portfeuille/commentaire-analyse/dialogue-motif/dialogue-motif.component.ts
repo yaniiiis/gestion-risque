@@ -36,7 +36,7 @@ export class DialogueMotifComponent implements OnInit {
     var year = moment().year();
     var month = moment().month() + 1;
 
-    this.commentaireSubordonne = this.commentaireService.findCommentaireSubordonneByDate(this.storageSer.getUser().roles.id, year, month);
+    this.commentaireSubordonne = this.commentaireService.findCommentaireSubordonneByDateAndTypeAnalyse(1,this.storageSer.getUser().roles.id, year, month);
     
    this.commentaireSubordonne.subscribe({
       next: (data) => {

@@ -23,6 +23,7 @@ import { AnalysePortfeuilleDirectComponent } from "src/app/admin/risque-credit/a
 import { AnalysePortfeuilleInDirectComponent } from "src/app/admin/risque-credit/analyse-portfeuille/analyse-portfeuille-in-direct/analyse-portfeuille-in-direct.component";
 import { PortefeuilIndirectComponent } from "src/app/admin/risque-credit/analyse-portfeuille/analyse-portfeuille-in-direct/portefeuil-indirect/portefeuil-indirect.component";
 import { AnalysePortfeuilleComponent } from "src/app/admin/risque-credit/analyse-portfeuille/analyse-portfeuille.component";
+import { CommentaireAnalysePfIndirectComponent } from "src/app/admin/risque-credit/analyse-portfeuille/commentaire-analyse-pf-indirect/commentaire-analyse-pf-indirect.component";
 import { CommentaireAnalyseComponent } from "src/app/admin/risque-credit/analyse-portfeuille/commentaire-analyse/commentaire-analyse.component";
 import { CreationDouteuseComponent } from "src/app/admin/risque-credit/analyse-portfeuille/creation-douteuse/creation-douteuse.component";
 import { DurationComponent } from "src/app/admin/risque-credit/analyse-portfeuille/durations/duration.component";
@@ -165,6 +166,10 @@ export const AdminLayoutRoutes: Routes = [
           {
             path: "CommentaireAnalyse",
             component: CommentaireAnalyseComponent,
+          },
+          {
+            path: "CommentaireAnalysePfIndirect",
+            component: CommentaireAnalysePfIndirectComponent,
           },
 
 

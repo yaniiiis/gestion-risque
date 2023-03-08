@@ -8,6 +8,7 @@ import { StorageSService } from 'src/app/_services/storageService/storage-s.serv
 import { environment } from 'src/environments/environment';
 import moment from 'moment';
 import { Observable } from 'rxjs';
+import { AnalysePortfeuilleServicesService } from 'src/app/_services/analysePrtfeuille/analyse-portfeuille-services.service';
 
 const baseUrl = environment.baseUrl;
 
@@ -27,7 +28,7 @@ export class CommentaireEditorComponent implements OnInit {
   currentCommentaire: string;
  
   boutonEnregistrerStatus: boolean = false;
-  constructor(private commentaireService: CommentaireService, public fb: FormBuilder, private storageSer: StorageSService, private analyseService: AnalyseService) { 
+  constructor(private commentaireService: CommentaireService, public fb: FormBuilder, private storageSer: StorageSService, private analyseService: AnalyseService, private portfeuilleDirectServices: AnalysePortfeuilleServicesService) { 
    
     this.form = this.fb.group({
       id:0,
@@ -43,8 +44,8 @@ export class CommentaireEditorComponent implements OnInit {
     var today = moment().format("DD-MM-YYYYTHH:mm:SS[Z]")
     var year = moment().year();
     var month = moment().month() + 1;
-
-    this.currentCommentaireObs = this.commentaireService.findCurrentCommentaireByDate(this.storageSer.getUser().roles.id, year , month);
+    console.log("cuurent analyse type : "+ this.portfeuilleDirectServices.currentAnalyseType)
+    this.currentCommentaireObs = this.commentaireService.findCurrentCommentaireByDateAndTypeAnalyse(this.portfeuilleDirectServices.currentAnalyseType, this.storageSer.getUser().roles.id, year , month);
      
      this.currentCommentaireObs.subscribe((data) =>{
       next:{
@@ -89,7 +90,7 @@ export class CommentaireEditorComponent implements OnInit {
     console.log('Month : '+ mm)
 
      let analyseId : Number;
-      this.analyseService.getAnalyseIdByMonthAndType(mm, '1').subscribe({
+      this.analyseService.getAnalyseIdByMonthAndType(mm, this.portfeuilleDirectServices.currentAnalyseType).subscribe({
         next: (data) => {
           console.log(data)
           analyseId = Number.parseInt(data.id) ;

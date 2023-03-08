@@ -51,20 +51,20 @@ export class CommentaireService {
     });
   }
 
-  findCommentaireSubordonneByDate(roleId, year, month) {
+  findCommentaireSubordonneByDateAndTypeAnalyse(typeAnalyse, roleId, year, month) {
        
    return this.httpClient
-      .get<Commentaire>(environment.baseUrl + "/findCommentaireSubordonneByDate/" + roleId +  "/" + year + "/" + month, {
+      .get<Commentaire>(environment.baseUrl + "/findCommentaireSubordonneByDateAndTypeAnalyse/" + typeAnalyse +  "/" + roleId +  "/" + year + "/" + month, {
         headers: new HttpHeaders({
           "Content-Type": "application/json",
         }),
       });
   }
 
-findCurrentCommentaireByDate(roleId, year, month) {
+findCurrentCommentaireByDateAndTypeAnalyse(typeAnalyse, roleId, year, month) {
        
     return this.httpClient
-       .get<Commentaire>(environment.baseUrl + "/findCurrentCommentaireByDate/" + roleId +  "/" + year + "/" + month, {
+       .get<Commentaire>(environment.baseUrl + "/findCurrentCommentaireByDateAndTypeAnalyse/" + typeAnalyse +  "/"+ roleId +  "/" + year + "/" + month, {
          headers: new HttpHeaders({
            "Content-Type": "application/json",
          }),

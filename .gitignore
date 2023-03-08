@@ -566,3 +566,4 @@ dist
 .angular
 .gitignore
 
+package-lock.json

@@ -88,7 +88,8 @@ registerLocaleData(localeFr);
     MatToolbarModule,
     MatTooltipModule,
     MatNativeDateModule,
-    MatOptionModule
+    MatOptionModule,
+    
   ],
   declarations: [
     
@@ -111,7 +112,8 @@ export class MaterialModule {}
         }),
         HttpClientModule,
         MaterialModule,
-       FixedpluginModule
+       FixedpluginModule,
+      
     ],
     declarations: [
         AppComponent,

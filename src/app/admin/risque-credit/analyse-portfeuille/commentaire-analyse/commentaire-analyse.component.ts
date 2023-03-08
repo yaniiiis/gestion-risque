@@ -1,5 +1,5 @@
 import { DatePipe } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { AllSelected } from "src/app/Models/AllSelected";
 import { CreditRisqueRapport } from "src/app/Models/CreditRisqueRapport";
@@ -90,6 +90,9 @@ export class CommentaireAnalyseComponent implements OnInit {
 
   commentaireSubAccepte: boolean = false;
   commentaireSubRejete: boolean = false;
+
+
+
   disabledGenerateReport : boolean = true;
   divUnit: number = 1;
   headers: string[] = [
@@ -170,7 +173,7 @@ export class CommentaireAnalyseComponent implements OnInit {
     var year = moment().year();
     var month = moment().month() + 1;
 
-    this.commentaireSubordonne = this.commentaireService.findCommentaireSubordonneByDate(this.storageSer.getUser().roles.id, year, month);
+    this.commentaireSubordonne = this.commentaireService.findCommentaireSubordonneByDateAndTypeAnalyse(this.servicesRepo.currentAnalyseType, this.storageSer.getUser().roles.id, year, month);
     
    this.commentaireSubordonne.subscribe({
       next: (data) => {
@@ -720,7 +723,7 @@ export class CommentaireAnalyseComponent implements OnInit {
   this.commentaireService.accepter(this.idCommentaireSub).subscribe({
     next: () => {
     //  this.commentaireService.updateCommentaireSub(commentaire) 
-    this.commentaireSubordonne = this.commentaireService.findCommentaireSubordonneByDate(this.storageSer.getUser().roles.id, year, month);
+    this.commentaireSubordonne = this.commentaireService.findCommentaireSubordonneByDateAndTypeAnalyse(this.servicesRepo.currentAnalyseType, this.storageSer.getUser().roles.id, year, month);
     
     this.commentaireSubordonne.subscribe({
        next: (data) => {

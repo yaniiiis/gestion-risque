@@ -3,7 +3,7 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-lg-16">
+      <!-- <div class="col-lg-16">
         <div class="form-group">
          
           <button
@@ -15,7 +15,7 @@
 
         
         </div>
-      </div>
+      </div> -->
 
       <div class="col-md-12">
         <form ng-submit="addNew()">
@@ -713,59 +713,50 @@
         </form>
       </div>
 
-      <div class="">
-        <div class="portefeuilDirect">
-          <div class="portefeuilDirect_row">
-            <div class="portefeuilDirect_row_comment_title">
-              Commentaire subordonné
-            </div>
-            <div class="portefeuilDirect_row_comment">
-              <textarea
-                class="comment_area"
-                matInput
-                [readonly]="true"
-                
-              > {{ commentaireSub }}</textarea>
-              <button
-                class="portefeuilDirect_row_comment_button"
-                mat-raised-button (click)="accepter()" [disabled]="commentaireSubAccepte"
-              >
-                Accepter
-              </button>
-              <button
-                class="portefeuilDirect_row_comment_button"
-                mat-raised-button
-                (click)="openDialog()" [disabled]="commentaireSubRejete"
-              >
-                Rejeter
-              </button>
-              <button
-                class="portefeuilDirect_row_comment_button"
-                mat-raised-button
-                (click)="generateReport()" [disabled]="disabledGenerateReport"
-              >
-                Generer rapport final
-              </button>
-            </div>
+      <mat-form-field class="col-md-12">
+        <textarea matInput placeholder="Commentaire subordonné">{{ commentaireSub }}</textarea>
+       </mat-form-field> 
+
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-2">
+          <button
+            class="btn btn-default btn-sm "
+            mat-raised-button (click)="accepter()" [disabled]="commentaireSubAccepte"
+          >
+            Accepter
+          </button>
           </div>
 
-          <!-- <div class="portefeuilDirect_row">
-            <div class="portefeuilDirect_row_comment_title">Commentaire</div>
-            <div class="portefeuilDirect_row_comment">
-              <textarea class="comment_area" matInput></textarea>
-              <button
-                class="portefeuilDirect_row_comment_button"
-                mat-raised-button (click)="enregistrerCommentaire()"
-              >
-                Enregistrer
-              </button>
-            </div>
-          </div> -->
+        <div class="col-md-2">
+          <button
+            class="btn btn-default btn-sm"
+            mat-raised-button
+            (click)="openDialog()" [disabled]="commentaireSubRejete"
+          >
+            Rejeter
+          </button>
+        </div>
+        <div class="col-md-2">
+          <button
+            class="btn btn-default btn-sm"
+            mat-raised-button
+            (click)="genrerRapportAnalysePortefeuilleDirect()" [disabled]="disabledGenerateReport"
+          >
+            Generer rapport final
+          </button>
+        </div>
+        </div>
+                    
+             
+              
+           
+
           <app-commentaire-editor></app-commentaire-editor>
           
         </div>
        
-      </div>
+      
     </div>
   </div>
 </body>  

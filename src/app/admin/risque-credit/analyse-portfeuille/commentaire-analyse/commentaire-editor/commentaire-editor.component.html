@@ -1,4 +1,4 @@
-<div class="portefeuilDirect_row">
+<!-- <div class="portefeuilDirect_row">
             <div class="portefeuilDirect_row_comment_title">Commentaire</div>
             <div class="portefeuilDirect_row_comment">
               <form [formGroup]="form" (ngSubmit)="enregistrer()">
@@ -9,4 +9,14 @@
               >Enregistrer</button>
             </form>
             </div>
-  </div> 
+  </div>  -->
+
+  <mat-form-field class="col-md-12">
+    <form [formGroup]="form" (ngSubmit)="enregistrer()">
+      <textarea placeholder="Commentaire" matInput formControlName="commentaire" ></textarea>
+      <button
+        class="btn btn-default btn-sm"
+        mat-raised-button [disabled]="boutonEnregistrerStatus"
+      >Enregistrer</button>
+    </form>
+  </mat-form-field> 

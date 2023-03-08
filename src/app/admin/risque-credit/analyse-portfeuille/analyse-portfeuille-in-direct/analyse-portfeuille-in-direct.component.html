@@ -1,11 +1,6 @@
 <div class="container">
   <div class="form-group">
-    <button
-      class="btn btn-default pull-right"
-      (click)="graphePortefeuilinDirect()"
-    >
-      Graphiques
-    </button>
+  
     <!-- <select name="formule" id="formule" (change)="changeFormule($event)">
       <option value="empty">rien</option>
       <option value="Mln">Millions</option>
@@ -55,6 +50,15 @@
         </div>
       </div>
     </div>
+    <button
+    class="btn btn-default btn-sm"
+    (click)="graphePortefeuilinDirect()"
+  >
+    Graphiques
+  </button>
+  <button class="btn btn-default btn-sm" (click)="commentaireAnalysePfIndirect()">
+    Commentaire
+  </button>
   </div>
 
   <div class="row">

@@ -105,6 +105,7 @@ import { RisqueLiquiditeComponent } from "./risque-liquidite/risque-liquidite.co
 import { StressTestLiquiditeComponent } from "./risque-liquidite/stress-test-liquidite/stress-test-liquidite.component";
 import { SurveillenceDeTreoserieComponent } from "./risque-liquidite/surveillence-de-treoserie/surveillence-de-treoserie.component";
 import { AnalysePortfeuilleComponent } from "./risque-credit/analyse-portfeuille/analyse-portfeuille.component";
+import { CommentaireAnalysePfIndirectComponent } from "./risque-credit/analyse-portfeuille/commentaire-analyse-pf-indirect/commentaire-analyse-pf-indirect.component";
 
 
 
@@ -148,6 +149,7 @@ import { AnalysePortfeuilleComponent } from "./risque-credit/analyse-portfeuille
     EvolutionComponent,
     PortefeuilIndirectComponent,
     CommentaireAnalyseComponent,
+    CommentaireAnalysePfIndirectComponent,
     DialogueMotifComponent,
     CommentaireEditorComponent,
     CreanceDouteuseEtProvisionChartComponent,

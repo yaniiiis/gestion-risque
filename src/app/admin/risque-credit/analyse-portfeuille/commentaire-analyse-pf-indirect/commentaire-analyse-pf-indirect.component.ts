@@ -1,13 +1,15 @@
 import { DatePipe } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { isNumber } from "@ng-bootstrap/ng-bootstrap/util/util";
-
-import { portefeuillIndirectRapport } from "src/app/Models/portefeuillIndirectRapport";
-import { rapportIndirect } from "src/app/Models/rapportIndirect";
-
+import { AllSelected } from "src/app/Models/AllSelected";
+import { CreditRisqueRapport } from "src/app/Models/CreditRisqueRapport";
 import { AnalysePortfeuilleServicesService } from "src/app/_services/analysePrtfeuille/analyse-portfeuille-services.service";
-import { PortfeuilleIndirectservicesService } from "src/app/_services/analysePrtfeuille/PortefeuilleIndirect/portfeuille-indirectservices.service";
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from "@angular/forms";
 import {
   MomentDateAdapter,
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
@@ -21,9 +23,18 @@ import { MatDatepicker } from "@angular/material/datepicker";
 import * as _moment from "moment";
 // tslint:disable-next-line:no-duplicate-imports
 import { default as _rollupMoment, Moment } from "moment";
-import { FormControl } from "@angular/forms";
-import { AllSelected } from "src/app/Models/AllSelected";
+import { REportD } from "src/app/Models/REportD";
+import { MatDialog } from "@angular/material/dialog";
+import { DialogueMotifComponent } from "../commentaire-analyse/dialogue-motif/dialogue-motif.component";
+import { Commentaire, CommentaireService } from "src/app/_services/CommentaireService/commentaire-service";
+import { StorageSService } from "src/app/_services/storageService/storage-s.service";
+import { Observable } from "rxjs";
+import { portefeuillIndirectRapport } from "src/app/Models/portefeuillIndirectRapport";
+import { rapportIndirect } from "src/app/Models/rapportIndirect";
+import { PortfeuilleIndirectservicesService } from "src/app/_services/analysePrtfeuille/PortefeuilleIndirect/portfeuille-indirectservices.service";
+
 const moment = _rollupMoment || _moment;
+
 export const MY_FORMATS = {
   parse: {
     dateInput: "YYYY",
@@ -36,10 +47,15 @@ export const MY_FORMATS = {
   },
 };
 
+interface Unite {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
-  selector: "app-analyse-portfeuille-in-direct",
-  templateUrl: "./analyse-portfeuille-in-direct.component.html",
-  styleUrls: ["./analyse-portfeuille-in-direct.component.css"],
+  selector: "app-commentaire-analyse-pf-indirect",
+  templateUrl: "./commentaire-analyse-pf-indirect.component.html",
+  styleUrls: ["./commentaire-analyse-pf-indirect.component.css"],
   providers: [
     // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
     // application's root module. We provide it at the component level here, due to limitations of
@@ -53,8 +69,27 @@ export const MY_FORMATS = {
     { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
-export class AnalysePortfeuilleInDirectComponent implements OnInit {
-  lastYear!: number;
+export class CommentaireAnalysePfIndirectComponent implements OnInit {
+ 
+ 
+  errormessage!: string;
+ 
+  checked: Boolean = false;
+  slectedPeriods: AllSelected[] = [];
+  availablePeriods: AllSelected[] = [];
+ 
+  // dateTransforme!: any;
+  // creditReportFix: any = {};
+  // creditReportTotal: any[] = [];
+  // creditReportAnalysePortfeuille: any = {};
+  // CreditRisqueRapportTotal!: CreditRisqueRapport;
+  // dateChecked: any[] = [];
+  
+  selectedUnit!: string;
+ 
+
+//-----------------------------------------------------------------
+lastYear!: number;
   years: number = new Date().getFullYear() - 1;
   header: string[] = [
     "Enagagement HB",
@@ -82,29 +117,142 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
   formule: string = "empty";
   selectedYear!: string;
   filterAvailablePeriods: any[] = [];
+
+
+//-----------------------------------------------------------------
+
+
+
+
+
+
+  commentaireSubordonne: Observable<Commentaire>;
+  commentaireSub: string;
+  idCommentaireSub: number;
+
+  commentaireSubAccepte: boolean = false;
+  commentaireSubRejete: boolean = false;
+  disabledGenerateReport : boolean = true;
+  divUnit: number = 1;
+  headers: string[] = [
+    "Credit Particulier",
+    "Credit Entreprise",
+    "Total ",
+    "Variation",
+  ];
+
+  loading = false;
+
+  propertyRaport: any = [
+    "creditTotaldirect",
+    "creanceDouteuse",
+    "creanceCourant",
+    "creanceDouteuseNets",
+    "creditDirectNetInteretReserve",
+    "provisions",
+    "tauxCreanceDouteuse",
+    "tauxOuverture",
+    "interetreservesCreancesDouteuse",
+  ];
+
+  creditType: any = ["entrepriseKey", "retailKey", "totalKey"];
+  creditTypePeriode: any = [
+    "periodeEntrperise",
+    "periodeRetails",
+    "periodeTotal",
+  ];
+  checkSelectPeriode: boolean = false;
+  public dateYear!: FormGroup;
+  reportD!: REportD;
+
+  //selctPeriodElt: AllSelected;
+
+  selctPeriodElt = {
+    id: 0,
+    checked: true,
+    datereporte: "2021-03-31",
+    creditParticulier: {} as CreditRisqueRapport,
+    creditEntreprise: {} as CreditRisqueRapport,
+  } as AllSelected;
+
+
+  unites: Unite[] = [
+    { value: "D", viewValue: "Dinars" },
+    { value: "ML", viewValue: "Milliard de dinars" },
+  ];
+
+  motif: string;
+  title: string = "Confirmation";
+
+  
+ 
   constructor(
+    private formBuilder: FormBuilder,
     private route: Router,
+   // private servicesRepo: AnalysePortfeuilleServicesService,
+    public dialog: MatDialog,
+    private commentaireService: CommentaireService,
+    private storageSer: StorageSService,
     private portfeuilleIndirectserrvices: PortfeuilleIndirectservicesService,
-    private portfeuilleDirectServices: AnalysePortfeuilleServicesService
+    private portfeuilleDirectServices: AnalysePortfeuilleServicesService,
     
-  ) {}
+  ) { }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogueMotifComponent, {
+      data: { motif: this.motif, title: this.title },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log("The dialog was closed");
+      this.motif = result;
+    });
+  }
 
   ngOnInit(): void {
-    /* let items = localStorage.getItem("indirectDynamicArray");
-    if (items) {
-      this.indirectDynamicArray = JSON.parse(items).data;
-      this.PeriodeDyna = JSON.parse(localStorage.getItem("PeriodeDyna")).data;
-    }*/
-    this.indirectfix.engagementHb = {};
-    this.indirectfix.depotsgarantie = {};
-    this.indirectfix.totalfix = {};
+    moment.locale('us');
+    var today = moment().format("DD-MM-YYYYTHH:mm:SS[Z]")
+    var year = moment().year();
+    var month = moment().month() + 1;
+
+    this.commentaireSubordonne = this.commentaireService.findCommentaireSubordonneByDateAndTypeAnalyse(this.portfeuilleDirectServices.currentAnalyseType,this.storageSer.getUser().roles.id, year, month);
+    
+   this.commentaireSubordonne.subscribe({
+      next: (data) => {
+        if(data!=null){
+        this.commentaireSub = data.commentaire
+        this.idCommentaireSub = data.id
+        this.commentaireSubAccepte = (data.acceptedOn==undefined && data.rejectedOn==undefined)?false:true;
+        this.commentaireSubRejete = (data.rejectedOn==undefined && data.acceptedOn==undefined)?false:true;
+        }
+           },
+       error: (error) =>{
+        console.log(error.error.text)
+       }    
+      });
+   
+    this.dateYear = this.formBuilder.group({
+      years: new FormControl("", [Validators.required]),
+    });
     if (this.selectedYear === undefined) {
       this.selectedYear = String(this.years + 1);
     }
-    console.log(" year select ", this.selectedYear);
-    this.portfeuilleDirectServices.currentAnalyseType = 2;
-    this.HandelGetRapportType();
+   this.slectedPeriods = [];
+  // this.stateChanged();
+  
+   if (this.storageSer.userHasGenererRapport())
+   this.disabledGenerateReport = false;
    
+   
+   this.indirectfix.engagementHb = {};
+   this.indirectfix.depotsgarantie = {};
+   this.indirectfix.totalfix = {};
+   if (this.selectedYear === undefined) {
+     this.selectedYear = String(this.years + 1);
+   }
+   console.log(" year select ", this.selectedYear);
+   this.HandelGetRapportType();
+  
   }
 
   graphePortefeuilinDirect() {
@@ -404,4 +552,74 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
   commentaireAnalysePfIndirect() {
     this.route.navigateByUrl("Admin/AnalysePortfeuille/CommentaireAnalysePfIndirect");
   }
+
+
+   
+
+
+ 
+
+
+ 
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+
+  
+
+ 
+  
+ accepter(){
+  moment.locale('fr');
+  var today = moment().format("DD-MM-YYYYTHH:mm:SS[Z]")
+  var year = moment().year();
+  var month = moment().month() + 1;
+  
+  this.commentaireService.accepter(this.idCommentaireSub).subscribe({
+    next: () => {
+    //  this.commentaireService.updateCommentaireSub(commentaire) 
+    this.commentaireSubordonne = this.commentaireService.findCommentaireSubordonneByDateAndTypeAnalyse(2, this.storageSer.getUser().roles.id, year, month);
+    
+    this.commentaireSubordonne.subscribe({
+       next: (data) => {
+         if(data!=null){
+         this.commentaireSub = data.commentaire
+         this.idCommentaireSub = data.id
+         this.commentaireSubAccepte = (data.acceptedOn==undefined && data.rejectedOn==undefined)?false:true;
+         this.commentaireSubRejete = (data.rejectedOn==undefined && data.acceptedOn==undefined)?false:true;
+         }
+            },
+        error: (error) =>{
+         console.log(error.error.text)
+        }    
+       });
+      alert("Commentaire Accepté ! ");
+              },
+    error: (error) => {
+       console.log(error);    
+    },
+  });
+ }
+
+ generateReport(){
+  alert('Generation Rapport finale')
+ }
 }

@@ -1,0 +1,172 @@
+.body {
+    margin: 0;
+  }
+  .progress5 {
+    cursor: progress;
+  }
+  table th {
+    width: 110px;
+    text-align: center;
+  }
+  table td {
+    font-size: 12px;
+  }
+  .classmultisele {
+    width: 100px;
+    justify-content: space-between;
+  }
+  
+  .labelclass {
+    text-align: left;
+    font-size: 12px;
+  }
+  .periodeclass {
+    font-size: 12px;
+  }
+  .myclass {
+    margin: -6px;
+    padding-left: 10px;
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .myclass div {
+    width: 90px;
+  }
+  tbody > tr > th,
+  tbody > tr > td {
+    padding: 0 !important;
+    padding: 0 !important;
+    border-right: 1px solid #000;
+    border-bottom: 1px solid #000;
+    border-top: 1px solid #000;
+  }
+  
+  /* table dates column separator */
+  
+  th.date > tr:has(:nth-child(2)) > th {
+    border-right: 1px solid #8cc8f9;
+  }
+  
+  th.date > tr:has(:nth-child(2)) > th:last-child {
+    border-right: none;
+  }
+  
+  th.date * {
+    white-space: nowrap;
+  }
+  
+  /* table td dates column separator */
+  td.date > tr:has(:nth-child(2)) > td {
+    border-right: 1px solid #8cc8f9;
+  }
+  
+  td.date > tr:has(:nth-child(2)) > td:last-child {
+    border-right: none;
+  }
+  
+  td.date * {
+    white-space: nowrap;
+  }
+  
+  .mat-form-field {
+    width: 240px;
+    box-shadow: 0 2px 2px 0 rgb(0 188 212 / 14%),
+      0 3px 1px -2px rgb(0 188 212 / 20%), 0 1px 5px 0 rgb(0 188 212 / 12%);
+  }
+  .dropselect {
+    width: 50%;
+    display: flex;
+  
+    gap: 10px;
+  }
+  
+  thead th {
+    vertical-align: center;
+  }
+  
+  tbody tr th:first-child {
+    text-align: left;
+    padding: 12px !important;
+  }
+  
+  th {
+    padding: 10px;
+  }
+  .head th {
+    font-size: 13px;
+  }
+  .table th,
+  .table td {
+    vertical-align: middle !important;
+    padding: 3px;
+  }
+  .table > tr:not(.head) th:first-child {
+    text-align: left;
+    font-size: 13px !important;
+  }
+  
+  .portefeuilDirect {
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    /* height: 100vh; */
+  }
+  
+  .portefeuilDirect_row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .portefeuilDirect_row_comment {
+    display: flex;
+    justify-content: space-between;
+  
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    margin-bottom: 7px;
+    /* margin-left: 10px;
+    margin-right: 10px;*/
+  }
+  
+  .portefeuilDirect_row_comment_title {
+    font-size: 16px;
+    line-height: 28px;
+    text-align: left;
+  }
+  .portefeuilDirect_row_comment_content {
+    background-color: #f7f7f7;
+    padding: 20px;
+    width: 100%;
+    height: 100px;
+    border: none;
+  }
+  .comment_area {
+    height: 10px;
+    padding: 10px;
+    width: 80%;
+    font-size: 15px;
+    background-color: white;
+    border: solid gray 2px;
+    border-radius: 5px;
+  }
+  .portefeuilDirect_row_comment_button {
+    padding: 8px;
+    margin: 6px;
+    width: 5%;
+    background-color: white;
+  }
+  textarea::placeholder {
+    color: rgb(25, 25, 26);
+  }
+  .container-xl,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container {
+    max-width: max-content !important;
+  }
+  

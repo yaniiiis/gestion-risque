@@ -57,6 +57,7 @@ return this.http.get<any>(baseUrl+"/allReportDate/"+p)
 
   availablePeriods: string[];
   public selectedDate: string;
+  public currentAnalyseType : number;
 
  public  creditReportFix: any = {};
 }
