@@ -34,6 +34,7 @@ export class CommentaireEditorComponent implements OnInit {
       id:0,
       commentaire:  new FormControl(),
       roleId: {id:0},
+      userId: {id:0},
       analyseId: {id:0}
     
     })
@@ -94,8 +95,9 @@ export class CommentaireEditorComponent implements OnInit {
         next: (data) => {
           console.log(data)
           analyseId = Number.parseInt(data.id) ;
-          
+          console.log('user : '+ this.storageSer.getUser().id);
           let roleId = this.storageSer.getUser().roles.id;
+          let userId = this.storageSer.getUser().id;
           let formData ;
           if (this.form.get('id')!==null){
            formData = {
@@ -103,6 +105,7 @@ export class CommentaireEditorComponent implements OnInit {
             commentaire:this.form.get('commentaire').value,
             createdOn: today,
             roleId:{id:roleId},
+            userId:{id:userId},
             analyseId:{id:analyseId}
           };
         } else {
@@ -110,6 +113,7 @@ export class CommentaireEditorComponent implements OnInit {
             commentaire:this.form.get('commentaire').value,
             createdOn: today,
             roleId:{id:roleId},
+            userId:{id:userId},
             analyseId:{id:analyseId}
           }; 
         }
