@@ -60,6 +60,11 @@ export const ROUTES: RouteInfo[] = [{
             title: "Gestion des risques clients",
             ab:'GRC'
           },
+      {
+        path: "Graphic",
+        title: "Gestion des Graphe et statistiques ",
+        ab:'GS'
+      },
           {
             path: "Kri",
             title: "Gestion des KRIs",

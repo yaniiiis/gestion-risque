@@ -1,0 +1,66 @@
+<!-- <style>
+  .card .card-header {
+      background: var(--theme-color)!important;
+  }
+</style> -->
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">Graphic chart </h4>
+          </div>
+
+          <div class="card-body">
+              <div class="row">
+                  <div class="col-lg-8">
+                    <div class="form-group">
+                      <button class="btn btn-social dropdown-toggle btn-sm" type="button" id="dropdownMenuButton"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sélectionner les parametrage du graphe
+                      </button>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div *ngFor="let parametre of graphParametre ; let i=index">
+                          <input class="mr-2 ml-2" type="checkbox"  value="{{parametre}}" (change)="onCheckboxChange($event)" id="{{parametre}}" />
+                          <label for="{{parametre}}">{{parametre}}</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+              
+                  <div class="col-lg-4 mt-2">
+                    <div class="d-flex">
+                      <label class="mr-2 mt-2 text-black"  for="text"> type de graphe</label>
+                          <select
+                            class="form-select w-25"
+                            aria-label="Default select example"  #type (change)="onSelected(type)">
+                            <option
+                              *ngFor="let type of grapheType"  [ngValue]="type" >
+                              {{ type }}
+                            </option>
+                          </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row" >
+                  <div class="chartCommentaire" *ngFor="let itemcheckedValue of checkedValue">
+                    <div class="col-lg-8">
+                      <app-graphe-chart [grapheParametre]="itemcheckedValue" [CurrentType]="CurrentType"  [LabelTextValue]="LabelTextValue"></app-graphe-chart>       
+                    </div>
+                    <div class="col-lg-4">
+                      <app-form-comentaire-analyste></app-form-comentaire-analyste>
+                    </div>
+           
+                  </div>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+          </div>
+        </div>
+
+

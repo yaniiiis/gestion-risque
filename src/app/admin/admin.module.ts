@@ -106,6 +106,10 @@ import { StressTestLiquiditeComponent } from "./risque-liquidite/stress-test-liq
 import { SurveillenceDeTreoserieComponent } from "./risque-liquidite/surveillence-de-treoserie/surveillence-de-treoserie.component";
 import { AnalysePortfeuilleComponent } from "./risque-credit/analyse-portfeuille/analyse-portfeuille.component";
 import { CommentaireAnalysePfIndirectComponent } from "./risque-credit/analyse-portfeuille/commentaire-analyse-pf-indirect/commentaire-analyse-pf-indirect.component";
+import { GraphicComponent } from "./risque-credit/graphic/graphic.component";
+import { FormComentaireAnalysteComponent } from "./risque-credit/graphic/form-comentaire-analyste/form-comentaire-analyste.component";
+import { GrapheChartComponent } from "./components/graphe-chart/graphe-chart.component";
+import { NgChartsModule } from "ng2-charts";
 
 
 
@@ -193,6 +197,9 @@ import { CommentaireAnalysePfIndirectComponent } from "./risque-credit/analyse-p
     SurveillenceDeTreoserieComponent,
     RisqueLiquiditeComponent,
     AnalysePortfeuilleComponent,
+    GraphicComponent,
+    FormComentaireAnalysteComponent,
+    GrapheChartComponent
    
   ],
   imports: [
@@ -213,7 +220,8 @@ import { CommentaireAnalysePfIndirectComponent } from "./risque-credit/analyse-p
     MatSnackBarModule,
     NavbarModule,
     SidebarModule,
-    FixedpluginModule
+    FixedpluginModule,
+    NgChartsModule,
   ],
   providers: [authInterceptorProviders, MatDatepickerModule] ,
   exports: [MatDatepickerModule]

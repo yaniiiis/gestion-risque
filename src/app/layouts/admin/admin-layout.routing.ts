@@ -32,6 +32,7 @@ import { PortefeuilDirectComponent } from "src/app/admin/risque-credit/analyse-p
 import { GestionDesResqueClientComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/gestion-des-resque-client.component";
 import { RepartitionParSecteurComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/repartition-par-secteur/repartition-par-secteur.component";
 import { RepartitionParZoneComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/repartition-par-zone/repartition-par-zone.component";
+import { GraphicComponent } from "src/app/admin/risque-credit/graphic/graphic.component";
 import { StressTestCentComponent } from "src/app/admin/risque-credit/stress-test/stress-test-cent/stress-test-cent.component";
 import { StressTestCinquanteComponent } from "src/app/admin/risque-credit/stress-test/stress-test-cinquante/stress-test-cinquante.component";
 import { StressTestDeuxCentComponent } from "src/app/admin/risque-credit/stress-test/stress-test-deux-cent/stress-test-deux-cent.component";
@@ -218,6 +219,10 @@ export const AdminLayoutRoutes: Routes = [
           },
           { path: "ClientParZone", component: RepartitionParZoneComponent },
         ],
+      },
+      {
+        path: "Graphic",
+        component: GraphicComponent,
       },
       {
         path: "Kri",

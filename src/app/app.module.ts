@@ -39,20 +39,20 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { AppComponent } from './app.component';
 
 import { FixedpluginModule} from './shared/fixedplugin/fixedplugin.module';
-import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 
 import { AppRoutes } from './app.routing';
 import { AppPageHomeComponent } from './app-page-home/app-page-home.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ConfirmationPasswordComponent } from './confirmation-password/confirmation-password.component';
 import { authInterceptorProviders } from './_helpper/AuthInterceptor';
 import { UpdateUserModalComponent } from './admin/gestion-role-et-utilisateur/gestion-utilisateur/update-user-modal/update-user-modal.component';
-import { TestComponent } from './admin/test/test.component';
 
 import localeFr from "@angular/common/locales/fr";
 import { registerLocaleData } from "@angular/common";
+import { NgChartsModule } from "ng2-charts";
+import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 registerLocaleData(localeFr);
 
@@ -76,6 +76,7 @@ registerLocaleData(localeFr);
     MatProgressSpinnerModule,
     MatRadioModule,
     MatSelectModule,
+    NgChartsModule,
     MatDatepickerModule,
     MatButtonModule,
     MatSidenavModule,
@@ -92,8 +93,8 @@ registerLocaleData(localeFr);
     
   ],
   declarations: [
-    
-  
+   
+   
     ]
 })
 export class MaterialModule {}
@@ -123,7 +124,7 @@ export class MaterialModule {}
         DashboardComponent,
         ForgotPasswordComponent,
         ConfirmationPasswordComponent,
-        TestComponent
+
     ],
     // providers : [ authInterceptorProviders,MatDatepickerModule,
     //   MatNativeDateModule,  { provide: LOCALE_ID, useValue: "fr-FR" },
