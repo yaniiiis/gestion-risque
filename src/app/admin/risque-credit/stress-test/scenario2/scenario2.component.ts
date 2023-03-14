@@ -1,7 +1,12 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CreditRisqueRapport } from 'src/app/Models/CreditRisqueRapport';
 import { AnalysePortfeuilleServicesService } from 'src/app/_services/analysePrtfeuille/analyse-portfeuille-services.service';
 
+interface Secteur{
+  value:number,
+  viewValue:string
+}
 @Component({
   selector: 'app-scenario2',
   templateUrl: './scenario2.component.html',
@@ -9,7 +14,7 @@ import { AnalysePortfeuilleServicesService } from 'src/app/_services/analysePrtf
 })
 export class Scenario2Component implements OnInit {
 
-  constructor( private servicesRepo: AnalysePortfeuilleServicesService) { }
+  constructor( private servicesRepo: AnalysePortfeuilleServicesService, private formBuilder: FormBuilder) { }
   variation:string= "Variation des créances douteuses de n% du solde du portefeuille des créances courantes";
 
   header: string[] =["code",
@@ -18,7 +23,29 @@ export class Scenario2Component implements OnInit {
   "code","Description",
   "montant en milliards dzd"]; 
 
+  public scenarioForm!: FormGroup;
+  secteurs: Secteur[] = [{value:1,
+  viewValue:'Particulier '},
+  {value:2,
+    viewValue:'Agriculture  '},
+    {value:3,
+      viewValue:'Production'},
+      {value:4,
+        viewValue:'Immobilier'},
+        {value:5,
+          viewValue:'Commerce '},
+          {value:6,
+            viewValue:'Service '},
+            {value:7,
+              viewValue:'Finance '},
+              {value:8,
+                viewValue:'Public '},
+                {value:9,
+                  viewValue:'Tous '},
+] 
+
  scenario:number = 2;
+ cs:string  = 'Agriculture';
  pro:number;
  fpr:number = 0;
  rnt:number;
@@ -111,7 +138,35 @@ export class Scenario2Component implements OnInit {
  }
 
   ngOnInit(): void {
+    
+    this.scenarioForm = this.formBuilder.group({
+     
+      secteurs: this.formBuilder.array([], [Validators.required]),
+      });
     this.getPortefeuilleDirecte();
+  }
+
+  changeenvent(event) {
+    const secteurs: FormArray = this.scenarioForm.get(
+      "secteurs"
+    ) as FormArray;
+
+    if (event.target.checked) {
+      secteurs.push(new FormControl({ value: event.target.value }));
+    } else {
+      let i: number = 0;
+      secteurs.controls.forEach((item: any) => {
+        if (item.value.value === event.target.value) {
+          secteurs.removeAt(i);
+          return;
+        }
+        i++;
+      });   
+      
+    }
+    for (let i=0;i<this.scenarioForm.value.secteurs.length;i++){
+      console.log("secteurs : " + this.scenarioForm.value.secteurs[i].value)
+    }
   }
 
 }

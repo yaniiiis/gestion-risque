@@ -1,51 +1,34 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { CreditRisqueRapport } from 'src/app/Models/CreditRisqueRapport';
 import { AnalysePortfeuilleServicesService } from 'src/app/_services/analysePrtfeuille/analyse-portfeuille-services.service';
 
-interface Secteur{
-  value:number,
-  viewValue:string
-}
 @Component({
-  selector: 'app-scenario1',
-  templateUrl: './scenario1.component.html',
-  styleUrls: ['./scenario1.component.css']
+  selector: 'app-scenario',
+  templateUrl: './scenario.component.html',
+  styleUrls: ['./scenario.component.css']
 })
-export class Scenario1Component implements OnInit {
+export class ScenarioComponent implements OnInit {
 
-  constructor( private servicesRepo: AnalysePortfeuilleServicesService,private formBuilder: FormBuilder) { }
+  title:string[]= ["Variation des créances douteuses de n% de leur solde",
+  "Variation des créances douteuses de n% du solde du portefeuille des créances courantes",
+  "Classement en douteux (catégorie 1, 2 ou 3) des créances accordées aux n plus grands clients"
 
-  variation:string= "Variation des créances douteuses de n% de leur solde";
+];
+
+  constructor(private servicesRepo: AnalysePortfeuilleServicesService, private route: ActivatedRoute) {
+    this.route.params.subscribe( params => {console.log(params)
+      this.scenario = 1
+    } );
+    
+   }
 
   header: string[] =["code",
   "Description",
   "montant en milliards dzd",
   "code","Description",
   "montant en milliards dzd"]; 
-
-  public scenarioForm!: FormGroup;
-  secteurs: Secteur[] = [{value:1,
-  viewValue:'Particulier '},
-  {value:2,
-    viewValue:'Agriculture  '},
-    {value:3,
-      viewValue:'Production'},
-      {value:4,
-        viewValue:'Immobilier'},
-        {value:5,
-          viewValue:'Commerce '},
-          {value:6,
-            viewValue:'Service '},
-            {value:7,
-              viewValue:'Finance '},
-              {value:8,
-                viewValue:'Public '},
-                {value:9,
-                  viewValue:'Tous '},
-]
-scenario:number = 1;
-cs:string  = 'Service'
+scenario:number;
 pro:number;
 fpr:number = 0;
 rnt:number;
@@ -68,27 +51,26 @@ intrcr:number;
 intrcd:number;
 nbr:number;
 
+creditReportFix: any = {};
+creditReportTotal: any[] = [];
+creditReportAnalysePortfeuille: any = {};
+CreditRisqueRapportTotal!: CreditRisqueRapport;
+lastYear: string;
+divUnit: number;
+
+
 ngOnChanges(changes: SimpleChanges){
   console.log(changes)
   this.tds =this.fpr; 
 }
 
   ngOnInit(): void {
-
-    this.scenarioForm = this.formBuilder.group({
-     
-    secteurs: this.formBuilder.array([], [Validators.required]),
-    });
     this.getPortefeuilleDirecte();
-    
+
+    this.scenario = 1
+
   }
 
-  creditReportFix: any = {};
-  creditReportTotal: any[] = [];
-  creditReportAnalysePortfeuille: any = {};
-  CreditRisqueRapportTotal!: CreditRisqueRapport;
-  lastYear: string;
-  divUnit: number;
   getPortefeuilleDirecte() {
     this.lastYear = "2020";
     this.divUnit = 1;
@@ -145,30 +127,6 @@ ngOnChanges(changes: SimpleChanges){
         });
     
     console.log("prtf ", this.creditReportAnalysePortfeuille);
-  }
-
-
-  changeenvent(event) {
-    const secteurs: FormArray = this.scenarioForm.get(
-      "secteurs"
-    ) as FormArray;
-
-    if (event.target.checked) {
-      secteurs.push(new FormControl({ value: event.target.value }));
-    } else {
-      let i: number = 0;
-      secteurs.controls.forEach((item: any) => {
-        if (item.value.value === event.target.value) {
-          secteurs.removeAt(i);
-          return;
-        }
-        i++;
-      });   
-      
-    }
-    for (let i=0;i<this.scenarioForm.value.secteurs.length;i++){
-      console.log("secteurs : " + this.scenarioForm.value.secteurs[i].value)
-    }
   }
 
 }

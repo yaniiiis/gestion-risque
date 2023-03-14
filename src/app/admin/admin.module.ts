@@ -110,6 +110,8 @@ import { NgChartsModule } from "ng2-charts";
 import { Scenario1Component } from './risque-credit/stress-test/scenario1/scenario1.component';
 import { Scenario2Component } from './risque-credit/stress-test/scenario2/scenario2.component';
 import { Scenario3Component } from './risque-credit/stress-test/scenario3/scenario3.component';
+import { ScenarioComponent } from './risque-credit/stress-test/scenario/scenario.component';
+import { MatSelect } from "@angular/material/select";
 
 
 
@@ -202,7 +204,8 @@ import { Scenario3Component } from './risque-credit/stress-test/scenario3/scenar
     GrapheChartComponent,
     Scenario1Component,
     Scenario2Component,
-    Scenario3Component
+    Scenario3Component,
+    ScenarioComponent
    
   ],
   imports: [
@@ -224,7 +227,7 @@ import { Scenario3Component } from './risque-credit/stress-test/scenario3/scenar
     NavbarModule,
     SidebarModule,
     FixedpluginModule,
-    NgChartsModule,
+    NgChartsModule
   ],
   providers: [authInterceptorProviders, MatDatepickerModule] ,
   exports: [MatDatepickerModule]

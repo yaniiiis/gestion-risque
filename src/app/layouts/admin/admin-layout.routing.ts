@@ -32,9 +32,11 @@ import { GestionDesResqueClientComponent } from "src/app/admin/risque-credit/ges
 import { RepartitionParSecteurComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/repartition-par-secteur/repartition-par-secteur.component";
 import { RepartitionParZoneComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/repartition-par-zone/repartition-par-zone.component";
 import { GraphicComponent } from "src/app/admin/risque-credit/graphic/graphic.component";
+import { ScenarioComponent } from "src/app/admin/risque-credit/stress-test/scenario/scenario.component";
 import { Scenario1Component } from "src/app/admin/risque-credit/stress-test/scenario1/scenario1.component";
 import { Scenario2Component } from "src/app/admin/risque-credit/stress-test/scenario2/scenario2.component";
 import { Scenario3Component } from "src/app/admin/risque-credit/stress-test/scenario3/scenario3.component";
+
 import { StressTestComponent } from "src/app/admin/risque-credit/stress-test/stress-test.component";
 import { DixPlusGrandClientAConcentrationComponent } from "src/app/admin/risque-credit/top10/dix-plus-grand-client-a-concentration/dix-plus-grand-client-a-concentration.component";
 import { DixPlusGrandClientAEngagementsComponent } from "src/app/admin/risque-credit/top10/dix-plus-grand-client-a-engagements/dix-plus-grand-client-a-engagements.component";
@@ -241,7 +243,7 @@ export const AdminLayoutRoutes: Routes = [
           {
             path: "scenario3",
             component: Scenario3Component,
-          },
+          }
         ],
       },
 
