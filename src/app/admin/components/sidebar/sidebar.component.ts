@@ -39,12 +39,12 @@ export const ROUTES: RouteInfo[] = [{
         forAdmin: true,
         children: [
             {path: 'GestionUtilisateur', title: 'Gestion des utilisateur', ab:'B'},
-            {path: 'GestionDesRoles', title: 'Gestion Des Rôles', ab:'GS'},
-            {path: 'ImporterFichierExcel', title: 'Importer Un Fichier Excel', ab:'P'}          
+            {path: 'GestionDesRoles', title: 'Gestion des rôles', ab:'GS'},
+            {path: 'ImporterFichierExcel', title: 'Importer un fichier Excel', ab:'P'}          
         ]
     },  {
         path: "/Admin",
-        title: "Risque Credit",
+        title: "Risque credit",
         icontype: "payments",
         type: 'sub',
         collapse: 'RisqueCredit',
@@ -52,7 +52,7 @@ export const ROUTES: RouteInfo[] = [{
         children: [
           {
             path: "AnalysePortfeuille",
-            title: "Analyse Du Portfeuille",
+            title: "Analyse du portfeuille",
             ab:'AP'
           },
           {
@@ -62,7 +62,7 @@ export const ROUTES: RouteInfo[] = [{
           },
       {
         path: "Graphic",
-        title: "Gestion des Graphe et statistiques ",
+        title: "Gestion des graphes et statistiques ",
         ab:'GS'
       },
           {

@@ -79,10 +79,7 @@ import { GestionRisqueClientContentComponent } from "./risque-credit/gestion-des
 import { RepartitionParSecteurComponent } from "./risque-credit/gestion-des-resque-client/repartition-par-secteur/repartition-par-secteur.component";
 import { RepartitionParZoneComponent } from "./risque-credit/gestion-des-resque-client/repartition-par-zone/repartition-par-zone.component";
 import { KRIsComponent } from "./risque-credit/kris/kris.component";
-import { StressTestCentComponent } from "./risque-credit/stress-test/stress-test-cent/stress-test-cent.component";
-import { StressTestCinquanteComponent } from "./risque-credit/stress-test/stress-test-cinquante/stress-test-cinquante.component";
 import { StressTestContentComponent } from "./risque-credit/stress-test/stress-test-content/stress-test-content.component";
-import { StressTestDeuxCentComponent } from "./risque-credit/stress-test/stress-test-deux-cent/stress-test-deux-cent.component";
 import { StressTestComponent } from "./risque-credit/stress-test/stress-test.component";
 import { DixPlusGrandClientAConcentrationComponent } from "./risque-credit/top10/dix-plus-grand-client-a-concentration/dix-plus-grand-client-a-concentration.component";
 import { DixPlusGrandClientAEngagementsComponent } from "./risque-credit/top10/dix-plus-grand-client-a-engagements/dix-plus-grand-client-a-engagements.component";
@@ -110,6 +107,9 @@ import { GraphicComponent } from "./risque-credit/graphic/graphic.component";
 import { FormComentaireAnalysteComponent } from "./risque-credit/graphic/form-comentaire-analyste/form-comentaire-analyste.component";
 import { GrapheChartComponent } from "./components/graphe-chart/graphe-chart.component";
 import { NgChartsModule } from "ng2-charts";
+import { Scenario1Component } from './risque-credit/stress-test/scenario1/scenario1.component';
+import { Scenario2Component } from './risque-credit/stress-test/scenario2/scenario2.component';
+import { Scenario3Component } from './risque-credit/stress-test/scenario3/scenario3.component';
 
 
 
@@ -171,10 +171,10 @@ import { NgChartsModule } from "ng2-charts";
     RepartitionParSecteurComponent,
     RepartitionParZoneComponent,
     KRIsComponent,
-    StressTestCentComponent,
-    StressTestCinquanteComponent,
+    Scenario1Component,
+    Scenario2Component,
     StressTestContentComponent,
-    StressTestDeuxCentComponent,
+    Scenario3Component,
     StressTestComponent,
     Top10Component,
     Top10ConentComponent,
@@ -199,7 +199,10 @@ import { NgChartsModule } from "ng2-charts";
     AnalysePortfeuilleComponent,
     GraphicComponent,
     FormComentaireAnalysteComponent,
-    GrapheChartComponent
+    GrapheChartComponent,
+    Scenario1Component,
+    Scenario2Component,
+    Scenario3Component
    
   ],
   imports: [

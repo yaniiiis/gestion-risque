@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StressTestCentComponent } from './stress-test-cent.component';
+import { Scenario1Component } from './scenario1.component';
 
-describe('StressTestCentComponent', () => {
-  let component: StressTestCentComponent;
-  let fixture: ComponentFixture<StressTestCentComponent>;
+describe('Scenario1Component', () => {
+  let component: Scenario1Component;
+  let fixture: ComponentFixture<Scenario1Component>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StressTestCentComponent ]
+      declarations: [ Scenario1Component ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(StressTestCentComponent);
+    fixture = TestBed.createComponent(Scenario1Component);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

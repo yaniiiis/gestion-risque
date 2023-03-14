@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {StressTestCinquanteComponent} from '../stress-test-cinquante/stress-test-cinquante.component';
-import { StressTestDeuxCentComponent } from '../stress-test-deux-cent/stress-test-deux-cent.component';
-import { StressTestCentComponent } from '../stress-test-cent/stress-test-cent.component';
+import { Scenario1Component } from '../scenario1/scenario1.component';
+import { Scenario2Component } from '../scenario2/scenario2.component';
+import { Scenario3Component } from '../scenario3/scenario3.component';
 @Component({
   selector: 'app-stress-test-content',
   templateUrl: './stress-test-content.component.html',
@@ -11,19 +11,19 @@ export class StressTestContentComponent implements OnInit {
 
   protected menuItems = [
     {
-      menuItem: "Variation de 50%",
-      path: "StressTestCinquante",
-      Component: StressTestCinquanteComponent,
+      menuItem: "Scenario 1",
+      path: "scenario1",
+      Component: Scenario1Component,
     },
     {
-      menuItem: "Variation de 100% ",
-      path: "StressTestCent",
-      component: StressTestCentComponent,
+      menuItem: "Scenario 2",
+      path: "scenario2",
+      component: Scenario2Component,
     },
     {
-      menuItem: "Variation de 200%  ",
-      path: "StressTestDeuxCent",
-      component: StressTestDeuxCentComponent,
+      menuItem: "Scenario 3",
+      path: "scenario3",
+      component: Scenario3Component,
     },
   ];
 

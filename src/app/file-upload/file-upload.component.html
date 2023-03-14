@@ -33,14 +33,15 @@
             </button>
           </div>
           <!-- Progress Bar -->
-          <div class="progress form-group" *ngIf="progress > 0">
+          <!-- <div class="progress form-group" *ngIf="progress > 0">
             <div
-              class="progress-bar progress-bar-striped bg-success"
+              class="progress-bar progress-bar-striped bg-primary"
               role="progressbar"
               [style.width.%]="progress"
             ></div>
-          </div>
+          </div> -->
         </div>
+        <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
 
       
       </div>

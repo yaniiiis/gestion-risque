@@ -12,7 +12,6 @@ import { AjouterDesUtilisateusComponent } from "src/app/admin/gestion-role-et-ut
 import { GestionUtilisateurComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-utilisateur/gestion-utilisateur.component";
 import { ListAgencesComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-utilisateur/list-agences/list-agences.component";
 import { ListeUtilisateursComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-utilisateur/liste-utilisateurs/liste-utilisateurs.component";
-import { UpdateUserModalComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-utilisateur/update-user-modal/update-user-modal.component";
 import { ParametrageAnalysePortfeuilleComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-analyse-portfeuille/parametrage-analyse-portfeuille.component";
 import { ParametrageDomaineHomeComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-domaine/parametrage-domaine-home/parametrage-domaine-home.component";
 import { ParametrageIndirectComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-indirect/parametrage-indirect.component";
@@ -33,9 +32,9 @@ import { GestionDesResqueClientComponent } from "src/app/admin/risque-credit/ges
 import { RepartitionParSecteurComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/repartition-par-secteur/repartition-par-secteur.component";
 import { RepartitionParZoneComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/repartition-par-zone/repartition-par-zone.component";
 import { GraphicComponent } from "src/app/admin/risque-credit/graphic/graphic.component";
-import { StressTestCentComponent } from "src/app/admin/risque-credit/stress-test/stress-test-cent/stress-test-cent.component";
-import { StressTestCinquanteComponent } from "src/app/admin/risque-credit/stress-test/stress-test-cinquante/stress-test-cinquante.component";
-import { StressTestDeuxCentComponent } from "src/app/admin/risque-credit/stress-test/stress-test-deux-cent/stress-test-deux-cent.component";
+import { Scenario1Component } from "src/app/admin/risque-credit/stress-test/scenario1/scenario1.component";
+import { Scenario2Component } from "src/app/admin/risque-credit/stress-test/scenario2/scenario2.component";
+import { Scenario3Component } from "src/app/admin/risque-credit/stress-test/scenario3/scenario3.component";
 import { StressTestComponent } from "src/app/admin/risque-credit/stress-test/stress-test.component";
 import { DixPlusGrandClientAConcentrationComponent } from "src/app/admin/risque-credit/top10/dix-plus-grand-client-a-concentration/dix-plus-grand-client-a-concentration.component";
 import { DixPlusGrandClientAEngagementsComponent } from "src/app/admin/risque-credit/top10/dix-plus-grand-client-a-engagements/dix-plus-grand-client-a-engagements.component";
@@ -43,7 +42,6 @@ import { DixPlusGrandClientALimiteAccordeeComponent } from "src/app/admin/risque
 import { GarantiesPrisesSurLesDixPlusGrandsClientsComponent } from "src/app/admin/risque-credit/top10/garanties-prises-sur-les-dix-plus-grands-clients/garanties-prises-sur-les-dix-plus-grands-clients.component";
 import { Top10Component } from "src/app/admin/risque-credit/top10/top10.component";
 import { AnalyseDesDepotsComponent } from "src/app/admin/risque-liquidite/analyse-des-depots/analyse-des-depots.component";
-import { RisqueLiquiditeComponent } from "src/app/admin/risque-liquidite/risque-liquidite.component";
 import { DashboardComponent } from "src/app/dashboard/dashboard.component";
 import { FileUploadComponent } from "src/app/file-upload/file-upload.component";
 
@@ -233,16 +231,16 @@ export const AdminLayoutRoutes: Routes = [
         component: StressTestComponent,
         children: [
           {
-            path: "StressTestCinquante",
-            component: StressTestCinquanteComponent,
+            path: "scenario1",
+            component: Scenario1Component,
           },
           {
-            path: "StressTestCent",
-            component: StressTestCentComponent,
+            path: "scenario2",
+            component: Scenario2Component,
           },
           {
-            path: "StressTestDeuxCent",
-            component: StressTestDeuxCentComponent,
+            path: "scenario3",
+            component: Scenario3Component,
           },
         ],
       },
