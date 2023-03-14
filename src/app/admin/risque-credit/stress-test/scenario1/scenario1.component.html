@@ -16,7 +16,31 @@
                   <tr>
                     <td  class="tbody__td">CS</td>
                     <td  class="tbody__td">Choix des secteurs</td>
-                    <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="pro"/></td>
+                    <td  class="tbody__td">
+                      <!-- <input type="text" id="formControlLg" [(ngModel)]="cs"/> -->
+                      <label for="secteurs"> Secteurs </label>
+                                  <div class="dropdown">
+                                 
+                                    <button class="btn btn-social dropdown-toggle  w-100" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Sélectionner des secteurs
+                                    </button>
+                                    <div class="dropdown-menu " aria-labelledby="dropdownMenuButton"   >
+                         
+                                          <a class="dropdown-item"  *ngFor="let s of secteurs" >
+                                            <div class="form-check permissions-checkboxes" >
+                                              <label class="form-check-label mr-3">
+                                                  <input class="form-check-input "  (change)="changeenvent($event, s)"    type="checkbox" value="{{s.value}}" >
+                                                 {{s.viewValue}}
+                                                  <span class="form-check-sign">
+                                                      <span class="check"></span>
+                                                  </span>
+                                              </label>
+                                            </div>
+                                          </a>
+                                      </div> 
+                                    </div>
+                    </td>
                     <td class="tbody__td" >TDS</td>
                     <td class="tbody__td">Taux de Solvabilité </td>
                     <td class="tbody__td">{{ ((fpr / trp)*100) | number:'4.1-2'}}%</td>
