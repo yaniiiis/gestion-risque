@@ -22,6 +22,8 @@ export class Scenario3Component implements OnInit {
   "montant en milliards dzd",
   "code","Description",
   "montant en milliards dzd"]; 
+  secteur = new FormControl('');
+  selectedSecteur;
 
   public scenarioForm!: FormGroup;
   secteurs: Secteur[] = [{value:1,
@@ -167,5 +169,10 @@ cs:string  = 'Production';
       console.log("secteurs : " + this.scenarioForm.value.secteurs[i].value)
     }
   }
+  selectSecteurs(event: Event) {
+    this.selectedSecteur= (event.target as HTMLSelectElement).value;
 
+    console.log("val : "+this.secteur.value)
+    
+  }
 }

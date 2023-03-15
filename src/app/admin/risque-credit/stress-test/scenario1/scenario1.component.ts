@@ -22,7 +22,9 @@ export class Scenario1Component implements OnInit {
   "Description",
   "montant en milliards dzd",
   "code","Description",
-  "montant en milliards dzd"]; 
+  "montant en milliards dzd"];
+  
+  secteur = new FormControl('');
 
   public scenarioForm!: FormGroup;
   secteurs: Secteur[] = [{value:1,
@@ -67,6 +69,9 @@ xmp:number;
 intrcr:number;
 intrcd:number;
 nbr:number;
+
+selectedSecteur;
+
 
 ngOnChanges(changes: SimpleChanges){
   console.log(changes)
@@ -169,6 +174,13 @@ ngOnChanges(changes: SimpleChanges){
     for (let i=0;i<this.scenarioForm.value.secteurs.length;i++){
       console.log("secteurs : " + this.scenarioForm.value.secteurs[i].value)
     }
+  }
+
+  selectSecteurs(event: Event) {
+    this.selectedSecteur= (event.target as HTMLSelectElement).value;
+
+    console.log("val : "+this.secteur.value)
+    
   }
 
 }

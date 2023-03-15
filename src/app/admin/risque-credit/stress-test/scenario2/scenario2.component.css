@@ -81,3 +81,15 @@
     margin: 0;
     padding: 0;
   }
+
+  .color_green{
+    color:green;
+  }
+
+  .color_orange{
+    color: orange;
+  }
+
+  .color_red{
+    color: red;
+  }

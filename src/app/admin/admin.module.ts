@@ -111,7 +111,8 @@ import { Scenario1Component } from './risque-credit/stress-test/scenario1/scenar
 import { Scenario2Component } from './risque-credit/stress-test/scenario2/scenario2.component';
 import { Scenario3Component } from './risque-credit/stress-test/scenario3/scenario3.component';
 import { ScenarioComponent } from './risque-credit/stress-test/scenario/scenario.component';
-import { MatSelect } from "@angular/material/select";
+
+
 
 
 
