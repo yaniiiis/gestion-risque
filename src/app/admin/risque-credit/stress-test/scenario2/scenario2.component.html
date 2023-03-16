@@ -2,39 +2,10 @@
   <h4>{{variation}}</h4>
 </div>
 
-<!-- <div class="row">
-  <label for="secteurs"> Secteurs </label>
-              <div class="dropdown">
-             
-                <button class="btn btn-social dropdown-toggle  w-100" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Sélectionner des secteurs
-                </button>
-                <div class="dropdown-menu " aria-labelledby="dropdownMenuButton"   >
-     
-                      <a class="dropdown-item"  *ngFor="let s of secteurs" >
-                        <div class="form-check permissions-checkboxes" >
-                          <label class="form-check-label mr-3">
-                              <input class="form-check-input "  (change)="changeenvent($event, s)"    type="checkbox" value="{{s.value}}" >
-                             {{s.viewValue}}
-                              <span class="form-check-sign">
-                                  <span class="check"></span>
-                              </span>
-                          </label>
-                        </div>
-                      </a>
-                  </div> 
-                </div>
-              </div>
-             -->
-             <mat-form-field appearance="fill">
-              <mat-label>Secteurs</mat-label>
-              <select matNativeControl multiple (change)="selectSecteurs($event)" [formControl]="secteur">
-                   <option *ngFor="let secteur of secteurs" [value]="secteur.value">{{secteur.viewValue}}</option>
-              </select>
-            </mat-form-field>
-            
-                               
+<mat-label>Secteur</mat-label>
+<select   class="btn btn-primary simple" (change)="selectSecteurs($event)" [formControl]="secteur">
+      <option *ngFor="let secteur of secteurs" [value]="secteur.value">{{secteur.viewValue}}</option>
+</select>                  
           
                 
              
