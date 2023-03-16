@@ -48,18 +48,18 @@ export class Scenario2Component implements OnInit {
 
  scenario:number = 2;
  cs:string  = 'Agriculture';
- pro:number;
- fpr:number = 0;
- rnt:number;
- trp:number;
- tsr:number;
- tp:number;
+ pro:number = 1.14;
+ fpr:number = 17.23;
+ rnt:number = 1.707;
+ trp:number = 44.69;
+ tsr:number = 0.05;
+ tp:number = 0.2;
  tds:number;
  trc:number;
  pra:number;
  tro:number;
  trm:number;
- ccr:number;
+ ccr:number = 36.27;
  mg:number;
  nb:number;
  mcd:number;
@@ -145,7 +145,7 @@ export class Scenario2Component implements OnInit {
      
       secteurs: this.formBuilder.array([], [Validators.required]),
       });
-    this.getPortefeuilleDirecte();
+   // this.getPortefeuilleDirecte();
   }
 
   changeenvent(event) {

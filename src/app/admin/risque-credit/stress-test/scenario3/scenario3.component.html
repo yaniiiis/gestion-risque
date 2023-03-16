@@ -2,41 +2,13 @@
   <h4>{{variation}}</h4>
 </div>
 
-<!-- <div class="row">
-  <label for="secteurs"> Secteurs </label>
-              <div class="dropdown">
-             
-                <button class="btn btn-social dropdown-toggle  w-100" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Sélectionner des secteurs
-                </button>
-                <div class="dropdown-menu " aria-labelledby="dropdownMenuButton"   >
+<mat-form-field appearance="fill">
+<mat-label>Secteurs</mat-label>
+<select matNativeControl multiple (change)="selectSecteurs($event)" [formControl]="secteur">
+      <option *ngFor="let secteur of secteurs" [value]="secteur.value">{{secteur.viewValue}}</option>
+</select>
+</mat-form-field>
      
-                      <a class="dropdown-item"  *ngFor="let s of secteurs" >
-                        <div class="form-check permissions-checkboxes" >
-                          <label class="form-check-label mr-3">
-                              <input class="form-check-input "  (change)="changeenvent($event, s)"    type="checkbox" value="{{s.value}}" >
-                             {{s.viewValue}}
-                              <span class="form-check-sign">
-                                  <span class="check"></span>
-                              </span>
-                          </label>
-                        </div>
-                      </a>
-                  </div> 
-                </div>
-              </div>
-             -->
-             <mat-form-field appearance="fill">
-              <mat-label>Secteurs</mat-label>
-              <select matNativeControl multiple (change)="selectSecteurs($event)" [formControl]="secteur">
-                   <option *ngFor="let secteur of secteurs" [value]="secteur.value">{{secteur.viewValue}}</option>
-              </select>
-            </mat-form-field>
-            
-                               
-          
-                
              
 <table class="center" >
        <thead>
@@ -49,20 +21,14 @@
         
         </thead >
              <tbody >
-                  <tr *ngIf="scenario===1 || scenario===2">
-                    <td  class="tbody__td">PRO</td>
-                    <td  class="tbody__td">Provisions </td>
-                    <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="pro"/></td>
-                    
-                  </tr>
-
+                
                   <tr *ngIf="scenario===1 || scenario===2 || scenario===3">
                     <td  class="tbody__td">FPR</td>
                     <td  class="tbody__td">Fonds propres réglementaires </td>
                     <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="fpr"/></td>
                     <td class="tbody__td" >TDS</td>
-                    <td class="tbody__td">Taux de Solvabilité </td>
-                    <td class="tbody__td">{{ ((fpr / trp)*100) | number:'4.1-2'}}%</td>
+                    <td class="tbody__td" >Taux de Solvabilité </td>
+                    <td class="tbody__td" >{{ ((fpr / trp)*100) | number:'4.1-2'}}%</td>
                   </tr>
 
                 
@@ -70,9 +36,9 @@
                     <td  class="tbody__td">RNT</td>
                     <td  class="tbody__td">Résultat </td>
                     <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="rnt"/></td>
-                    <td class="tbody__td" >PRAS1</td>
-                    <td class="tbody__td">Perte après stress </td>
-                    <td class="tbody__td">{{ (pro * tp *tsr) | number:'4.1-2'}}</td>
+                    <td class="tbody__td" [ngClass]="(rnt - pra) > 0 ? 'color_green': 'color_red'">PRAS1</td>
+                    <td class="tbody__td" [ngClass]="(rnt - pra) > 0 ? 'color_green': 'color_red'">Perte après stress </td>
+                    <td class="tbody__td" [ngClass]="(rnt - pra) > 0 ? 'color_green': 'color_red'">{{ pra | number:'4.1-3'}}</td>
                   
                   </tr>
 
@@ -80,9 +46,9 @@
                     <td  class="tbody__td">TRC</td>
                     <td  class="tbody__td">Total des risques crédit   </td>
                     <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="trc"/></td>
-                    <td class="tbody__td" >FPAS1</td>
+                    <td class="tbody__td" >FPA</td>
                     <td class="tbody__td">Fonds propres réglementaires après stress</td>
-                    <td class="tbody__td">{{ (fpr - (pro * tp *tsr) ) | number:'4.1-2'}}</td>
+                    <td class="tbody__td">{{ (fpr - pra ) | number:'4.1-3'}}</td>
                    
                   </tr>
                   <!-- <td class="tbody__td" >RPAS1</td>
@@ -95,19 +61,18 @@
                     <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="tro"/></td>
                     <td class="tbody__td" >PRAS2</td>
                     <td class="tbody__td">Risques pondérés après stress</td>
-                    <td class="tbody__td">{{ trp - (pro * tp *tsr) }}</td>
+                    <td class="tbody__td">{{ (trp - pra) | number:'4.1-3' }}</td>
                    
                   </tr>
 
                   <tr *ngIf="scenario===3">
                     <td  class="tbody__td">TRM</td>
                     <td  class="tbody__td">Total des risques marché </td>
-                    <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="trm"/></td>
-                   
+                    <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="trm"/></td>            
 
-                     <td class="tbody__td" >TSAS1</td>
-                    <td class="tbody__td">Taus de solvabilité après stress</td>
-                    <td class="tbody__td">{{ (((pro * tp *tsr) - pra) / (trp - (pro * tp *tsr))) | number:'4.1-2'}}</td>
+                     <td class="tbody__td" [ngClass]="{'color_green': ((fpr / trp)*100) > 12.5, 'color_orange': ( ((fpr / trp)*100) < 12.5 && ((fpr / trp)*100) > 9.5 ) , 'color_red': ( ((fpr / trp)*100) < 9.5 )}">TSAS</td>
+                    <td class="tbody__td" [ngClass]="{'color_green': ((fpr / trp)*100) > 12.5, 'color_orange': ( ((fpr / trp)*100) < 12.5 && ((fpr / trp)*100) > 9.5 ) , 'color_red': ( ((fpr / trp)*100) < 9.5 )}">Taus de solvabilité après stress</td>
+                    <td class="tbody__td" [ngClass]="{'color_green': ((fpr / trp)*100) > 12.5, 'color_orange': ( ((fpr / trp)*100) < 12.5 && ((fpr / trp)*100) > 9.5 ) , 'color_red': ( ((fpr / trp)*100) < 9.5 )}">{{ (((fpr - pra ) / (trp - pra))*100) | number:'4.1-2'}}% </td>
                   </tr>
 
                   <tr *ngIf="scenario===1 || scenario===2 || scenario===3">
@@ -116,116 +81,26 @@
                     <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="trp"/></td>
                     <td class="tbody__td" >RTAS1</td>
                     <td class="tbody__td">Résultat aprés stress</td>
-                    <td class="tbody__td">{{ rnt - (pro*tp* tsr)}}</td>
-                  </tr>
-
-                  <tr *ngIf="scenario===1 || scenario===2">
-                    <td  class="tbody__td">TSR</td>
-                    <td  class="tbody__td">Taux de Stress  </td>
-                    <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="tsr"/></td>
-                    <td class="tbody__td" >TSAS2</td>
-                    <td class="tbody__td">Taux de solvabilité après stress</td>
-                    <td class="tbody__td">{{ (((fpr - (pro * tp *tsr)) / (trp - (pro * tp *tsr)))*100) | number:'4.1-2' }}%</td>
+                    <td class="tbody__td">{{ (rnt - pra) | number:'4.1-3'}}</td>
+                  </tr>  
+                  
+                  <tr *ngIf="scenario===3">
+                    <td  class="tbody__td">NB</td>
+                    <td  class="tbody__td">Nombre de clients </td>
+                    <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="nb"/></td>
+                    <td class="tbody__td" >MP</td>
+                    <td class="tbody__td">Montant total des provisions de {{nb}} premiers clients </td>
+                    <td class="tbody__td">{{ pra | number:'4.1-3'}}</td>
                   </tr>
                  
                   <tr *ngIf="scenario===1 || scenario===2 || scenario===3">
                     <td  class="tbody__td">TP</td>
                     <td  class="tbody__td">Taux de provisionnement </td>
                     <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="tp"/></td>
-                    <!-- <td class="tbody__td" >RTAS2</td>
-                    <td class="tbody__td">Résultat après stress</td>
-                    <td class="tbody__td">{{ rnt - (pro * tp *tsr) }}</td> -->
-                  </tr>
-
-                  <tr *ngIf="scenario===2 ">
-                    <td  class="tbody__td">CCR</td>
-                    <td  class="tbody__td">Créances courantes </td>
-                    <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="ccr"/></td>
-                    <td class="tbody__td" >TSA</td>
-                    <td class="tbody__td">Taux de solvabilité après stress</td>
-                    <td class="tbody__td">{{((fpr - (pro * tp *tsr) ) / (trp - (pro * tp *tsr)))}}</td>
-                  </tr>
-
-                  <tr *ngIf="scenario===3">
-                    <td  class="tbody__td">NB</td>
-                    <td  class="tbody__td">Nombre de clients </td>
-                    <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="nbr"/></td>
-                    <td class="tbody__td" >MG</td>
-                    <td class="tbody__td">Montant total garanties </td>
-                    <td class="tbody__td">{{ mg }}</td>
-                  </tr>
-
-                  <tr *ngIf="scenario===0">
-                    <td  class="tbody__td">CD</td>
-                    <td  class="tbody__td">Créances douteuses</td>
-                    <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="cd"/></td>
-                    <td class="tbody__td" >MCD</td>
-                    <td class="tbody__td">Montant à provisionner</td>
-                    <td class="tbody__td">{{ mcd }}</td>
-                  </tr>
-
-                  <tr *ngIf="scenario===0">
-                    <td  class="tbody__td">INTRCD</td>
-                    <td  class="tbody__td">Intérêts réservés créances douteuses</td>
-                    <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="intrcd"/></td>
-                    <td class="tbody__td" >MP</td>
-                    <td class="tbody__td">Montant provision</td>
-                    <td class="tbody__td">{{ mp }}</td>
-                  </tr>
-
-                  <tr *ngIf="scenario===0">
-                    <td  class="tbody__td">INTRCR</td>
-                    <td  class="tbody__td">Intérêts réservés créances courantes</td>
-                    <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="intrcr"/></td>
-                    <td class="tbody__td" >XMP</td>
-                    <td class="tbody__td">Montant total des provisions de X client</td>
-                    <td class="tbody__td">{{ (mp * nb) }}</td>
-                  </tr>
-
-                  <tr>
-                    <td  class="tbody__td"></td>
-                    <td  class="tbody__td"></td>
-                    <td  class="tbody__td"></td>
-                    <td class="tbody__td" [ngClass]=" (rnt - (pro*tp* tsr)) > 0 ? 'color_green':'color_red'" >PRAS3</td>
-                    <td class="tbody__td" [ngClass]=" (rnt - (pro*tp* tsr)) > 0 ? 'color_green':'color_red'">Perte après stress</td>
-                    <td class="tbody__td" [ngClass]=" (rnt - (pro*tp* tsr)) > 0 ? 'color_green':'color_red'">{{ (pro * tp *tsr)  }}</td>
-                  </tr>
-
-                  <tr>
-                    <td  class="tbody__td"></td>
-                    <td  class="tbody__td"></td>
-                    <td  class="tbody__td"></td>
-                    <td class="tbody__td" >FPAS3</td>
-                    <td class="tbody__td">Fonds propres réglementaires après stress</td>
-                    <td class="tbody__td">{{ (pro * tp *tsr) - xmp  }}</td>
-                  </tr>
-
-                  <tr>
-                    <td  class="tbody__td"></td>
-                    <td  class="tbody__td"></td>
-                    <td  class="tbody__td"></td>
-                    <td class="tbody__td" >RPAS3</td>
-                    <td class="tbody__td">Risques pondérés après stress</td>
-                    <td class="tbody__td">{{ (trp - xmp)  }}</td>
-                  </tr>
-
-                  <tr>
-                    <td  class="tbody__td"></td>
-                    <td  class="tbody__td"></td>
-                    <td  class="tbody__td"></td>
-                    <td class="tbody__td" >TSAS3</td>
-                    <td class="tbody__td">Taux de solvabilité après stress</td>
-                    <td class="tbody__td">{{ ((pro * tp *tsr) - xmp) / (trp - xmp) }}</td>
-                  </tr>
-
-                  <tr>
-                    <td  class="tbody__td"></td>
-                    <td  class="tbody__td"></td>
-                    <td  class="tbody__td"></td>
-                    <td class="tbody__td" >RTAS3</td>
-                    <td class="tbody__td">Résultat parés stress</td>
-                    <td class="tbody__td">{{ (rnt - xmp) }}</td>
-                  </tr>
+                    <td class="tbody__td" ></td>
+                    <td class="tbody__td"></td>
+                    <td class="tbody__td"></td> 
+                  </tr>                 
                  
              </tbody>
 

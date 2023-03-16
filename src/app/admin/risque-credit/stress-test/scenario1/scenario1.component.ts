@@ -48,12 +48,12 @@ export class Scenario1Component implements OnInit {
 ]
 scenario:number = 1;
 cs:string  = 'Service'
-pro:number;
-fpr:number = 0;
-rnt:number;
-trp:number;
-tsr:number;
-tp:number;
+pro:number = 1.11;
+fpr:number = 17.28;
+rnt:number = 0.689;
+trp:number = 50.56;
+tsr:number = 0.5;
+tp:number = 0.2;
 tds:number;
 trc:number;
 pra:number;
@@ -84,7 +84,7 @@ ngOnChanges(changes: SimpleChanges){
      
     secteurs: this.formBuilder.array([], [Validators.required]),
     });
-    this.getPortefeuilleDirecte();
+   // this.getPortefeuilleDirecte();
     
   }
 
