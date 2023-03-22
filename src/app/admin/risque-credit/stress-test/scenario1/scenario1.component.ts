@@ -84,7 +84,7 @@ ngOnChanges(changes: SimpleChanges){
      
     secteurs: this.formBuilder.array([], [Validators.required]),
     });
-   // this.getPortefeuilleDirecte();
+    this.getPortefeuilleDirecte();
     
   }
 
@@ -96,7 +96,7 @@ ngOnChanges(changes: SimpleChanges){
   divUnit: number;
   getPortefeuilleDirecte() {
     this.lastYear = "2020";
-    this.divUnit = 1;
+    this.divUnit = 1000000000;
     this.creditReportFix.datereportfix = {};
      
       this.creditReportFix.datereportfix = this.lastYear + "-12-31";

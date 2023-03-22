@@ -34,9 +34,9 @@
                     <td  class="tbody__td">RNT</td>
                     <td  class="tbody__td">Résultat </td>
                     <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="rnt"/></td>
-                    <td class="tbody__td" [ngClass]="(rnt - pra) > 0 ? 'color_green': 'color_red'">PRAS1</td>
-                    <td class="tbody__td" [ngClass]="(rnt - pra) > 0 ? 'color_green': 'color_red'">Perte après stress </td>
-                    <td class="tbody__td" [ngClass]="(rnt - pra) > 0 ? 'color_green': 'color_red'">{{ pra | number:'4.1-3'}}</td>
+                    <td class="tbody__td" [ngClass]="(rnt - (pra * nb)) > 0 ? 'color_green': 'color_red'">PRAS1</td>
+                    <td class="tbody__td" [ngClass]="(rnt - (pra * nb)) > 0 ? 'color_green': 'color_red'">Perte après stress </td>
+                    <td class="tbody__td" [ngClass]="(rnt - (pra * nb)) > 0 ? 'color_green': 'color_red'">{{ (pra * nb) | number:'4.1-3'}}</td>
                   
                   </tr>
 
@@ -46,7 +46,7 @@
                     <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="trc"/></td>
                     <td class="tbody__td" >FPA</td>
                     <td class="tbody__td">Fonds propres réglementaires après stress</td>
-                    <td class="tbody__td">{{ (fpr - pra ) | number:'4.1-3'}}</td>
+                    <td class="tbody__td">{{ (fpr - (pra * nb) ) | number:'4.1-3'}}</td>
                    
                   </tr>
                   <!-- <td class="tbody__td" >RPAS1</td>
@@ -59,7 +59,7 @@
                     <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="tro"/></td>
                     <td class="tbody__td" >PRAS2</td>
                     <td class="tbody__td">Risques pondérés après stress</td>
-                    <td class="tbody__td">{{ (trp - pra) | number:'4.1-3' }}</td>
+                    <td class="tbody__td">{{ (trp - (pra * nb)) | number:'4.1-3' }}</td>
                    
                   </tr>
 
@@ -79,16 +79,16 @@
                     <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="trp"/></td>
                     <td class="tbody__td" >RTAS1</td>
                     <td class="tbody__td">Résultat aprés stress</td>
-                    <td class="tbody__td">{{ (rnt - pra) | number:'4.1-3'}}</td>
+                    <td class="tbody__td">{{ (rnt - (pra * nb)) | number:'4.1-3'}}</td>
                   </tr>  
                   
                   <tr *ngIf="scenario===3">
                     <td  class="tbody__td">NB</td>
                     <td  class="tbody__td">Nombre de clients </td>
                     <td  class="tbody__td"><input type="number" id="formControlLg" [(ngModel)]="nb"/></td>
-                    <td class="tbody__td" >MP</td>
+                    <td class="tbody__td" >XMP</td>
                     <td class="tbody__td">Montant total des provisions de {{nb}} premiers clients </td>
-                    <td class="tbody__td">{{ pra | number:'4.1-3'}}</td>
+                    <td class="tbody__td">{{ (pra * nb) | number:'4.1-3'}}</td>
                   </tr>
                  
                   <tr *ngIf="scenario===1 || scenario===2 || scenario===3">

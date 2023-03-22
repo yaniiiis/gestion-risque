@@ -3,10 +3,13 @@
 </div>
 <!-- <mat-form-field appearance="fill"> -->
 <mat-label>Secteur</mat-label>
-<select   class="btn btn-primary simple" (change)="selectSecteurs($event)" [formControl]="secteur">
+<select   class="btn btn-primary simple" (change)="selectSecteurs($event)" [formControl]="secteur" > 
       <option *ngFor="let secteur of secteurs" [value]="secteur.value">{{secteur.viewValue}}</option>
 </select>
 <!-- </mat-form-field>              -->
+
+
+
 <table class="center" >
        <thead>
           <th  colspan="3" >Données input</th>
