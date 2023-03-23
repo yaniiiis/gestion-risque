@@ -4,16 +4,27 @@ export interface Rapport {
   code: string;
   description: string;
   clause: string;
-  keysValuesOperands: keyValueOperenad[];
+  keysValuesOperands: keyValueOperationOperand[];
 }
 
-interface keyValueOperenad {
+export interface keyValueOperationOperand {
+  id: number;
   key: string;
   value: string;
-  operand: Operand;
+  operation: string;
+  operand: string;
 }
 
-enum Operand {
-  OR,
-  AND,
+export interface Clause {
+  field: string;
+  selection?: string;
+}
+
+export interface Type {
+  id?: number;
+  type: string;
+  code: string;
+  description: string;
+  clauses?: Clause[];
+  kvoo_s?: keyValueOperationOperand[];
 }

@@ -1,4 +1,4 @@
-.DialogTitle {
+/* .DialogTitle {
   font-weight: bold;
   font-size: 18px;
 }
@@ -14,8 +14,7 @@
   height: 45px;
   padding: 6px;
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  /* -webkit-box-shadow: 0px 1px 16px 1px rgba(156, 142, 142, 0.75);
-    -moz-box-shadow: 0px 1px 16px 1px rgba(156, 142, 142, 0.75); */
+
   border-radius: 8px;
   margin-bottom: 20px;
   border: none;
@@ -30,4 +29,4 @@
 .span-error {
   color: red;
   font-size: 13px;
-}
+} */

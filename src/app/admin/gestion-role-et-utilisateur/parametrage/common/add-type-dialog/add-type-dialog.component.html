@@ -1,0 +1,73 @@
+<h3 class="DialogTitle" mat-dialog-title>Ajouter Un type</h3>
+<div mat-dialog-content>
+  <form class="addForm" [formGroup]="formGroup">
+    <input
+      class="formInput"
+      type="text"
+      placeholder="Nom"
+      name="name"
+      formControlName="name"
+    />
+    <span *ngIf="name.touched && name.invalid" class="span-error">
+      Champ invalid
+    </span>
+    <mat-checkbox
+      class="example-margin"
+      [checked]="withRelations"
+      (change)="checkBoxChange($event.checked)"
+    >
+      contien des relations
+    </mat-checkbox>
+
+    <div class="form-div" *ngIf="withRelations">
+      <input
+        class="form-input-list"
+        type="text"
+        placeholder="Champ"
+        name="feild"
+        autocomplete="off"
+        (click)="toggleListRelations()"
+        (clickOutside)="closeListRelations()"
+        formControlName="field"
+      />
+      <span class="span-error" *ngIf="1 == 2"
+        >Veuillez choisir ajouter les relations</span
+      >
+      <!-- class="clause-list-content"  down class -->
+      <div *ngIf="isListRelationsOpen">
+        <div
+          class="caluse-item"
+          *ngFor="let item of relationsList"
+          (click)="selectRelation(item)"
+        >
+          <span class="">{{ item }}</span>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="selectedRelations.length > 0 && withRelations">
+      <div
+        class="form-choosed-clause-list"
+        *ngFor="let item of selectedRelations"
+      >
+        <div>
+          {{ item }}
+        </div>
+        <mat-icon class="x-delete" (click)="deleteFromSelectedRelations(item)">
+          delete_forever
+        </mat-icon>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="myActionsContainer">
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button
+    mat-button
+    cdkFocusInitial
+    [mat-dialog-close]="name.value"
+    class="deleteAction"
+    [disabled]="formGroup.invalid"
+  >
+    Ajouter
+  </button>
+</div>

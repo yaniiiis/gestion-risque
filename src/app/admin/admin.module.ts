@@ -1,4 +1,3 @@
-
 import { LOCALE_ID, NgModule } from "@angular/core";
 import { CommonModule, DatePipe } from "@angular/common";
 
@@ -9,7 +8,6 @@ import { MatPseudoCheckboxModule } from "@angular/material/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
-
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MatCheckboxModule } from "@angular/material/checkbox";
@@ -107,14 +105,24 @@ import { GraphicComponent } from "./risque-credit/graphic/graphic.component";
 import { FormComentaireAnalysteComponent } from "./risque-credit/graphic/form-comentaire-analyste/form-comentaire-analyste.component";
 import { GrapheChartComponent } from "./components/graphe-chart/graphe-chart.component";
 import { NgChartsModule } from "ng2-charts";
-import { Scenario1Component } from './risque-credit/stress-test/scenario1/scenario1.component';
-import { Scenario2Component } from './risque-credit/stress-test/scenario2/scenario2.component';
-import { Scenario3Component } from './risque-credit/stress-test/scenario3/scenario3.component';
-import { ScenarioComponent } from './risque-credit/stress-test/scenario/scenario.component';
-
-
-
-
+import { Scenario1Component } from "./risque-credit/stress-test/scenario1/scenario1.component";
+import { Scenario2Component } from "./risque-credit/stress-test/scenario2/scenario2.component";
+import { Scenario3Component } from "./risque-credit/stress-test/scenario3/scenario3.component";
+import { ScenarioComponent } from "./risque-credit/stress-test/scenario/scenario.component";
+import { ClauseDialogComponent } from "./gestion-role-et-utilisateur/parametrage/common/clause-dialog/clause-dialog.component";
+import { KeyValueOperandComponent } from "./gestion-role-et-utilisateur/parametrage/parametrage-rapport/key-value-operand/key-value-operand.component";
+import { HomeComponent } from "./gestion-role-et-utilisateur/parametrage/parametrage-rapport/home/home.component";
+import { ListComponent } from "./gestion-role-et-utilisateur/parametrage/parametrage-rapport/list/list.component";
+import { TableComponent } from "./gestion-role-et-utilisateur/parametrage/parametrage-rapport/table/table.component";
+import { AddTypeDialogComponent } from "./gestion-role-et-utilisateur/parametrage/common/add-type-dialog/add-type-dialog.component";
+import { AddToTypeDialogComponent } from "./gestion-role-et-utilisateur/parametrage/common/add-to-type-dialog/add-to-type-dialog.component";
+import { DeleteFromTypeDialogComponent } from "./gestion-role-et-utilisateur/parametrage/common/delete-from-type-dialog/delete-from-type-dialog.component";
+import { EditTypeDialogComponent } from "./gestion-role-et-utilisateur/parametrage/common/edit-type-dialog/edit-type-dialog.component";
+import { EditClauseDialogComponent } from "./gestion-role-et-utilisateur/parametrage/common/edit-clause-dialog/edit-clause-dialog.component";
+import { KvooForEditComponent } from "./gestion-role-et-utilisateur/parametrage/common/edit-type-dialog/kvoo-for-edit/kvoo-for-edit.component";
+import { ClickOutsideModule } from "ng-click-outside";
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { ColumnComponent } from './gestion-role-et-utilisateur/parametrage/column/column.component';
 
 @NgModule({
   declarations: [
@@ -206,8 +214,30 @@ import { ScenarioComponent } from './risque-credit/stress-test/scenario/scenario
     Scenario1Component,
     Scenario2Component,
     Scenario3Component,
-    ScenarioComponent
-   
+    ScenarioComponent,
+    ParametrageAnalysePortfeuilleComponent,
+    ParametrageIndirectComponent,
+    ParametrageDomaineHomeComponent,
+    ParametrageDomaineTableComponent,
+    ParametrageDomaineListComponent,
+    DeleteDialogComponent,
+    AddToDialogComponent,
+    EditDomaineDialogComponent,
+    AddDomaineDialogComponent,
+    ParametrageRapportComponent,
+    AddKeyValueOperationDialogComponent,
+    ClauseDialogComponent,
+    KeyValueOperandComponent,
+    HomeComponent,
+    ListComponent,
+    TableComponent,
+    AddTypeDialogComponent,
+    AddToTypeDialogComponent,
+    DeleteFromTypeDialogComponent,
+    EditTypeDialogComponent,
+    EditClauseDialogComponent,
+    KvooForEditComponent,
+    ColumnComponent,
   ],
   imports: [
     CommonModule,
@@ -228,9 +258,11 @@ import { ScenarioComponent } from './risque-credit/stress-test/scenario/scenario
     NavbarModule,
     SidebarModule,
     FixedpluginModule,
-    NgChartsModule
+    NgChartsModule,
+    ClickOutsideModule,
+    MatAutocompleteModule,
   ],
-  providers: [authInterceptorProviders, MatDatepickerModule] ,
-  exports: [MatDatepickerModule]
+  providers: [authInterceptorProviders, MatDatepickerModule],
+  exports: [MatDatepickerModule],
 })
 export class AdminModule {}

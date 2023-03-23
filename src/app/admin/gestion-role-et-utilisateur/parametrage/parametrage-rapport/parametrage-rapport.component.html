@@ -1,25 +1,59 @@
-<div>
-  <form class="my-rapport-form">
+<div class="my-dialog-container">
+  <div class="x-dialog" (click)="closeDialog()">x</div>
+  <form class="my-form" [formGroup]="formGroup">
     <div class="my-form-row">
       <div class="my-form-column">
-        <label for="nom" class="my-form-label">Code </label>
-        <input type="text" name="code" class="my-rapport-form-input-list" />
+        <label for="code" class="my-form-label">Code</label>
+        <input
+          placeholder="Code"
+          type="text"
+          name="code"
+          class="my-rapport-form-input-list"
+          formControlName="code"
+        />
       </div>
       <div class="my-form-column">
         <label for="type" class="my-form-label">Clause </label>
-        <div>Cliquer pour choisir une clause</div>
-      </div>
-      <div>
-        <label for="code" class="my-form-label">Description</label>
-        <textarea rows="4"> </textarea>
-      </div>
-
-      <div class="form-keyValueOperation">
-        <input type="text" name="key" class="keyValueOperation-input" />
-        <input type="text" name="value" class="keyValueOperation-input" />
-        <input type="text" name="operation" class="keyValueOperation-input" />
+        <div (click)="openClauseDialog()" class="clause-click-div">
+          Cliquer pour choisir une clause ({{ choosedClauses.length }})
+        </div>
       </div>
     </div>
-    <div class="my-form-submit-button">Ajouter</div>
+
+    <app-key-value-operand
+      style="width: 100%"
+      *ngFor="let item of kVooList"
+      [kVOO]="item"
+    ></app-key-value-operand>
+    <div class="my-form-row">
+      <div class="my-form-column">
+        <label for="description" class="my-form-label">Description</label>
+        <textarea
+          rows="3"
+          class="my-rapport-form-textarea"
+          type="text"
+          placeholder="Description"
+          name="description"
+          formControlName="description"
+        ></textarea>
+      </div>
+    </div>
+
+    <button
+      class="my-add-button"
+      type="submit"
+      [mat-dialog-close]="{
+        id: 0,
+        code: code.value,
+        description: description.value,
+        clauses: choosedClauses,
+        kvoo_s: kVooList,
+        type: data.key
+      }"
+      [disabled]="isButtonDisabled()"
+      (click)="onSubmit()"
+    >
+      Ajouter
+    </button>
   </form>
 </div>

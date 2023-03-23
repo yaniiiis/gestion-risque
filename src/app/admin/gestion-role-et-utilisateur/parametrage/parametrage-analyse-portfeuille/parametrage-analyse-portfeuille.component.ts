@@ -17,8 +17,8 @@ export class ParametrageAnalysePortfeuilleComponent implements OnInit {
       path: "ParametrageDomaine",
     },
     {
-      menuItem: "Rapport ",
-      path: "rapport",
+      menuItem: "Rapports ",
+      path: "Rapport",
     },
   ];
   constructor() {}

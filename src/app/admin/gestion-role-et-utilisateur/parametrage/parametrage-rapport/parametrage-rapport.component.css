@@ -1,17 +1,49 @@
-.my-rapport-form {
+.my-dialog-container {
+  position: relative;
+}
+
+.x-dialog {
+  border: 1px solid rgb(194, 194, 194);
+  border-radius: 50px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
+}
+
+.my-form {
   padding: 6px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .my-form-row {
   display: flex;
-  flex-direction: column;
-  padding: 3px;
-  width: 200px;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 .my-form-column {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  margin: 5px;
+}
+
+.my-form-label {
+  color: black;
+  font-weight: 500;
 }
 
 .my-rapport-form-input-list {
@@ -19,27 +51,94 @@
   outline: none;
   border: 0.5px solid rgb(184, 181, 181);
   border-radius: 5px;
-  width: 200px;
+  width: 100%;
+  height: 40px;
+  padding: 5px;
+  box-shadow: 1px 1px 2px rgb(102 68 68 / 20%);
+}
+.my-rapport-form-textarea {
+  position: relative;
+  outline: none;
+  border: 0.5px solid rgb(184, 181, 181);
+  border-radius: 5px;
+  width: 100%;
+  padding: 5px;
+  box-shadow: 1px 1px 2px rgb(102 68 68 / 20%);
+}
+
+input:focus,
+textarea:focus {
+  border: 0.5px solid rgb(136, 132, 132);
 }
 
 .my-form-textarea {
   outline: none;
   border: 0.5px solid rgb(184, 181, 181);
   border-radius: 5px;
-  width: 200px;
+  width: 100%;
 }
 
 .my-form-submit-button {
-  width: 200px;
+  padding-top: 9px;
+  padding-bottom: 9px;
   border: 0.5px solid rgb(184, 181, 181);
   border-radius: 5px;
   background-color: blue;
   color: white;
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  margin-top: 25px;
 }
 
 .form-keyValueOperation {
   display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
-.keyValueOperation-input {
-  flex: 1;
+
+.clause-click-div {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  box-shadow: 1px 1px 2px rgb(102 68 68 / 20%);
+  height: 40px;
+  border: 0.5px solid rgb(184, 181, 181);
+  border-radius: 5px;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.clause-click-div:hover {
+  scale: 1.01;
+  font-size: 14px;
+}
+
+.form-checkbox-container {
+  display: flex;
+  width: 100%;
+  justify-content: start;
+  align-items: center;
+  height: 40px;
+}
+
+.form-checkbox {
+  margin-right: 9px;
+}
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.my-add-button {
+  border-radius: 5px;
+  padding: 8px 32px;
+  background-color: green;
+  border: 1px solid green;
+  color: white;
+  font-weight: bold;
+  margin-bottom: -5px;
 }

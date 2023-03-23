@@ -1,0 +1,59 @@
+<div>
+  <form class="my-form" [formGroup]="formGroup">
+    <div class="my-form-row">
+      <div class="my-form-column">
+        <label for="description" class="my-form-label">Description</label>
+        <textarea
+          rows="4"
+          class="my-rapport-form-textarea"
+          type="text"
+          placeholder="Description"
+          name="description"
+          formControlName="description"
+        ></textarea>
+      </div>
+    </div>
+    <div class="my-form-row">
+      <div class="my-form-column">
+        <label for="code" class="my-form-label">Code</label>
+        <input
+          placeholder="Code"
+          type="text"
+          name="code"
+          class="my-rapport-form-input-list"
+          formControlName="code"
+        />
+      </div>
+      <div class="my-form-column">
+        <label for="type" class="my-form-label">Clause </label>
+        <div (click)="openClauseDialog()" class="clause-click-div">
+          Cliquer pour choisir une clause ({{ choosedClauses.length }})
+        </div>
+      </div>
+    </div>
+
+    <app-kvoo-for-edit
+      style="width: 100%"
+      *ngFor="let item of kVooList"
+      [kVOO]="item"
+      [deleteKvooCallback]="deleteFromKvooListCallback"
+      [addKvooCallback]="addToKvooListCallback"
+      [existingKvoos]="kVooList"
+    ></app-kvoo-for-edit>
+    <button
+      class=""
+      type="submit"
+      [mat-dialog-close]="{
+        id: data.type.id,
+        code: code.value,
+        description: description.value,
+        clauses: choosedClauses,
+        kvoo_s: kVooList,
+        type: data.type.type
+      }"
+      [disabled]="isButtonDisabled()"
+    >
+      Ajouter
+    </button>
+  </form>
+</div>

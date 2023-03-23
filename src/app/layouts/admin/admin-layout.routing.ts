@@ -1,4 +1,3 @@
-
 import { Routes } from "@angular/router";
 import { AddPermissionComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-roles/add-permission/add-permission.component";
 import { AjouterDesRolesComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-roles/ajouter-des-roles/ajouter-des-roles.component";
@@ -15,6 +14,7 @@ import { ListeUtilisateursComponent } from "src/app/admin/gestion-role-et-utilis
 import { ParametrageAnalysePortfeuilleComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-analyse-portfeuille/parametrage-analyse-portfeuille.component";
 import { ParametrageDomaineHomeComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-domaine/parametrage-domaine-home/parametrage-domaine-home.component";
 import { ParametrageIndirectComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-indirect/parametrage-indirect.component";
+import { HomeComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-rapport/home/home.component";
 import { ParametrageRapportComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-rapport/parametrage-rapport.component";
 import { ActionDeRecouvermentComponent } from "src/app/admin/risque-credit/analyse-portfeuille/action-de-recouverment/action-de-recouverment.component";
 import { ActionJusticeComponent } from "src/app/admin/risque-credit/analyse-portfeuille/action-justice/action-justice.component";
@@ -47,20 +47,15 @@ import { AnalyseDesDepotsComponent } from "src/app/admin/risque-liquidite/analys
 import { DashboardComponent } from "src/app/dashboard/dashboard.component";
 import { FileUploadComponent } from "src/app/file-upload/file-upload.component";
 
-
-
-
-
 export const AdminLayoutRoutes: Routes = [
- 
   {
     path: "",
     children: [
       {
         path: "",
         component: DashboardComponent,
-      }
-    ]
+      },
+    ],
   },
   {
     path: "dashboard",
@@ -83,7 +78,7 @@ export const AdminLayoutRoutes: Routes = [
           },
           {
             path: "UpdateUser",
-            component: AjouterDesUtilisateusComponent
+            component: AjouterDesUtilisateusComponent,
           },
           {
             path: "AjouterDesAgences",
@@ -93,7 +88,7 @@ export const AdminLayoutRoutes: Routes = [
             path: "ListAgences",
             component: ListAgencesComponent,
           },
-        ]
+        ],
       },
       {
         path: "GestionDesRoles",
@@ -123,8 +118,8 @@ export const AdminLayoutRoutes: Routes = [
           {
             path: "ListNiveaux",
             component: ListNiveauComponent,
-          }
-        ]
+          },
+        ],
       },
 
       {
@@ -145,12 +140,12 @@ export const AdminLayoutRoutes: Routes = [
             component: ParametrageDomaineHomeComponent,
           },
           {
-            path: "rapport",
-            component: ParametrageRapportComponent,
-          }
-        ]
-      }
-    ]
+            path: "Rapport",
+            component: HomeComponent,
+          },
+        ],
+      },
+    ],
   },
   {
     path: "",
@@ -172,7 +167,6 @@ export const AdminLayoutRoutes: Routes = [
             path: "CommentaireAnalysePfIndirect",
             component: CommentaireAnalysePfIndirectComponent,
           },
-
 
           {
             path: "GraphePortfeuilleindirect",
@@ -243,7 +237,7 @@ export const AdminLayoutRoutes: Routes = [
           {
             path: "scenario3",
             component: Scenario3Component,
-          }
+          },
         ],
       },
 
@@ -271,88 +265,85 @@ export const AdminLayoutRoutes: Routes = [
       },
     ],
   },
-    {
-      path: '',
-     // canActivate : [AuthPermissionsGuard],
+  {
+    path: "",
+    // canActivate : [AuthPermissionsGuard],
     //  data :{
     // expectedPermission:['ConsulterRessources']
-   //}
-   
-      children: [
-        {
-        path: 'AnalyseDesDepots',
-        // component:
-        component:AnalyseDesDepotsComponent
-      },
-      {
-        path: 'AnalyseQualitativeETQuantitative',
-        // component:
-      },
-      {
-        path: 'KRIsLiQuidite',
-        // component: ,
-      },
-      {
-        path: 'StressTestLiquidite',
-        // component:
-      },
-      {
-        path: 'SurveillanceDeLaTreoserie',
-        // component:
-      },
-    ]
-      },
-    {
-      path: '',
-     // canActivate : [AuthPermissionsGuard],
-      data :{
-    // expectedPermission:['ConsulterRessources']
-   },
-      children: [
-        {
-        path: 'EvaluationDesTAuxDeCharges',
-        // component:
-      },
-      {
-        path: 'SurveillanceDesSessionsDevise',
-        // component:
-      },
-      {
-        path: 'KRIsDeChange',
-        // component: ,
-      },
-      {
-        path: 'StressTestDeChange',
-        // component:
-      },
+    //}
 
-    ]
+    children: [
+      {
+        path: "AnalyseDesDepots",
+        // component:
+        component: AnalyseDesDepotsComponent,
       },
       {
-        path: '',
-       // canActivate : [AuthPermissionsGuard],
-        data :{
+        path: "AnalyseQualitativeETQuantitative",
+        // component:
+      },
+      {
+        path: "KRIsLiQuidite",
+        // component: ,
+      },
+      {
+        path: "StressTestLiquidite",
+        // component:
+      },
+      {
+        path: "SurveillanceDeLaTreoserie",
+        // component:
+      },
+    ],
+  },
+  {
+    path: "",
+    // canActivate : [AuthPermissionsGuard],
+    data: {
       // expectedPermission:['ConsulterRessources']
-     },
-        children: [
-          {
-          path: 'Invertissements',
-          // component:
-        },
-        {
-          path: 'LimitesBanque',
-          // component:
-        },
-        {
-          path: 'NotionsBanques',
-          // component: ,
-        },
-        {
-          path: 'NotionsPays',
-          // component:
-        },
-  
-      ]
-        }
-  
+    },
+    children: [
+      {
+        path: "EvaluationDesTAuxDeCharges",
+        // component:
+      },
+      {
+        path: "SurveillanceDesSessionsDevise",
+        // component:
+      },
+      {
+        path: "KRIsDeChange",
+        // component: ,
+      },
+      {
+        path: "StressTestDeChange",
+        // component:
+      },
+    ],
+  },
+  {
+    path: "",
+    // canActivate : [AuthPermissionsGuard],
+    data: {
+      // expectedPermission:['ConsulterRessources']
+    },
+    children: [
+      {
+        path: "Invertissements",
+        // component:
+      },
+      {
+        path: "LimitesBanque",
+        // component:
+      },
+      {
+        path: "NotionsBanques",
+        // component: ,
+      },
+      {
+        path: "NotionsPays",
+        // component:
+      },
+    ],
+  },
 ];

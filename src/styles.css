@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: green;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  color: green;
+  background-color: green;
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  background-color: rgb(255, 37, 37, 0.26);
+}
+
+.success-snackbar {
+  background-color: green;
+  color: white;
+}
+.error-snackbar {
+  background-color: red;
+  color: white;
+}

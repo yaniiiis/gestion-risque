@@ -2,12 +2,11 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ParametrageService } from "src/app/_services/ParametrageService/parametrage.service";
-//import { ParametrageService } from "src/app/_services/ParametrageService/parametrage.service";
 
 @Component({
   selector: "app-add-domaine-dialog",
   templateUrl: "./add-domaine-dialog.component.html",
-  styleUrls: ["./add-domaine-dialog.component.css"],
+  styleUrls: ["../add.css"],
 })
 export class AddDomaineDialogComponent implements OnInit {
   constructor(
