@@ -11,10 +11,14 @@ export class PortefeuilDirectService {
   constructor(private http: HttpClient) {}
 
   // EVOLUTION DE PORTEFEUILLE DIRECT
-  evolutionDirect(dateDebut: string, dateFin: string): any {
+     
+     evolutionDirect(dateDebut: string, dateFin: string, glsubheadParam: string, typeEngagement : string, typeClient: string): any {
     const body = {
       date_debut: dateDebut,
       date_fin: dateFin,
+      glsubheadParam:glsubheadParam,
+      typeEngagement:typeEngagement,
+      typeClient:typeClient
     };
     return this.http.post<any>(
       environment.baseUrl + "/portefeuille/directtwodates/",
@@ -29,10 +33,13 @@ export class PortefeuilDirectService {
   }
 
   // CREDIT NET
-  creditNet(dateDebut: string, dateFin: string): any {
+  creditNet(dateDebut: string, dateFin: string, glsubheadParam: string, typeEngagement : string, typeClient: string): any {
     const body = {
       date_debut: dateDebut,
       date_fin: dateFin,
+      glsubheadParam:glsubheadParam,
+      typeEngagement:typeEngagement,
+      typeClient:typeClient
     };
     const rep = this.http.post<any>(
       environment.baseUrl + "/portefeuille/creancedouteusetwodates/",
@@ -46,4 +53,6 @@ export class PortefeuilDirectService {
     );
     return rep;
   }
+
+ 
 }

@@ -117,7 +117,7 @@ constructor(private portefeuilleDirectService: PortefeuilDirectService) {}
   
   ngOnInit(): void {
     this.lineChartData[0].label = this.LabelTextValue
-this.lineChartOptions.plugins.title.text = this.LabelTextValue
+    this.lineChartOptions.plugins.title.text = this.LabelTextValue
   }
   
   ngOnChanges(changes: SimpleChanges) {
@@ -136,7 +136,7 @@ if (changes['LabelTextValue'] && changes['LabelTextValue'] !== undefined) {
         case 'credit_Net':
           this.implementedChartData=[]
           this.creditNetSubscription = this.portefeuilleDirectService
-        .creditNet("2020-06-10", "2022-08-20")
+        .creditNet("2020-06-10", "2022-08-20","28", "FUND","Retail")
         .subscribe({
           next: (response: any) => {
             this.creditDirectHasError = false;
@@ -164,7 +164,7 @@ if (changes['LabelTextValue'] && changes['LabelTextValue'] !== undefined) {
         case "Evolution_Direct":
           this.implementedChartData=[]
           this.creditNetSubscription = this.portefeuilleDirectService
-          .evolutionDirect("2020-06-10", "2022-08-20")
+          .evolutionDirect("2020-06-10", "2022-08-20", "28", "FUND", "Retail")
           .subscribe({
             next: (response: any) => {
               this.creditDirectHasError = false;

@@ -21,7 +21,7 @@ export class EvolutionDirectComponent implements OnInit {
 
   ngOnInit(): void {
     this.evolutionDirectSubscription = this.portefeuilleDirectService
-      .evolutionDirect("2020-06-10", "2022-08-20")
+      .evolutionDirect("2020-06-10", "2022-08-20", "28", "FUND", "Retail")
       .subscribe({
         next: (response: PortefeuilleResponse[]) => {
           this.evolutionDirectHasError = false;
