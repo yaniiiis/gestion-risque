@@ -3,8 +3,12 @@ import { TableData } from '../md/md-table/md-table.component';
 
 
 import * as Chartist from 'chartist';
+import { StorageSService } from '../_services/storageService/storage-s.service';
+import { AlerteRoleService } from '../_services/AlerteRoleService/alerte-role-service';
 
 declare const $: any;
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +18,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   // constructor(private navbarTitleService: NavbarTitleService, private notificationService: NotificationService) { }
   public tableData: TableData;
  
+
+  alerteMessages?: string ="";
+  roles: string[] = [];
   startAnimationForLineChart(chart: any) {
       let seq: any, delays: any, durations: any;
       seq = 0;
@@ -69,7 +76,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
       seq2 = 0;
   }
-  // constructor(private navbarTitleService: NavbarTitleService) { }
+   constructor(/*private navbarTitleService: NavbarTitleService*/
+   private storageSer: StorageSService,
+   private alerteRoleService: AlerteRoleService) { }
   public ngOnInit() {
       this.tableData = {
           headerRow: ['ID', 'Name', 'Salary', 'Country', 'City'],
@@ -182,6 +191,12 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
              alert(message);
          }
+      });
+
+      this.roles = this.storageSer.getUser().roles.name.toLowerCase();
+      console.log("role : " + this.roles);
+      this.alerteRoleService.findByRoleName(this.roles).subscribe((response) => {
+        this.alerteMessages = response;
       });
    }
    ngAfterViewInit() {

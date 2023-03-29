@@ -26,11 +26,19 @@
            
                   <div class="card-body">
                       <h4 class="card-title">Mes notifications</h4>
+                      <ul class="my_list">
+                        <li *ngFor="let alerte of alerteMessages">
+
+                        <label   class="btn btn-sm btn-primary">
+                                <span >{{alerte}}</span>
+                        </label>
+                        </li>
+                      </ul>
                   </div>
           
                 <div class="card-footer">
                     <div class="stats">
-                        <i class="material-icons">notifications</i> campaign sent 2 days ago
+                        <i class="material-icons">notifications</i> vous avez {{ alerteMessages.length}} notifications
                     </div>
                 </div>
             </div>
