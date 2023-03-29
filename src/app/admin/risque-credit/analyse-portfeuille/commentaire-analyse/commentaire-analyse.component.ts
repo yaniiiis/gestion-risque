@@ -29,6 +29,7 @@ import { DialogueMotifComponent } from "./dialogue-motif/dialogue-motif.componen
 import { Commentaire, CommentaireService } from "src/app/_services/CommentaireService/commentaire-service";
 import { StorageSService } from "src/app/_services/storageService/storage-s.service";
 import { Observable } from "rxjs";
+import { IndicateurService } from "src/app/_services/indicateur.service";
 
 const moment = _rollupMoment || _moment;
 
@@ -145,15 +146,27 @@ export class CommentaireAnalyseComponent implements OnInit {
   motif: string;
   title: string = "Confirmation";
 
-  
+  showAccept = true;
  
+  l_total_credit_direct = 0;
+  l_creances_douteuses = 0;
+  l_creances_courantes = 0;
+  l_interets_reserves = 0;
+  l_provisions = 0;
+  l_taux_creances_douteuses = 0;
+  l_taux_de_couverture = 0;
+  l_interets_reserves_creances_douteuses = 0;
+  l_creances_douteuses_net_interets_reserves = 0;
+  l_credit_direct_net_interet_reserves = 0;
+
   constructor(
     private formBuilder: FormBuilder,
     private route: Router,
     private servicesRepo: AnalysePortfeuilleServicesService,
     public dialog: MatDialog,
     private commentaireService: CommentaireService,
-    private storageSer: StorageSService
+    private storageSer: StorageSService,
+    private indicateurService: IndicateurService
   ) { }
 
   openDialog(): void {
@@ -172,6 +185,8 @@ export class CommentaireAnalyseComponent implements OnInit {
     var today = moment().format("DD-MM-YYYYTHH:mm:SS[Z]")
     var year = moment().year();
     var month = moment().month() + 1;
+    if (this.storageSer.getUser().roles.id === 4)
+    this.showAccept = false;
 
     this.commentaireSubordonne = this.commentaireService.findCommentaireSubordonneByDateAndTypeAnalyse(this.servicesRepo.currentAnalyseType, this.storageSer.getUser().roles.id, year, month);
     
@@ -210,7 +225,46 @@ export class CommentaireAnalyseComponent implements OnInit {
   
    if (this.storageSer.userHasGenererRapport())
    this.disabledGenerateReport = false;
-    
+   
+   this.indicateurService.getIndicateurById(1).subscribe((response) =>{
+       this.l_total_credit_direct = response.valeurLimite;
+   });
+
+   this.indicateurService.getIndicateurById(2).subscribe((response) =>{
+    this.l_creances_douteuses = response.valeurLimite;
+   });
+
+   this.indicateurService.getIndicateurById(3).subscribe((response) =>{
+    this.l_creances_courantes = response.valeurLimite;;
+   });
+
+   this.indicateurService.getIndicateurById(4).subscribe((response) =>{
+    this.l_interets_reserves = response.valeurLimite;;
+   });
+
+   this.indicateurService.getIndicateurById(5).subscribe((response) =>{
+    this.l_provisions = response.valeurLimite;;
+   });
+
+   this.indicateurService.getIndicateurById(6).subscribe((response) =>{
+    this.l_taux_creances_douteuses = response.valeurLimite;;
+   });
+
+   this.indicateurService.getIndicateurById(7).subscribe((response) =>{
+    this.l_taux_de_couverture = response.valeurLimite;;
+   });
+
+   this.indicateurService.getIndicateurById(8).subscribe((response) =>{
+    this.l_interets_reserves_creances_douteuses = response.valeurLimite;;
+   });
+
+   this.indicateurService.getIndicateurById(9).subscribe((response) =>{
+    this.l_creances_douteuses_net_interets_reserves = response.valeurLimite;;
+   });
+
+   this.indicateurService.getIndicateurById(10).subscribe((response) =>{
+    this.l_credit_direct_net_interet_reserves = response.valeurLimite;;
+   });
   
   }
 
@@ -417,6 +471,7 @@ export class CommentaireAnalyseComponent implements OnInit {
                 this.creditReportFix;
            //  console.log('dans handle fix '+ this.creditReportAnalysePortfeuille.creditReportFix.totalFix.creditTotaldirect)   
              this.servicesRepo.creditReportFix =   this.creditReportFix;  
+
             });
         });
     } else {
