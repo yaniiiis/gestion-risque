@@ -1,4 +1,4 @@
- <body ng-app="myapp" ng-controller="ListController1">
+ <!-- <body ng-app="myapp" ng-controller="ListController1"> -->
   <div [ngClass]="loading ? ['container', 'progress5'] : 'container'"></div>
 
   <div class="container">
@@ -49,9 +49,7 @@
               </th>
               <th scope="col" *ngFor="let sel of slectedPeriods">
                 {{ sel.datereporte | date : "yyyy-MM-dd" }}
-              </th>
-
-           
+              </th>           
               <th scope="col">
                 {{ lastYear ? lastYear + "-12-31" : years + "-12-31" }}
               </th>
@@ -767,4 +765,4 @@
       
     </div>
   </div>
-</body>  
+<!-- </body>   -->
