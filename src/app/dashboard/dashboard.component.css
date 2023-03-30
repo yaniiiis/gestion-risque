@@ -1,12 +1,13 @@
 .my-list {  
-    margin: 0 0 2em 0;
+    margin: 0 0 0em 0;
     list-style-type: none;
     padding: 0;
-    width: 15em;
- 
+  
+  
 }
 
-.my-list  li {
+/* .my-list  li {
     display: flex;
-  }
+   
+  }  */
 
