@@ -51,7 +51,11 @@ export class CommentaireEditorComponent implements OnInit {
      this.currentCommentaireObs.subscribe((data) =>{
       next:{
         this.form.get('id').setValue(data.id)
-        this.currentCommentaire = data.commentaire;
+        this.currentCommentaire = data.commentaire ;
+
+        if(data.motifRejet!==undefined){
+          this.currentCommentaire = this.currentCommentaire + "   Rejeté pour motif : ("+ data.motifRejet+")"
+        }
         console.log("comm0 : " + this.currentCommentaire)
         this.form.get("commentaire").setValue(this.currentCommentaire) 
         console.log('data.acceptedOn : '+data.acceptedOn)
@@ -138,7 +142,7 @@ export class CommentaireEditorComponent implements OnInit {
       }).unsubscribe;
      
     
-     
+      this.boutonEnregistrerStatus = true;
       
   }
  
