@@ -43,6 +43,7 @@ import { DixPlusGrandClientAEngagementsComponent } from "src/app/admin/risque-cr
 import { DixPlusGrandClientALimiteAccordeeComponent } from "src/app/admin/risque-credit/top10/dix-plus-grand-client-a-limite-accordee/dix-plus-grand-client-a-limite-accordee.component";
 import { GarantiesPrisesSurLesDixPlusGrandsClientsComponent } from "src/app/admin/risque-credit/top10/garanties-prises-sur-les-dix-plus-grands-clients/garanties-prises-sur-les-dix-plus-grands-clients.component";
 import { Top10Component } from "src/app/admin/risque-credit/top10/top10.component";
+import { KRIsDeChangeComponent } from "src/app/admin/risque-de-change/kris-de-change/kris-de-change.component";
 import { AnalyseDesDepotsComponent } from "src/app/admin/risque-liquidite/analyse-des-depots/analyse-des-depots.component";
 import { DashboardComponent } from "src/app/dashboard/dashboard.component";
 import { FileUploadComponent } from "src/app/file-upload/file-upload.component";
@@ -319,7 +320,7 @@ export const AdminLayoutRoutes: Routes = [
       },
       {
         path: 'KRIsDeChange',
-        // component: ,
+         component: KRIsDeChangeComponent,
       },
       {
         path: 'StressTestDeChange',
