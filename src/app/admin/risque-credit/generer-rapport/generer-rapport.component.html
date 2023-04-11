@@ -1,0 +1,76 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <!-- <app-analyse-portfeuille-content></app-analyse-portfeuille-content> -->
+
+        <app-navigation-menu
+          [navigationItems]="menuItems"
+        ></app-navigation-menu>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card-body">
+            <div class="my-container">
+              <div>
+                <div class="container-page-title">
+                  <h3 class="page-title">Génération d'un rapport</h3>
+                </div>
+              </div>
+
+              <div class="predicats-container">
+                <div class="autocomplete-container">
+                  <input
+                    class="autocomplete-input"
+                    type="text"
+                    placeholder="Type"
+                    name="type"
+                    autocomplete="off"
+                    (click)="toggleListTypes()"
+                    (clickOutside)="closeListTypes()"
+                    [(ngModel)]="type"
+                  />
+                  <span class="span-error" *ngIf="generateIsClicked && !type"
+                    >Veuillez choisir un champ</span
+                  >
+                  <div
+                    class="autocomplete-list-content"
+                    #clauseList
+                    *ngIf="isListOpen"
+                  >
+                    <div
+                      class="autocomplete-item"
+                      *ngFor="let item of typesList"
+                      (click)="selectType(item)"
+                    >
+                      <span>{{ item }}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <mat-form-field class="my-calender" floatLabel="never">
+                  <input
+                    matInput
+                    [matDatepicker]="picker"
+                    placeholder="Sélectionner une date"
+                    [(ngModel)]="selectedDate"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <button (click)="handleGenerate()" class="my-button-generate">
+                  Géner
+                </button>
+              </div>
+            </div>
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
