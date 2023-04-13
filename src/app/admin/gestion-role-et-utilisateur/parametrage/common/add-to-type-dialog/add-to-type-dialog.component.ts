@@ -8,7 +8,7 @@ import {
   Validators,
 } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { Type } from "src/app/Models/Rapport";
+import { RapportLine } from "src/app/Models/Rapport";
 import { ParametrageService } from "src/app/_services/ParametrageService/parametrage.service";
 
 @Component({
@@ -61,7 +61,9 @@ export class AddToTypeDialogComponent implements OnInit {
         return null;
       }
 
-      const exist = this.data.existingTypes.find((d: Type) => d.code == value);
+      const exist = this.data.existingTypes.find(
+        (d: RapportLine) => d.code == value
+      );
       return exist ? { exist: true } : null;
     };
   }

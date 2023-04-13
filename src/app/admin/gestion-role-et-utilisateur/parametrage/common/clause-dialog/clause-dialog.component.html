@@ -8,12 +8,12 @@
           <input
             class="form-input-list"
             type="text"
-            placeholder="Champ"
+            placeholder="Selection"
             name="feild"
             autocomplete="off"
             (click)="toggleListClause()"
             (clickOutside)="closeListClause()"
-            formControlName="field"
+            formControlName="selection"
           />
           <span
             class="span-error"
@@ -24,7 +24,7 @@
             <div
               class="caluse-item"
               *ngFor="let item of clausesList"
-              (click)="selectField(item)"
+              (click)="selectSelection(item)"
             >
               <span class="item_name">{{ item }}</span>
             </div>
@@ -40,7 +40,7 @@
             autocomplete="off"
             (click)="toggleListClauseOperation()"
             (clickOutside)="closeListOperation()"
-            formControlName="selection"
+            formControlName="field"
           />
           <div
             class="clause-operation-content"
@@ -50,7 +50,7 @@
             <div
               class="operation-item"
               *ngFor="let item of operations"
-              (click)="selectSelection(item)"
+              (click)="selectFiled(item)"
             >
               <span class="item_name" #itemText>{{ item }}</span>
             </div>
@@ -71,8 +71,8 @@
           *ngFor="let item of clausesToDisplay"
         >
           <div>
-            <span *ngIf="item.selection"> ({{ item.selection }}) </span>
-            {{ item.field }}
+            <span *ngIf="item.selection"> ({{ item.filed }}) </span>
+            {{ item.selection }}
           </div>
           <mat-icon class="x-delete" (click)="deleteFromChoosedClauses(item)">
             delete_forever

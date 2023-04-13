@@ -84,7 +84,14 @@
   margin-right: 15px;
   background-color: #eeeeee;
   padding: 0px 10px;
-  color: black;
+  color: #333333;
+  font-size: 17px;
+  padding-top: 9px;
+}
+.rapport-type-spinner {
+  position: absolute;
+  right: 20px;
+  top: 40%;
 }
 
 .autocomplete-input ::placeholder {
@@ -125,4 +132,8 @@
 }
 .autocomplete-item {
   font-size: 17px;
+}
+
+::ng-deep .mat-focused .mat-form-field-placeholder {
+  color: red;
 }

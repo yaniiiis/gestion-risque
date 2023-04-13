@@ -1,19 +1,24 @@
 <div class="container">
   <div>
     <div class="container-page-title">
-      <h3 class="page-title">Analyse portefeuil direct</h3>
+      <h3 class="page-title">{{ rapportTypeName }}</h3>
     </div>
   </div>
   <div class="under-type-div">
-    <div class="under-type-item"></div>
+    <div class="under-type-item" *ngFor="let item of underTypesNames">
+      {{ item }}
+    </div>
   </div>
   <div class="rapport-card">
-    <div class="title-div">
-      <div class="my-title">Crédit entreprise</div>
-    </div>
-    <div class="rapport-item" *ngFor="let item of rapportLines">
-      <p>item.name</p>
-      <p>item.value</p>
+    <!-- <div class="title-div">
+      <div class="my-title">{{ choosedUnderType }}</div>
+    </div> -->
+    <div
+      class="rapport-items-div"
+      *ngFor="let item of underTypeLinesToDisplay | keyvalue"
+    >
+      <p class="rappor_item">{{ item.key }}</p>
+      <p class="rappor_item">{{ item.value }}</p>
     </div>
   </div>
 </div>

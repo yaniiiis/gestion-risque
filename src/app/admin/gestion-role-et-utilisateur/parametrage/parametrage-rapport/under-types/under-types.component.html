@@ -1,0 +1,13 @@
+<div class="my-container">
+  <div class="my-header">{{ type }}</div>
+  <div class="under-types-container">
+    <div
+      (click)="underTypeClicked(item)"
+      class="under-type"
+      *ngFor="let item of underTypesList"
+    >
+      item
+    </div>
+    <div class="under-type">+</div>
+  </div>
+</div>

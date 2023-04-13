@@ -79,7 +79,7 @@ export class KeyValueOperandComponent implements OnInit {
         key: this.choosedKey,
         value: this.value.value,
         operation: this.choosedOperation,
-        operand: this.operand.value,
+        operand: this.operand.value == "AND" ? "true" : "false",
       };
       this.parametrageService.addToKVOOList(newKVOO);
       this.plusClicked = false;
@@ -183,8 +183,8 @@ export class KeyValueOperandComponent implements OnInit {
   }
 
   operationClicked(item: string) {
-    this.choosedOperation = item;
-    this.kVOO.operation = item;
+    this.choosedOperation = this.operationsMap[item];
+    this.kVOO.operation = this.operationsMap[item];
     this.operationHasError = false;
     // this.formGroupe.patchValue({
     //   operand: undefined,
@@ -247,6 +247,19 @@ export class KeyValueOperandComponent implements OnInit {
     return this.formGroupe.get("operand");
   }
 
-  keys = ["solde balance", "nominal expo", "islamic"];
-  operations = ["equal", "greater than", "less than"];
+  keys = ["GL_SUBHEAD", "TYPE_ENGAGEMENT", "customerType", "MAIN_PROD_DESC"];
+  operations = [
+    "Egale",
+    "Supérieur",
+    "Supérieur ou égale",
+    "Inférieur",
+    "Inférieur ou égale",
+  ];
+  operationsMap = {
+    Egale: "=",
+    Supérieur: ">",
+    "Supérieur ou égale": ">=",
+    Inférieur: "<",
+    "Inférieur ou égale": "<=",
+  };
 }

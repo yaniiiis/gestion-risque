@@ -30,6 +30,11 @@
                     (clickOutside)="closeListTypes()"
                     [(ngModel)]="type"
                   />
+                  <mat-spinner
+                    [diameter]="20"
+                    class="rapport-type-spinner"
+                    *ngIf="rapportTypesLoading"
+                  ></mat-spinner>
                   <span class="span-error" *ngIf="generateIsClicked && !type"
                     >Veuillez choisir un champ</span
                   >
@@ -40,10 +45,10 @@
                   >
                     <div
                       class="autocomplete-item"
-                      *ngFor="let item of typesList"
+                      *ngFor="let item of rapportTypes"
                       (click)="selectType(item)"
                     >
-                      <span>{{ item }}</span>
+                      <span>{{ item.titreRapport }}</span>
                     </div>
                   </div>
                 </div>
@@ -63,7 +68,11 @@
                 </mat-form-field>
 
                 <button (click)="handleGenerate()" class="my-button-generate">
-                  Géner
+                  <mat-spinner
+                    [diameter]="30"
+                    *ngIf="generateIsLoading; else generer"
+                  ></mat-spinner>
+                  <ng-template #generer> Générer</ng-template>
                 </button>
               </div>
             </div>

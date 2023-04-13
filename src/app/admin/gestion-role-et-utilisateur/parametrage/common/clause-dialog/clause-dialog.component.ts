@@ -52,7 +52,7 @@ export class ClauseDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  selectField(item: string) {
+  selectFiled(item: string) {
     this.choosedFeild = item;
     this.formGroup.patchValue({
       field: item,
@@ -74,12 +74,12 @@ export class ClauseDialogComponent implements OnInit {
         if (
           !this.clausesToDisplay.find(
             (c) =>
-              c.field == this.choosedFeild &&
+              c.filed == this.choosedFeild &&
               c.selection == this.choosedSelection
           )
         ) {
           clause = {
-            field: this.choosedFeild,
+            filed: this.choosedFeild,
             selection: this.choosedSelection,
           };
           this.clausesToDisplay.push(clause);
@@ -91,10 +91,10 @@ export class ClauseDialogComponent implements OnInit {
         }
       } else if (
         !this.clausesToDisplay.find(
-          (c) => c.field == this.choosedFeild && c.selection == ""
+          (c) => c.filed == this.choosedFeild && c.selection == ""
         )
       ) {
-        clause = { field: this.choosedFeild, selection: "" };
+        clause = { filed: this.choosedFeild, selection: "" };
         this.clausesToDisplay.push(clause);
       } else {
         this.snackBar.open("Clause déja ajoutée", null, {
@@ -129,7 +129,7 @@ export class ClauseDialogComponent implements OnInit {
 
   deleteFromChoosedClauses(clause: Clause) {
     this.clausesToDisplay = this.clausesToDisplay.filter(
-      (c) => c.field != clause.field || c.selection != clause.selection
+      (c) => c.filed != clause.filed || c.selection != clause.selection
     );
     // this.parametrageService.deleteFromClauseList(clause);
   }
@@ -156,6 +156,12 @@ export class ClauseDialogComponent implements OnInit {
     // this.parametrageService.resetClauseList();
   }
 
-  clausesList = ["NominalExposure", "SoldBalance", "Islamic"];
-  operations = ["*", "count", "avg"];
+  clausesList = [
+    "NOMINAL_EXPOSURE",
+    "INT_RESERVES",
+    "soldeBalance",
+    "PROVISIONS",
+    "VALEUR_CASH",
+  ];
+  operations = ["sum"];
 }

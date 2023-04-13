@@ -1,17 +1,19 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Type } from "src/app/Models/Rapport";
+import { RapportLine } from "src/app/Models/Rapport";
 import { ParametrageService } from "src/app/_services/ParametrageService/parametrage.service";
 import { AddToTypeDialogComponent } from "../../common/add-to-type-dialog/add-to-type-dialog.component";
 import { DeleteFromTypeDialogComponent } from "../../common/delete-from-type-dialog/delete-from-type-dialog.component";
 import { EditTypeDialogComponent } from "../../common/edit-type-dialog/edit-type-dialog.component";
 import { ParametrageRapportComponent } from "../parametrage-rapport.component";
+import { AddUnderTypeComponent } from "../../common/add-under-type/add-under-type.component";
+import { DeleteTypeComponent } from "../../common/delete-type/delete-type.component";
 
 @Component({
   selector: "app-table",
   templateUrl: "./table.component.html",
-  styleUrls: ["../../table-css.css"],
+  styleUrls: ["../../table-css.css", "./table.component.css"],
 })
 export class TableComponent implements OnInit {
   constructor(
@@ -21,12 +23,12 @@ export class TableComponent implements OnInit {
   ) {}
 
   @Input() type: string;
-  @Input() passedTypes: Type[];
+  @Input() passedRapportsLine: RapportLine[];
 
   typesToAdd: any[] = [];
-  typesToUpdate: Type[] = [];
+  typesToUpdate: RapportLine[] = [];
   typesToDelete: any[] = [];
-  typesTofilter: Type[];
+  typesTofilter: RapportLine[];
   isOpen: boolean = false;
 
   // operations booleans
@@ -45,8 +47,19 @@ export class TableComponent implements OnInit {
   saveIsSuccess = false;
   saveHasError = false;
 
+  //under type
+  listUnderType: string[] = [];
+  linesIsShown: boolean = false;
+  choosedUnderType: string;
+
   ngOnInit(): void {
-    this.typesTofilter = this.passedTypes;
+    this.typesTofilter = this.passedRapportsLine;
+    this.passedRapportsLine.forEach((rapportLine) => {
+      console.log("raport line from table : ", rapportLine);
+      if (!this.listUnderType.includes(rapportLine.sousType)) {
+        this.listUnderType.push(rapportLine.sousType);
+      }
+    });
   }
 
   setIsOpen() {
@@ -57,24 +70,18 @@ export class TableComponent implements OnInit {
     const filtredDomains = this.typesTofilter.filter(
       (d) => d.code.includes(input) || d.description.includes(input)
     );
-    this.passedTypes = filtredDomains;
+    this.passedRapportsLine = filtredDomains;
   }
 
   sauvgarderClick() {
     this.saveIsLoading = true;
 
-    // for (let index = 0; index < this.typesToAdd.length; index++) {
-    //   const l = this.typesToAdd[index]["kvooList"].length;
-    //   this.typesToAdd[index]["kvooList"][l - 1].operand = "";
-    // }
-
     const data = {
       typesToSave: this.typesToAdd,
       typesToUpdate: this.typesToUpdate,
       typesToDelete: this.typesToDelete,
+      typeTitle: this.type,
     };
-
-    console.log("Data : ", data);
 
     this.parametrageService.sauvgarderTypes(data).subscribe({
       next: (response) => {
@@ -105,28 +112,30 @@ export class TableComponent implements OnInit {
     const dialogRef = this.dialog.open(ParametrageRapportComponent, {
       data: {
         key: this.type,
-        existingTypes: this.passedTypes,
+        existingTypes: this.passedRapportsLine,
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        result.kvoo_s[result.kvoo_s.length - 1].operand = "";
+        console.log("  66 ", result.kvoo_s[result.kvoo_s.length - 1]);
+        delete result.kvoo_s[result.kvoo_s.length - 1].operand;
 
-        if (this.passedTypes.find((d) => d.code == result.code)) {
+        if (this.passedRapportsLine.find((d) => d.code == result.code)) {
           this.snackBar.open("Ce code existe déja dans ce type", null, {
             duration: 6000,
             panelClass: ["error-snackbar"],
           });
         } else {
+          result["sousType"] = this.choosedUnderType;
           this.typesToAdd.push(result);
-          this.passedTypes.push(result);
-          this.typesTofilter = this.passedTypes;
+          this.passedRapportsLine.push(result);
+          this.typesTofilter = this.passedRapportsLine;
         }
       }
     });
   }
 
-  openDeleteDialog(type: Type): void {
+  openDeleteDialog(type: RapportLine): void {
     const dialogRef = this.dialog.open(DeleteFromTypeDialogComponent, {
       data: {
         type: type,
@@ -149,16 +158,16 @@ export class TableComponent implements OnInit {
           this.typesToDelete.push(result);
         }
 
-        const newTypes = this.passedTypes.filter((d) => {
+        const newTypes = this.passedRapportsLine.filter((d) => {
           return !(d.code == result.code && d.type == result.type);
         });
-        this.passedTypes = newTypes;
-        this.typesTofilter = this.passedTypes;
+        this.passedRapportsLine = newTypes;
+        this.typesTofilter = this.passedRapportsLine;
       }
     });
   }
 
-  openEditDialog(type: Type): void {
+  openEditDialog(type: RapportLine): void {
     const dialogRef = this.dialog.open(EditTypeDialogComponent, {
       data: {
         type: type,
@@ -167,13 +176,14 @@ export class TableComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         result.kvoo_s[result.kvoo_s.length - 1].operand = "";
-        const t: Type = {
+        const t: RapportLine = {
           id: result.id,
           type: result.type,
           code: result.code,
           description: result.description,
           kvoo_s: result.kvoo_s,
           clauses: result.clauses,
+          sousType: this.choosedUnderType,
         };
         if (
           this.typesToAdd.find(
@@ -191,11 +201,61 @@ export class TableComponent implements OnInit {
         // console.log("types to add :  ", this.typesToAdd);
         // console.log("types to update :  ", this.typesToUpdate);
 
-        const indexInDisplayedTypes = this.passedTypes.findIndex(
+        const indexInDisplayedTypes = this.passedRapportsLine.findIndex(
           (d) => d.type == type.type && d.code == type.code
         );
-        this.passedTypes[indexInDisplayedTypes] = t;
+        this.passedRapportsLine[indexInDisplayedTypes] = t;
       }
     });
   }
+
+  handleShowLine(underType: string) {
+    this.choosedUnderType = underType;
+    this.linesIsShown = true;
+  }
+
+  handleAddUnderType() {
+    const dialogRef = this.dialog.open(AddUnderTypeComponent, {
+      data: {
+        type: this.type,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        let underType: string = result.underType;
+        if (!this.listUnderType.includes(underType)) {
+          this.listUnderType.push(underType);
+        } else {
+          this.snackBar.open("Ce sous type existe déja dans ce type", null, {
+            duration: 5000,
+            panelClass: ["error-snackbar"],
+          });
+        }
+      }
+    });
+  }
+
+  deleteType(type: string) {
+    const dialogRef = this.dialog.open(DeleteTypeComponent, {
+      data: {
+        type: type,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.parametrageService.deleteType(type).subscribe({
+          next: (response) => {
+            this.passedRapportsLine = this.passedRapportsLine.filter((r) => {
+              r.type != type;
+            });
+          },
+          error: (err) => {
+            console.log("Error : ", err);
+          },
+        });
+      }
+    });
+  }
+
+  deleteUnderType(item: string) {}
 }

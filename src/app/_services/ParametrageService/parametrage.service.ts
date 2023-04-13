@@ -5,7 +5,11 @@ import { Domain } from "domain";
 import { response } from "express";
 import { BehaviorSubject, of, Subject } from "rxjs";
 import { Domaine } from "src/app/Models/Domaine";
-import { Clause, keyValueOperationOperand, Type } from "src/app/Models/Rapport";
+import {
+  Clause,
+  keyValueOperationOperand,
+  RapportLine,
+} from "src/app/Models/Rapport";
 import { environment } from "src/environments/environment";
 
 @Injectable({
@@ -105,22 +109,38 @@ export class ParametrageService {
   choosedOperation = new BehaviorSubject<string>(undefined);
   givenValue = new BehaviorSubject<string>(undefined);
   clausesListSubject = new BehaviorSubject<Clause[]>([]);
-  allTypesSubject = new BehaviorSubject<any>(undefined);
-  mapOfCheckedTypesSubject = new BehaviorSubject<Map<string, Type[]>>(
-    new Map<string, Type[]>()
+  allRapportLinesSubject = new BehaviorSubject<any>(undefined);
+  mapOfCheckedTypesSubject = new BehaviorSubject<Map<string, RapportLine[]>>(
+    new Map<string, RapportLine[]>()
   );
-  getAllTypes() {
+  rapportType: Map<string, string> = new Map<string, string>();
+
+  getAllRapportType() {
+    return this.http.get<any>(
+      environment.baseUrl + "/parametrageRapport/listRapportType"
+    );
+  }
+
+  getRapportLinesGroupedByType() {
     this.http
       .get<any>(environment.baseUrl + "/parametrageRapport/groupByTypes")
       .subscribe({
         next: (response) => {
-          console.log("Res Res : ", response);
-          this.allTypesSubject.next(response);
+          this.allRapportLinesSubject.next(response);
         },
       });
   }
 
-  addTocheckedTypesList(type: string, types: Type[]) {
+  addType(title: string) {
+    return this.http.post(
+      environment.baseUrl + "/parametrageRapport/SaveRapportType",
+      {
+        titreRapport: title,
+      }
+    );
+  }
+
+  addTocheckedTypesList(type: string, types: RapportLine[]) {
     const checkedTypes = this.mapOfCheckedTypesSubject.value;
     checkedTypes.set(type, types);
     this.mapOfCheckedTypesSubject.next(checkedTypes);
@@ -247,7 +267,7 @@ export class ParametrageService {
 
   deleteFromClauseList(clause: Clause) {
     const newClauseList = this.clausesListSubject.value.filter(
-      (c) => c.field != clause.field || c.selection != clause.selection
+      (c) => c.filed != clause.filed || c.selection != clause.selection
     );
     this.clausesListSubject.next(newClauseList);
   }
@@ -321,12 +341,16 @@ export class ParametrageService {
     console.log("existing kvoos : ", existingKvoos);
   }
 
+  deleteType(type: string) {
+    return this.http.delete(environment.baseUrl + "/type/");
+  }
+
   KVOOListSubject$ = this.KVOOListSubject.asObservable();
   submitIsDisabledSubject$ = this.submitIsDisabledSubject.asObservable();
   choosedKey$ = this.choosedKey.asObservable();
   choosedOperation$ = this.choosedOperation.asObservable();
   givenValue$ = this.givenValue.asObservable();
   clausesListSubject$ = this.clausesListSubject.asObservable();
-  allTypesSubject$ = this.allTypesSubject.asObservable();
+  allRapportLinesSubject$ = this.allRapportLinesSubject.asObservable();
   mapOfCheckedTypesSubject$ = this.mapOfCheckedTypesSubject.asObservable();
 }

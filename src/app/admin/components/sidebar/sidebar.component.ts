@@ -63,6 +63,11 @@ export const ROUTES: RouteInfo[] = [
     forAdmin: false,
     children: [
       {
+        path: "generer-rapport",
+        title: "Générer un rapport",
+        ab: "GR",
+      },
+      {
         path: "AnalysePortfeuille",
         title: "Analyse du portfeuille",
         ab: "AP",

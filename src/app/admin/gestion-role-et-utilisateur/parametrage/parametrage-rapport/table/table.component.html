@@ -1,5 +1,7 @@
-<div class="mycontainer">
-  <div class="myHeader" (click)="setIsOpen()">{{ type }}</div>
+<div class="mycontainer" *ngIf="linesIsShown; else sousTypes">
+  <div class="myHeader" (click)="setIsOpen()">
+    {{ choosedUnderType + " - " + type }}
+  </div>
   <div class="domainesContainer" *ngIf="isOpen">
     <div class="domainsUtils">
       <input
@@ -16,8 +18,8 @@
       <div class="domaineItem">Description</div>
       <div class="domaineItem">Actions</div>
     </div>
-    <div class="domaineItems" *ngFor="let item of passedTypes">
-      <div class="domaineItem domaineName">{{ item.type }}</div>
+    <div class="domaineItems" *ngFor="let item of passedRapportsLine">
+      <div class="domaineItem domaineName">{{ item.sousType }}</div>
       <div class="domaineItem domaineCode">{{ item.code }}</div>
       <div class="domaineItem domaineDescription">{{ item.description }}</div>
       <div class="domaineItem domaineActions">
@@ -54,7 +56,7 @@
       ></mat-spinner>
       <ng-template #addDomaine>
         <div class="addDiv" (click)="openAddDialog()">
-          Ajouter un(e) {{ type }}
+          Ajouter au {{ type }}
         </div>
         <div
           *ngIf="
@@ -74,4 +76,28 @@
       </ng-template>
     </div>
   </div>
+</div>
+<div class="mycontainer">
+  <ng-template #sousTypes>
+    <div class="myHeader under-type-header" (click)="setIsOpen()">
+      {{ type }}
+    </div>
+    <div class="under-type-container" *ngIf="isOpen">
+      <div
+        (click)="handleShowLine(item)"
+        class="under-type-card"
+        *ngFor="let item of listUnderType"
+      >
+        {{ item }}
+        <mat-icon class="delete-under-type" (click)="deleteUnderType(item)"
+          >delete_forever</mat-icon
+        >
+        <!-- <mat-icon class="under-type-delete-icon">delete_forever</mat-icon> -->
+      </div>
+      <div (click)="handleAddUnderType()" class="under-type-card">
+        <div class="my-add-icon">+</div>
+      </div>
+      <p class="delete-type" (click)="deleteType(type)">Supprimer ce type</p>
+    </div>
+  </ng-template>
 </div>

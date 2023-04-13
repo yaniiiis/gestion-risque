@@ -95,3 +95,15 @@
   background-color: red;
   color: white;
 }
+.mat-calendar-body-selected,
+.mat-calendar-body-cell-content:hover {
+  background-color: #32d185 !important;
+  color: white;
+}
+.mat-form-field-underline {
+  display: none;
+}
+.mat-option:hover {
+  background: #32d185 !important;
+  color: white;
+}

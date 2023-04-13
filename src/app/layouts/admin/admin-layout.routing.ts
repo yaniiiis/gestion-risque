@@ -1,4 +1,6 @@
+import { Component } from "@angular/core";
 import { Routes } from "@angular/router";
+import path from "path";
 import { AddPermissionComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-roles/add-permission/add-permission.component";
 import { AjouterDesRolesComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-roles/ajouter-des-roles/ajouter-des-roles.component";
 import { AjouterNiveauComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-roles/ajouter-niveau/ajouter-niveau.component";
@@ -11,6 +13,7 @@ import { AjouterDesUtilisateusComponent } from "src/app/admin/gestion-role-et-ut
 import { GestionUtilisateurComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-utilisateur/gestion-utilisateur.component";
 import { ListAgencesComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-utilisateur/list-agences/list-agences.component";
 import { ListeUtilisateursComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-utilisateur/liste-utilisateurs/liste-utilisateurs.component";
+import { ParametrageColumnComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/column/column.component";
 import { ParametrageAnalysePortfeuilleComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-analyse-portfeuille/parametrage-analyse-portfeuille.component";
 import { ParametrageDomaineHomeComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-domaine/parametrage-domaine-home/parametrage-domaine-home.component";
 import { ParametrageIndirectComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-indirect/parametrage-indirect.component";
@@ -28,6 +31,8 @@ import { CreationDouteuseComponent } from "src/app/admin/risque-credit/analyse-p
 import { DurationComponent } from "src/app/admin/risque-credit/analyse-portfeuille/durations/duration.component";
 import { KriComponent } from "src/app/admin/risque-credit/analyse-portfeuille/kri/kri.component";
 import { PortefeuilDirectComponent } from "src/app/admin/risque-credit/analyse-portfeuille/portefeuil-direct/portefeuil-direct.component";
+import { GenererRapportComponent } from "src/app/admin/risque-credit/generer-rapport/generer-rapport.component";
+import { MonRapportComponent } from "src/app/admin/risque-credit/generer-rapport/mon-rapport/mon-rapport.component";
 import { GestionDesResqueClientComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/gestion-des-resque-client.component";
 import { RepartitionParSecteurComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/repartition-par-secteur/repartition-par-secteur.component";
 import { RepartitionParZoneComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/repartition-par-zone/repartition-par-zone.component";
@@ -143,6 +148,7 @@ export const AdminLayoutRoutes: Routes = [
             path: "Rapport",
             component: HomeComponent,
           },
+          { path: "columns", component: ParametrageColumnComponent },
         ],
       },
     ],
@@ -150,6 +156,15 @@ export const AdminLayoutRoutes: Routes = [
   {
     path: "",
     children: [
+      {
+        path: "generer-rapport",
+        component: GenererRapportComponent,
+      },
+      {
+        path: "mon-rapport",
+        component: MonRapportComponent,
+      },
+
       {
         path: "AnalysePortfeuille",
         component: AnalysePortfeuilleComponent,

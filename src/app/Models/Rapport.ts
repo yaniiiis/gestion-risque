@@ -16,15 +16,23 @@ export interface keyValueOperationOperand {
 }
 
 export interface Clause {
-  field: string;
   selection?: string;
+  filed?: string;
 }
 
-export interface Type {
+export interface RapportLine {
   id?: number;
   type: string;
   code: string;
   description: string;
   clauses?: Clause[];
   kvoo_s?: keyValueOperationOperand[];
+  sousType?: string;
+}
+
+export interface RapportType {
+  id?: number;
+  titreRapport: string;
+  description?: string;
+  //underTypes: string[];
 }

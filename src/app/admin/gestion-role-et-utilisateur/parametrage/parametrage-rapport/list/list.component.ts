@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { MatCheckboxChange } from "@angular/material/checkbox";
 import { MatDialog } from "@angular/material/dialog";
 import { Subscription } from "rxjs";
-import { Type } from "src/app/Models/Rapport";
+import { RapportLine } from "src/app/Models/Rapport";
 import { ParametrageService } from "src/app/_services/ParametrageService/parametrage.service";
 import { AddTypeDialogComponent } from "../../common/add-type-dialog/add-type-dialog.component";
 
@@ -23,15 +23,22 @@ export class ListComponent implements OnInit {
   typeListToFilter: string[] = [];
   existingDomaineInToDisplay: string[] = [];
 
-  typesMap: Map<string, Type[]> = new Map<string, Type[]>();
-  typesMapToDisplay: Map<string, Type[]> = new Map<string, Type[]>();
+  typesMap: Map<string, RapportLine[]> = new Map<string, RapportLine[]>();
+  typesMapToDisplay: Map<string, RapportLine[]> = new Map<
+    string,
+    RapportLine[]
+  >();
 
   typesSubscraption: Subscription;
-  checkedTypesMap: Map<string, Type[]> = new Map<string, Type[]>();
+  checkedTypesMap: Map<string, RapportLine[]> = new Map<
+    string,
+    RapportLine[]
+  >();
 
   ngOnInit(): void {
-    this.parametrageService.getAllTypes();
-    this.parametrageService.allTypesSubject$.subscribe((t: any) => {
+    this.parametrageService.getRapportLinesGroupedByType();
+    this.parametrageService.allRapportLinesSubject$.subscribe((t: any) => {
+      console.log("all type result : ", t);
       this.typesMap = new Map(Object.entries(t));
       this.typeListToFilter = Array.from(this.typesMap.keys());
       this.typeListToDisplay = this.typeListToFilter;
@@ -54,14 +61,9 @@ export class ListComponent implements OnInit {
     this.isListTypesOpen = !this.isListTypesOpen;
   }
 
-  itemClicked(item: string) {
-    const types: Type[] = this.typesMap.get(item);
-    this.parametrageService.addTocheckedTypesList(item, types);
-  }
-
   checkboxChange(ob: MatCheckboxChange, item: string) {
     if (ob.checked) {
-      const types: Type[] = this.typesMap.get(item);
+      const types: RapportLine[] = this.typesMap.get(item);
       this.parametrageService.addTocheckedTypesList(item, types);
     } else {
       this.parametrageService.removeFromCheckedTypesList(item);
@@ -78,14 +80,20 @@ export class ListComponent implements OnInit {
 
   openAddDomaineDialog(): void {
     const dialogRef = this.dialog.open(AddTypeDialogComponent, {});
+
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        if (!this.typesMap.has(result)) {
-          this.typesMap.set(result, []);
-
-          this.parametrageService.addTocheckedTypesList(result, []);
-          this.typeListToFilter = Array.from(this.typesMap.keys());
-          this.typeListToDisplay = this.typeListToFilter;
+        if (!this.typesMap.has(result.title)) {
+          this.parametrageService.addType(result.title).subscribe({
+            next: (response) => {
+              this.typesMap.set(result.title, []);
+              //this.parametrageService.rapportType.set(result.name, result.type);
+              this.parametrageService.addTocheckedTypesList(result.title, []);
+              this.typeListToFilter = Array.from(this.typesMap.keys());
+              this.typeListToDisplay = this.typeListToFilter;
+            },
+            error: (err) => {},
+          });
         }
       }
     });

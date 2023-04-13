@@ -34,12 +34,12 @@ export class EditClauseDialogComponent implements OnInit {
   }
 
   formGroup = new FormGroup({
-    field: new FormControl("", [Validators.required]),
+    filed: new FormControl("", [Validators.required]),
     selection: new FormControl("", [Validators.required]),
   });
 
-  get field() {
-    return this.formGroup.get("field");
+  get filed() {
+    return this.formGroup.get("filed");
   }
 
   onNoClick(): void {
@@ -49,7 +49,7 @@ export class EditClauseDialogComponent implements OnInit {
   selectField(item: string) {
     this.choosedFeild = item;
     this.formGroup.patchValue({
-      field: item,
+      filed: item,
     });
   }
 
@@ -68,12 +68,12 @@ export class EditClauseDialogComponent implements OnInit {
         if (
           !this.choosedClauses.find(
             (c) =>
-              c.field == this.choosedFeild &&
+              c.filed == this.choosedFeild &&
               c.selection == this.choosedSelection
           )
         ) {
           clause = {
-            field: this.choosedFeild,
+            filed: this.choosedFeild,
             selection: this.choosedSelection,
           };
           this.choosedClauses.push(clause);
@@ -85,10 +85,10 @@ export class EditClauseDialogComponent implements OnInit {
         }
       } else if (
         !this.choosedClauses.find(
-          (c) => c.field == this.choosedFeild && c.selection == ""
+          (c) => c.filed == this.choosedFeild && c.selection == ""
         )
       ) {
-        clause = { field: this.choosedFeild, selection: "" };
+        clause = { filed: this.choosedFeild, selection: "" };
         this.choosedClauses.push(clause);
       } else {
         this.snackBar.open("Clause déja ajoutée", null, {
@@ -100,9 +100,9 @@ export class EditClauseDialogComponent implements OnInit {
       this.choosedSelection = "";
       this.formGroup.patchValue({
         selection: "",
-        field: "",
+        filed: "",
       });
-      this.formGroup.controls.field.markAsPristine();
+      this.formGroup.controls.filed.markAsPristine();
     }
   }
 
@@ -114,7 +114,7 @@ export class EditClauseDialogComponent implements OnInit {
 
   deleteFromChoosedClauses(clause: Clause) {
     this.choosedClauses = this.choosedClauses.filter(
-      (c) => c.field != clause.field || c.selection != clause.selection
+      (c) => c.filed != clause.filed || c.selection != clause.selection
     );
   }
 

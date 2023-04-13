@@ -20,3 +20,6 @@
   background-color: red;
   color: white;
 }
+.mat-form-field-underline {
+  display: none;
+}

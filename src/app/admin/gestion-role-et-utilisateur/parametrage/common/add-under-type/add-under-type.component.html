@@ -8,33 +8,20 @@
     <input
       class="formInput"
       type="text"
-      placeholder="Type"
-      name="type"
-      formControlName="title"
+      placeholder="Sous type"
+      name="underType"
+      formControlName="underType"
     />
-    <span *ngIf="title.touched && title.invalid" class="span-error">
-      Champ invalid
-    </span>
-
-    <textarea
-      class="formInput"
-      type="text"
-      placeholder="Déscription"
-      name="description"
-      formControlName="description"
-      rows="3"
-    ></textarea>
-    <span *ngIf="description.touched && description.invalid" class="span-error">
+    <span *ngIf="underType.touched && underType.invalid" class="span-error">
       Champ invalid
     </span>
   </form>
 </div>
 <div class="myActionsContainer">
-  <!-- <button mat-button (click)="onNoClick()">Annuler</button> -->
   <button
     mat-button
     cdkFocusInitial
-    [mat-dialog-close]="{ title: title.value, description: description.value }"
+    [mat-dialog-close]="{ underType: underType.value }"
     [ngClass]="formGroup.invalid ? 'my-add-button-disabled' : 'my-add-button'"
     [disabled]="formGroup.invalid"
   >

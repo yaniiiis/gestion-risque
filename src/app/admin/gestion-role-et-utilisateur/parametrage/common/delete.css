@@ -1,0 +1,14 @@
+.DialogTitle {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.myActionsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+
+.deleteAction {
+  color: red;
+}

@@ -20,6 +20,10 @@ export class ParametrageAnalysePortfeuilleComponent implements OnInit {
       menuItem: "Rapports ",
       path: "Rapport",
     },
+    {
+      menuItem: "Columns ",
+      path: "columns",
+    },
   ];
   constructor() {}
 

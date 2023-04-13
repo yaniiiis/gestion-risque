@@ -122,7 +122,13 @@ import { EditClauseDialogComponent } from "./gestion-role-et-utilisateur/paramet
 import { KvooForEditComponent } from "./gestion-role-et-utilisateur/parametrage/common/edit-type-dialog/kvoo-for-edit/kvoo-for-edit.component";
 import { ClickOutsideModule } from "ng-click-outside";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
-import { ColumnComponent } from './gestion-role-et-utilisateur/parametrage/column/column.component';
+import { ParametrageColumnComponent } from "./gestion-role-et-utilisateur/parametrage/column/column.component";
+import { ColumnRowComponent } from "./gestion-role-et-utilisateur/parametrage/common/column-row/column-row.component";
+import { UnderTypesComponent } from "./gestion-role-et-utilisateur/parametrage/parametrage-rapport/under-types/under-types.component";
+import { AddUnderTypeComponent } from "./gestion-role-et-utilisateur/parametrage/common/add-under-type/add-under-type.component";
+import { DeleteTypeComponent } from "./gestion-role-et-utilisateur/parametrage/common/delete-type/delete-type.component";
+import { GenererRapportComponent } from "./risque-credit/generer-rapport/generer-rapport.component";
+import { MonRapportComponent } from "./risque-credit/generer-rapport/mon-rapport/mon-rapport.component";
 
 @NgModule({
   declarations: [
@@ -237,7 +243,13 @@ import { ColumnComponent } from './gestion-role-et-utilisateur/parametrage/colum
     EditTypeDialogComponent,
     EditClauseDialogComponent,
     KvooForEditComponent,
-    ColumnComponent,
+    ParametrageColumnComponent,
+    ColumnRowComponent,
+    UnderTypesComponent,
+    AddUnderTypeComponent,
+    DeleteTypeComponent,
+    GenererRapportComponent,
+    MonRapportComponent,
   ],
   imports: [
     CommonModule,
@@ -262,7 +274,7 @@ import { ColumnComponent } from './gestion-role-et-utilisateur/parametrage/colum
     ClickOutsideModule,
     MatAutocompleteModule,
   ],
-  providers: [authInterceptorProviders, MatDatepickerModule],
+  providers: [authInterceptorProviders, MatDatepickerModule, DatePipe],
   exports: [MatDatepickerModule],
 })
 export class AdminModule {}

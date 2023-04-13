@@ -15,10 +15,10 @@ export class AddTypeDialogComponent implements OnInit {
     private parametrageService: ParametrageService
   ) {}
 
-  isListRelationsOpen: boolean = false;
-  selectedRelations: string[] = [];
+  isListUnderTypesOpen: boolean = false;
+  selectedUnderType: string;
   withRelations: boolean = false;
-  relationsList = ["One", "Two", "Three"];
+  underTypesList = ["Entreprise", "Particulier"];
 
   ngOnInit(): void {}
 
@@ -31,30 +31,32 @@ export class AddTypeDialogComponent implements OnInit {
   }
 
   formGroup = new FormGroup({
-    name: new FormControl("", [Validators.required]),
+    title: new FormControl("", [Validators.required]),
+    description: new FormControl("", [Validators.required]),
+    // underType: new FormControl("", [Validators.required]),
   });
 
-  get name() {
-    return this.formGroup.get("name");
+  get title() {
+    return this.formGroup.get("title");
   }
+
+  get description() {
+    return this.formGroup.get("description");
+  }
+
+  // get underType() {
+  //   return this.formGroup.get("underType");
+  // }
 
   checkBoxChange(event: any) {
     this.withRelations = event;
   }
 
-  toggleListRelations() {
-    this.isListRelationsOpen = !this.isListRelationsOpen;
+  toggleListUnderTypes() {
+    this.isListUnderTypesOpen = !this.isListUnderTypesOpen;
   }
 
-  closeListRelations() {
-    this.isListRelationsOpen = false;
-  }
-
-  selectRelation(item: string) {
-    this.selectedRelations.push(item);
-  }
-
-  deleteFromSelectedRelations(item: string) {
-    this.selectedRelations = this.selectedRelations.filter((r) => r != item);
+  closeListUnderTypes() {
+    this.isListUnderTypesOpen = false;
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Subscription } from "rxjs";
-import { Type } from "src/app/Models/Rapport";
+import { RapportLine } from "src/app/Models/Rapport";
 import { ParametrageService } from "src/app/_services/ParametrageService/parametrage.service";
 
 @Component({
@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   constructor(private parametrageService: ParametrageService) {}
 
   typesSubscraption: Subscription;
-  typesMap: Map<string, Type[]> = new Map<string, Type[]>();
+  typesMap: Map<string, RapportLine[]> = new Map<string, RapportLine[]>();
   ngOnInit(): void {
     this.typesSubscraption =
       this.parametrageService.mapOfCheckedTypesSubject$.subscribe((m) => {
