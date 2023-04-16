@@ -4,6 +4,12 @@
   </div>
   <div class="domainesContainer" *ngIf="isOpen">
     <div class="domainsUtils">
+      <div class="back-icon-container">
+        <mat-icon class="back-icon" (click)="hiddenRapportLines()"
+          >arrow_back_ios</mat-icon
+        >
+      </div>
+
       <input
         type="text"
         placeholder="Rechercher"

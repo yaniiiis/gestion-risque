@@ -15,10 +15,29 @@
 
 .domainsUtils {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   width: 100%;
-  height: 60px;
+  height: 70px;
+  align-items: center;
 }
+
+.back-icon-container {
+  background-color: white;
+  box-shadow: 1.5px 1.5px 2px #7f93ad;
+  color: #3c4858;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+}
+
+.back-icon:hover {
+  scale: 1.05;
+}
+
 .searchInput {
   width: 150px;
   height: 40px;

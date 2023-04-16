@@ -48,8 +48,13 @@ export class KeyValueOperandComponent implements OnInit {
     this.formGroupe = new FormGroup({
       key: new FormControl(this.kVOO.key, [Validators.required]),
       value: new FormControl(this.kVOO.value, [Validators.required]),
-      operation: new FormControl(this.kVOO.operation, [Validators.required]),
-      operand: new FormControl(this.kVOO.operand, [Validators.required]),
+      operation: new FormControl(
+        this.operationsMapOpposit[this.kVOO.operation],
+        [Validators.required]
+      ),
+      operand: new FormControl(this.kVOO.operand == "false" ? "OR" : "AND", [
+        Validators.required,
+      ]),
     });
 
     if (this.kVOO.key.length >= 1) this.choosedKey = this.kVOO.key;
@@ -261,5 +266,12 @@ export class KeyValueOperandComponent implements OnInit {
     "Supérieur ou égale": ">=",
     Inférieur: "<",
     "Inférieur ou égale": "<=",
+  };
+  operationsMapOpposit = {
+    "=": "Egale",
+    ">": "Supérieur",
+    ">=": "Supérieur ou égale",
+    "<": "Inférieur",
+    "<=": "Inférieur ou égale",
   };
 }

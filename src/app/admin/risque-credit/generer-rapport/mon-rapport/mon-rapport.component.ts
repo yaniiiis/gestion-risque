@@ -17,6 +17,7 @@ export class MonRapportComponent implements OnInit {
   underTypeLinesToDisplay: Map<string, any>;
   linesGroupedByUnderType: Map<string, any> = new Map<string, any>();
   choosedUnderType: string;
+  selectedIndex: number = 0;
 
   ngOnInit(): void {
     this.data = this.rapportGenerationService.generatedRapport;
@@ -37,6 +38,7 @@ export class MonRapportComponent implements OnInit {
     this.underTypeLinesToDisplay = this.linesGroupedByUnderType.get(underType);
     console.log("entreprise : ", this.underTypeLinesToDisplay);
     this.choosedUnderType = underType;
+    this.selectedIndex = this.underTypesNames.indexOf(underType);
   }
 
   @Input() rapportsMapedByUnderType: Map<string, any>;

@@ -5,8 +5,14 @@
     </div>
   </div>
   <div class="under-type-div">
-    <div class="under-type-item" *ngFor="let item of underTypesNames">
-      {{ item }}
+    <div
+      class="under-type-item"
+      *ngFor="let item of underTypesNames; let i = index"
+      (click)="handleUnderTypeChange(item)"
+    >
+      <span class="my-test" [ngClass]="{ myBorderBottom: i === selectedIndex }">
+        {{ item }}
+      </span>
     </div>
   </div>
   <div class="rapport-card">
@@ -17,8 +23,8 @@
       class="rapport-items-div"
       *ngFor="let item of underTypeLinesToDisplay | keyvalue"
     >
-      <p class="rappor_item">{{ item.key }}</p>
-      <p class="rappor_item">{{ item.value }}</p>
+      <p class="rappor-item">{{ item.key }}</p>
+      <p class="rappor-item rapport-title">{{ item.value }}</p>
     </div>
   </div>
 </div>

@@ -51,15 +51,16 @@ export class TableComponent implements OnInit {
   listUnderType: string[] = [];
   linesIsShown: boolean = false;
   choosedUnderType: string;
+  rapportLinesTypesToFilter: RapportLine[];
 
   ngOnInit(): void {
     this.typesTofilter = this.passedRapportsLine;
     this.passedRapportsLine.forEach((rapportLine) => {
-      console.log("raport line from table : ", rapportLine);
       if (!this.listUnderType.includes(rapportLine.sousType)) {
         this.listUnderType.push(rapportLine.sousType);
       }
     });
+    this.rapportLinesTypesToFilter = this.passedRapportsLine;
   }
 
   setIsOpen() {
@@ -212,6 +213,13 @@ export class TableComponent implements OnInit {
   handleShowLine(underType: string) {
     this.choosedUnderType = underType;
     this.linesIsShown = true;
+    this.passedRapportsLine = this.rapportLinesTypesToFilter.filter(
+      (rl) => rl.sousType == underType
+    );
+  }
+
+  hiddenRapportLines() {
+    this.linesIsShown = false;
   }
 
   handleAddUnderType() {

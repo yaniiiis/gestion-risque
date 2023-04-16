@@ -1,7 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 10px 30px;
 }
 
 .under-type-div {
@@ -9,22 +9,50 @@
   display: flex;
   justify-content: space-around;
   background-color: white;
-  box-shadow: 1px 2.5px 2px white;
-  height: 50px;
+  box-shadow: 1px 2.5px 2px #d9d9d9;
+  height: 63px;
   align-items: center;
-  color: #28353b;
+  color: #000000;
+  background-color: #d9d9d9;
+  border-radius: 7px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.under-type-item {
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  /* transition: all 150ms; */
+}
+.under-type-item:hover {
+  scale: 1.02;
 }
 
 .rapport-card {
   padding: 30px 16px;
+  background-color: white;
+  max-width: 700px;
+  box-shadow: 1px 2px 2px rgb(233, 232, 232);
+  margin-top: 30px;
+  border-radius: 7px;
+  width: 100%;
+  margin: 30px auto;
 }
 
-.rappor_item {
+.rappor-item {
   flex: 1;
+}
+.rapport-title {
+  font-weight: bolder;
 }
 
 .rapport-items-div {
   display: flex;
+  color: #000000;
+  font-weight: bold;
+
+  align-items: center;
 }
 
 .container-page-title {
@@ -48,4 +76,8 @@
   font-size: 20px;
   margin-bottom: 20px;
   padding: 0px 25px;
+}
+
+.myBorderBottom {
+  border-bottom: solid 2px #28353b;
 }

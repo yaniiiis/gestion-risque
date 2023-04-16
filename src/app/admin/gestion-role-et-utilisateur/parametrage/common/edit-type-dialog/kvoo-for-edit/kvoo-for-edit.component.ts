@@ -52,8 +52,18 @@ export class KvooForEditComponent implements OnInit {
     this.formGroupe = new FormGroup({
       key: new FormControl(this.kVOO.key, [Validators.required]),
       value: new FormControl(this.kVOO.value, [Validators.required]),
-      operation: new FormControl(this.kVOO.operation, [Validators.required]),
-      operand: new FormControl(this.kVOO.operand, [Validators.required]),
+      operation: new FormControl(
+        this.operationsMapOpposit[this.kVOO.operation],
+        [Validators.required]
+      ),
+      operand: new FormControl(
+        this.kVOO.operand == "true"
+          ? "AND"
+          : this.kVOO.operand == "false"
+          ? "OR"
+          : "",
+        [Validators.required]
+      ),
     });
 
     if (this.kVOO.key.length >= 1) this.choosedKey = this.kVOO.key;
@@ -142,8 +152,8 @@ export class KvooForEditComponent implements OnInit {
   }
 
   operationClicked(item: string) {
-    this.choosedOperation = item;
-    this.kVOO.operation = item;
+    this.choosedOperation = this.operationsMap[item];
+    this.kVOO.operation = this.operationsMap[item];
     this.operationHasError = false;
     // this.formGroupe.patchValue({
     //   operand: undefined,
@@ -208,4 +218,20 @@ export class KvooForEditComponent implements OnInit {
 
   keys = ["solde balance", "nominal expo", "islamic"];
   operations = ["equal", "greater than", "less than"];
+
+  operationsMap = {
+    Egale: "=",
+    Supérieur: ">",
+    "Supérieur ou égale": ">=",
+    Inférieur: "<",
+    "Inférieur ou égale": "<=",
+  };
+
+  operationsMapOpposit = {
+    "=": "Egale",
+    ">": "Supérieur",
+    ">=": "Supérieur ou égale",
+    "<": "Inférieur",
+    "<=": "Inférieur ou égale",
+  };
 }
