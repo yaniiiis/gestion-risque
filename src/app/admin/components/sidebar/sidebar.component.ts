@@ -127,10 +127,15 @@ export const ROUTES: RouteInfo[] = [{
         forAdmin: false,
         children: [
           {
-            path: "EvaluationDesTAuxDeCharges",
-            title: "Gestion D'évaluation Des Taux De Change",
-            ab:'GETC'
+            path: "ConsultationPositionDeChange",
+            title: "Consultation",
+            ab:'CONS'
           },
+          // {
+          //   path: "EvaluationDesTAuxDeCharges",
+          //   title: "Gestion D'évaluation Des Taux De Change",
+          //   ab:'GETC'
+          // },
           {
             path: "SurveillanceDesSessionsDevise",
             title: "Surveillance Des Cessions Devises",

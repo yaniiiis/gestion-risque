@@ -21,7 +21,8 @@ export class FileUploadComponent {
   fileName = "";
   progress: number = 0;
   uploadSub: Subscription;
-
+  selectedOption;
+  url:string;
   constructor(private http: HttpClient) {}
 
   onFileSelected(event) {
@@ -32,8 +33,12 @@ export class FileUploadComponent {
       const formData = new FormData();
       formData.append("file", file);
 
+      if(this.selectedOption==="1")
+      this.url="/seed"
+      else this.url="/seedSoldeCompte"
+
       const upload$ = this.http
-        .post(environment.baseUrl + "/seed", formData, {
+        .post(environment.baseUrl + this.url, formData, {
           reportProgress: true,
           observe: "events",
         })
@@ -71,5 +76,9 @@ export class FileUploadComponent {
   reset() {
     this.progress = 0;
     this.uploadSub = null;
+  }
+
+  click(){
+    alert
   }
 }

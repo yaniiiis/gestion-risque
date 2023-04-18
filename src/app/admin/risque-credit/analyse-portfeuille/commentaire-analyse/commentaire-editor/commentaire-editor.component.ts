@@ -50,6 +50,8 @@ export class CommentaireEditorComponent implements OnInit {
      
      this.currentCommentaireObs.subscribe((data) =>{
       next:{
+        console.log('data '+ data)
+        if(data!==null){
         this.form.get('id').setValue(data.id)
         this.currentCommentaire = data.commentaire ;
 
@@ -64,6 +66,9 @@ export class CommentaireEditorComponent implements OnInit {
         }else{
           this.boutonEnregistrerStatus = true; 
         }
+      } else{
+        this.currentCommentaire =null; 
+      }
       }
       error:{
         this.currentCommentaire =null;

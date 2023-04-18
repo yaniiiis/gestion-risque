@@ -43,6 +43,11 @@ import { DixPlusGrandClientAEngagementsComponent } from "src/app/admin/risque-cr
 import { DixPlusGrandClientALimiteAccordeeComponent } from "src/app/admin/risque-credit/top10/dix-plus-grand-client-a-limite-accordee/dix-plus-grand-client-a-limite-accordee.component";
 import { GarantiesPrisesSurLesDixPlusGrandsClientsComponent } from "src/app/admin/risque-credit/top10/garanties-prises-sur-les-dix-plus-grands-clients/garanties-prises-sur-les-dix-plus-grands-clients.component";
 import { Top10Component } from "src/app/admin/risque-credit/top10/top10.component";
+import { ConsultationComponent } from "src/app/admin/risque-de-change/consultation/consultation.component";
+import { PositionParDateComponent } from "src/app/admin/risque-de-change/consultation/position-par-date/position-par-date.component";
+import { PositionParPlusieursDatesComponent } from "src/app/admin/risque-de-change/consultation/position-par-plusieurs-dates/position-par-plusieurs-dates.component";
+import { EvaluationTauxChangeComponent } from "src/app/admin/risque-de-change/evaluation-taux-change/evaluation-taux-change.component";
+
 import { KRIsDeChangeComponent } from "src/app/admin/risque-de-change/kris-de-change/kris-de-change.component";
 import { AnalyseDesDepotsComponent } from "src/app/admin/risque-liquidite/analyse-des-depots/analyse-des-depots.component";
 import { DashboardComponent } from "src/app/dashboard/dashboard.component";
@@ -304,31 +309,51 @@ export const AdminLayoutRoutes: Routes = [
     ]
       },
     {
-      path: '',
+      path: 'KRIsDeChange',
+      component: KRIsDeChangeComponent,
      // canActivate : [AuthPermissionsGuard],
       data :{
     // expectedPermission:['ConsulterRessources']
    },
-      children: [
-        {
-        path: 'EvaluationDesTAuxDeCharges',
-        // component:
+    //   children: [
+    //     {
+    //     path: 'EvaluationDesTAuxDeCharges',
+    //     component: EvaluationTauxChangeComponent,
+    //   },
+    //   {
+    //     path: 'SurveillanceDesSessionsDevise',
+    //     // component:
+    //   },
+    //   {
+    //     path: 'KRIsDeChange',
+    //      component: KRIsDeChangeComponent,
+    //   },
+    //   {
+    //     path: 'StressTestDeChange',
+    //     // component:
+    //   },
+
+    // ]
       },
       {
-        path: 'SurveillanceDesSessionsDevise',
-        // component:
-      },
-      {
-        path: 'KRIsDeChange',
-         component: KRIsDeChangeComponent,
-      },
-      {
-        path: 'StressTestDeChange',
-        // component:
+        path: 'ConsultationPositionDeChange',
+        component: ConsultationComponent,
+
+        children: [
+          {
+          path:'PositionParDate',
+          component: PositionParDateComponent,
+          },
+          {
+            path:'PositionParPlusieursDates',
+          component: PositionParPlusieursDatesComponent,
+
+          }
+
+        ]
+
       },
 
-    ]
-      },
       {
         path: '',
        // canActivate : [AuthPermissionsGuard],

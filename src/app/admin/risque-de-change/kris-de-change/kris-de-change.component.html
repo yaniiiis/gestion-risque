@@ -1,151 +1,229 @@
-
 <div class="main-content">
     <div class="container-fluid">
-      <div class="card">
-        <div class="card-header">
-          <div class="yz_container">
-            <table>
-              <thead>
-                <th class="theed__th--indicateur">Indicateur</th>
-                <th *ngFor="let date of header">{{ date }}</th>
-              </thead>
-              <tbody>
-                <tr *ngFor="let element of data">
-                  <td class="tbody__td--label">{{ indicateur1.description }}</td>
-                  <td class="tbody__td" *ngFor="let value of element.value">
-                    <tr class="tbody__td__tr yz_green">
-                      {{
-                        value  < indicateur1.valeurMinimum ? value.toString() + element.unit : "" 
-                      }}
-                    </tr>
-                    <tr class="tbody__td__tr yz_yellow">
-                      {{
-                        value  >= indicateur1.valeurMinimum && value <= indicateur1.valeurLimite
-                          ? value.toString() + element.unit
-                          : "" 
-                      }}
-                    </tr>
-                    <tr class="tbody__td__tr yz_red">
-                      {{
-                        value  > indicateur1.valeurLimite
-                          ? value.toString() + element.unit
-                          : "" 
-                      }}
-                    </tr>
-                  </td>
-                  <td class="tbody__td--limit">{{ indicateur1.valeurLimite }}</td>
-                  <td class="tbody__td--trigger">
-                    <tr class="tbody__td__tr yz_green">
-                      <td class="tbody__td--compareValues">
-                        < {{ indicateur1.valeurMinimum + element.unit }}
-                      </td>
-                      <td class="tbody__td--colors yz_bgGreen"></td>
-                    </tr>
-                    <tr class="tbody__td__tr yz_yellow">
-                      <td class="tbody__td--compareValues">
-                        {{ indicateur1.valeurLimite + element.unit }} -
-                        {{ indicateur1.valeurMinimum + element.unit }}
-                      </td>
-                      <td class="tbody__td--colors yz_bgYellow"></td>
-                    </tr>
-                    <tr class="tbody__td__tr yz_red">
-                      <td class="tbody__td--compareValues">
-                        > {{ indicateur1.valeurLimite + element.unit }}
-                      </td>
-                      <td class="tbody__td--colors yz_bgRed"></td>
-                    </tr>
-                  </td>                 
-                </tr>
-              </tbody>
-              <tfoot></tfoot>
-            </table>
-          </div>
-
-          <div class="yz_container">
-            <div>
-              <label for="fp">Fonts propres</label>
-              <input type="decimal" [(ngModel)]="fp" style="text-align: right;" id="fp" (keyup)="calculIndicateur()">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header card-header-primary">
+              <h4 class="card-title">Liste des KRIs</h4>
             </div>
-            <table>
-              <thead>
-                <th class="theed__th--indicateur">DEVISE</th>
-                <th *ngFor="let h of header1">{{ h }}</th>
-              </thead>
-              <tbody>              
-                <tr *ngFor="let y of listAffichePosition">
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: center;">{{ y.devise }}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;">{{ y.positionCourte | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;">{{ y.positionLongue | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;">{{ y.positionNetteCourte | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;">{{ y.positionNetteLongue | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;">{{ fp | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0);  text-align: center; background-color: lightgreen;" *ngIf="y.ratio<indicateur2.valeurMinimum">
-                      {{
-                         y.ratio | number:'4.1-2'
-                      }}                   
-                  </td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: center; background-color: yellow;" *ngIf="y.ratio>=indicateur2.valeurMinimum && y.ratio<indicateur2.valeurLimite">
-                    {{
-                       y.ratio | number:'4.1-2'
-                    }}                   
-                  </td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: center; background-color: red;" *ngIf="y.ratio>indicateur2.valeurLimite">
-                    {{
-                       y.ratio | number:'4.1-2'
-                    }}                   
-                  </td>
-                  
-                </tr>
-              </tbody>
-              <tfoot></tfoot>
-            </table>
-
-            <div style="margin-top: 20px;">
-            <table>
-              <thead>
-                <th class="theed__th--indicateur">DEVISE</th>
-                <th *ngFor="let h of header1">{{ h }}</th>
-              </thead>
-              <tbody>              
-                <tr >
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: center;">{{ totalAffichePosition.devise }}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;">{{ totalAffichePosition.positionCourte | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;">{{ totalAffichePosition.positionLongue | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;">{{ totalAffichePosition.positionNetteCourte | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;">{{ totalAffichePosition.positionNetteLongue | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;">{{ totalAffichePosition.fpn | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0);  text-align: center; background-color: lightgreen;" *ngIf="totalAffichePosition.ratio<indicateur3.valeurMinimum">
-                      {{
-                        totalAffichePosition.ratio | number:'4.1-2'
-                      }}                   
-                  </td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: center; background-color: yellow;" *ngIf="totalAffichePosition.ratio>=indicateur3.valeurMinimum && totalAffichePosition.ratio<indicateur3.valeurLimite">
-                    {{
-                      totalAffichePosition.ratio | number:'4.1-2'
-                    }}                   
-                  </td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: center; background-color: red;" *ngIf="totalAffichePosition.ratio>indicateur3.valeurLimite">
-                    {{
-                      totalAffichePosition.ratio | number:'4.1-2'
-                    }}                   
-                  </td>                  
-                </tr>
-              </tbody>
-              <tfoot></tfoot>
-            </table>
-            <div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card-body">
-              <app-commentaire-editor></app-commentaire-editor>
-
-              <router-outlet></router-outlet>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
   
+            <div class="card-body">
+                <div class="row">
+
+                    <table class="table">
+                        <thead>
+                        <th class="theed__th--indicateur">Indice</th>
+                        <th class="theed__th--indicateur">Valeur</th>
+                        <th *ngFor="let h of header">{{ h }}</th>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let element of data">
+                            <td class="tbody__td--label">{{ indicateur1.description }}</td>
+                            <td class="tbody__td " *ngFor="let value of element.value" >
+                                <tr class="yz_green" *ngIf="value  < indicateur1.valeurMinimum">
+                                  {{ value.toString() + element.unit }}
+                                </tr>
+                                <tr class="yz_yellow" *ngIf="value  >= indicateur1.valeurMinimum && value <= indicateur1.valeurLimite">
+                                    {{ value.toString() + element.unit }}
+                                </tr>
+                                <tr class="yz_red" *ngIf="value > indicateur1.valeurLimite">
+                                    {{ value.toString() + element.unit }}
+                                </tr>
+                            </td>  
+                           
+                            <td class="tbody__td--limit">{{ indicateur1.valeurLimite }}</td>  
+                            <td class="tbody__td--trigger">
+                                <tr class="tbody__td__tr yz_green">
+                                    <td class="tbody__td--compareValues">
+                                    < {{ indicateur1.valeurMinimum  }}
+                                    </td>
+                                  
+                                </tr>
+                                <tr class="tbody__td__tr yz_yellow">
+                                    <td class="tbody__td--compareValues">
+                                    {{ indicateur1.valeurLimite  }} -
+                                    {{ indicateur1.valeurMinimum  }}
+                                    </td>
+                                   
+                                </tr>
+                                <tr class="tbody__td__tr yz_red">
+                                    <td class="tbody__td--compareValues">
+                                    > {{ indicateur1.valeurLimite  }}
+                                    </td>
+                                  
+                                </tr>
+                                </td>   
+                                
+                                <td class="tbody__td--trigger">
+                                    <tr class="tbody__td__tr yz_green">
+                                       
+                                        <td class="tbody__td--colors yz_bgGreen"></td>
+                                    </tr>
+                                    <tr class="tbody__td__tr yz_yellow">
+                                       
+                                        <td class="tbody__td--colors yz_bgYellow"></td>
+                                    </tr>
+                                    <tr class="tbody__td__tr yz_red">
+                                       
+                                        <td class="tbody__td--colors yz_bgRed"></td>
+                                    </tr>
+                                </td>                
+                        </tr>
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
+               </div>
+             
+
+               <div class="row">
+
+                <table class="table" >
+                    <thead>
+                    <th class="theed__th--indicateur">Indice</th>
+                    <th class="theed__th--indicateur">Devise</th>
+                    <th class="theed__th--indicateur" *ngFor="let d of dateSelectedItems">{{ d.item_id }}</th>
+                    <th *ngFor="let h of header">{{ h }}</th>           
+                    
+                    </thead>
+                    <tbody>
+                   
+                    <tr>
+                        <td class="tbody__td--label">{{ indicateur2.description }}</td>  
+
+                        <td class="tbody__td">
+                           
+                            <tr *ngFor="let devise of deviseSelectedItems, i as index" style="border-bottom: 1px solid rgb(165, 165, 165);">
+                                <td>{{ devise.item_id }}</td>                                    
+                            </tr> 
+                       </td>
+
+                        <td *ngFor="let date of dateSelectedItems" class="tbody__td">
+                           
+                        <tr *ngFor="let devise of deviseSelectedItems, i as index" style="border-bottom: 1px solid rgb(165, 165, 165);">
+                           <td class=" yz_green" *ngIf="getRatioByDevise(date.item_id, devise.item_id)<indicateur2.valeurMinimum">{{ getRatioByDevise(date.item_id, devise.item_id)  | number:'1.1-8' }}% </td> 
+                           <td class=" yz_yellow" *ngIf="getRatioByDevise(date.item_id, devise.item_id)>=indicateur2.valeurMinimum && getRatioByDevise(date.item_id, devise.item_id)<indicateur2.valeurLimite">{{ getRatioByDevise(date.item_id, devise.item_id)  | number:'1.1-8' }}% </td>  
+                           <td class=" yz_red" *ngIf="getRatioByDevise(date.item_id, devise.item_id)>=indicateur2.valeurLimite">{{ getRatioByDevise(date.item_id, devise.item_id)  | number:'1.1-8' }}% </td>   
+                        </tr> 
+                        </td>
+
+                        <td class="tbody__td--limit">{{ indicateur2.valeurLimite }}</td>
+                            <td class="tbody__td--trigger">
+                            <tr class="tbody__td__tr yz_green">
+                                <td class="tbody__td--compareValues">
+                                < {{ indicateur2.valeurMinimum  }}
+                                </td>
+                              
+                            </tr>
+                            <tr class="tbody__td__tr yz_yellow">
+                                <td class="tbody__td--compareValues">
+                                {{ indicateur2.valeurLimite  }} -
+                                {{ indicateur2.valeurMinimum  }}
+                                </td>
+                               
+                            </tr>
+                            <tr class="tbody__td__tr yz_red">
+                                <td class="tbody__td--compareValues">
+                                > {{ indicateur2.valeurLimite  }}
+                                </td>
+                              
+                            </tr>
+                            </td>   
+                            
+                            <td class="tbody__td--trigger">
+                                <tr class="tbody__td__tr yz_green">
+                                   
+                                    <td class="tbody__td--colors yz_bgGreen"></td>
+                                </tr>
+                                <tr class="tbody__td__tr yz_yellow">
+                                   
+                                    <td class="tbody__td--colors yz_bgYellow"></td>
+                                </tr>
+                                <tr class="tbody__td__tr yz_red">
+                                   
+                                    <td class="tbody__td--colors yz_bgRed"></td>
+                                </tr>
+                                </td>   
+                    </tr>
+                   
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
+             </div>
+
+
+             <div class="row">
+
+                <table class="table">
+                    <thead>
+                    <th class="theed__th--indicateur">Indice</th>
+                    <th class="theed__th--indicateur" *ngFor="let d of dateSelectedItems">{{ d.item_id }}</th>
+                    <th *ngFor="let h of header">{{ h }}</th>
+                    
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let element of data">
+                        <td class="tbody__td--label">{{ indicateur3.description }}</td>
+                        <td *ngFor="let date of dateSelectedItems" class="tbody__td"> 
+                            <tr class="yz_green" *ngIf="getRatioGlobal(date.item_id) <=indicateur3.valeurMinimum">
+                                {{ getRatioGlobal(date.item_id)  | number:'1.1-8' }}% 
+                            </tr> 
+                            <tr class="yz_yellow" *ngIf="getRatioGlobal(date.item_id) > indicateur3.valeurMinimum && getRatioGlobal(date.item_id) < indicateur3.valeurLimite">
+                                {{ getRatioGlobal(date.item_id)  | number:'1.1-8' }}% 
+                            </tr> 
+                            <tr class="yz_red" *ngIf="getRatioGlobal(date.item_id) > indicateur3.valeurMinimum && getRatioGlobal(date.item_id) >= indicateur3.valeurLimite">
+                                {{ getRatioGlobal(date.item_id)  | number:'1.1-8' }}% 
+                            </tr>       
+                                                 
+                        </td>
+
+
+                        <td class="tbody__td--limit">{{ indicateur3.valeurLimite }}</td>  
+                        <td class="tbody__td--trigger">
+                            <tr class="tbody__td__tr yz_green">
+                                <td class="tbody__td--compareValues">
+                                < {{ indicateur3.valeurMinimum  }}
+                                </td>
+                              
+                            </tr>
+                            <tr class="tbody__td__tr yz_yellow">
+                                <td class="tbody__td--compareValues">
+                                {{ indicateur3.valeurLimite  }} -
+                                {{ indicateur3.valeurMinimum  }}
+                                </td>
+                               
+                            </tr>
+                            <tr class="tbody__td__tr yz_red">
+                                <td class="tbody__td--compareValues">
+                                > {{ indicateur3.valeurLimite  }}
+                                </td>
+                              
+                            </tr>
+                            </td>   
+                            
+                            <td class="tbody__td--trigger">
+                                <tr class="tbody__td__tr yz_green">
+                                   
+                                    <td class="tbody__td--colors yz_bgGreen"></td>
+                                </tr>
+                                <tr class="tbody__td__tr yz_yellow">
+                                   
+                                    <td class="tbody__td--colors yz_bgYellow"></td>
+                                </tr>
+                                <tr class="tbody__td__tr yz_red">
+                                   
+                                    <td class="tbody__td--colors yz_bgRed"></td>
+                                </tr>
+                            </td>              
+                    </tr>
+                    </tbody>
+                    <tfoot></tfoot>
+                </table>
+             </div>
+            </div>  
+
+
+         </div>
+       </div>
+     </div>
+   </div>
+</div>

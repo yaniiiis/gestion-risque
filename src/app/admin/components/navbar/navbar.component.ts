@@ -47,7 +47,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("role : " );
+    //console.log("role : " );
     this.listTitles = ROUTES.filter((listTitle) => listTitle);
     this.toggleButton = document.querySelector('.sidebarMenu')
     this.toggleButtonSubMenu = document.querySelector('.submenu')
@@ -63,7 +63,7 @@ export class NavbarComponent implements OnInit {
     });
 
     this.roles = this.storageSer.getUser().roles.name.toLowerCase();
-    console.log("role : " + this.roles);
+    //console.log("role : " + this.roles);
     this.alerteRoleService.findByRoleName(this.roles).subscribe((response) => {
       this.alerteMessages = response;
     });

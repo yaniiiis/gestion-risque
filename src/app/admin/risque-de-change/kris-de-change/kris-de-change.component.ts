@@ -1,8 +1,22 @@
-import { DecimalPipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import {  IDropdownSettings } from 'ng-multiselect-dropdown';
 import { AnalysePortfeuilleServicesService } from 'src/app/_services/analysePrtfeuille/analyse-portfeuille-services.service';
 import { IndicateurService } from 'src/app/_services/indicateur.service';
 import { SoldeCompteService } from 'src/app/_services/solde-compte.service';
+import * as _moment from "moment";
+import { FondsPropresService } from 'src/app/_services/fonds-propres.service';
+
+interface indicateur{
+  id: number,
+  description: string,
+  valeurMinimum: number,
+  valeurLimite: number,
+  dateEffet : Date
+}
+
 interface  affichePosition{
   devise: string,
   positionLongue: number,
@@ -21,13 +35,21 @@ interface  totalAffichePosition{
   ratio: number
 }
 
-interface indicateur{
-  id: number,
-  description: string,
-  valeurMinimum: number,
-  valeurLimite: number,
-  dateEffet : Date
-}
+interface  Devise {
+  item_id : string,
+  item_text :string
+  }
+
+  interface Ratio  {
+    devise : string,
+    date : string,
+    ratio : number
+   }
+
+   interface RatioGlobal  {
+    date : string,
+    ratio : number
+   }  
 @Component({
   selector: 'app-kris-de-change',
   templateUrl: './kris-de-change.component.html',
@@ -58,7 +80,7 @@ interface indicateur{
     border: 1px solid rgb(83, 82, 82);
   }
   thead {
-    background-color: rgba(7, 194, 194, 0.76);
+    background-color: lightgray;
   }
   thead th {
     padding-left: 0.25rem;
@@ -132,28 +154,15 @@ interface indicateur{
   .yz_bgRed {
     background-color: red;
   }`]
+ 
 })
 export class KRIsDeChangeComponent implements OnInit {
 
-constructor(private soldeCompteService: SoldeCompteService,  private servicesRepo: AnalysePortfeuilleServicesService, private indicateurService:IndicateurService) { }
-soldeCompte : number;
-fp : number = 17700000000;
-listAffichePosition : affichePosition[] = []
-
-totalAffichePosition : totalAffichePosition = {devise: '',
-positionCourte:0,
-positionLongue:0,
-positionNetteCourte:0,
-positionNetteLongue:0,
-ratio:0,
-fpn:0};
-
-positionOfAllDevises: string[];
-
   header: string[] = [
-    "Ratio",
+   
     "Limit",
     "Trigger",
+    "Rating",
    
   ];
 
@@ -168,74 +177,177 @@ positionOfAllDevises: string[];
     }
   ];
 
-  header1: string[] = [
-    "POSITION LONGUE",
-    "POSITION COURTE",
-    "POSITION NETTE LONGUE",
-    "POSITION NETTE COURTE",
-    "FPN",
-    "RATIO2_PART DES FPN"
-   
-  ];
+  indicateur1 : indicateur ={
+    id:0,
+    description:'',
+    dateEffet: null,
+    valeurLimite:0,
+    valeurMinimum:0,
+    
+  }
+  indicateur2 : indicateur ={
+    id:0,
+    description:'',
+    dateEffet: null,
+    valeurLimite:0,
+    valeurMinimum:0,  
+  }
+  
+  indicateur3 : indicateur ={
+    id:0,
+    description:'',
+    dateEffet: null,
+    valeurLimite:0,
+    valeurMinimum:0,  
+  }
 
  
-indicateur1 : indicateur ={
-  id:0,
-  description:'',
-  dateEffet: null,
-  valeurLimite:0,
-  valeurMinimum:0,
-  
-}
-indicateur2 : indicateur ={
-  id:0,
-  description:'',
-  dateEffet: null,
-  valeurLimite:0,
-  valeurMinimum:0,  
-}
 
-indicateur3 : indicateur ={
-  id:0,
-  description:'',
-  dateEffet: null,
-  valeurLimite:0,
-  valeurMinimum:0,  
-}
+  soldeCompte : number;
+  fp : number ;
+  listAffichePosition : affichePosition[] = []
+
+  totalAffichePosition : totalAffichePosition = {
+    devise: '',
+    positionCourte:0,
+    positionLongue:0,
+    positionNetteCourte:0,
+    positionNetteLongue:0,
+    ratio:0,
+    fpn:0
+  };
+
+positionOfAllDevises: string[];
+dateTransforme : string ='2022-09-29'
+dateSelectedItems : Devise[] = [];
+deviseSelectedItems : Devise[] = [];
+ratio : Ratio[] = [];
+ratioGlobal : RatioGlobal[] = [];
+constructor( private soldeCompteService: SoldeCompteService, 
+             private indicateurService:IndicateurService,
+             private servicesRepo: AnalysePortfeuilleServicesService,
+             private fondsPropresServices: FondsPropresService) { }
+
+
   ngOnInit(): void {
-     this.soldeCompteService.getRatioRessourcesDuCompteEnDeviseEtrangereDesClients().subscribe((data) =>{
+  
+
+    this.soldeCompteService.getRatioRessourcesDuCompteEnDeviseEtrangereDesClients().subscribe((data) =>{
       this.soldeCompte = data;
       //console.log('solde compte : ' + this.soldeCompte);
       this.data[0].value.push(this.soldeCompte);
      })
 
-     this.calculIndicateur()
+          //this.selectedItems = ['AED']
+          var dateNow = _moment.now()
+
+          var datePipe = new DatePipe("en-US");
+          this.dateTransforme = datePipe.transform(dateNow, "yyyy-MM-dd");
      
+         // Fonds propres 
+     
+         this.fondsPropresServices.getFondsPropresByDate('2022-09-29').subscribe((data) =>{
+           this.fp=data;
+         })
+     
+          this.calculIndicateur()
+          
+         
+          // Position de change
+          this.servicesRepo.currentAnalyseType = 5;  
+     
+     
+          // recuperation des parametres des indicateurs
+          // Les ressources du compte en devise étrangère des clients
+           this.indicateurService.getIndicateurById(11).subscribe((data) =>{
+              this.indicateur1 = data;
+           })  
+           
+           //Position par devise
+           this.indicateurService.getIndicateurById(12).subscribe((data) =>{
+             this.indicateur2 = data;
+           }) 
+           //Total position par devise
+           this.indicateurService.getIndicateurById(13).subscribe((data) =>{
+           this.indicateur3 = data;
+          })  
     
-     // Position de change
-     this.servicesRepo.currentAnalyseType = 5;  
+     this.calculIndicateur()
 
 
-     // recuperation des parametres des indicateurs
-     // Les ressources du compte en devise étrangère des clients
-      this.indicateurService.getIndicateurById(11).subscribe((data) =>{
-         this.indicateur1 = data;
-      })  
-      
-      //Position par devise
-      this.indicateurService.getIndicateurById(12).subscribe((data) =>{
-        this.indicateur2 = data;
-      }) 
-      //Total position par devise
-      this.indicateurService.getIndicateurById(13).subscribe((data) =>{
-      this.indicateur3 = data;
-     })  
+     // les date pour kris
+
+       this.dateSelectedItems = [
+       { item_id: '2021-12-31', item_text: '2021-12-31' },
+       { item_id: '2022-01-31', item_text: '2022-01-31' },
+       { item_id: '2022-09-29', item_text: '2022-09-29' },
+       ];
+
+     // les devise pour kris  
+
+    //  this.deviseSelectedItems = [
+    //   { item_id: 'AED', item_text: 'AED' },
+    //   { item_id: 'CAD', item_text: 'CAD' },
+    //   { item_id: 'CHF', item_text: 'CHF' },
+    //   { item_id: 'DZD', item_text: 'DZD' },
+    //   { item_id: 'EUR', item_text: 'EUR' },
+    //   { item_id: 'GBP', item_text: 'GBP' },
+    //   { item_id: 'USD', item_text: 'USD' }
+       
+    // ];
+
+    let allDevises : string[];
+    this.soldeCompteService.findAllDevises().subscribe({
+      next : (data) =>{
+        allDevises = data;
+
+        allDevises.forEach(d =>{
+          this.deviseSelectedItems.push({ item_id: d, item_text: d }) 
+        })
+      }
+    })
+
+    this.deviseSelectedItems.forEach(devise => 
+    this.dateSelectedItems.forEach(date => {  
+      this.soldeCompteService.getRatioByDevise(date.item_id, devise.item_id).subscribe({
+        next:(value) => {
+                        const a = {} as Ratio;
+                         a.devise = devise.item_id
+                         a.date = date.item_id
+                         a.ratio = value    
+                         this.ratio = this.ratio.concat(a);                                                
+                        }  
+      })
+    })
+    )
+    this.dateSelectedItems.forEach((date) =>{
+        // position global pour la date selectionnée ...
+        const rg : RatioGlobal = {
+          date: '',
+          ratio: 0
+        };
+
+        rg.date = date.item_id
+       this.soldeCompteService.getRatioGlobal(date.item_id).subscribe((data) =>{
+        rg.ratio = data
+       });
+
+        this.ratioGlobal.push(rg);
+    })
   }
+  
   calculIndicateur(){
-    this.soldeCompteService.getPositionOfAllDevises().subscribe((data) =>{     
+    this.soldeCompteService.getPositionOfAllDevises(this.dateTransforme).subscribe((data) =>{     
       this.positionOfAllDevises = data;
       //console.log('affichePosition '+ this.listAffichePosition)
       this.listAffichePosition=[]
+
+       this.totalAffichePosition.positionCourte=0;
+       this.totalAffichePosition.positionLongue=0;
+       this.totalAffichePosition.positionNetteCourte=0;
+       this.totalAffichePosition.positionNetteLongue=0;
+       this.totalAffichePosition.ratio = 0;
+       this.totalAffichePosition.fpn = 0;
       
       for (let i=0;i<data.length;i++) {
        let a: affichePosition = {
@@ -262,7 +374,6 @@ indicateur3 : indicateur ={
        a.positionNetteCourte = Number.parseFloat(data[i][3]);
        a.positionNetteLongue = Number.parseFloat(data[i][4]);
        a.ratio = x;
-       this.listAffichePosition.push(a);
  
        this.totalAffichePosition.positionCourte=this.totalAffichePosition.positionCourte+Number.parseFloat(data[i][1]);
        this.totalAffichePosition.positionLongue=this.totalAffichePosition.positionLongue+Number.parseFloat(data[i][2]);
@@ -270,8 +381,48 @@ indicateur3 : indicateur ={
        this.totalAffichePosition.positionNetteLongue=this.totalAffichePosition.positionNetteLongue+Number.parseFloat(data[i][4]);
        this.totalAffichePosition.ratio = this.totalAffichePosition.ratio + x;
        this.totalAffichePosition.fpn = this.fp;
+ 
      }
       });
   }
 
+  getRatioByDevise(date : string, devise: string) : number{
+     
+    if(this.ratio.length > 0 ){
+    //return this.ratio?.find(value => (value?.devise===devise && value?.date===date))?.ratio
+        let found = 0;
+        for(let i=0;i<this.ratio.length;i++){
+          // console.log('date : '+this.ratio[i].date)
+          // console.log('devise : '+this.ratio[i].devise)
+          if (this.ratio[i].date === date && this.ratio[i].devise === devise){
+            found = this.ratio[i].ratio
+            break;
+          } 
+        }
+        return found;
+    }       
+ 
+    else return 0;
+
+  
+}
+getRatioGlobal(date : string) : number{
+
+  if(this.ratioGlobal.length > 0 ){
+    //return this.ratio?.find(value => (value?.devise===devise && value?.date===date))?.ratio
+        let found = 0;
+        for(let i=0;i<this.ratioGlobal.length;i++){
+          // console.log('date : '+this.ratio[i].date)
+          // console.log('devise : '+this.ratio[i].devise)
+          if (this.ratioGlobal[i].date === date){
+            found = this.ratioGlobal[i].ratio
+            break;
+          } 
+        }
+        return found;
+    }       
+ 
+    else return 0;
+}
+  
 }
