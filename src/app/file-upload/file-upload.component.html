@@ -10,8 +10,15 @@
       <div class="navbar navbar-expand-lg navbar-light bg-primary">
         <h4 class="nav-item">Importer un fichier excel</h4>
       </div>
+
+     
+
       <div class="card-body">
         <div class="container">
+          <mat-radio-group aria-label="Selectionner le type de données sources" [(ngModel)]="selectedOption">
+            <mat-radio-button value="1">Risque crédit</mat-radio-button>
+            <mat-radio-button value="2">Position de change</mat-radio-button>
+          </mat-radio-group>
           <input
             type="file"
             class="file-input"
@@ -40,6 +47,9 @@
               [style.width.%]="progress"
             ></div>
           </div> -->
+
+          
+          
         </div>
         <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
 

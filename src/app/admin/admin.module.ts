@@ -111,6 +111,12 @@ import { Scenario1Component } from './risque-credit/stress-test/scenario1/scenar
 import { Scenario2Component } from './risque-credit/stress-test/scenario2/scenario2.component';
 import { Scenario3Component } from './risque-credit/stress-test/scenario3/scenario3.component';
 import { ScenarioComponent } from './risque-credit/stress-test/scenario/scenario.component';
+import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
+import { EvaluationTauxChangeContentComponent } from './risque-de-change/evaluation-taux-change/evaluation-taux-change-content/evaluation-taux-change-content.component';
+import { ConsultationComponent } from './risque-de-change/consultation/consultation.component';
+import { ConsultationContentComponent } from './risque-de-change/consultation/consultation-content/consultation-content.component';
+import { PositionParDateComponent } from "./risque-de-change/consultation/position-par-date/position-par-date.component";
+import { PositionParPlusieursDatesComponent } from "./risque-de-change/consultation/position-par-plusieurs-dates/position-par-plusieurs-dates.component";
 
 
 
@@ -206,7 +212,12 @@ import { ScenarioComponent } from './risque-credit/stress-test/scenario/scenario
     Scenario1Component,
     Scenario2Component,
     Scenario3Component,
-    ScenarioComponent
+    ScenarioComponent,
+    EvaluationTauxChangeContentComponent,
+    PositionParDateComponent,
+    PositionParPlusieursDatesComponent,
+    ConsultationComponent,
+    ConsultationContentComponent
    
   ],
   imports: [
@@ -228,7 +239,8 @@ import { ScenarioComponent } from './risque-credit/stress-test/scenario/scenario
     NavbarModule,
     SidebarModule,
     FixedpluginModule,
-    NgChartsModule
+    NgChartsModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [authInterceptorProviders, MatDatepickerModule] ,
   exports: [MatDatepickerModule]

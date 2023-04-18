@@ -29,10 +29,6 @@ export class StressTestContentComponent implements OnInit {
     },
   ];
 
-
-
-
-
   constructor() { }
 
   ngOnInit(): void {

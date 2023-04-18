@@ -53,6 +53,7 @@ import { registerLocaleData } from "@angular/common";
 import { NgChartsModule } from "ng2-charts";
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 registerLocaleData(localeFr);
 
@@ -91,6 +92,7 @@ registerLocaleData(localeFr);
     MatNativeDateModule,
     MatOptionModule,
     
+    
   ],
   declarations: [
    
@@ -101,6 +103,7 @@ export class MaterialModule {}
 
 @NgModule({
     imports:      [
+      NgMultiSelectDropDownModule.forRoot(),
         CommonModule,
         BrowserAnimationsModule,
         FormsModule,
