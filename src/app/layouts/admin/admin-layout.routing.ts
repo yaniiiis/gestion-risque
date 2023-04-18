@@ -136,18 +136,19 @@ export const AdminLayoutRoutes: Routes = [
         path: "parametrageAnalysePrtfeuille",
         component: ParametrageAnalysePortfeuilleComponent,
         children: [
+          // {
+          //   path: "ParametrageIndirect",
+          //   component: ParametrageIndirectComponent,
+          // },
           {
-            path: "ParametrageIndirect",
-            component: ParametrageIndirectComponent,
+            path: "Rapport",
+            component: HomeComponent,
           },
           {
             path: "ParametrageDomaine",
             component: ParametrageDomaineHomeComponent,
           },
-          {
-            path: "Rapport",
-            component: HomeComponent,
-          },
+
           { path: "columns", component: ParametrageColumnComponent },
         ],
       },

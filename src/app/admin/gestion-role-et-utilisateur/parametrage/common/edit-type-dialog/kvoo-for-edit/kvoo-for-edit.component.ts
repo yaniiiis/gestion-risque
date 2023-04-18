@@ -216,8 +216,14 @@ export class KvooForEditComponent implements OnInit {
     return this.formGroupe.get("operand");
   }
 
-  keys = ["solde balance", "nominal expo", "islamic"];
-  operations = ["equal", "greater than", "less than"];
+  keys = ["GL_SUBHEAD", "TYPE_ENGAGEMENT", "customerType", "MAIN_PROD_DESC"];
+  operations = [
+    "Egale",
+    "Supérieur",
+    "Supérieur ou égale",
+    "Inférieur",
+    "Inférieur ou égale",
+  ];
 
   operationsMap = {
     Egale: "=",

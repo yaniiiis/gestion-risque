@@ -35,12 +35,18 @@ export class ParametrageRapportComponent implements OnInit {
     this.parametrageService.clausesListSubject$.subscribe((c) => {
       this.choosedClauses = c;
     });
+    this.formGroup2 = new FormGroup({
+      code: new FormControl("", [Validators.required]),
+      operation: new FormControl("", [Validators.required]),
+      code2: new FormControl("", [Validators.required]),
+    });
   }
 
   filledKVOONumber: any[];
   kVooList: keyValueOperationOperand[] = [];
   submitIsDisabled: boolean;
   choosedClauses: Clause[];
+  isRequest: boolean = false;
 
   addToKeyValueOperationArray() {}
 
@@ -50,6 +56,8 @@ export class ParametrageRapportComponent implements OnInit {
     code: new FormControl("", [Validators.required]),
     description: new FormControl("", [Validators.required]),
   });
+
+  formGroup2: FormGroup;
 
   onSubmit() {
     this.kVooList[this.kVooList.length - 1].operand = "";
@@ -90,5 +98,31 @@ export class ParametrageRapportComponent implements OnInit {
 
   closeDialog() {
     this.dialogRef.close();
+  }
+
+  operationsToDisplay = ["+", "-", "*", "/"];
+  codesToDisplay = ["aval", "caution"];
+  isListCodes2Open: boolean = false;
+
+  toggleCodesList2() {
+    this.isListCodes2Open = !this.isListCodes2Open;
+  }
+
+  addArithmetic() {
+    console.log(this.arithmeticCode.value);
+    console.log(this.arithmeticOperation.value);
+    console.log(this.arithmeticCode2.value);
+  }
+
+  get arithmeticCode() {
+    return this.formGroup2.get("code");
+  }
+
+  get arithmeticOperation() {
+    return this.formGroup2.get("operation");
+  }
+
+  get arithmeticCode2() {
+    return this.formGroup2.get("code2");
   }
 }

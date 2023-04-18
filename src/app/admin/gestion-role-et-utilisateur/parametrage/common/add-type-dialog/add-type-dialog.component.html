@@ -34,7 +34,10 @@
   <button
     mat-button
     cdkFocusInitial
-    [mat-dialog-close]="{ title: title.value, description: description.value }"
+    [mat-dialog-close]="{
+      title: title.value.trim(),
+      description: description.value.trim()
+    }"
     [ngClass]="formGroup.invalid ? 'my-add-button-disabled' : 'my-add-button'"
     [disabled]="formGroup.invalid"
   >

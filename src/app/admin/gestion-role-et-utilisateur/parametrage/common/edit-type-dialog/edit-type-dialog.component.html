@@ -2,19 +2,6 @@
   <form class="my-form" [formGroup]="formGroup">
     <div class="my-form-row">
       <div class="my-form-column">
-        <label for="description" class="my-form-label">Description</label>
-        <textarea
-          rows="4"
-          class="my-rapport-form-textarea"
-          type="text"
-          placeholder="Description"
-          name="description"
-          formControlName="description"
-        ></textarea>
-      </div>
-    </div>
-    <div class="my-form-row">
-      <div class="my-form-column">
         <label for="code" class="my-form-label">Code</label>
         <input
           placeholder="Code"
@@ -40,6 +27,19 @@
       [addKvooCallback]="addToKvooListCallback"
       [existingKvoos]="kVooList"
     ></app-kvoo-for-edit>
+    <div class="my-form-row">
+      <div class="my-form-column">
+        <label for="description" class="my-form-label">Description</label>
+        <textarea
+          rows="4"
+          class="my-rapport-form-textarea"
+          type="text"
+          placeholder="Description"
+          name="description"
+          formControlName="description"
+        ></textarea>
+      </div>
+    </div>
     <button
       class=""
       type="submit"

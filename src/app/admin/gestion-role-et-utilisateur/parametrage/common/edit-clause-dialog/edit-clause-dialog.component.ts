@@ -140,6 +140,12 @@ export class EditClauseDialogComponent implements OnInit {
     // this.parametrageService.resetClauseList();
   }
 
-  clausesList = ["NominalExposure", "SoldBalance", "Islamic"];
-  operations = ["*", "count", "avg"];
+  clausesList = [
+    "NOMINAL_EXPOSURE",
+    "INT_RESERVES",
+    "soldeBalance",
+    "PROVISIONS",
+    "VALEUR_CASH",
+  ];
+  operations = ["sum"];
 }

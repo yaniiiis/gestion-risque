@@ -30,7 +30,7 @@
 }
 
 .rapport-card {
-  padding: 30px 16px;
+  padding: 30px 20px;
   background-color: white;
   max-width: 700px;
   box-shadow: 1px 2px 2px rgb(233, 232, 232);
@@ -38,20 +38,31 @@
   border-radius: 7px;
   width: 100%;
   margin: 30px auto;
+  border: 1px solid #28353b;
 }
 
-.rappor-item {
+.rappor-item-key {
+  flex: 2;
+}
+.rapport-item-title {
+  font-weight: bolder;
   flex: 1;
 }
-.rapport-title {
-  font-weight: bolder;
+.under-rapport-title-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  font-weight: bold;
+  font-size: 20px;
+  height: 50px;
+  color: black;
 }
 
 .rapport-items-div {
   display: flex;
   color: #000000;
   font-weight: bold;
-
   align-items: center;
 }
 
@@ -80,4 +91,17 @@
 
 .myBorderBottom {
   border-bottom: solid 2px #28353b;
+}
+
+.rapport-items-header {
+  width: 100%;
+  display: flex;
+  font-weight: bold;
+  background-color: #f5f3f3;
+  padding: 10px 0px;
+  font-size: 17px;
+}
+
+.header-item {
+  flex: 1;
 }

@@ -86,7 +86,6 @@ export class TableComponent implements OnInit {
 
     this.parametrageService.sauvgarderTypes(data).subscribe({
       next: (response) => {
-        console.log("Response : ", response);
         this.saveIsLoading = false;
         this.saveIsSuccess = true;
         this.typesToAdd = [];
@@ -96,6 +95,21 @@ export class TableComponent implements OnInit {
           duration: 3000,
           panelClass: ["success-snackbar"],
         });
+        // this.typesToAdd.forEach((element) => {
+        //   this.passedRapportsLine.push(element);
+        // });
+        // this.typesToUpdate.forEach((element) => {
+        //   let index = this.passedRapportsLine.findIndex(
+        //     (e) => element.code == e.code
+        //   );
+        //   if (index) this.passedRapportsLine[index] = element;
+        // });
+        // this.typesToDelete.forEach((element) => {
+        //   let index = this.passedRapportsLine.findIndex(
+        //     (e) => element.code == e.code
+        //   );
+        //   if (index) this.passedRapportsLine.splice(index, 1);
+        // });
       },
       error: (error: any) => {
         console.log("error : ", error);
@@ -220,6 +234,7 @@ export class TableComponent implements OnInit {
 
   hiddenRapportLines() {
     this.linesIsShown = false;
+    this.parametrageService.getRapportLinesGroupedByType();
   }
 
   handleAddUnderType() {

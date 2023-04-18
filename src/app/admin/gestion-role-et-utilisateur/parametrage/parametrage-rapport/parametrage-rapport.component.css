@@ -142,3 +142,75 @@ button[disabled] {
   font-weight: bold;
   margin-bottom: -5px;
 }
+
+.arethmetic-operation-container {
+  width: 400px;
+  height: fit-content;
+  display: flex;
+  justify-content: space-around;
+}
+
+.select-code {
+  width: 150px;
+  height: 45px;
+}
+
+.select-operation {
+  width: 80px;
+  height: 45px;
+}
+
+select {
+  width: 200px;
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  border: 2px solid #999;
+  border-radius: 5px;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: center right;
+}
+
+select option {
+  padding: 80px;
+  font-size: 14px;
+  color: red;
+}
+
+select option:hover {
+  background-color: #eee;
+  color: #333;
+}
+
+.my-option {
+  padding: 20px !important;
+}
+/* Styles pour le mat-form-field */
+.mat-form-field {
+  width: 300px;
+  margin-bottom: 20px;
+}
+
+/* Styles pour le mat-select */
+.mat-select {
+  font-size: 16px;
+  color: #333 !important;
+  background-color: #fff;
+  border: 2px solid #999;
+  padding: 10px;
+  height: 50px;
+}
+
+/* Styles pour les options */
+.mat-option {
+  font-size: 14px;
+  color: #666;
+  padding: 5px;
+}
+
+/* Styles pour les options survolées */
+.mat-option:hover {
+  background-color: #eee !important;
+  color: #333 !important;
+}
