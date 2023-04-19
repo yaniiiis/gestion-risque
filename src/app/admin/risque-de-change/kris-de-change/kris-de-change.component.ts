@@ -98,7 +98,7 @@ interface  Devise {
     font-size: 13px;
   }
   .tbody__td--label {
-    font-size: 11px;
+    font-size: 13px;
     padding-left: 4px;
     padding-right: 4px;
     height: 25px;
@@ -116,7 +116,7 @@ interface  Devise {
     align-items: center;
     border-bottom: 1px solid rgb(165, 165, 165);
     font-weight: 600;
-    font-size: 10px;
+    font-size: 13px;
   }
   .tbody__td--limit {
     text-align: center;
