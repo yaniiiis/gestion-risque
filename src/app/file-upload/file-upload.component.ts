@@ -23,6 +23,7 @@ export class FileUploadComponent {
   uploadSub: Subscription;
   selectedOption;
   url:string;
+  textChargement:string ="";
   constructor(private http: HttpClient) {}
 
   onFileSelected(event) {
@@ -46,23 +47,29 @@ export class FileUploadComponent {
 
       this.uploadSub = upload$.subscribe((event) => {
         switch (event.type) {
-          case HttpEventType.Sent:
+          case HttpEventType.Sent:{
             console.log("Request has been made!");
+            this.textChargement = "Chargement en cours !"
             break;
+          }
           case HttpEventType.ResponseHeader:
             console.log("Response header has been received!");
             break;
-          case HttpEventType.UploadProgress:
+          case HttpEventType.UploadProgress:{
             this.progress = Math.round((event.loaded / event.total) * 100);
             console.log(`Uploaded! ${this.progress}%`);
             break;
-          case HttpEventType.Response:
+            this.textChargement+='.'
+          }
+          case HttpEventType.Response:{
             console.log("User successfully created!", event.body);
             alert("Fichier importé avec succes!");
 
             setTimeout(() => {
               this.progress = 0;
             }, 1500);
+            this.textChargement = "Chargement terminé."
+          }
         }
       });
     }
