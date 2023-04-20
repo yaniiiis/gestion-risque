@@ -98,7 +98,7 @@ interface  Devise {
     font-size: 13px;
   }
   .tbody__td--label {
-    font-size: 11px;
+    font-size: 13px;
     padding-left: 4px;
     padding-right: 4px;
     height: 25px;
@@ -116,7 +116,7 @@ interface  Devise {
     align-items: center;
     border-bottom: 1px solid rgb(165, 165, 165);
     font-weight: 600;
-    font-size: 10px;
+    font-size: 13px;
   }
   .tbody__td--limit {
     text-align: center;
@@ -300,26 +300,27 @@ constructor( private soldeCompteService: SoldeCompteService,
     this.soldeCompteService.findAllDevises().subscribe({
       next : (data) =>{
         allDevises = data;
-
         allDevises.forEach(d =>{
-          this.deviseSelectedItems.push({ item_id: d, item_text: d }) 
+          const devise = { item_id: d, item_text: d }
+          this.deviseSelectedItems.push(devise) 
         })
+
+        this.deviseSelectedItems.forEach(devise => 
+          this.dateSelectedItems.forEach(date => {  
+            this.soldeCompteService.getRatioByDevise(date.item_id, devise.item_id).subscribe({
+              next:(value) => {
+                              const a = {} as Ratio;
+                               a.devise = devise.item_id
+                               a.date = date.item_id
+                               a.ratio = value   
+                               this.ratio = this.ratio.concat(a);                                                
+                              }  
+            })
+          })
+          )
       }
     })
-
-    this.deviseSelectedItems.forEach(devise => 
-    this.dateSelectedItems.forEach(date => {  
-      this.soldeCompteService.getRatioByDevise(date.item_id, devise.item_id).subscribe({
-        next:(value) => {
-                        const a = {} as Ratio;
-                         a.devise = devise.item_id
-                         a.date = date.item_id
-                         a.ratio = value    
-                         this.ratio = this.ratio.concat(a);                                                
-                        }  
-      })
-    })
-    )
+    
     this.dateSelectedItems.forEach((date) =>{
         // position global pour la date selectionnée ...
         const rg : RatioGlobal = {

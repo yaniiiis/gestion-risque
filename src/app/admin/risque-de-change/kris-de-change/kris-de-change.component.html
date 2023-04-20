@@ -100,9 +100,9 @@
                         <td *ngFor="let date of dateSelectedItems" class="tbody__td">
                            
                         <tr *ngFor="let devise of deviseSelectedItems, i as index" style="border-bottom: 1px solid rgb(165, 165, 165);">
-                           <td class=" yz_green" *ngIf="getRatioByDevise(date.item_id, devise.item_id)<indicateur2.valeurMinimum">{{ getRatioByDevise(date.item_id, devise.item_id)  | number:'1.1-8' }}% </td> 
-                           <td class=" yz_yellow" *ngIf="getRatioByDevise(date.item_id, devise.item_id)>=indicateur2.valeurMinimum && getRatioByDevise(date.item_id, devise.item_id)<indicateur2.valeurLimite">{{ getRatioByDevise(date.item_id, devise.item_id)  | number:'1.1-8' }}% </td>  
-                           <td class=" yz_red" *ngIf="getRatioByDevise(date.item_id, devise.item_id)>=indicateur2.valeurLimite">{{ getRatioByDevise(date.item_id, devise.item_id)  | number:'1.1-8' }}% </td>   
+                           <td class="tbody__td1 yz_green" *ngIf="getRatioByDevise(date.item_id, devise.item_id)<indicateur2.valeurMinimum">{{ getRatioByDevise(date.item_id, devise.item_id)  | number:'1.1-8' }}% </td> 
+                           <td class="tbody__td1 yz_yellow" *ngIf="getRatioByDevise(date.item_id, devise.item_id)>=indicateur2.valeurMinimum && getRatioByDevise(date.item_id, devise.item_id)<indicateur2.valeurLimite">{{ getRatioByDevise(date.item_id, devise.item_id)  | number:'1.1-8' }}% </td>  
+                           <td class="tbody__td1 yz_red" *ngIf="getRatioByDevise(date.item_id, devise.item_id)>=indicateur2.valeurLimite">{{ getRatioByDevise(date.item_id, devise.item_id)  | number:'1.1-8' }}% </td>   
                         </tr> 
                         </td>
 
@@ -219,6 +219,15 @@
                     <tfoot></tfoot>
                 </table>
              </div>
+             <div class="row">
+                <div class="col-md-12">
+                  <div class="card-body">
+                    <app-commentaire-editor></app-commentaire-editor>
+                    <router-outlet></router-outlet>
+                  </div>
+                </div>
+              </div> 
+             
             </div>  
 
 
