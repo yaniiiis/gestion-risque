@@ -55,7 +55,7 @@ export class CommentaireEditorComponent implements OnInit {
         this.form.get('id').setValue(data.id)
         this.currentCommentaire = data.commentaire ;
 
-        if(data.motifRejet!==undefined){
+        if(data.motifRejet!==undefined && data.motifRejet!==null){
           this.currentCommentaire = this.currentCommentaire + "   Rejeté pour motif : ("+ data.motifRejet+")"
         }
         console.log("comm0 : " + this.currentCommentaire)
