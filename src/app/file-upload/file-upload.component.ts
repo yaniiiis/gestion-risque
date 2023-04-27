@@ -36,7 +36,18 @@ export class FileUploadComponent {
 
       if(this.selectedOption==="1")
       this.url="/seed"
-      else this.url="/seedSoldeCompte"
+      else if (this.selectedOption==="2")
+       this.url="/seedSoldeCompte"
+      else if (this.selectedOption==="3")
+       this.url="/seedRisqLiqDepot" 
+      else if (this.selectedOption==="4")
+       this.url="/seedRisqLiqDonneesSources" 
+       else if (this.selectedOption==="5")
+       this.url="/seedRisqLiqRatiosDeLiquidite" 
+      else if (this.selectedOption==="6")
+       this.url="/seedRisqLiqDonneesActifLiquide"   
+      else if (this.selectedOption==="7")
+       this.url="/seedRisqLiqPlacements" 
 
       const upload$ = this.http
         .post(environment.baseUrl + this.url, formData, {
