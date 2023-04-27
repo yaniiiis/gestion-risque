@@ -129,6 +129,12 @@ import { AddUnderTypeComponent } from "./gestion-role-et-utilisateur/parametrage
 import { DeleteTypeComponent } from "./gestion-role-et-utilisateur/parametrage/common/delete-type/delete-type.component";
 import { GenererRapportComponent } from "./risque-credit/generer-rapport/generer-rapport.component";
 import { MonRapportComponent } from "./risque-credit/generer-rapport/mon-rapport/mon-rapport.component";
+import { MyInputListComponent } from "./gestion-role-et-utilisateur/parametrage/common/my-input-list/my-input-list.component";
+import { SecondDeleteDialogComponent } from "./gestion-role-et-utilisateur/parametrage/common/second-delete-dialog/second-delete-dialog.component";
+import { ConcentrationComponent } from "./risque-credit/kris/concentration/concentration.component";
+import { IndicateursRisqueCreditComponent } from "./risque-credit/kris/indicateurs-risque-credit/indicateurs-risque-credit.component";
+import { ConcentrationDetailsComponent } from "./risque-credit/kris/concentration-details/concentration-details.component";
+import { ConcentrationTableRowComponent } from './risque-credit/kris/indicateurs-risque-credit/concentration-table-row/concentration-table-row.component';
 
 @NgModule({
   declarations: [
@@ -250,6 +256,12 @@ import { MonRapportComponent } from "./risque-credit/generer-rapport/mon-rapport
     DeleteTypeComponent,
     GenererRapportComponent,
     MonRapportComponent,
+    MyInputListComponent,
+    SecondDeleteDialogComponent,
+    ConcentrationComponent,
+    IndicateursRisqueCreditComponent,
+    ConcentrationDetailsComponent,
+    ConcentrationTableRowComponent,
   ],
   imports: [
     CommonModule,

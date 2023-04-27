@@ -1,5 +1,12 @@
 <div class="my-dialog-container">
   <mat-icon class="x-dialog" (click)="closeDialog()">cancel</mat-icon>
+  <mat-radio-group
+    class="request-arithmetic-radio-container"
+    (change)="onRequestOrArithmeticChanged($event)"
+  >
+    <mat-radio-button value="Requete" checked>Requete</mat-radio-button>
+    <mat-radio-button value="Arithmetic">Arithmetic</mat-radio-button>
+  </mat-radio-group>
   <form
     *ngIf="isRequest; else arithmeticOperation"
     class="my-form"
@@ -64,7 +71,28 @@
   <ng-template #arithmeticOperation>
     <form [formGroup]="formGroup2">
       <div class="arethmetic-operation-container">
-        <select class="select-code" name="" id="" formControlName="code">
+        <app-my-input-list
+          [list]="codesToDisplay"
+          [callbackFunction]="myCallbackFunction1_1"
+          [hasError]="hasError1_1"
+          title="Sélection"
+        ></app-my-input-list>
+
+        <app-my-input-list
+          [list]="operationsToDisplay"
+          [callbackFunction]="myCallbackFunctionOperation_1"
+          [hasError]="hasErrorOperation_1"
+          title="Opération"
+        ></app-my-input-list>
+
+        <app-my-input-list
+          [list]="codesToDisplay"
+          [callbackFunction]="myCallbackFunction1_2"
+          [hasError]="hasError1_2"
+          title="Sélection"
+        ></app-my-input-list>
+
+        <!-- <select class="select-code" name="" id="" formControlName="code">
           <option
             class="my-option"
             *ngFor="let item of codesToDisplay"
@@ -72,8 +100,8 @@
           >
             {{ item }}
           </option>
-        </select>
-        <select
+        </select> -->
+        <!-- <select
           formControlName="operation"
           class="select-operation"
           name=""
@@ -87,11 +115,52 @@
           <option *ngFor="let item of codesToDisplay" value="{{ item }}">
             {{ item }}
           </option>
-        </select>
+        </select> -->
       </div>
 
-      <div>
-        <button (click)="addArithmetic()">ajouter</button>
+      <div class="middle-arithmetic-divider-container">
+        <button
+          class="middle-arithmetic-divider"
+          (click)="showSecondArithmeticOperation()"
+        >
+          /
+        </button>
+      </div>
+
+      <!-- second arithmetic operation if exist -->
+
+      <div
+        class="arethmetic-operation-container"
+        *ngIf="isSecondArethmeticOperation"
+        formGroupName="secondArithmetic"
+      >
+        <app-my-input-list
+          [list]="codesToDisplay"
+          [callbackFunction]="myCallbackFunction2_1"
+          [hasError]="hasError2_1"
+          title="Sélection"
+        ></app-my-input-list>
+
+        <app-my-input-list
+          [list]="operationsToDisplay"
+          [callbackFunction]="myCallbackFunctionOperation_2"
+          [hasError]="hasErrorOperation_1"
+          title="Opération"
+        ></app-my-input-list>
+
+        <app-my-input-list
+          [list]="codesToDisplay"
+          [callbackFunction]="myCallbackFunction2_2"
+          [hasError]="hasError2_2"
+          title="Sélection"
+        ></app-my-input-list>
+        <div class="x-delete" (click)="deleteSecondeArithmeticOperationClick()">
+          <mat-icon> delete_forever </mat-icon>
+        </div>
+      </div>
+
+      <div class="arithmetic-add-button-container">
+        <button class="my-add-button" (click)="addArithmetic()">ajouter</button>
       </div>
     </form>
   </ng-template>

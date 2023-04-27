@@ -37,6 +37,10 @@ import { GestionDesResqueClientComponent } from "src/app/admin/risque-credit/ges
 import { RepartitionParSecteurComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/repartition-par-secteur/repartition-par-secteur.component";
 import { RepartitionParZoneComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/repartition-par-zone/repartition-par-zone.component";
 import { GraphicComponent } from "src/app/admin/risque-credit/graphic/graphic.component";
+import { ConcentrationDetailsComponent } from "src/app/admin/risque-credit/kris/concentration-details/concentration-details.component";
+import { ConcentrationComponent } from "src/app/admin/risque-credit/kris/concentration/concentration.component";
+import { IndicateursRisqueCreditComponent } from "src/app/admin/risque-credit/kris/indicateurs-risque-credit/indicateurs-risque-credit.component";
+import { KRIsComponent } from "src/app/admin/risque-credit/kris/kris.component";
 import { ScenarioComponent } from "src/app/admin/risque-credit/stress-test/scenario/scenario.component";
 import { Scenario1Component } from "src/app/admin/risque-credit/stress-test/scenario1/scenario1.component";
 import { Scenario2Component } from "src/app/admin/risque-credit/stress-test/scenario2/scenario2.component";
@@ -236,7 +240,21 @@ export const AdminLayoutRoutes: Routes = [
       },
       {
         path: "Kri",
-        component: KriComponent,
+        component: KRIsComponent,
+        children: [
+          {
+            path: "concentration",
+            component: ConcentrationComponent,
+          },
+          {
+            path: "concentration-details",
+            component: ConcentrationDetailsComponent,
+          },
+          {
+            path: "indicateurs-risque-credit",
+            component: IndicateursRisqueCreditComponent,
+          },
+        ],
       },
       {
         path: "StressTest",

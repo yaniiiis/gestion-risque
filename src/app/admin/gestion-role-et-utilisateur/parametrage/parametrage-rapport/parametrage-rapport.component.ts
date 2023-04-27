@@ -39,14 +39,42 @@ export class ParametrageRapportComponent implements OnInit {
       code: new FormControl("", [Validators.required]),
       operation: new FormControl("", [Validators.required]),
       code2: new FormControl("", [Validators.required]),
+      secondArithmetic: new FormGroup({
+        code: new FormControl("", [Validators.required]),
+        operation: new FormControl("", [Validators.required]),
+        code2: new FormControl("", [Validators.required]),
+      }),
     });
+
+    this.formGroup2Arithmetic = new FormGroup({});
   }
 
   filledKVOONumber: any[];
   kVooList: keyValueOperationOperand[] = [];
   submitIsDisabled: boolean;
   choosedClauses: Clause[];
-  isRequest: boolean = false;
+  isRequest: boolean = true;
+  isSecondArethmeticOperation: boolean = false;
+  divided: boolean = false;
+
+  selectedValue = "Requete";
+
+  // for arithmetic side
+  selectedArithmetic1_1: string;
+  selectedArithmeticOperation1: string;
+  selectedArithmetic1_2: string;
+  selectedArithmetic2_1: string;
+  selectedArithmeticOperation2: string;
+  selectedArithmetic2_2: string;
+  selectedMiddleOperation: string = "/";
+
+  hasError1_1 = false;
+  hasErrorOperation_1 = false;
+  hasError1_2 = false;
+  hasErrorOperationMiddle = false;
+  hasError2_1 = false;
+  hasErrorOperation_2 = false;
+  hasError2_2 = false;
 
   addToKeyValueOperationArray() {}
 
@@ -58,6 +86,7 @@ export class ParametrageRapportComponent implements OnInit {
   });
 
   formGroup2: FormGroup;
+  formGroup2Arithmetic: FormGroup;
 
   onSubmit() {
     this.kVooList[this.kVooList.length - 1].operand = "";
@@ -108,10 +137,61 @@ export class ParametrageRapportComponent implements OnInit {
     this.isListCodes2Open = !this.isListCodes2Open;
   }
 
+  showSecondArithmeticOperation() {
+    this.divided = true;
+    this.isSecondArethmeticOperation = true;
+  }
+
   addArithmetic() {
-    console.log(this.arithmeticCode.value);
-    console.log(this.arithmeticOperation.value);
-    console.log(this.arithmeticCode2.value);
+    console.log(
+      "( " +
+        this.selectedArithmetic1_1 +
+        " " +
+        this.selectedArithmeticOperation1 +
+        " " +
+        this.selectedArithmetic1_2 +
+        " )" +
+        this.selectedMiddleOperation +
+        "( " +
+        this.selectedArithmetic2_1 +
+        " " +
+        this.selectedArithmeticOperation2 +
+        " " +
+        this.selectedArithmetic2_2 +
+        " )"
+    );
+    // console.log(this.arithmeticCode.value);
+    // console.log(this.arithmeticOperation.value);
+    // console.log(this.arithmeticCode2.value);
+
+    // console.log("divided : ", this.divided);
+
+    // console.log("2 : ", this.secondArithmeticCode.value);
+    // console.log("2 : ", this.secondArithmeticOperation.value);
+    // console.log("2 : ", this.secondArithmeticCode2.value);
+
+    // console.log("type : ", this.data.key);
+    // console.log("underType : ", this.data.choosedUnderType);
+  }
+
+  deleteSecondeArithmeticOperationClick() {
+    this.divided = false;
+    this.isSecondArethmeticOperation = false;
+    this.formGroup2.get("secondArithmetic").patchValue({
+      code: "",
+      operation: "",
+      code2: "",
+    });
+  }
+
+  onRequestOrArithmeticChanged(event: any) {
+    this.selectedValue = event;
+    if (event.value == "Requete") {
+      this.isRequest = true;
+    } else {
+      this.isRequest = false;
+    }
+    console.log("event : ", event);
   }
 
   get arithmeticCode() {
@@ -125,4 +205,44 @@ export class ParametrageRapportComponent implements OnInit {
   get arithmeticCode2() {
     return this.formGroup2.get("code2");
   }
+
+  get secondArithmeticCode() {
+    return this.formGroup2.get("secondArithmetic.code");
+  }
+
+  get secondArithmeticOperation() {
+    return this.formGroup2.get("secondArithmetic.operation");
+  }
+
+  get secondArithmeticCode2() {
+    return this.formGroup2.get("secondArithmetic.code2");
+  }
+
+  myCallbackFunction1_1 = (args: any): void => {
+    this.selectedArithmetic1_1 = args;
+  };
+
+  myCallbackFunctionOperation_1 = (args: any): void => {
+    this.selectedArithmeticOperation1 = args;
+  };
+
+  myCallbackFunction1_2 = (args: any): void => {
+    this.selectedArithmetic1_2 = args;
+  };
+
+  myCallbackFunctionMiddleOperation = (args: any): void => {
+    this.selectedArithmetic2_2 = args;
+  };
+
+  myCallbackFunction2_1 = (args: any): void => {
+    this.selectedArithmetic2_1 = args;
+  };
+
+  myCallbackFunctionOperation_2 = (args: any): void => {
+    this.selectedArithmeticOperation2 = args;
+  };
+
+  myCallbackFunction2_2 = (args: any): void => {
+    this.selectedArithmetic2_2 = args;
+  };
 }

@@ -9,6 +9,8 @@ import { EditTypeDialogComponent } from "../../common/edit-type-dialog/edit-type
 import { ParametrageRapportComponent } from "../parametrage-rapport.component";
 import { AddUnderTypeComponent } from "../../common/add-under-type/add-under-type.component";
 import { DeleteTypeComponent } from "../../common/delete-type/delete-type.component";
+import { SecondDeleteDialogComponent } from "../../common/second-delete-dialog/second-delete-dialog.component";
+import { element } from "protractor";
 
 @Component({
   selector: "app-table",
@@ -49,7 +51,7 @@ export class TableComponent implements OnInit {
 
   //under type
   listUnderType: string[] = [];
-  linesIsShown: boolean = false;
+  rapportLinesIsShown: boolean = false;
   choosedUnderType: string;
   rapportLinesTypesToFilter: RapportLine[];
 
@@ -128,6 +130,7 @@ export class TableComponent implements OnInit {
       data: {
         key: this.type,
         existingTypes: this.passedRapportsLine,
+        choosedUnderType: this.choosedUnderType,
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
@@ -226,14 +229,14 @@ export class TableComponent implements OnInit {
 
   handleShowLine(underType: string) {
     this.choosedUnderType = underType;
-    this.linesIsShown = true;
+    this.rapportLinesIsShown = true;
     this.passedRapportsLine = this.rapportLinesTypesToFilter.filter(
       (rl) => rl.sousType == underType
     );
   }
 
   hiddenRapportLines() {
-    this.linesIsShown = false;
+    this.rapportLinesIsShown = false;
     this.parametrageService.getRapportLinesGroupedByType();
   }
 
@@ -280,5 +283,25 @@ export class TableComponent implements OnInit {
     });
   }
 
-  deleteUnderType(item: string) {}
+  deleteUnderType(item: string) {
+    const dialogRef = this.dialog.open(SecondDeleteDialogComponent, {
+      data: {
+        title: "Supprimer " + item,
+        text:
+          "En supprimant " +
+          item +
+          " toute les ligne avec ce sous rapport seront supprimer \n etes vous sur de vouloir continuer ?",
+        item: item,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.listUnderType = this.listUnderType.filter(
+          (element) => element != result.item
+        );
+        this.rapportLinesIsShown = false;
+      }
+      console.log("new list underType : ", this.listUnderType);
+    });
+  }
 }

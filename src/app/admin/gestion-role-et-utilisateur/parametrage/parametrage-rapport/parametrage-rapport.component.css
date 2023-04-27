@@ -144,7 +144,7 @@ button[disabled] {
 }
 
 .arethmetic-operation-container {
-  width: 400px;
+  padding: 6px;
   height: fit-content;
   display: flex;
   justify-content: space-around;
@@ -213,4 +213,50 @@ select option:hover {
 .mat-option:hover {
   background-color: #eee !important;
   color: #333 !important;
+}
+
+.middle-arithmetic-divider-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.middle-arithmetic-divider {
+  width: 60px;
+  height: 40px;
+  border-radius: 10px;
+  align-items: center;
+  cursor: pointer;
+  background-color: #b6b6b6;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  transition: all;
+  border: solid 1px #7e7e7e;
+}
+
+.middle-arithmetic-divider:hover {
+  scale: 1.03;
+  transition: all;
+}
+
+.x-delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+  cursor: pointer;
+}
+
+.request-arithmetic-radio-container {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.arithmetic-add-button-container {
+  height: 80px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
 }

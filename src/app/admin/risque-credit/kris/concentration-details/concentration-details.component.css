@@ -1,0 +1,35 @@
+th,
+td,
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.my-table-head {
+  background-color: #dddddd;
+}
+th,
+td {
+  padding: 10px;
+}
+.details-title-container {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+h3 {
+  font-weight: 500;
+}
+
+.back-to-previous-page-container {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  color: rgb(18, 102, 151);
+  font-weight: bold;
+  padding: 8px;
+  cursor: pointer;
+  margin-top: 15px;
+}

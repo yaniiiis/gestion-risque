@@ -1,0 +1,28 @@
+<div class="form-div">
+  <div class="input-list-container" (clickOutside)="closeList()">
+    <input
+      class="form-input-list"
+      type="text"
+      [placeholder]="title"
+      name="feild"
+      autocomplete="off"
+      (click)="toggleList()"
+      [(ngModel)]="inputValue"
+      (keyup)="filtering(inputValue)"
+    />
+    <mat-icon (click)="toggleList()" class="arrow-down-icon"
+      >keyboard_arrow_down</mat-icon
+    >
+  </div>
+
+  <span class="span-error" *ngIf="hasError">Veuillez choisir un champ</span>
+  <div class="clause-list-content" #clauseList *ngIf="isListOpen">
+    <div
+      class="caluse-item"
+      *ngFor="let item of list"
+      (click)="itemClicked(item)"
+    >
+      <span class="item_name">{{ item }}</span>
+    </div>
+  </div>
+</div>

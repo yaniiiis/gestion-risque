@@ -1,0 +1,17 @@
+<div class="my-container">
+  <div class="details-title-container">
+    <h4>Détails de concentration</h4>
+  </div>
+  <table class="my-table">
+    <tr class="my-table-row">
+      <th class="my-table-head" *ngFor="let item of header">
+        {{ item }}
+      </th>
+    </tr>
+    <tr *ngFor="let item of data">
+      <td *ngFor="let item2 of header">{{ item[item2] }}</td>
+    </tr>
+  </table>
+
+  <div class="back-to-previous-page-container" (click)="back()">Retour</div>
+</div>
