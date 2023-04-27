@@ -91,31 +91,36 @@ export const ROUTES: RouteInfo[] = [{
         collapse: 'RisqueLiquidite',
         forAdmin: false,
         children: [
+          // {
+          //   path: "AnalyseDesDepots",
+          //   title: "Analyse Des Dépôts",
+          //   ab:'ADD'
+          // },
+          // {
+          //   path: "AnalyseQualitativeETQuantitative",
+          //   title: "Analyse Qualitative ET Quantitative",
+          //   ab:'AQQ'
+          // },
+          // {
+          //   path: "KRIsLiQuidite",
+          //   title: "Gestion des KRIs",
+          //   ab:'GDK'
+          // },
+          // {
+          //   path: "StressTestLiquidite",
+          //   title: "Gestion des Stress tests",
+          //   ab:'GST'
+          // },
+          // {
+          //   path: "SurveillanceDeLaTreoserie",
+          //   title: "Gestion des  Surveillances De La Tresoserie",
+          //   ab:'GST'
+          // },
           {
-            path: "AnalyseDesDepots",
-            title: "Analyse Des Dépôts",
-            ab:'ADD'
-          },
-          {
-            path: "AnalyseQualitativeETQuantitative",
-            title: "Analyse Qualitative ET Quantitative",
-            ab:'AQQ'
-          },
-          {
-            path: "KRIsLiQuidite",
-            title: "Gestion des KRIs",
-            ab:'GDK'
-          },
-          {
-            path: "StressTestLiquidite",
-            title: "Gestion des Stress tests",
-            ab:'GST'
-          },
-          {
-            path: "SurveillanceDeLaTreoserie",
-            title: "Gestion des  Surveillances De La Tresoserie",
-            ab:'GST'
-          },
+            path:  "ConsultationRatiosLiquidite",
+            title: "Consultation Ratio 1",
+            ab:'CON'
+          }
         ],
       },
       {

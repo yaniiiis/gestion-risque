@@ -1,0 +1,70 @@
+<div class="container-fluid">
+<div class="row">
+<table class="table">
+    <thead>
+        <th class="theed__th--indicateur">Indice</th>
+        <th class="theed__th--indicateur">Valeur</th>
+        <th *ngFor="let h of header">{{ h }}</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let element of data">
+            <td class="tbody__td--label">{{ indicateur1.description }}</td>
+            <td class="tbody__td ">
+        <tr class="yz_green" *ngIf="element.value  < indicateur1.valeurMinimum">
+            {{ element.value.toString() + element.unit }}
+        </tr>
+        <tr class="yz_yellow" *ngIf="value  >= indicateur1.valeurMinimum && element.value <= indicateur1.valeurLimite">
+            {{ element.value.toString() + element.unit }}
+        </tr>
+        <tr class="yz_red" *ngIf="element.value > indicateur1.valeurLimite">
+            {{ element.value.toString() + element.unit }}
+        </tr>
+
+        </td>
+
+        <td class="tbody__td--limit">{{ indicateur1.valeurLimite }}</td>
+        <td class="tbody__td--trigger">
+            <tr class="tbody__td__tr yz_green">
+                <td class="tbody__td--compareValues">
+                    < {{ indicateur1.valeurMinimum }} </td>
+
+            </tr>
+            <tr class="tbody__td__tr yz_yellow">
+                <td class="tbody__td--compareValues">
+                    {{ indicateur1.valeurLimite }} -
+                    {{ indicateur1.valeurMinimum }}
+                </td>
+            </tr>
+            <tr class="tbody__td__tr yz_red">
+                <td class="tbody__td--compareValues">
+                    > {{ indicateur1.valeurLimite }}
+                </td>
+            </tr>
+        </td>
+
+        <td class="tbody__td--trigger">
+            <tr class="tbody__td__tr yz_green">
+                <td class="tbody__td--colors yz_bgGreen"></td>
+            </tr>
+            <tr class="tbody__td__tr yz_yellow">
+                <td class="tbody__td--colors yz_bgYellow"></td>
+            </tr>
+            <tr class="tbody__td__tr yz_red">
+                <td class="tbody__td--colors yz_bgRed"></td>
+            </tr>
+        </td>
+        </tr>
+    </tbody>
+    <tfoot></tfoot>
+</table>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card-body">
+            <app-commentaire-editor></app-commentaire-editor>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
+</div>
+
