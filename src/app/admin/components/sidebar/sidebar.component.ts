@@ -117,9 +117,14 @@ export const ROUTES: RouteInfo[] = [{
           //   ab:'GST'
           // },
           {
-            path:  "ConsultationRatiosLiquidite",
+            path:  "ConsultationRatios1Liquidite",
             title: "Consultation Ratio 1",
-            ab:'CON'
+            ab:'CON1'
+          },
+           {
+            path:  "ConsultationRatios2Liquidite",
+            title: "Consultation Ratio 2",
+            ab:'CON1'
           }
         ],
       },
