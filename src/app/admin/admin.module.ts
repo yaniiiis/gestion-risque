@@ -117,6 +117,11 @@ import { ConsultationComponent } from './risque-de-change/consultation/consultat
 import { ConsultationContentComponent } from './risque-de-change/consultation/consultation-content/consultation-content.component';
 import { PositionParDateComponent } from "./risque-de-change/consultation/position-par-date/position-par-date.component";
 import { PositionParPlusieursDatesComponent } from "./risque-de-change/consultation/position-par-plusieurs-dates/position-par-plusieurs-dates.component";
+import { ConsultationRatio1LiquiditeComponent } from './risque-liquidite/consultation-ratios1-liquidite/consultation-ratio1-liquidite.component';
+import { RatioLiquiditeQuotidienComponent } from './risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-quotidien/ratio-liquidite-quotidien.component';
+import { RatioLiquiditeMensuelComponent } from './risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-mensuel/ratio-liquidite-mensuel.component';
+import { RatioLiquiditeTrimestrielComponent } from './risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-trimestriel/ratio-liquidite-trimestriel.component';
+import { ConsultationRatio1LiquiditeContentComponent } from './risque-liquidite/consultation-ratios1-liquidite/consultation-ratios1-liquidite-content/consultation-ratio1-liquidite-content.component';
 
 
 
@@ -217,7 +222,12 @@ import { PositionParPlusieursDatesComponent } from "./risque-de-change/consultat
     PositionParDateComponent,
     PositionParPlusieursDatesComponent,
     ConsultationComponent,
-    ConsultationContentComponent
+    ConsultationContentComponent,
+    ConsultationRatio1LiquiditeComponent,
+    RatioLiquiditeQuotidienComponent,
+    RatioLiquiditeMensuelComponent,
+    RatioLiquiditeTrimestrielComponent,
+    ConsultationRatio1LiquiditeContentComponent
    
   ],
   imports: [

@@ -50,6 +50,10 @@ import { EvaluationTauxChangeComponent } from "src/app/admin/risque-de-change/ev
 
 import { KRIsDeChangeComponent } from "src/app/admin/risque-de-change/kris-de-change/kris-de-change.component";
 import { AnalyseDesDepotsComponent } from "src/app/admin/risque-liquidite/analyse-des-depots/analyse-des-depots.component";
+import { ConsultationRatio1LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/consultation-ratio1-liquidite.component";
+import { RatioLiquiditeMensuelComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-mensuel/ratio-liquidite-mensuel.component";
+import { RatioLiquiditeQuotidienComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-quotidien/ratio-liquidite-quotidien.component";
+import { RatioLiquiditeTrimestrielComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-trimestriel/ratio-liquidite-trimestriel.component";
 import { DashboardComponent } from "src/app/dashboard/dashboard.component";
 import { FileUploadComponent } from "src/app/file-upload/file-upload.component";
 
@@ -306,6 +310,11 @@ export const AdminLayoutRoutes: Routes = [
         path: 'SurveillanceDeLaTreoserie',
         // component:
       },
+
+      {
+        path: 'ConsultationRatiosLiquidite',
+        component: ConsultationRatio1LiquiditeComponent
+      }
     ]
       },
     {
@@ -352,6 +361,27 @@ export const AdminLayoutRoutes: Routes = [
 
         ]
 
+      },
+      {
+        path:"ConsultationRatiosLiquidite",
+        component: ConsultationRatio1LiquiditeComponent,
+        children: [
+          {
+          path:'RatioLiquiditeQuotidien',
+          component: RatioLiquiditeQuotidienComponent,
+          },
+          {
+            path:'RatioLiquiditeMensuel',
+          component: RatioLiquiditeMensuelComponent,
+
+          },
+          {
+            path:'RatioLiquiditeTrimestriel',
+          component: RatioLiquiditeTrimestrielComponent,
+
+          }
+
+        ]
       },
 
       {
