@@ -50,6 +50,7 @@ import { EvaluationTauxChangeComponent } from "src/app/admin/risque-de-change/ev
 
 import { KRIsDeChangeComponent } from "src/app/admin/risque-de-change/kris-de-change/kris-de-change.component";
 import { AnalyseDesDepotsComponent } from "src/app/admin/risque-liquidite/analyse-des-depots/analyse-des-depots.component";
+import { ConsultationRatio2LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratio2-liquidite/consultation-ratio2-liquidite.component";
 import { ConsultationRatio1LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/consultation-ratio1-liquidite.component";
 import { RatioLiquiditeMensuelComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-mensuel/ratio-liquidite-mensuel.component";
 import { RatioLiquiditeQuotidienComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-quotidien/ratio-liquidite-quotidien.component";
@@ -312,8 +313,14 @@ export const AdminLayoutRoutes: Routes = [
       },
 
       {
-        path: 'ConsultationRatiosLiquidite',
+        path: 'ConsultationRatios1Liquidite',
         component: ConsultationRatio1LiquiditeComponent
+      }
+      ,
+
+      {
+        path: 'ConsultationRatios2Liquidite',
+        component: ConsultationRatio2LiquiditeComponent
       }
     ]
       },
@@ -363,7 +370,7 @@ export const AdminLayoutRoutes: Routes = [
 
       },
       {
-        path:"ConsultationRatiosLiquidite",
+        path:"ConsultationRatios1Liquidite",
         component: ConsultationRatio1LiquiditeComponent,
         children: [
           {

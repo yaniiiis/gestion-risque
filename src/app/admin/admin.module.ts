@@ -122,6 +122,7 @@ import { RatioLiquiditeQuotidienComponent } from './risque-liquidite/consultatio
 import { RatioLiquiditeMensuelComponent } from './risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-mensuel/ratio-liquidite-mensuel.component';
 import { RatioLiquiditeTrimestrielComponent } from './risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-trimestriel/ratio-liquidite-trimestriel.component';
 import { ConsultationRatio1LiquiditeContentComponent } from './risque-liquidite/consultation-ratios1-liquidite/consultation-ratios1-liquidite-content/consultation-ratio1-liquidite-content.component';
+import { ConsultationRatio2LiquiditeComponent } from './risque-liquidite/consultation-ratio2-liquidite/consultation-ratio2-liquidite.component';
 
 
 
@@ -227,7 +228,8 @@ import { ConsultationRatio1LiquiditeContentComponent } from './risque-liquidite/
     RatioLiquiditeQuotidienComponent,
     RatioLiquiditeMensuelComponent,
     RatioLiquiditeTrimestrielComponent,
-    ConsultationRatio1LiquiditeContentComponent
+    ConsultationRatio1LiquiditeContentComponent,
+    ConsultationRatio2LiquiditeComponent
    
   ],
   imports: [

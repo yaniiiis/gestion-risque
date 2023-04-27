@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import ChartDataLabels from "chartjs-plugin-datalabels";
 
 import {  ChartOptions } from 'chart.js';
 import { RisqueLiquiditeService } from 'src/app/_services/risque-liquidite.service';
@@ -12,26 +11,9 @@ import { AnalysePortfeuilleServicesService } from 'src/app/_services/analysePrtf
 })
 export class RatioLiquiditeQuotidienComponent implements OnInit {
   
-  chartData = [
-    // {
-    //   data: [100, 100, 100, 100],
-    //   label: 'Limite inferieure',     
-    //          "borderColor": "red",
-    
-    //  },
-    // {
-    //   data: [120, 455, 100, 340],
-    //   label: 'Ratio'
-    // },
-    // {
-    //   data: [110, 110, 110, 110],
-    //   label: 'Limite superieur',
-    //   "borderColor": "green",
-    // }
-  ];
+  chartData = [];
 
-  chartLabels = [
-   ];
+  chartLabels = [];
  
    lineChartOptions: ChartOptions = {
     elements: {
