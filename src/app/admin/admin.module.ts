@@ -123,6 +123,14 @@ import { RatioLiquiditeMensuelComponent } from './risque-liquidite/consultation-
 import { RatioLiquiditeTrimestrielComponent } from './risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-trimestriel/ratio-liquidite-trimestriel.component';
 import { ConsultationRatio1LiquiditeContentComponent } from './risque-liquidite/consultation-ratios1-liquidite/consultation-ratios1-liquidite-content/consultation-ratio1-liquidite-content.component';
 import { ConsultationRatio2LiquiditeComponent } from './risque-liquidite/consultation-ratio2-liquidite/consultation-ratio2-liquidite.component';
+import { ConsultationRatio2LiquiditeContentComponent } from './risque-liquidite/consultation-ratio2-liquidite/consultation-ratio2-liquidite-content/consultation-ratio2-liquidite-content.component';
+import { ConsultationR2Component } from './risque-liquidite/consultation-ratio2-liquidite/consultation-r2/consultation-r2.component';
+import { ConsultationRatio3LiquiditeComponent } from './risque-liquidite/consultation-ratio3-liquidite/consultation-ratio3-liquidite.component';
+import { ConsultationRatio3LiquiditeContentComponent } from './risque-liquidite/consultation-ratio3-liquidite/consultation-ratio3-liquidite-content/consultation-ratio3-liquidite-content.component';
+import { ConsultationR3Component } from './risque-liquidite/consultation-ratio3-liquidite/consultation-r3/consultation-r3.component';
+import { ConsultationRatio4LiquiditeComponent } from './risque-liquidite/consultation-ratio4-liquidite/consultation-ratio4-liquidite.component';
+import { ConsultationRatio4LiquiditeContentComponent } from './risque-liquidite/consultation-ratio4-liquidite/consultation-ratio4-liquidite-content/consultation-ratio4-liquidite-content.component';
+import { ConsultationR4Component } from './risque-liquidite/consultation-ratio4-liquidite/consultation-r4/consultation-r4.component';
 
 
 
@@ -229,7 +237,15 @@ import { ConsultationRatio2LiquiditeComponent } from './risque-liquidite/consult
     RatioLiquiditeMensuelComponent,
     RatioLiquiditeTrimestrielComponent,
     ConsultationRatio1LiquiditeContentComponent,
-    ConsultationRatio2LiquiditeComponent
+    ConsultationRatio2LiquiditeComponent,
+    ConsultationRatio2LiquiditeContentComponent,
+    ConsultationR2Component,
+    ConsultationRatio3LiquiditeComponent,
+    ConsultationRatio3LiquiditeContentComponent,
+    ConsultationR3Component,
+    ConsultationRatio4LiquiditeComponent,
+    ConsultationRatio4LiquiditeContentComponent,
+    ConsultationR4Component
    
   ],
   imports: [

@@ -1,26 +1,13 @@
-<div class="main-content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-header card-header-primary">
-              <h4 class="card-title">Ratio de liquidité quotidien </h4>
-            </div> 
-            <div class="card-body">   
-                  <div class="row" >                    
-                    <div  style="position: relative; height:60vh; width:80vw"
-                    
-                    >
-                      <canvas baseChart [type]="'line'" [legend]="true" [datasets]="chartData" [labels]="chartLabels"
-                        [options]="lineChartOptions"></canvas>
-                    </div>
-                    </div>                 
-                      <div class="col-md-12">                      
-                          <app-commentaire-editor></app-commentaire-editor>
-                          <router-outlet></router-outlet>                     
-                      </div>                     
-                    </div>
-                  </div>  
-                  </div>
-            </div>
-          </div>
+            
+<div  style="position: relative; height:60vh; width:80vw"
+
+>
+  <canvas baseChart [type]="'line'" [legend]="true" [datasets]="chartData" [labels]="chartLabels"
+    [options]="lineChartOptions"></canvas>
+</div>
+            
+<div class="col-md-12">                      
+    <app-commentaire-editor></app-commentaire-editor>
+    <router-outlet></router-outlet>                     
+</div>                     
+             

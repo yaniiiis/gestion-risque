@@ -31,14 +31,34 @@ export class RatioLiquiditeTrimestrielComponent implements OnInit {
   dateRelativeAuDeuxiemeMoisDuTrimestre = '2021-01-31';
   dateRelativeAuTroisiemeMoisDuTrimestre = '2021-02-28'
 
-    indicateur : Indicateur ={
+    indicateur1 : Indicateur ={
     id:0,
     description:"",
     dateEffet: null,
     valeurLimite:0,
     valeurMinimum:0,    
   }
-
+    indicateur2 : Indicateur ={
+    id:0,
+    description:"",
+    dateEffet: null,
+    valeurLimite:0,
+    valeurMinimum:0,    
+  }
+  indicateur3 : Indicateur ={
+    id:0,
+    description:"",
+    dateEffet: null,
+    valeurLimite:0,
+    valeurMinimum:0,    
+  }
+    indicateur4 : Indicateur ={
+    id:0,
+    description:"",
+    dateEffet: null,
+    valeurLimite:0,
+    valeurMinimum:0,    
+  }
   constructor(private indicateurService: IndicateurService, 
               private risqueLiquiditeService: RisqueLiquiditeService,
               private servicesRepo: AnalysePortfeuilleServicesService) { }
@@ -61,6 +81,7 @@ export class RatioLiquiditeTrimestrielComponent implements OnInit {
                 if (i==15){
                   // recuperation de la valeur de l'indicateur du backend
                   // Coefficient de liquidité à un mois (cf. modèle 5002)
+                  this.indicateur1 = response;
                   this.risqueLiquiditeService.getRatiosByDate(this.selectedDate).subscribe({
                     next: (result) =>{
                       const a ={
@@ -80,6 +101,7 @@ export class RatioLiquiditeTrimestrielComponent implements OnInit {
                if (i==16){
                   // recuperation de la valeur de l'indicateur du backend
                   // Coefficient de liquidité d’observation (cf. modèle 5005)
+                   this.indicateur2 = response;
                   this.risqueLiquiditeService.getRatiosByDate(this.selectedDate).subscribe({
                     next: (result) =>{
                       const a ={
@@ -99,6 +121,7 @@ export class RatioLiquiditeTrimestrielComponent implements OnInit {
               if (i==17){
                   // recuperation de la valeur de l'indicateur du backend
                   // Coefficient de liquidité relatif au deuxième mois du trimestre qui s’achève
+                   this.indicateur3 = response;
                   this.risqueLiquiditeService.getRatiosByDate(this.dateRelativeAuDeuxiemeMoisDuTrimestre).subscribe({
                     next: (result) =>{
                       const a ={
@@ -117,6 +140,7 @@ export class RatioLiquiditeTrimestrielComponent implements OnInit {
                if (i==18){
                   // recuperation de la valeur de l'indicateur du backend
                   // Coefficient de liquidité relatif au troisieme mois du trimestre qui s’achève
+                   this.indicateur4 = response;
                   this.risqueLiquiditeService.getRatiosByDate(this.dateRelativeAuTroisiemeMoisDuTrimestre).subscribe({
                     next: (result) =>{
                       const a ={
