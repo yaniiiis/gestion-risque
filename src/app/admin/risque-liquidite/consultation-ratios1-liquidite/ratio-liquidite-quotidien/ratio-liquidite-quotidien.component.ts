@@ -16,6 +16,7 @@ export class RatioLiquiditeQuotidienComponent implements OnInit {
   chartLabels = [];
  
    lineChartOptions: ChartOptions = {
+    responsive: true,
     elements: {
       point: {
         radius: 3,
@@ -52,9 +53,9 @@ export class RatioLiquiditeQuotidienComponent implements OnInit {
         // Risque de liquidite code 6
      this.servicesRepo.currentAnalyseType = 6; 
     
-    this.risqueLiquiditeService.getListRatiosEntreDeuxDates(2021,3).subscribe((res) =>{
+    this.risqueLiquiditeService.getListRatiosEntreDeuxDates(2021,3).subscribe({
       
-      next:{
+      next: (res) => {
         const data : any[] = []
         const data_inf : any[] = []
         const data_sup : any[] = []
@@ -72,7 +73,8 @@ export class RatioLiquiditeQuotidienComponent implements OnInit {
         this.chartData.push({ data:data, label:'Ratio', borderColor:'blue'})
         this.chartData.push({ data:data_sup, label:'Limite superieure', borderColor:'red'})
 
-      }
+      },
+     
     })
     
   }

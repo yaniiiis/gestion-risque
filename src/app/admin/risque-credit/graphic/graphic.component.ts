@@ -60,9 +60,6 @@ export class GraphicComponent implements OnInit {
     this.Typeparametrage = this.formBuilder.group({
       parametrage: this.formBuilder.array([], [Validators.required])
     });
-
-   
-    
   }
 
   onCheckboxChange(event: any) {

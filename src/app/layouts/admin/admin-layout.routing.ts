@@ -50,7 +50,12 @@ import { EvaluationTauxChangeComponent } from "src/app/admin/risque-de-change/ev
 
 import { KRIsDeChangeComponent } from "src/app/admin/risque-de-change/kris-de-change/kris-de-change.component";
 import { AnalyseDesDepotsComponent } from "src/app/admin/risque-liquidite/analyse-des-depots/analyse-des-depots.component";
+import { ConsultationR2Component } from "src/app/admin/risque-liquidite/consultation-ratio2-liquidite/consultation-r2/consultation-r2.component";
 import { ConsultationRatio2LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratio2-liquidite/consultation-ratio2-liquidite.component";
+import { ConsultationR3Component } from "src/app/admin/risque-liquidite/consultation-ratio3-liquidite/consultation-r3/consultation-r3.component";
+import { ConsultationRatio3LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratio3-liquidite/consultation-ratio3-liquidite.component";
+import { ConsultationR4Component } from "src/app/admin/risque-liquidite/consultation-ratio4-liquidite/consultation-r4/consultation-r4.component";
+import { ConsultationRatio4LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratio4-liquidite/consultation-ratio4-liquidite.component";
 import { ConsultationRatio1LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/consultation-ratio1-liquidite.component";
 import { RatioLiquiditeMensuelComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-mensuel/ratio-liquidite-mensuel.component";
 import { RatioLiquiditeQuotidienComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-quotidien/ratio-liquidite-quotidien.component";
@@ -319,8 +324,17 @@ export const AdminLayoutRoutes: Routes = [
       ,
 
       {
-        path: 'ConsultationRatios2Liquidite',
+        path: 'ConsultationRatio2Liquidite',
         component: ConsultationRatio2LiquiditeComponent
+      },
+
+      {
+        path: 'ConsultationRatio3Liquidite',
+        component: ConsultationRatio3LiquiditeComponent
+      },
+      {
+        path: 'ConsultationRatio4Liquidite',
+        component: ConsultationRatio4LiquiditeComponent
       }
     ]
       },
@@ -388,6 +402,37 @@ export const AdminLayoutRoutes: Routes = [
 
           }
 
+        ]
+      },
+
+      {
+        path:"ConsultationRatio2Liquidite",
+        component: ConsultationRatio2LiquiditeComponent,
+        children: [
+          {
+          path:'ConsultationR2',
+          component: ConsultationR2Component,
+          }
+        ]
+      },
+      {
+        path:"ConsultationRatio3Liquidite",
+        component: ConsultationRatio3LiquiditeComponent,
+        children: [
+          {
+          path:'ConsultationR3',
+          component: ConsultationR3Component,
+          }
+        ]
+      },
+      {
+        path:"ConsultationRatio4Liquidite",
+        component: ConsultationRatio4LiquiditeComponent,
+        children: [
+          {
+          path:'ConsultationR4',
+          component: ConsultationR4Component,
+          }
         ]
       },
 

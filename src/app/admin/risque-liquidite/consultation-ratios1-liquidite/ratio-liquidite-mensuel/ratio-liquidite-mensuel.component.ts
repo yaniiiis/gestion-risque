@@ -47,30 +47,33 @@ export class RatioLiquiditeMensuelComponent implements OnInit {
               private risqueLiquiditeService: RisqueLiquiditeService) { }
 
   ngOnInit(): void {
-    //Total position par devise
-           this.indicateurService.getIndicateurById(14).subscribe((data) =>{
+    //Coeficient de liquidité
+           this.indicateurService.getIndicateurById(14).subscribe({
+            next :(data) =>{
            this.indicateur1 = data;
-          }) 
+
+            // calcul de la valeur de l'indicateur R1- Coefficient de liquidité
+    
+            this.risqueLiquiditeService.getRatiosByDate("2021-03-31").subscribe(
+              {
+              next: (result) => {
+                const a = {
+                  value: Number.parseFloat(result[0][1])  ,
+                  limit: data.valeurLimite,
+                  label: '',
+                  min: data.valeurMinimum,
+                  unit: '%',}
+              console.log(result[0][1]);
+                this.data.push(a)
+          }
+        })
+
+          }}) 
 
       // Risque de liquidite code 6
      this.servicesRepo.currentAnalyseType = 6;       
 
-     // calcul de la valeur de l'indicateur R1- Coefficient de liquidité
     
-     this.risqueLiquiditeService.getRatiosByDate("2021-03-31").subscribe(
-      {
-      
-      next: (result) => {
-         const a = {
-          value: Number.parseFloat(result[0][1])  ,
-          limit: 110,
-          label: '',
-          min: 100,
-          unit: '%',}
-      console.log(result[0][1]);
-         this.data.push(a)
-  }
-})
   }
   
 
