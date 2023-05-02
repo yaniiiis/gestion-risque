@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 
 import {  ChartOptions } from 'chart.js';
 import { RisqueLiquiditeService } from 'src/app/_services/risque-liquidite.service';
 import { AnalysePortfeuilleServicesService } from 'src/app/_services/analysePrtfeuille/analyse-portfeuille-services.service';
+import { BaseChartDirective } from 'ng2-charts';
 @Component({
   selector: 'app-ratio-liquidite-quotidien',
   templateUrl: './ratio-liquidite-quotidien.component.html',
   styleUrls: ['./ratio-liquidite-quotidien.component.css']
 })
 export class RatioLiquiditeQuotidienComponent implements OnInit {
-  
+   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
   chartData = [];
 
   chartLabels = [];
@@ -72,11 +73,29 @@ export class RatioLiquiditeQuotidienComponent implements OnInit {
         this.chartData.push({ data:data_inf, label:'Limite inferieure', borderColor:'green'})
         this.chartData.push({ data:data, label:'Ratio', borderColor:'blue'})
         this.chartData.push({ data:data_sup, label:'Limite superieure', borderColor:'red'})
-
+       this.refresh_chart();
       },
      
     })
-    
+
+ 
+
+    // this.chartData.push({ data:[1,2,3,4] , label : 'Ratio', borderColor:'blue'})
+    // this.chartLabels.push(1)
+    // this.chartLabels.push(2)
+    // this.chartLabels.push(3)
+    // this.chartLabels.push(4)
   }
+
+  refresh_chart() {
+    setTimeout(() => {
+       
+        if (this.chart && this.chart.chart && this.chart.chart.config) {
+            this.chart.chart.config.data.labels = this.chartLabels;
+            this.chart.chart.config.data.datasets = this.chartData;
+            this.chart.chart.update();
+        }
+    });
+}
 
 }
