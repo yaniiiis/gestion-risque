@@ -131,6 +131,12 @@ import { ConsultationR3Component } from './risque-liquidite/consultation-ratio3-
 import { ConsultationRatio4LiquiditeComponent } from './risque-liquidite/consultation-ratio4-liquidite/consultation-ratio4-liquidite.component';
 import { ConsultationRatio4LiquiditeContentComponent } from './risque-liquidite/consultation-ratio4-liquidite/consultation-ratio4-liquidite-content/consultation-ratio4-liquidite-content.component';
 import { ConsultationR4Component } from './risque-liquidite/consultation-ratio4-liquidite/consultation-r4/consultation-r4.component';
+import { ConsultationRatio5LiquiditeComponent } from './risque-liquidite/consultation-ratio5-liquidite/consultation-ratio5-liquidite.component';
+import { ConsultationRatio5LiquiditeContentComponent } from './risque-liquidite/consultation-ratio5-liquidite/consultation-ratio5-liquidite-content/consultation-ratio5-liquidite-content.component';
+import { ConsultationR5Component } from './risque-liquidite/consultation-ratio5-liquidite/consultation-r5/consultation-r5.component';
+import { ConsultationRatio6LiquiditeComponent } from './risque-liquidite/consultation-ratio6-liquidite/consultation-ratio6-liquidite.component';
+import { ConsultationRatio6LiquiditeContentComponent } from './risque-liquidite/consultation-ratio6-liquidite/consultation-ratio6-liquidite-content/consultation-ratio6-liquidite-content.component';
+import { ConsultationR6Component } from './risque-liquidite/consultation-ratio6-liquidite/consultation-r6/consultation-r6.component';
 
 
 
@@ -245,7 +251,13 @@ import { ConsultationR4Component } from './risque-liquidite/consultation-ratio4-
     ConsultationR3Component,
     ConsultationRatio4LiquiditeComponent,
     ConsultationRatio4LiquiditeContentComponent,
-    ConsultationR4Component
+    ConsultationR4Component,
+    ConsultationRatio5LiquiditeComponent,
+    ConsultationRatio5LiquiditeContentComponent,
+    ConsultationR5Component,
+    ConsultationRatio6LiquiditeComponent,
+    ConsultationRatio6LiquiditeContentComponent,
+    ConsultationR6Component
    
   ],
   imports: [

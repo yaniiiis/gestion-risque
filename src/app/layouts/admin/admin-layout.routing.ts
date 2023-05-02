@@ -56,6 +56,10 @@ import { ConsultationR3Component } from "src/app/admin/risque-liquidite/consulta
 import { ConsultationRatio3LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratio3-liquidite/consultation-ratio3-liquidite.component";
 import { ConsultationR4Component } from "src/app/admin/risque-liquidite/consultation-ratio4-liquidite/consultation-r4/consultation-r4.component";
 import { ConsultationRatio4LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratio4-liquidite/consultation-ratio4-liquidite.component";
+import { ConsultationR5Component } from "src/app/admin/risque-liquidite/consultation-ratio5-liquidite/consultation-r5/consultation-r5.component";
+import { ConsultationRatio5LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratio5-liquidite/consultation-ratio5-liquidite.component";
+import { ConsultationR6Component } from "src/app/admin/risque-liquidite/consultation-ratio6-liquidite/consultation-r6/consultation-r6.component";
+import { ConsultationRatio6LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratio6-liquidite/consultation-ratio6-liquidite.component";
 import { ConsultationRatio1LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/consultation-ratio1-liquidite.component";
 import { RatioLiquiditeMensuelComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-mensuel/ratio-liquidite-mensuel.component";
 import { RatioLiquiditeQuotidienComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-quotidien/ratio-liquidite-quotidien.component";
@@ -335,6 +339,14 @@ export const AdminLayoutRoutes: Routes = [
       {
         path: 'ConsultationRatio4Liquidite',
         component: ConsultationRatio4LiquiditeComponent
+      },
+      {
+        path: 'ConsultationRatio5Liquidite',
+        component: ConsultationRatio5LiquiditeComponent
+      },
+      {
+        path: 'ConsultationRatio6Liquidite',
+        component: ConsultationRatio6LiquiditeComponent
       }
     ]
       },
@@ -435,7 +447,26 @@ export const AdminLayoutRoutes: Routes = [
           }
         ]
       },
-
+      {
+        path:"ConsultationRatio5Liquidite",
+        component: ConsultationRatio5LiquiditeComponent,
+        children: [
+          {
+          path:'ConsultationR5',
+          component: ConsultationR5Component,
+          }
+        ]
+      },
+      {
+        path:"ConsultationRatio6Liquidite",
+        component: ConsultationRatio6LiquiditeComponent,
+        children: [
+          {
+          path:'ConsultationR6',
+          component: ConsultationR6Component,
+          }
+        ]
+      },
       {
         path: '',
        // canActivate : [AuthPermissionsGuard],

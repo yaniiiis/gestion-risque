@@ -57,6 +57,24 @@ export class RisqueLiquiditeService {
       headers: this.httpOptions.headers,
     }
   );
+   }
+  // Ratio5 : Emplois/Ressources  
+   public getRatio5EmploisSurRessources(dateEffet :string): Observable<number>{
+    return this.http.get<any>(
+    baseUrl + "/getRatio5/" + dateEffet,
+    {
+      headers: this.httpOptions.headers,
+    }
+  ); 
+  }
+ //  Ratio6 : Investissement sous forme de placements interbancaires
+ public  getRatio6InvestissementSousFormeDePlacementsInterbancaires(dateEffet :string): Observable<number>{
+    return this.http.get<any>(
+    baseUrl + "/getRatio6/" + dateEffet,
+    {
+      headers: this.httpOptions.headers,
+    }
+  ); 
 }
 
   constructor(private http: HttpClient, private storageSer: StorageSService) { }
