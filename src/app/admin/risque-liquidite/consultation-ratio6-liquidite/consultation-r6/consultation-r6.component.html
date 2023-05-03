@@ -9,19 +9,18 @@
             <tbody>
                 <tr *ngFor="let element of data">
                     <td class="tbody__td--label">{{ indicateur.description }}</td>
-                    <td class="tbody__td ">
-                <tr class="yz_green" *ngIf="element.value  < indicateur.valeurMinimum">
-                    {{ element.value.toString() + element.unit }}
-                </tr>
-                <tr class="yz_yellow"
-                    *ngIf="value  >= indicateur.valeurMinimum && element.value <= indicateur.valeurLimite">
-                    {{ element.value.toString() + element.unit }}
-                </tr>
-                <tr class="yz_red" *ngIf="element.value > indicateur.valeurLimite">
-                    {{ element.value.toString() + element.unit }}
-                </tr>
-
-                </td>
+                    <td class="tbody__td--limit ">
+                        <div class="yz_green" *ngIf="element.value  < indicateur.valeurMinimum">
+                            {{ element.value.toString() + element.unit }}
+                        </div>
+                        <div class="yz_yellow"
+                            *ngIf="value  >= indicateur.valeurMinimum && element.value <= indicateur.valeurLimite">
+                            {{ element.value.toString() + element.unit }}
+                        </div>
+                        <div class="yz_red" *ngIf="element.value > indicateur.valeurLimite">
+                            {{ element.value.toString() + element.unit }}
+                        </div>
+                    </td>
 
                 <td class="tbody__td--limit">{{ indicateur.valeurLimite }}</td>
                 <td class="tbody__td--trigger">

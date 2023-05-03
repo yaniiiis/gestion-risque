@@ -11,17 +11,17 @@
                 
                 <tr *ngFor="let element of data">
                     <td class="tbody__td--label">{{ element.label }}</td>
-                    <td class="tbody__td ">
-                <tr class="yz_green " *ngIf="element.value  < indicateur1.valeurMinimum">
-                    {{ element.value | number:'1.1-2' }}%
-                </tr>
-                <tr class="yz_yellow "
-                    *ngIf="element.value  >= indicateur1.valeurMinimum && element.value <= indicateur1.valeurLimite">
-                    {{ element.value | number:'1.1-2' }}%
-                </tr>
-                <tr class="yz_red " *ngIf="element.value > indicateur1.valeurLimite">
-                    {{ element.value | number:'1.1-2' }}%
-                </tr>
+                    <td class="tbody__td--limit ">
+                        <div class="yz_green " *ngIf="element.value  < indicateur1.valeurMinimum">
+                            {{ element.value | number:'1.1-2' }}%
+                        </div>
+                        <div class="yz_yellow "
+                            *ngIf="element.value  >= indicateur1.valeurMinimum && element.value <= indicateur1.valeurLimite">
+                            {{ element.value | number:'1.1-2' }}%
+                        </div>
+                        <div class="yz_red " *ngIf="element.value > indicateur1.valeurLimite">
+                            {{ element.value | number:'1.1-2' }}%
+                        </div>
 
                 </td>
                 </tr>
