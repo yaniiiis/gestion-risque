@@ -1,0 +1,83 @@
+<div class="yz_container">
+    <div class="row">
+        <div class="col-md-2">
+
+            <mat-form-field appearance="fill">
+                <mat-label>Selectionner une date</mat-label>
+                <input matInput [(ngModel)]="selectedDate" [matDatepicker]="picker1" (ngModelChange)="addEvent('change', $event)"/>
+                <mat-hint>DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+<!-- <app-ratio-liquidite-mensuel-ratio [selectedDate]="selectedDate"></app-ratio-liquidite-mensuel-ratio>
+<app-consultation-ratio2-liquidite-ratio [selectedDate]="selectedDate"></app-consultation-ratio2-liquidite-ratio>
+<app-consultation-ratio3-liquidite-ratio [selectedDate]="selectedDate"></app-consultation-ratio3-liquidite-ratio>
+<app-consultation-ratio4-liquidite-ratio [selectedDate]="selectedDate"></app-consultation-ratio4-liquidite-ratio>
+<app-consultation-ratio5-liquidite-ratio [selectedDate]="selectedDate"></app-consultation-ratio5-liquidite-ratio>
+<app-consultation-ratio6-liquidite-ratio [selectedDate]="selectedDate"></app-consultation-ratio6-liquidite-ratio> -->
+
+<div class="container-fluid">
+    <div class="row">
+        <table class="table">
+            <thead>
+                <th class="theed__th--indicateur">Indice</th>
+                <th class="theed__th--indicateur">Valeur</th>
+                <th *ngFor="let h of header">{{ h }}</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let element of data">
+                    <td class="tbody__td--label">{{ element.label }}</td>
+                    <td class="tbody__td--limit">
+                        <div class="yz_green" *ngIf="element.value  < element.min">
+                            {{ element.value }} {{element.unit }}
+                        </div>
+                        <div class="yz_yellow"
+                            *ngIf="element.value  >= element.min && element.value <= element.limit">
+                            {{ element.value}} {{ element.unit }}
+                        </div>
+                        <div class="yz_red" *ngIf="element.value > element.limit">
+                            {{ element.value }} {{ element.unit }}
+                        </div>
+                    </td>
+
+                    <td class="tbody__td--limit">{{ element.limit }}</td>
+                    <td class="tbody__td--trigger">
+                        <tr class="tbody__td__tr yz_green">
+                            <td class="tbody__td--compareValues">
+                                < {{ element.min }} </td>
+
+                        </tr>
+                        <tr class="tbody__td__tr yz_yellow">
+                            <td class="tbody__td--compareValues">
+                                {{ element.limit }} -
+                                {{ element.min }}
+                            </td>
+                        </tr>
+                        <tr class="tbody__td__tr yz_red">
+                            <td class="tbody__td--compareValues">
+                                > {{ element.limit }}
+                            </td>
+                        </tr>
+                    </td>
+
+                <td class="tbody__td--trigger">
+                    <tr class="tbody__td__tr yz_green">
+                        <td class="tbody__td--colors yz_bgGreen"></td>
+                    </tr>
+                    <tr class="tbody__td__tr yz_yellow">
+                        <td class="tbody__td--colors yz_bgYellow"></td>
+                    </tr>
+                    <tr class="tbody__td__tr yz_red">
+                        <td class="tbody__td--colors yz_bgRed"></td>
+                    </tr>
+                </td>
+                </tr>
+            </tbody>
+            <tfoot></tfoot>
+        </table>
+    </div>
+
+</div>

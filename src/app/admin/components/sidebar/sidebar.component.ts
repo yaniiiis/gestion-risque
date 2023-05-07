@@ -145,6 +145,11 @@ export const ROUTES: RouteInfo[] = [{
             path:  "ConsultationRatio6Liquidite",
             title: "Consultation Ratio 6",
             ab:'CON6'
+          },
+           {
+            path:  "ConsultationRapportKrisLiquidite",
+            title: "Consultation Rapport",
+            ab:'Rapp'
           }
         ],
       },

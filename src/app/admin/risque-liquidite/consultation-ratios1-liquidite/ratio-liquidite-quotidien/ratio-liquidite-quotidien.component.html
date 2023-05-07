@@ -1,13 +1,27 @@
-            
-<div  style="position: relative; height:60vh; width:80vw"
+<div class="yz_container">
+  <div class="row">
+    <div class="col-md-2">
 
->
-  <canvas baseChart [type]="'line'" [legend]="true" [datasets]="chartData" [labels]="chartLabels"
-    [options]="lineChartOptions"></canvas>
+      <mat-form-field appearance="fill">
+        <mat-label>Month and Year</mat-label>
+        <input matInput [matDatepicker]="dp" [formControl]="date">
+        <mat-hint>MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp startView="multi-year" (monthSelected)="setMonthAndYear($event, dp)"
+          panelClass="example-month-picker">
+        </mat-datepicker>
+      </mat-form-field>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <app-ratio-liquidite-quotidien-ratio [year]="year" [month]="month"></app-ratio-liquidite-quotidien-ratio>
+  </div>
+
+  <div class="row">
+    <app-ratio-liquidite-quotidien-commentaire></app-ratio-liquidite-quotidien-commentaire>
+  </div>
+
 </div>
-            
-<div class="col-md-12">                      
-    <app-commentaire-editor></app-commentaire-editor>
-    <router-outlet></router-outlet>                     
-</div>                     
              
