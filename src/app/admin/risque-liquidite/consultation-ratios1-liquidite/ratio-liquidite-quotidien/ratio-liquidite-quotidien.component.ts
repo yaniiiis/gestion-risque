@@ -1,101 +1,79 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import { ViewEncapsulation } from "@angular/core";
+import { FormControl } from "@angular/forms";
+import {
+  MomentDateAdapter,
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+} from "@angular/material-moment-adapter";
+import {
+  DateAdapter,
+  MAT_DATE_FORMATS,
+  MAT_DATE_LOCALE,
+} from "@angular/material/core";
+import { MatDatepicker } from "@angular/material/datepicker";
 
+// Depending on whether rollup is used, moment needs to be imported differently.
+// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
+// syntax. However, rollup creates a synthetic default module and we thus need to import it using
+// the `default as` syntax.
+import * as _moment from "moment";
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupMoment, Moment } from "moment";
 
-import {  ChartOptions } from 'chart.js';
-import { RisqueLiquiditeService } from 'src/app/_services/risque-liquidite.service';
-import { AnalysePortfeuilleServicesService } from 'src/app/_services/analysePrtfeuille/analyse-portfeuille-services.service';
-import { BaseChartDirective } from 'ng2-charts';
+const moment = _rollupMoment || _moment;
+
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+  parse: {
+    dateInput: "MM/YYYY",
+  },
+  display: {
+    dateInput: "MM/YYYY",
+    monthYearLabel: "MMM YYYY",
+    dateA11yLabel: "LL",
+    monthYearA11yLabel: "MMMM YYYY",
+  },
+};
+
 @Component({
-  selector: 'app-ratio-liquidite-quotidien',
-  templateUrl: './ratio-liquidite-quotidien.component.html',
-  styleUrls: ['./ratio-liquidite-quotidien.component.css']
+  selector: "app-ratio-liquidite-quotidien",
+  templateUrl: "./ratio-liquidite-quotidien.component.html",
+  styleUrls: ["./ratio-liquidite-quotidien.component.css"],
+  providers: [
+    // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
+    // application's root module. We provide it at the component level here, due to limitations of
+    // our example generation script.
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+    },
+
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
+  ],
+  encapsulation: ViewEncapsulation.None,
 })
 export class RatioLiquiditeQuotidienComponent implements OnInit {
-   @ViewChild(BaseChartDirective) chart: BaseChartDirective;
-  chartData = [];
+  date = new FormControl(moment());
+  year: number;
+  month: number;
 
-  chartLabels = [];
- 
-   lineChartOptions: ChartOptions = {
-    responsive: true,
-    elements: {
-      point: {
-        radius: 3,
-      },
-    },
-    plugins: {
-      title: {
-        display: true,
-        text: "Ratios de liquidité quotidien ",
-        padding: {
-          bottom: 20,
-          top: 20,
-          
-        },
-      },
-      legend: {
-        align: 'center',
-        position: 'bottom',
-        labels: {
-          boxHeight:0.5,
-          font: {
-            size: 10,
-          },
-        },
-      },
-    }
-  };
-  
-  
-  constructor(private risqueLiquiditeService: RisqueLiquiditeService, private servicesRepo: AnalysePortfeuilleServicesService) { }
-
-  ngOnInit(): void {
-
-        // Risque de liquidite code 6
-     this.servicesRepo.currentAnalyseType = 6; 
-    
-    this.risqueLiquiditeService.getListRatiosEntreDeuxDates(2021,3).subscribe({
-      
-      next: (res) => {
-        const data : any[] = []
-        const data_inf : any[] = []
-        const data_sup : any[] = []
-       
-        for (let i=0;i<res.length;i++){
-          console.log('res '+res[i][1])
-          this.chartLabels.push(res[i][0])
-          data.push(res[i][1])
-        }
-        for (let i=0;i<res.length;i++){
-          data_inf.push(100)
-          data_sup.push(110)
-        }
-        this.chartData.push({ data:data_inf, label:'Limite inferieure', borderColor:'green'})
-        this.chartData.push({ data:data, label:'Ratio', borderColor:'blue'})
-        this.chartData.push({ data:data_sup, label:'Limite superieure', borderColor:'red'})
-       this.refresh_chart();
-      },
-     
-    })
-
- 
-
-    // this.chartData.push({ data:[1,2,3,4] , label : 'Ratio', borderColor:'blue'})
-    // this.chartLabels.push(1)
-    // this.chartLabels.push(2)
-    // this.chartLabels.push(3)
-    // this.chartLabels.push(4)
+  setMonthAndYear(
+    normalizedMonthAndYear: Moment,
+    datepicker: MatDatepicker<Moment>
+  ) {
+    const ctrlValue = this.date.value!;
+    ctrlValue.month(normalizedMonthAndYear.month());
+    ctrlValue.year(normalizedMonthAndYear.year());
+    this.date.setValue(ctrlValue);
+    console.log("year " + normalizedMonthAndYear.year());
+    console.log("Month " + normalizedMonthAndYear.month() + 1);
+    this.year = normalizedMonthAndYear.year();
+    this.month = normalizedMonthAndYear.month() + 1;
+    datepicker.close();
   }
+  constructor() {}
 
-  refresh_chart() {
-    setTimeout(() => {
-       
-        if (this.chart && this.chart.chart && this.chart.chart.config) {
-            this.chart.chart.config.data.labels = this.chartLabels;
-            this.chart.chart.config.data.datasets = this.chartData;
-            this.chart.chart.update();
-        }
-    });
-}
-
+  ngOnInit(): void {}
 }

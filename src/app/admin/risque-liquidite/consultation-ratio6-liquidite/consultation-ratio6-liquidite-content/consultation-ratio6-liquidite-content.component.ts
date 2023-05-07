@@ -9,7 +9,7 @@ import { ConsultationR6Component } from '../consultation-r6/consultation-r6.comp
 export class ConsultationRatio6LiquiditeContentComponent implements OnInit {
 
   constructor() { }
-         protected menuItems = [
+    protected menuItems = [
     {
       menuItem: "Ratio6 : Investissement sous forme de placements interbancaires",
       path: "ConsultationR6",

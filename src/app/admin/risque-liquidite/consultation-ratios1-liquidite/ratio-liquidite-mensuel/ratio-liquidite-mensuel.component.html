@@ -1,70 +1,23 @@
 
-<!-- <div class="row"> -->
-<table class="table">
-    <thead>
-        <th class="theed__th--indicateur">Indice</th>
-        <th class="theed__th--indicateur">Valeur</th>
-        <th *ngFor="let h of header">{{ h }}</th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let element of data">
-            <td class="tbody__td--label">{{ indicateur1.description }}</td>
-            <td class="tbody__td--limit">
-                <div class="yz_green" *ngIf="element.value  < indicateur1.valeurMinimum">
-                    {{ element.value.toString() + element.unit }}
+        <div class="yz_container">
+            <div class="row">
+                <div class="col-md-2">
+        
+                    <mat-form-field appearance="fill">
+                        <mat-label>Selectionner une date</mat-label>
+                        <input matInput [(ngModel)]="selectedDate" [matDatepicker]="picker1"
+                          />
+                        <mat-hint>DD/MM/YYYY</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                        <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
                 </div>
-                <div class="yz_yellow" *ngIf="value  >= indicateur1.valeurMinimum && element.value <= indicateur1.valeurLimite">
-                    {{ element.value.toString() + element.unit }}
-                </div>
-                <div class="yz_red" *ngIf="element.value > indicateur1.valeurLimite">
-                    {{ element.value.toString() + element.unit }}
-                </div>
-
-            </td>
-
-        <td class="tbody__td--limit">{{ indicateur1.valeurLimite }}</td>
-        <td class="tbody__td--trigger">
-            <tr class="tbody__td__tr yz_green">
-                <td class="tbody__td--compareValues">
-                    < {{ indicateur1.valeurMinimum }} </td>
-
-            </tr>
-            <tr class="tbody__td__tr yz_yellow">
-                <td class="tbody__td--compareValues">
-                    {{ indicateur1.valeurLimite }} -
-                    {{ indicateur1.valeurMinimum }}
-                </td>
-            </tr>
-            <tr class="tbody__td__tr yz_red">
-                <td class="tbody__td--compareValues">
-                    > {{ indicateur1.valeurLimite }}
-                </td>
-            </tr>
-        </td>
-
-        <td class="tbody__td--trigger">
-            <tr class="tbody__td__tr yz_green">
-                <td class="tbody__td--colors yz_bgGreen"></td>
-            </tr>
-            <tr class="tbody__td__tr yz_yellow">
-                <td class="tbody__td--colors yz_bgYellow"></td>
-            </tr>
-            <tr class="tbody__td__tr yz_red">
-                <td class="tbody__td--colors yz_bgRed"></td>
-            </tr>
-        </td>
-        </tr>
-    </tbody>
-    <tfoot></tfoot>
-</table>
-<!-- </div> -->
-<!-- <div class="row">
-    <div class="col-md-12">
-        <div class="card-body">
-            <app-commentaire-editor></app-commentaire-editor>
-            <router-outlet></router-outlet>
+        
+  
+        
+            </div>
+        
         </div>
-    </div>
-</div> -->
 
-
+<app-ratio-liquidite-mensuel-ratio [selectedDate]="selectedDate"></app-ratio-liquidite-mensuel-ratio>
+<app-ratio-liquidite-mensuel-commentaire></app-ratio-liquidite-mensuel-commentaire>

@@ -50,6 +50,8 @@ import { EvaluationTauxChangeComponent } from "src/app/admin/risque-de-change/ev
 
 import { KRIsDeChangeComponent } from "src/app/admin/risque-de-change/kris-de-change/kris-de-change.component";
 import { AnalyseDesDepotsComponent } from "src/app/admin/risque-liquidite/analyse-des-depots/analyse-des-depots.component";
+import { ConsultationRapportKrisLiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-rapport-kris-liquidite/consultation-rapport-kris-liquidite.component";
+import { RapportKrisLiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-rapport-kris-liquidite/rapport-kris-liquidite/rapport-kris-liquidite.component";
 import { ConsultationR2Component } from "src/app/admin/risque-liquidite/consultation-ratio2-liquidite/consultation-r2/consultation-r2.component";
 import { ConsultationRatio2LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratio2-liquidite/consultation-ratio2-liquidite.component";
 import { ConsultationR3Component } from "src/app/admin/risque-liquidite/consultation-ratio3-liquidite/consultation-r3/consultation-r3.component";
@@ -348,6 +350,11 @@ export const AdminLayoutRoutes: Routes = [
         path: 'ConsultationRatio6Liquidite',
         component: ConsultationRatio6LiquiditeComponent
       }
+      ,
+      {
+        path: 'ConsultationRapportKrisLiquidite',
+        component: ConsultationRapportKrisLiquiditeComponent
+      }
     ]
       },
     {
@@ -467,6 +474,18 @@ export const AdminLayoutRoutes: Routes = [
           }
         ]
       },
+      {
+        path:"ConsultationRapportKrisLiquidite",
+        component: ConsultationRapportKrisLiquiditeComponent,
+        children: [
+          {
+          path:'ConsultationRapport',
+          component: RapportKrisLiquiditeComponent,
+          }
+        ]
+      },
+
+      
       {
         path: '',
        // canActivate : [AuthPermissionsGuard],

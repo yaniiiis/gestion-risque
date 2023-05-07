@@ -1,41 +1,20 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="theed__th--indicateur">Période : {{ selectedDate }}</div>
-        <table class="table">
-            <thead>
-                <th class="theed__th--indicateur">ELEMENTS DE CALCUL</th>
-                <th class="theed__th--indicateur">{{selectedDate}}</th>
-               
-            </thead>
-            <tbody>
-                
-                <tr *ngFor="let element of data">
-                    <td class="tbody__td--label">{{ element.label }}</td>
-                    <td class="tbody__td--limit ">
-                        <div class="yz_green " *ngIf="element.value  < indicateur1.valeurMinimum">
-                            {{ element.value | number:'1.1-2' }}%
-                        </div>
-                        <div class="yz_yellow "
-                            *ngIf="element.value  >= indicateur1.valeurMinimum && element.value <= indicateur1.valeurLimite">
-                            {{ element.value | number:'1.1-2' }}%
-                        </div>
-                        <div class="yz_red " *ngIf="element.value > indicateur1.valeurLimite">
-                            {{ element.value | number:'1.1-2' }}%
-                        </div>
-
-                </td>
-                </tr>
-            </tbody>
-            <tfoot></tfoot>
-        </table>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card-body">
-                <app-commentaire-editor></app-commentaire-editor>
-                <router-outlet></router-outlet>
+<div class="container-fluid"> 
+            <div class="yz_container">
+                <div class="row">
+                    <div class="col-md-2">
+            
+                        <mat-form-field appearance="fill">
+                            <mat-label>Selectionner une date</mat-label>
+                            <input matInput [(ngModel)]="selectedDate" [matDatepicker]="picker1" />
+                            <mat-hint>DD/MM/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+            
             </div>
-        </div>
-    </div>
+ <app-ratio-liquidite-trimestriel-ratio [selectedDate]="selectedDate"></app-ratio-liquidite-trimestriel-ratio>
+ <app-ratio-liquidite-trimestriel-commentaire></app-ratio-liquidite-trimestriel-commentaire>
 </div>
 
