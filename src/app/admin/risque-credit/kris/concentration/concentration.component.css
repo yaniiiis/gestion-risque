@@ -148,9 +148,10 @@ td {
   width: 100%;
   display: flex;
   justify-content: end;
-  padding: 0px 15px;
+  padding: 10px 15px;
   color: blue;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .no-data-container {

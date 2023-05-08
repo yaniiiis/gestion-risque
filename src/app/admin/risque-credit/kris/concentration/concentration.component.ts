@@ -115,8 +115,7 @@ export class ConcentrationComponent implements OnInit {
 
   detailsClicked() {
     this.router.navigate([
-      "/Admin/Kri/concentration",
-      { id: this.selectedId, date: this.date },
+      `/Admin/Kri/concentration/${this.selectedId}/${this.date}`,
     ]);
   }
 
