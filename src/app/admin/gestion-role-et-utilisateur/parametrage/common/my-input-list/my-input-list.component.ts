@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { element } from "protractor";
 
@@ -10,18 +10,18 @@ import { element } from "protractor";
 export class MyInputListComponent implements OnInit {
   constructor() {}
 
-  @Input() callbackFunction: (args: any) => void;
+  // @Input() callbackFunction: (args: any) => any;
   @Input() hasError: boolean;
   @Input() list: any[];
+  @Input() listToDisplay: any[];
   @Input() title: string;
+  @Output() callbackFunction = new EventEmitter<string>();
 
   isListOpen: boolean = false;
   inputValue: string;
   listToFilter: any[];
 
-  ngOnInit(): void {
-    this.listToFilter = this.list;
-  }
+  ngOnInit(): void {}
 
   toggleList() {
     this.isListOpen = !this.isListOpen;
@@ -31,13 +31,13 @@ export class MyInputListComponent implements OnInit {
   }
 
   itemClicked(event: any) {
-    this.callbackFunction(event);
+    this.callbackFunction.emit(event);
     this.inputValue = event;
   }
 
   filtering(item: any) {
-    this.list = this.listToFilter.filter((element) =>
-      element.toString().includes(item)
+    this.listToDisplay = this.list.filter((element) =>
+      element.toString().toLocaleLowerCase().includes(item.toLocaleLowerCase())
     );
   }
 }

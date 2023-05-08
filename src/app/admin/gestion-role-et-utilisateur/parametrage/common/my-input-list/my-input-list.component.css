@@ -12,7 +12,7 @@
   padding: 5px;
 }
 
-.arrow-down-icon {
+.my-arrow-down-icon {
   position: absolute;
   right: 10px;
   top: 60%;
@@ -54,7 +54,7 @@
   z-index: 10;
   box-shadow: 1px 1px 2px rgb(211, 211, 211);
   max-height: 150px;
-  overflow-y: hidden;
+  overflow-y: scroll;
 }
 
 .caluse-item,

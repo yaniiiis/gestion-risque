@@ -69,7 +69,17 @@
   </form>
   <!-- Arithmetic Operations -->
   <ng-template #arithmeticOperation>
-    <form [formGroup]="formGroup2">
+    <form [formGroup]="formGroup">
+      <div class="my-form-column helf-width">
+        <label for="code" class="my-form-label">Code</label>
+        <input
+          placeholder="Code"
+          type="text"
+          name="code"
+          class="my-rapport-form-input-list"
+          formControlName="code"
+        />
+      </div>
       <div class="arethmetic-operation-container">
         <app-my-input-list
           [list]="codesToDisplay"
@@ -91,31 +101,6 @@
           [hasError]="hasError1_2"
           title="Sélection"
         ></app-my-input-list>
-
-        <!-- <select class="select-code" name="" id="" formControlName="code">
-          <option
-            class="my-option"
-            *ngFor="let item of codesToDisplay"
-            value="{{ item }}"
-          >
-            {{ item }}
-          </option>
-        </select> -->
-        <!-- <select
-          formControlName="operation"
-          class="select-operation"
-          name=""
-          id=""
-        >
-          <option *ngFor="let item of operationsToDisplay" value="{{ item }}">
-            {{ item }}
-          </option>
-        </select>
-        <select formControlName="code2" class="select-code" name="" id="">
-          <option *ngFor="let item of codesToDisplay" value="{{ item }}">
-            {{ item }}
-          </option>
-        </select> -->
       </div>
 
       <div class="middle-arithmetic-divider-container">
@@ -129,33 +114,52 @@
 
       <!-- second arithmetic operation if exist -->
 
-      <div
-        class="arethmetic-operation-container"
-        *ngIf="isSecondArethmeticOperation"
-        formGroupName="secondArithmetic"
-      >
-        <app-my-input-list
-          [list]="codesToDisplay"
-          [callbackFunction]="myCallbackFunction2_1"
-          [hasError]="hasError2_1"
-          title="Sélection"
-        ></app-my-input-list>
+      <div class="my-form-row">
+        <div
+          class="arethmetic-operation-container"
+          *ngIf="isSecondArethmeticOperation"
+          formGroupName="secondArithmetic"
+        >
+          <app-my-input-list
+            [list]="codesToDisplay"
+            [callbackFunction]="myCallbackFunction2_1"
+            [hasError]="hasError2_1"
+            title="Sélection"
+          ></app-my-input-list>
 
-        <app-my-input-list
-          [list]="operationsToDisplay"
-          [callbackFunction]="myCallbackFunctionOperation_2"
-          [hasError]="hasErrorOperation_1"
-          title="Opération"
-        ></app-my-input-list>
+          <app-my-input-list
+            [list]="operationsToDisplay"
+            [callbackFunction]="myCallbackFunctionOperation_2"
+            [hasError]="hasErrorOperation_1"
+            title="Opération"
+          ></app-my-input-list>
 
-        <app-my-input-list
-          [list]="codesToDisplay"
-          [callbackFunction]="myCallbackFunction2_2"
-          [hasError]="hasError2_2"
-          title="Sélection"
-        ></app-my-input-list>
-        <div class="x-delete" (click)="deleteSecondeArithmeticOperationClick()">
-          <mat-icon> delete_forever </mat-icon>
+          <app-my-input-list
+            [list]="codesToDisplay"
+            [callbackFunction]="myCallbackFunction2_2"
+            [hasError]="hasError2_2"
+            title="Sélection"
+          ></app-my-input-list>
+          <div
+            class="x-delete"
+            (click)="deleteSecondeArithmeticOperationClick()"
+          >
+            <mat-icon> delete_forever </mat-icon>
+          </div>
+        </div>
+      </div>
+
+      <div class="my-form-row">
+        <div class="my-form-column">
+          <label for="description" class="my-form-label">Description</label>
+          <textarea
+            rows="3"
+            class="my-rapport-form-textarea"
+            type="text"
+            placeholder="Description"
+            name="description"
+            formControlName="description"
+          ></textarea>
         </div>
       </div>
 

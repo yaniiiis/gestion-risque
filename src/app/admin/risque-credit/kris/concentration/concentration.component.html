@@ -23,15 +23,22 @@
     <div class="date-and-id-container">
       <div class="my-date-container">
         <label class="my-label" for="date-arrete">Date arreté</label>
-        <input type="date" id="date-arrete" class="my-input" />
+        <input
+          type="date"
+          id="date-arrete"
+          class="my-input"
+          [(ngModel)]="date"
+          (change)="dateChanged()"
+        />
       </div>
       <div class="id-client-or-group-container">
         <label class="my-label" for="id-client-or-group">{{
           inputListTitle
         }}</label>
         <app-my-input-list
-          [list]="clientsIds"
-          [callbackFunction]="idClientClicked"
+          [list]="listOfIds"
+          [listToDisplay]="listOfIds"
+          (callbackFunction)="idClientClicked($event)"
           [hasError]="myListInputHasError"
           [title]="inputListTitle"
         ></app-my-input-list>
@@ -41,36 +48,49 @@
     <div class="fonds-reglementaire-container">
       <div class="fond-container">
         <label class="my-label" for="fonds">Fond propres réglementaires</label>
-        <input type="text" id="fonds" class="my-input" />
+        <input
+          type="text"
+          id="fonds"
+          class="my-input"
+          [(ngModel)]="fondPropres"
+        />
+      </div>
+
+      <div class="my-button-calculer-container">
+        <button class="my-button-calculer" (click)="calculerClicked()">
+          Calculer
+        </button>
       </div>
     </div>
 
     <div class="my-table-container">
-      <table class="my-table">
-        <tr class="my-table-row">
-          <th class="my-table-head" *ngFor="let item of header">
-            {{ item }}
-          </th>
-        </tr>
-        <tr *ngIf="data; else selectionnerClientEtDate">
-          <td *ngFor="let item of header" (click)="tauxClicked(item)">
-            <span
-              [ngClass]="{ 'taux-span': item == 'Taux de concentration' }"
-              >{{ data[item] }}</span
-            >
-          </td>
-        </tr>
-        <ng-template #selectionnerClientEtDate>
-          <tr>
-            <td
-              [attr.colspan]="header.length"
-              class="selec-client-and-date-text"
-            >
-              Veuillez selectionner une date et un client
+      <div
+        class="my-table-container"
+        *ngIf="header && dataFinal.length > 0; else noData"
+      >
+        <table class="my-table">
+          <tr class="my-table-row">
+            <th class="my-table-head" *ngFor="let item of header">
+              {{ item }}
+            </th>
+          </tr>
+          <tr *ngFor="let d of dataFinal">
+            <td *ngFor="let item of d" (click)="tauxClicked(item)">
+              <span
+                [ngClass]="{ 'taux-span': item == 'Taux de concentration' }"
+                >{{ item }}</span
+              >
             </td>
           </tr>
-        </ng-template>
-      </table>
+        </table>
+      </div>
+
+      <ng-template #noData>
+        <div class="no-data-container">
+          Veuillez selectionner les information ci-dessus pour afficher les
+          données
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

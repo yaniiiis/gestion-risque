@@ -10,7 +10,7 @@
       [(ngModel)]="inputValue"
       (keyup)="filtering(inputValue)"
     />
-    <mat-icon (click)="toggleList()" class="arrow-down-icon"
+    <mat-icon (click)="toggleList()" class="my-arrow-down-icon"
       >keyboard_arrow_down</mat-icon
     >
   </div>
@@ -19,7 +19,7 @@
   <div class="clause-list-content" #clauseList *ngIf="isListOpen">
     <div
       class="caluse-item"
-      *ngFor="let item of list"
+      *ngFor="let item of listToDisplay"
       (click)="itemClicked(item)"
     >
       <span class="item_name">{{ item }}</span>

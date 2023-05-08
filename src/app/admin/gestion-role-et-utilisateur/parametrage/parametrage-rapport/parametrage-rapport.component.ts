@@ -35,18 +35,18 @@ export class ParametrageRapportComponent implements OnInit {
     this.parametrageService.clausesListSubject$.subscribe((c) => {
       this.choosedClauses = c;
     });
-    this.formGroup2 = new FormGroup({
-      code: new FormControl("", [Validators.required]),
-      operation: new FormControl("", [Validators.required]),
-      code2: new FormControl("", [Validators.required]),
-      secondArithmetic: new FormGroup({
-        code: new FormControl("", [Validators.required]),
-        operation: new FormControl("", [Validators.required]),
-        code2: new FormControl("", [Validators.required]),
-      }),
-    });
+    // this.formGroup2 = new FormGroup({
+    //   code1_1: new FormControl("", [Validators.required]),
+    //   operation: new FormControl("", [Validators.required]),
+    //   code1_2: new FormControl("", [Validators.required]),
+    //   secondArithmetic: new FormGroup({
+    //     code2_1: new FormControl("", [Validators.required]),
+    //     operation: new FormControl("", [Validators.required]),
+    //     code2_2: new FormControl("", [Validators.required]),
+    //   }),
+    // });
 
-    this.formGroup2Arithmetic = new FormGroup({});
+    // this.formGroup2Arithmetic = new FormGroup({});
   }
 
   filledKVOONumber: any[];
@@ -85,8 +85,8 @@ export class ParametrageRapportComponent implements OnInit {
     description: new FormControl("", [Validators.required]),
   });
 
-  formGroup2: FormGroup;
-  formGroup2Arithmetic: FormGroup;
+  // formGroup2: FormGroup;
+  // formGroup2Arithmetic: FormGroup;
 
   onSubmit() {
     this.kVooList[this.kVooList.length - 1].operand = "";
@@ -158,12 +158,14 @@ export class ParametrageRapportComponent implements OnInit {
         this.selectedArithmeticOperation2 +
         " " +
         this.selectedArithmetic2_2 +
-        " )"
+        " ) code : " +
+        this.code.value +
+        " description : " +
+        this.description.value
     );
     // console.log(this.arithmeticCode.value);
     // console.log(this.arithmeticOperation.value);
     // console.log(this.arithmeticCode2.value);
-
     // console.log("divided : ", this.divided);
 
     // console.log("2 : ", this.secondArithmeticCode.value);
@@ -177,11 +179,11 @@ export class ParametrageRapportComponent implements OnInit {
   deleteSecondeArithmeticOperationClick() {
     this.divided = false;
     this.isSecondArethmeticOperation = false;
-    this.formGroup2.get("secondArithmetic").patchValue({
-      code: "",
-      operation: "",
-      code2: "",
-    });
+    // this.formGroup2.get("secondArithmetic").patchValue({
+    //   code: "",
+    //   operation: "",
+    //   code2: "",
+    // });
   }
 
   onRequestOrArithmeticChanged(event: any) {
@@ -194,29 +196,29 @@ export class ParametrageRapportComponent implements OnInit {
     console.log("event : ", event);
   }
 
-  get arithmeticCode() {
-    return this.formGroup2.get("code");
-  }
+  // get arithmeticCode1_1() {
+  //   return this.formGroup2.get("code");
+  // }
 
-  get arithmeticOperation() {
-    return this.formGroup2.get("operation");
-  }
+  // get arithmeticOperation() {
+  //   return this.formGroup2.get("operation");
+  // }
 
-  get arithmeticCode2() {
-    return this.formGroup2.get("code2");
-  }
+  // get arithmeticCode1_2() {
+  //   return this.formGroup2.get("code2");
+  // }
 
-  get secondArithmeticCode() {
-    return this.formGroup2.get("secondArithmetic.code");
-  }
+  // get secondArithmeticCode2_1() {
+  //   return this.formGroup2.get("secondArithmetic.code");
+  // }
 
-  get secondArithmeticOperation() {
-    return this.formGroup2.get("secondArithmetic.operation");
-  }
+  // get secondArithmeticOperation() {
+  //   return this.formGroup2.get("secondArithmetic.operation");
+  // }
 
-  get secondArithmeticCode2() {
-    return this.formGroup2.get("secondArithmetic.code2");
-  }
+  // get secondArithmeticCode2_2() {
+  //   return this.formGroup2.get("secondArithmetic.code2");
+  // }
 
   myCallbackFunction1_1 = (args: any): void => {
     this.selectedArithmetic1_1 = args;
