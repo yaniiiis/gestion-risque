@@ -46,7 +46,7 @@ export class ConcentrationService {
       });
   }
 
-  getConcentrationClientDetails(id: string, date: string) {
+  getConcentrationClientDetails(id: string, date: string, type: string) {
     return this.httpClient.get(
       environment.baseUrl + `/concentration/detailParClient/${id}/${date}`
     );
