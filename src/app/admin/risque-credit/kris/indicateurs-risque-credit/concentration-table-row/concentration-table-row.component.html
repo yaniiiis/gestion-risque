@@ -1,56 +1,62 @@
-<!-- <table>
+<table *ngFor="let d of data">
   <thead>
-    <th class="theed__th--indicateur">Indice</th>
     <th *ngFor="let item of header">{{ item }}</th>
   </thead>
   <tbody>
-    <tr *ngFor="let item of selectedData | keyvalue">
-      <td class="tbody__td--label">{{ item.key }}</td>
-      <td class="tbody__td" *ngFor="let value of item | keyvalue">
+    <tr>
+      <td class="tbody__td--label">{{ d.Indice }}</td>
+      <td class="tbody__td" *ngFor="let v of d.values; let i = index">
+        <!-- <h1>{{ v[dates[i]] }}</h1> -->
         <tr class="tbody__td__tr yz_green">
           {{
-            item.value < min ? value.toString() + unit : ""
+            v[dates[i]] < d.min ? v[dates[i]].toString() + d.unit : ""
           }}
         </tr>
         <tr class="tbody__td__tr yz_yellow">
           {{
-            value >= min && value <= element.limit
-              ? value.toString() + unit
+            v[dates[i]] >= d.min && v[dates[i]] <= d.limit
+              ? v[dates[i]].toString() + d.unit
               : ""
           }}
         </tr>
         <tr class="tbody__td__tr yz_red">
           {{
-            value > element.limit ? value.toString() + element.unit : ""
+            v[dates[i]] > d.limit ? v[dates[i]].toString() + d.unit : ""
           }}
         </tr>
       </td>
-      <td class="tbody__td--limit">{{ element.limit }}</td>
+      <td class="tbody__td--limit">{{ d.limit }}</td>
       <td class="tbody__td--trigger">
         <tr class="tbody__td__tr yz_green">
-          <td class="tbody__td--compareValues">
-            < {{ element.min + element.unit }}
-          </td>
-          <td class="tbody__td--colors yz_bgGreen"></td>
+          <td class="tbody__td--compareValues">< {{ d.min }}</td>
         </tr>
         <tr class="tbody__td__tr yz_yellow">
           <td class="tbody__td--compareValues">
-            {{ element.limit + element.unit }} -
-            {{ element.min + element.unit }}
+            {{ d.limit }} -
+            {{ d.min }}
           </td>
+        </tr>
+        <tr class="tbody__td__tr yz_red">
+          <td class="tbody__td--compareValues">> {{ d.limit }}</td>
+        </tr>
+      </td>
+
+      <td class="tbody__td--trigger">
+        <tr class="tbody__td__tr yz_green">
+          <td class="tbody__td--colors yz_bgGreen"></td>
+        </tr>
+        <tr class="tbody__td__tr yz_yellow">
           <td class="tbody__td--colors yz_bgYellow"></td>
         </tr>
         <tr class="tbody__td__tr yz_red">
-          <td class="tbody__td--compareValues">
-            > {{ element.limit + element.unit }}
-          </td>
           <td class="tbody__td--colors yz_bgRed"></td>
         </tr>
       </td>
-      <td class="tbody__td--commentaire">
-        {{ element.commentaire }}
-      </td>
+
+      <!-- <td class="tbody__td--commentaire">
+        {{ d.commentaire }}
+      </td> -->
     </tr>
   </tbody>
   <tfoot></tfoot>
-</table> -->
+</table>

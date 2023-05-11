@@ -63,7 +63,7 @@
       </div>
     </div>
 
-    <div class="my-table-container">
+    <div class="">
       <div
         class="my-table-container"
         *ngIf="header && dataFinal.length > 0; else noData"
@@ -75,11 +75,13 @@
             </th>
           </tr>
           <tr *ngFor="let d of dataFinal">
-            <td *ngFor="let item of d" (click)="tauxClicked(item)">
-              <span
-                [ngClass]="{ 'taux-span': item == 'Taux de concentration' }"
-                >{{ item }}</span
-              >
+            <td
+              *ngFor="let item of d; let i = index"
+              (click)="i == d.length - 1 && tauxClicked(item)"
+            >
+              <span [ngClass]="{ 'taux-span': i == d.length - 1 }">{{
+                item ? item : "/"
+              }}</span>
             </td>
           </tr>
         </table>
@@ -90,8 +92,7 @@
 
       <ng-template #noData>
         <div class="no-data-container">
-          Veuillez selectionner les information ci-dessus pour afficher les
-          données
+          {{ textNoData }}
         </div>
       </ng-template>
     </div>

@@ -8,5 +8,13 @@ import { Component, OnInit } from "@angular/core";
 export class IndicateursRisqueCreditComponent implements OnInit {
   constructor() {}
 
+  date: string;
+  choicesOfKris = ["kris1", "kris2", "kris3"];
+  selectedChoiceIndex: number = 0;
+
   ngOnInit(): void {}
+
+  dateChanged() {}
+
+  krisChoiceChanged(item: string) {}
 }

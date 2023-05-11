@@ -247,7 +247,7 @@ export const AdminLayoutRoutes: Routes = [
             component: ConcentrationComponent,
           },
           {
-            path: "concentration/:id/:date",
+            path: "concentration/:type/:id/:date",
             component: ConcentrationDetailsComponent,
           },
           {

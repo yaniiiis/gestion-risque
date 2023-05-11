@@ -26,6 +26,9 @@ export class ConcentrationComponent implements OnInit {
   fondPropres: any;
   sss: string;
   listOfIds: string[] = [];
+  textNoData: string =
+    "Veuillez selectionner les information ci-dessus pour afficher les données";
+  taux: number;
 
   ngOnInit(): void {
     this.concentrationService.listOfIds$.subscribe((l) => {
@@ -53,16 +56,22 @@ export class ConcentrationComponent implements OnInit {
       );
     }
     subsraption.subscribe((response) => {
+      this.dataFinal = [];
+      if (response.length == 0) this.textNoData = "Données non disponibles ";
       response.forEach((element: any) => {
-        let dd = [this.date];
+        console.log("response : ", response);
+        let dd: any[] = [this.date];
         for (const key in element) {
-          if (!this.header.includes(key)) {
-            this.header.push(key);
+          if (!this.header.includes(this.myMapper[key])) {
+            this.header.push(this.myMapper[key]);
           }
           dd.push(element[key]);
         }
+        dd.push(element["risquePendree"] / this.fondPropres);
         this.dataFinal.push(dd);
       });
+      console.log("Data final : ", this.dataFinal);
+      if (!this.header.includes("Taux")) this.header.push("Taux");
     });
   }
 
@@ -84,6 +93,9 @@ export class ConcentrationComponent implements OnInit {
     this.selectedChoice = item;
     this.dataFinal = [];
     this.selectedId = undefined;
+    this.date = "";
+    this.listOfIds = [];
+    this.fondPropres = undefined;
     if (item.toLocaleLowerCase() == "concentration par client") {
       this.inputListTitle = "Client";
       this.data = this.tableData;
@@ -105,17 +117,21 @@ export class ConcentrationComponent implements OnInit {
   }
 
   tauxClicked(item: string) {
-    if (item.toLocaleLowerCase().trim() == "taux de concentration") {
-      this.router.navigate([
-        "/Admin/Kri/concentration",
-        { id: this.selectedId, date: this.date },
-      ]);
-    }
+    console.log("Taux clickeeeeeed : ", item);
+
+    // return console.log(
+    //   `selected choice ${this.selectedChoice}\n selectedID : ${this.selectedId} \n date : ${this.date}`
+    // );
+    // if (item.toLocaleLowerCase().trim() == "taux de concentration") {
+    this.router.navigate([
+      `/Admin/Kri/concentration/${this.selectedChoice}/${this.selectedId}/${this.date}`,
+    ]);
+    // }
   }
 
   detailsClicked() {
     this.router.navigate([
-      `/Admin/Kri/concentration/${this.selectedId}/${this.date}`,
+      `/Admin/Kri/concentration/${this.selectedChoice}/${this.selectedId}/${this.date}`,
     ]);
   }
 
@@ -159,7 +175,7 @@ export class ConcentrationComponent implements OnInit {
     "Taux de concentration": "11%",
   };
 
-  mapForMappin = {
+  myMapper = {
     date: "Date",
     id: "ID Client",
     nom: "Nom Client",
@@ -170,7 +186,9 @@ export class ConcentrationComponent implements OnInit {
     risqueNet: "Risque net",
     engagementHorsBilan: "Engagement hors bilan",
     grantiesHorsBilan: "Garanties hors bilan",
+    risquePendree: "Risque pendéré",
   };
+
   lastData = [
     {
       id: "XXFXEZGF",

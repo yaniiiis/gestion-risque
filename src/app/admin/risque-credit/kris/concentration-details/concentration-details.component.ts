@@ -1,6 +1,7 @@
 import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
+import { type } from "os";
 import { ConcentrationService } from "src/app/_services/ConcentrationService/concentration-service.service";
 
 @Component({
@@ -16,19 +17,20 @@ export class ConcentrationDetailsComponent implements OnInit {
   ) {}
 
   data = [];
-
+  id = this.activatedRoute.snapshot.paramMap.get("id");
+  date = this.activatedRoute.snapshot.paramMap.get("date");
+  type = this.activatedRoute.snapshot.paramMap.get("type");
   ngOnInit(): void {
-    const id = this.activatedRoute.snapshot.paramMap.get("id");
-    const date = this.activatedRoute.snapshot.paramMap.get("date");
+    console.log("selected type : ", this.type);
 
     this.concentrationService
-      .getConcentrationClientDetails(id, date)
+      .getConcentrationClientDetails(this.id, this.date, this.type)
       .subscribe((response: any[]) => {
         response.forEach((element) => {
           console.log("Response from details : ", response);
           const obj = {
-            Date: date,
-            "ID Client": id,
+            Date: this.date,
+            "ID Client": this.id,
             Agence: element["desc_AGENCE"],
             "Numero compte": element["numero_COMPTE"],
             "Type engagement": element["type_ENGAGEMENT"],
@@ -46,7 +48,7 @@ export class ConcentrationDetailsComponent implements OnInit {
 
   header = [
     "Date",
-    "ID Client",
+    this.type == "client" ? "ID Client" : "ID Client",
     "Agence",
     "Numero compte",
     "Type engagement",

@@ -73,6 +73,11 @@
   margin-right: 15p;
 }
 
+.my-table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .my-label {
   font-size: 14px;
   line-height: 1.42857;
@@ -88,6 +93,7 @@ table {
   width: 100%;
   overflow: auto;
   margin-top: 40px;
+  overflow-x: auto;
 }
 
 th,
