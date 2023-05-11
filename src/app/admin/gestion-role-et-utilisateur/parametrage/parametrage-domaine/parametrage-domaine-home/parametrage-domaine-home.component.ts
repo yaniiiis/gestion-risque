@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { Domaine } from "src/app/Models/Domaine";
-import { ParametrageService } from "src/app/_services/ParametrageService/parametrage.service";
 import { map } from "jquery";
 import { Subscription } from "rxjs";
+import { Domaine } from "src/app/Models/Domaine";
+import { ParametrageService } from "src/app/_services/ParametrageService/parametrage.service";
 
 @Component({
   selector: "app-parametrage-domaine-home",

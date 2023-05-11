@@ -1,0 +1,95 @@
+<form [formGroup]="formGroupe" class="container-key-value">
+  <div>
+    <div class="my-form-row">
+      <div class="my-form-column">
+        <label class="my-form-label" for="key">Clé</label>
+        <input
+          placeholder="Clé"
+          type="text"
+          name="key"
+          class="my-rapport-form-input-list"
+          formControlName="key"
+          (click)="toggleKeysList()"
+          (keyup)="filterKeys(key.value)"
+          autocomplete="off"
+        />
+        <p
+          *ngIf="keyHasError || (plusClicked && !choosedKey)"
+          class="span-error"
+        >
+          Veuillez choisir une clé
+        </p>
+        <div class="list_content" #domaineList *ngIf="isListKeyOpen">
+          <div
+            class="list_item"
+            *ngFor="let item of keysToDisplay"
+            (click)="keyClicked(item)"
+          >
+            <span class="item_name" #itemText>{{ item }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="my-form-column">
+        <label class="my-form-label" for="operation"> Opération</label>
+        <input
+          type="text"
+          name="operation"
+          class="my-rapport-form-input-list"
+          placeholder="Opération"
+          formControlName="operation"
+          (keyup)="filterOperations(operation.value)"
+          (click)="toggleOperationsList()"
+          autocomplete="off"
+        />
+        <p
+          *ngIf="operationHasError || (plusClicked && !choosedOperation)"
+          class="span-error"
+        >
+          Veuillez choisir une operation
+        </p>
+        <div class="list_content" *ngIf="isListOperationOpen">
+          <div
+            class="list_item"
+            *ngFor="let item of operationsToDisplay"
+            (click)="operationClicked(item)"
+          >
+            <span class="item_name">{{ item }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="my-form-column">
+        <label class="my-form-label" for="value">Valeur</label>
+        <input
+          placeholder="Valeur"
+          type="text"
+          name="value"
+          class="my-rapport-form-input-list"
+          formControlName="value"
+          autocomplete="off"
+          (keyup)="valueKeyup(value.value)"
+        />
+        <p *ngIf="plusClicked && value.invalid" class="span-error">
+          Veuillez entrer une valeur valide
+        </p>
+      </div>
+      <div class="my-form-column">
+        <label class="my-form-label" for="key">Opérande</label>
+        <mat-radio-group
+          formControlName="operand"
+          aria-label="Selectionnez un opérand"
+        >
+          <mat-radio-button value="OR">OR</mat-radio-button>
+          <mat-radio-button value="AND">AND</mat-radio-button>
+          <div class="plus-icon" (click)="plusClick()">+</div>
+          <!-- <mat-radio-button value="Aucun">Aucun</mat-radio-button> -->
+        </mat-radio-group>
+      </div>
+      <div class="x-delete" (click)="deleteClick()">
+        <mat-icon> delete_forever </mat-icon>
+      </div>
+    </div>
+
+    <!-- <div class="my-form-row"></div> -->
+  </div>
+</form>

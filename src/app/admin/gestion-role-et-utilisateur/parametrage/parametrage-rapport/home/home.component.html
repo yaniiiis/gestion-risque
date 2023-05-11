@@ -1,0 +1,11 @@
+<div>
+  <app-list></app-list>
+  <div class="no-item-selected" *ngIf="typesMap.size == 0">
+    Aucun type n'est selectionné
+  </div>
+  <app-table
+    *ngFor="let item of typesMap | keyvalue"
+    [type]="item.key"
+    [passedRapportsLine]="item.value"
+  ></app-table>
+</div>

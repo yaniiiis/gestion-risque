@@ -1,0 +1,80 @@
+<div class="mycontainer">
+  <div class="domainesContainer">
+    <div class="domainsUtils">
+      <input
+        type="text"
+        placeholder="Rechercher"
+        class="searchInput"
+        (keyup)="searching(searchInput.value)"
+        #searchInput
+      />
+    </div>
+    <div class="domaineItems domaineHeader">
+      <div class="domaineItem">Code</div>
+      <div class="domaineItem">Entitie</div>
+      <div class="domaineItem">Domaine code</div>
+      <div class="domaineItem">Obligatoire</div>
+      <div class="domaineItem">Actions</div>
+    </div>
+    <div class="domaineItems" *ngFor="let item of columns">
+      <div class="domaineItem domaineName">{{ item.codeColumn }}</div>
+      <div class="domaineItem domaineCode">{{ item.entiteColumn }}</div>
+      <div class="domaineItem domaineDescription">{{ item.domaineCode }}</div>
+      <div class="domaineItem domaineDescription">
+        {{ item.obligatoire ? "Oui" : "Non" }}
+      </div>
+      <div class="domaineItem domaineActions">
+        <mat-spinner
+          class="actionSpinner"
+          *ngIf="isEditLoading; else editIcon"
+          [diameter]="25"
+        ></mat-spinner>
+
+        <ng-template #editIcon>
+          <mat-icon class="actionEdit" (click)="openEditDialog(item)"
+            >edit</mat-icon
+          >
+        </ng-template>
+
+        <mat-spinner
+          class="actionSpinner"
+          *ngIf="isDeleteLoading; else deleteIcon"
+          [diameter]="25"
+        ></mat-spinner>
+
+        <ng-template #deleteIcon>
+          <mat-icon class="actionDelete" (click)="openDeleteDialog(item)">
+            delete_forever
+          </mat-icon>
+        </ng-template>
+      </div>
+    </div>
+    <!-- <div class="addDivContainer">
+      <mat-spinner
+        class="actionSpinner"
+        *ngIf="isAddLoading; else addDomaine"
+        [diameter]="25"
+      ></mat-spinner>
+      <ng-template #addDomaine>
+        <div class="addDiv" (click)="openAddDialog()">
+          Ajouter un(e) {{ key }}
+        </div>
+        <div
+          *ngIf="
+            doaminesToAdd.length > 0 ||
+            doaminesToUpdate.length > 0 ||
+            domainesToDelete.length > 0
+          "
+          class="sauvgarder"
+          (click)="sauvgarderClick()"
+        >
+          <mat-spinner
+            [diameter]="25"
+            *ngIf="saveIsLoading; else sauvgarder"
+          ></mat-spinner>
+          <ng-template #sauvgarder> <span>Sauvgarder</span></ng-template>
+        </div>
+      </ng-template>
+    </div> -->
+  </div>
+</div>

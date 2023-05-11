@@ -1,0 +1,109 @@
+<div class="mycontainer" *ngIf="rapportLinesIsShown; else sousTypes">
+  <div class="myHeader" (click)="setIsOpen()">
+    {{ choosedUnderType + " - " + type }}
+  </div>
+  <div class="domainesContainer" *ngIf="isOpen">
+    <div class="domainsUtils">
+      <div class="back-icon-container">
+        <mat-icon class="back-icon" (click)="hiddenRapportLines()"
+          >arrow_back_ios</mat-icon
+        >
+      </div>
+
+      <input
+        type="text"
+        placeholder="Rechercher"
+        class="searchInput"
+        (keyup)="searching(searchInput.value)"
+        #searchInput
+      />
+    </div>
+    <div class="domaineItems domaineHeader">
+      <div class="domaineItem">Type</div>
+      <div class="domaineItem">Code</div>
+      <div class="domaineItem">Description</div>
+      <div class="domaineItem">Actions</div>
+    </div>
+    <div class="domaineItems" *ngFor="let item of passedRapportsLine">
+      <div class="domaineItem domaineName">{{ item.sousType }}</div>
+      <div class="domaineItem domaineCode">{{ item.code }}</div>
+      <div class="domaineItem domaineDescription">{{ item.description }}</div>
+      <div class="domaineItem domaineActions">
+        <mat-spinner
+          class="actionSpinner"
+          *ngIf="isEditLoading; else editIcon"
+          [diameter]="25"
+        ></mat-spinner>
+
+        <ng-template #editIcon>
+          <mat-icon class="actionEdit" (click)="openEditDialog(item)"
+            >edit</mat-icon
+          >
+        </ng-template>
+
+        <mat-spinner
+          class="actionSpinner"
+          *ngIf="isDeleteLoading; else deleteIcon"
+          [diameter]="25"
+        ></mat-spinner>
+
+        <ng-template #deleteIcon>
+          <mat-icon class="actionDelete" (click)="openDeleteDialog(item)">
+            delete_forever
+          </mat-icon>
+        </ng-template>
+      </div>
+    </div>
+    <div class="addDivContainer">
+      <mat-spinner
+        class="actionSpinner"
+        *ngIf="isAddLoading; else addDomaine"
+        [diameter]="25"
+      ></mat-spinner>
+      <ng-template #addDomaine>
+        <div class="addDiv" (click)="openAddDialog()">
+          Ajouter au {{ type }}
+        </div>
+        <div
+          *ngIf="
+            typesToAdd.length > 0 ||
+            typesToUpdate.length > 0 ||
+            typesToDelete.length > 0
+          "
+          class="sauvgarder"
+          (click)="sauvgarderClick()"
+        >
+          <mat-spinner
+            [diameter]="25"
+            *ngIf="saveIsLoading; else sauvgarder"
+          ></mat-spinner>
+          <ng-template #sauvgarder> <span>Sauvgarder</span></ng-template>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+<div class="mycontainer">
+  <ng-template #sousTypes>
+    <div class="myHeader under-type-header" (click)="setIsOpen()">
+      {{ type }}
+    </div>
+    <div class="under-type-container" *ngIf="isOpen">
+      <div
+        (click)="handleShowLine(item)"
+        class="under-type-card"
+        *ngFor="let item of listUnderType"
+      >
+        {{ item }}
+        <mat-icon class="delete-under-type" (click)="deleteUnderType(item)"
+          >delete_forever</mat-icon
+        >
+        <!-- <mat-icon class="under-type-delete-icon">delete_forever</mat-icon> -->
+      </div>
+      <div (click)="handleAddUnderType()" class="under-type-card">
+        <div class="my-add-icon">+</div>
+      </div>
+      <p class="delete-type" (click)="deleteType(type)">Supprimer ce type</p>
+    </div>
+  </ng-template>
+</div>

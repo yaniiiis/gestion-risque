@@ -8,17 +8,17 @@ import { Component, OnInit } from "@angular/core";
 export class ParametrageAnalysePortfeuilleComponent implements OnInit {
   protected menuItems = [
     {
-      menuItem: "Parametrage analyse des portefeuilles ",
-      path: "ParametrageIndirect",
+      menuItem: "Rapports ",
+      path: "Rapport",
     },
-
     {
       menuItem: "Domaines ",
       path: "ParametrageDomaine",
     },
+
     {
-      menuItem: "Rapport ",
-      path: "rapport",
+      menuItem: "Columns ",
+      path: "columns",
     },
   ];
   constructor() {}

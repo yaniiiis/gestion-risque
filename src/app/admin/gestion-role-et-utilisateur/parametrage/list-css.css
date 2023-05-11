@@ -1,0 +1,56 @@
+/* List CSS */
+.myContainer {
+  display: flex;
+  align-items: center;
+}
+
+.list_input {
+  position: relative;
+  width: 200px;
+  height: 45px;
+  padding: 6px;
+  border: solid 1px rgb(226, 224, 224);
+  border-radius: 6px;
+  margin-right: 10px;
+}
+.list_content {
+  position: absolute;
+  top: 60px;
+  left: 19px;
+  padding-right: 6px;
+  padding-left: 6px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  width: 200px;
+  background-color: white;
+  box-shadow: 0.7px 1.5px 2px rgb(196, 195, 195);
+}
+
+.list_item {
+  padding: 6px;
+  margin-right: 2px;
+  margin-left: 2px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.addDiv {
+  width: 37px;
+  height: 37px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  background-color: #3c4858;
+  font-weight: bold;
+  font-size: 22px;
+  color: white;
+  z-index: 100;
+  cursor: pointer;
+}
+
+mat-checkbox {
+  margin-top: 5.5px;
+}

@@ -1,0 +1,59 @@
+<form *ngIf="onEdit; else divs" [formGroup]="formGroup" ]>
+  <input
+    class="edit-column-input"
+    type="text"
+    formControlName="code"
+    placeholder="Code"
+  />
+  <input
+    class="edit-column-input"
+    type="text"
+    formControlName="entite"
+    placeholder="Entité"
+  />
+  <input
+    class="edit-column-input"
+    type="text"
+    formControlName="domaineCode"
+    placeholder="Code domaine"
+  />
+  <input
+    type="checkbox"
+    formControlName="obligatoire"
+    placeholder="Code domaine"
+  />
+</form>
+
+<ng-template class="domaineItems" #divs>
+  <div class="domaineItem domaineName">{{ column.codeColumn }}</div>
+  <div class="domaineItem domaineCode">{{ column.entiteColumn }}</div>
+  <div class="domaineItem domaineDescription">{{ column.domaineCode }}</div>
+  <div class="domaineItem domaineDescription">
+    {{ column.obligatoire ? "Oui" : "Non" }}
+  </div>
+  <div class="domaineItem domaineActions">
+    <mat-spinner
+      class="actionSpinner"
+      *ngIf="isEditLoading; else editIcon"
+      [diameter]="25"
+    ></mat-spinner>
+
+    <ng-template #editIcon>
+      <mat-icon class="actionEdit" (click)="editIconClicked(item)"
+        >edit</mat-icon
+      >
+    </ng-template>
+
+    <mat-spinner
+      class="actionSpinner"
+      *ngIf="isDeleteLoading; else deleteIcon"
+      [diameter]="25"
+    ></mat-spinner>
+
+    <ng-template #deleteIcon>
+      <mat-icon class="actionDelete" (click)="openDeleteDialog(item)">
+        delete_forever
+      </mat-icon>
+    </ng-template>
+  </div>
+</ng-template>

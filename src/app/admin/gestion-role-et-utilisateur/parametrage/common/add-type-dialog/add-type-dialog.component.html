@@ -1,0 +1,46 @@
+<div class="title-and-delete-icon" mat-dialog-title>
+  <h3 class="DialogTitle">Ajouter Un type</h3>
+  <mat-icon (click)="onNoClick()" class="delete-x">cancel</mat-icon>
+</div>
+
+<div mat-dialog-content>
+  <form class="addForm" [formGroup]="formGroup">
+    <input
+      class="formInput"
+      type="text"
+      placeholder="Type"
+      name="type"
+      formControlName="title"
+    />
+    <span *ngIf="title.touched && title.invalid" class="span-error">
+      Champ invalid
+    </span>
+
+    <textarea
+      class="formInput"
+      type="text"
+      placeholder="Déscription"
+      name="description"
+      formControlName="description"
+      rows="3"
+    ></textarea>
+    <span *ngIf="description.touched && description.invalid" class="span-error">
+      Champ invalid
+    </span>
+  </form>
+</div>
+<div class="myActionsContainer">
+  <!-- <button mat-button (click)="onNoClick()">Annuler</button> -->
+  <button
+    mat-button
+    cdkFocusInitial
+    [mat-dialog-close]="{
+      title: title.value.trim(),
+      description: description.value.trim()
+    }"
+    [ngClass]="formGroup.invalid ? 'my-add-button-disabled' : 'my-add-button'"
+    [disabled]="formGroup.invalid"
+  >
+    Ajouter
+  </button>
+</div>

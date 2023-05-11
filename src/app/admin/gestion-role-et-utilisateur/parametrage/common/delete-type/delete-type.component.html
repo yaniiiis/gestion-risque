@@ -1,0 +1,19 @@
+<h3 class="DialogTitle" mat-dialog-title>Supprimer {{ data.type }}</h3>
+<div mat-dialog-content>
+  <p>
+    en supprimant ce type, toute les lignes de ce dernier seront supprimés de la
+    base de données
+  </p>
+  <h4>etes vous sur de vouloir supprimer ce type ?</h4>
+</div>
+<div mat-dialog-actions class="myActionsContainer">
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button
+    mat-button
+    cdkFocusInitial
+    [mat-dialog-close]="data.type"
+    class="deleteAction"
+  >
+    Oui
+  </button>
+</div>

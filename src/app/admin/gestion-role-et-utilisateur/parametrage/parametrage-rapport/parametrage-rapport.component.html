@@ -1,25 +1,171 @@
-<div>
-  <form class="my-rapport-form">
+<div class="my-dialog-container">
+  <mat-icon class="x-dialog" (click)="closeDialog()">cancel</mat-icon>
+  <mat-radio-group
+    class="request-arithmetic-radio-container"
+    (change)="onRequestOrArithmeticChanged($event)"
+  >
+    <mat-radio-button value="Requete" checked>Requete</mat-radio-button>
+    <mat-radio-button value="Arithmetic">Arithmetic</mat-radio-button>
+  </mat-radio-group>
+  <form
+    *ngIf="isRequest; else arithmeticOperation"
+    class="my-form"
+    [formGroup]="formGroup"
+  >
     <div class="my-form-row">
       <div class="my-form-column">
-        <label for="nom" class="my-form-label">Code </label>
-        <input type="text" name="code" class="my-rapport-form-input-list" />
+        <label for="code" class="my-form-label">Code</label>
+        <input
+          placeholder="Code"
+          type="text"
+          name="code"
+          class="my-rapport-form-input-list"
+          formControlName="code"
+        />
       </div>
       <div class="my-form-column">
         <label for="type" class="my-form-label">Clause </label>
-        <div>Cliquer pour choisir une clause</div>
-      </div>
-      <div>
-        <label for="code" class="my-form-label">Description</label>
-        <textarea rows="4"> </textarea>
-      </div>
-
-      <div class="form-keyValueOperation">
-        <input type="text" name="key" class="keyValueOperation-input" />
-        <input type="text" name="value" class="keyValueOperation-input" />
-        <input type="text" name="operation" class="keyValueOperation-input" />
+        <div (click)="openClauseDialog()" class="clause-click-div">
+          Cliquer pour choisir une clause ({{ choosedClauses.length }})
+        </div>
       </div>
     </div>
-    <div class="my-form-submit-button">Ajouter</div>
+
+    <app-key-value-operand
+      style="width: 100%"
+      *ngFor="let item of kVooList"
+      [kVOO]="item"
+    ></app-key-value-operand>
+    <div class="my-form-row">
+      <div class="my-form-column">
+        <label for="description" class="my-form-label">Description</label>
+        <textarea
+          rows="3"
+          class="my-rapport-form-textarea"
+          type="text"
+          placeholder="Description"
+          name="description"
+          formControlName="description"
+        ></textarea>
+      </div>
+    </div>
+
+    <button
+      class="my-add-button"
+      type="submit"
+      [mat-dialog-close]="{
+        id: 0,
+        code: code.value.trim(),
+        description: description.value,
+        clauses: choosedClauses,
+        kvoo_s: kVooList,
+        type: data.key
+      }"
+      [disabled]="isButtonDisabled()"
+      (click)="onSubmit()"
+    >
+      Ajouter
+    </button>
   </form>
+  <!-- Arithmetic Operations -->
+  <ng-template #arithmeticOperation>
+    <form [formGroup]="formGroup">
+      <div class="my-form-column helf-width">
+        <label for="code" class="my-form-label">Code</label>
+        <input
+          placeholder="Code"
+          type="text"
+          name="code"
+          class="my-rapport-form-input-list"
+          formControlName="code"
+        />
+      </div>
+      <div class="arethmetic-operation-container">
+        <app-my-input-list
+          [list]="codesToDisplay"
+          [callbackFunction]="myCallbackFunction1_1"
+          [hasError]="hasError1_1"
+          title="Sélection"
+        ></app-my-input-list>
+
+        <app-my-input-list
+          [list]="operationsToDisplay"
+          [callbackFunction]="myCallbackFunctionOperation_1"
+          [hasError]="hasErrorOperation_1"
+          title="Opération"
+        ></app-my-input-list>
+
+        <app-my-input-list
+          [list]="codesToDisplay"
+          [callbackFunction]="myCallbackFunction1_2"
+          [hasError]="hasError1_2"
+          title="Sélection"
+        ></app-my-input-list>
+      </div>
+
+      <div class="middle-arithmetic-divider-container">
+        <button
+          class="middle-arithmetic-divider"
+          (click)="showSecondArithmeticOperation()"
+        >
+          /
+        </button>
+      </div>
+
+      <!-- second arithmetic operation if exist -->
+
+      <div class="my-form-row">
+        <div
+          class="arethmetic-operation-container"
+          *ngIf="isSecondArethmeticOperation"
+          formGroupName="secondArithmetic"
+        >
+          <app-my-input-list
+            [list]="codesToDisplay"
+            [callbackFunction]="myCallbackFunction2_1"
+            [hasError]="hasError2_1"
+            title="Sélection"
+          ></app-my-input-list>
+
+          <app-my-input-list
+            [list]="operationsToDisplay"
+            [callbackFunction]="myCallbackFunctionOperation_2"
+            [hasError]="hasErrorOperation_1"
+            title="Opération"
+          ></app-my-input-list>
+
+          <app-my-input-list
+            [list]="codesToDisplay"
+            [callbackFunction]="myCallbackFunction2_2"
+            [hasError]="hasError2_2"
+            title="Sélection"
+          ></app-my-input-list>
+          <div
+            class="x-delete"
+            (click)="deleteSecondeArithmeticOperationClick()"
+          >
+            <mat-icon> delete_forever </mat-icon>
+          </div>
+        </div>
+      </div>
+
+      <div class="my-form-row">
+        <div class="my-form-column">
+          <label for="description" class="my-form-label">Description</label>
+          <textarea
+            rows="3"
+            class="my-rapport-form-textarea"
+            type="text"
+            placeholder="Description"
+            name="description"
+            formControlName="description"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="arithmetic-add-button-container">
+        <button class="my-add-button" (click)="addArithmetic()">ajouter</button>
+      </div>
+    </form>
+  </ng-template>
 </div>

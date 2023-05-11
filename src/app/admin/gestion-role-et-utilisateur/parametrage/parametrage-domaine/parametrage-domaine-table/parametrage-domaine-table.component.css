@@ -1,15 +1,17 @@
-.mycontainer {
+/* .mycontainer {
   padding: 6px;
 }
 
 .myHeader {
   width: 100%;
-  padding: 6px;
+  padding: 8px;
   background-color: blue;
   color: #ffffff;
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
+  border-radius: 5px;
+
 }
 
 .domainsUtils {
@@ -127,4 +129,4 @@
   padding-left: 4px;
   padding-right: 4px;
   color: red;
-}
+} */
