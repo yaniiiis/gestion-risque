@@ -1,0 +1,157 @@
+.mycontainer {
+  padding: 6px;
+}
+
+.myHeader {
+  width: 100%;
+  padding: 8px;
+  background-color: #3c4858;
+  color: #ffffff;
+  font-size: 19px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.domainsUtils {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 70px;
+  align-items: center;
+}
+
+.back-icon-container {
+  background-color: white;
+  box-shadow: 1.5px 1.5px 2px #7f93ad;
+  color: #3c4858;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+}
+
+.back-icon:hover {
+  scale: 1.05;
+}
+
+.searchInput {
+  width: 150px;
+  height: 40px;
+  padding: 6px;
+  border: solid 1px rgb(226, 224, 224);
+  border-radius: 6px;
+  margin-right: 8px;
+}
+
+.addDivContainer {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-top: 20px;
+}
+
+.addDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  padding: 0px 10px;
+  height: 40px;
+  background: #3c4858;
+  color: white;
+  border-radius: 5px;
+  border: solid 0.5px #3c4858;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.addDiv:hover {
+  scale: 1.03;
+  animation: 300ms;
+  transition: all;
+}
+
+.sauvgarder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  width: 150px;
+  height: 40px;
+  background: green;
+  color: white;
+  border-radius: 5px;
+  border: solid 0.5px green;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.sauvgarder:hover {
+  scale: 1.03;
+  animation: 300ms;
+  transition: all;
+}
+
+.domainesContainer {
+  user-select: none;
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.domaineItems {
+  display: flex;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-weight: 500;
+  align-items: center;
+  border-bottom: solid 0.5px #ddd5d5;
+  color: #323232;
+  height: 50px;
+}
+
+.domaineHeader {
+  font-weight: bold;
+  background-color: #f5f3f3;
+}
+
+.domaineItem {
+  flex: 1;
+  text-align: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+}
+
+.domaineDescription {
+  width: 150px;
+}
+
+.domaineActions {
+  display: flex;
+}
+
+.actionEdit {
+  padding-left: 4px;
+  padding-right: 4px;
+  color: gray;
+}
+.actionDelete {
+  padding-left: 4px;
+  padding-right: 4px;
+  color: red;
+}
+
+.sous-type-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}

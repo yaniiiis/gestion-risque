@@ -12,53 +12,96 @@
         </div>
     </div>
 </div>
-<!-- <app-ratio-liquidite-mensuel-ratio [selectedDate]="selectedDate"></app-ratio-liquidite-mensuel-ratio>
-<app-consultation-ratio2-liquidite-ratio [selectedDate]="selectedDate"></app-consultation-ratio2-liquidite-ratio>
-<app-consultation-ratio3-liquidite-ratio [selectedDate]="selectedDate"></app-consultation-ratio3-liquidite-ratio>
-<app-consultation-ratio4-liquidite-ratio [selectedDate]="selectedDate"></app-consultation-ratio4-liquidite-ratio>
-<app-consultation-ratio5-liquidite-ratio [selectedDate]="selectedDate"></app-consultation-ratio5-liquidite-ratio>
-<app-consultation-ratio6-liquidite-ratio [selectedDate]="selectedDate"></app-consultation-ratio6-liquidite-ratio> -->
+
 
 <div class="container-fluid">
     <div class="row">
         <table class="table">
             <thead>
                 <th class="theed__th--indicateur">Indice</th>
-                <th class="theed__th--indicateur">Valeur</th>
+                <th class="theed__th--indicateur">{{ decembrePrecedent }}</th>
+                <th class="theed__th--indicateur">{{ premierMoisDuTrimestre }}</th>
+                <th class="theed__th--indicateur">{{ deuxiemeMoisDuTrimestre }}</th>
+                <th class="theed__th--indicateur">{{ dateTransforme }}</th>
+                
                 <th *ngFor="let h of header">{{ h }}</th>
             </thead>
             <tbody>
-                <tr *ngFor="let element of data">
-                    <td class="tbody__td--label">{{ element.label }}</td>
+                <tr *ngFor="let element of data | async">
+                    <td class="tbody__td--label">{{ element[0] }}</td>
                     <td class="tbody__td--limit">
-                        <div class="yz_green" *ngIf="element.value  < element.min">
-                            {{ element.value }} {{element.unit }}
+                        <div class="yz_green" *ngIf=" ConvertStringToNumber(element[1]) < ConvertStringToNumber(element[5])">
+                            {{ element[1] | number:'0.1-2' }}
+                        </div>
+                        <div class="yz_yellow" *ngIf=" ConvertStringToNumber(element[1]) >= ConvertStringToNumber(element[5]) && ConvertStringToNumber(element[1])<= ConvertStringToNumber(element[6])">
+                            {{ element[1] | number:'0.1-2' }}
+                        </div>
+
+                        <div class="yz_red"
+                            *ngIf=" ConvertStringToNumber(element[1]) > ConvertStringToNumber(element[6]) ">
+                            {{ element[1] | number:'0.1-2' }}
+                        </div> 
+                    </td>
+
+                    <td class="tbody__td--limit">
+                        <div class="yz_green" *ngIf=" ConvertStringToNumber(element[2]) < ConvertStringToNumber(element[5])">
+                            {{ element[2] | number:'0.1-2' }}
                         </div>
                         <div class="yz_yellow"
-                            *ngIf="element.value  >= element.min && element.value <= element.limit">
-                            {{ element.value}} {{ element.unit }}
+                            *ngIf=" ConvertStringToNumber(element[2]) >= ConvertStringToNumber(element[5]) && ConvertStringToNumber(element[2])<= ConvertStringToNumber(element[6])">
+                            {{ element[2] | number:'0.1-2' }}
                         </div>
-                        <div class="yz_red" *ngIf="element.value > element.limit">
-                            {{ element.value }} {{ element.unit }}
+                    
+                        <div class="yz_red" *ngIf=" ConvertStringToNumber(element[2]) > ConvertStringToNumber(element[6]) ">
+                            {{ element[2] | number:'0.1-2' }}
                         </div>
                     </td>
 
-                    <td class="tbody__td--limit">{{ element.limit }}</td>
+                    <td class="tbody__td--limit">
+                        <div class="yz_green" *ngIf=" ConvertStringToNumber(element[3]) < ConvertStringToNumber(element[5])">
+                            {{ element[3] | number:'0.1-2' }}
+                        </div>
+                        <div class="yz_yellow"
+                            *ngIf=" ConvertStringToNumber(element[3]) >= ConvertStringToNumber(element[5]) && ConvertStringToNumber(element[3])<= ConvertStringToNumber(element[6])">
+                            {{ element[3] | number:'0.1-2' }}
+                        </div>
+                    
+                        <div class="yz_red" *ngIf=" ConvertStringToNumber(element[3]) > ConvertStringToNumber(element[6]) ">
+                            {{ element[3] | number:'0.1-2' }}
+                        </div>
+                    </td>
+
+                    <td class="tbody__td--limit">
+                        <div class="yz_green" *ngIf=" ConvertStringToNumber(element[4]) < ConvertStringToNumber(element[5])">
+                            {{ element[4] | number:'0.1-2' }}
+                        </div>
+                        <div class="yz_yellow"
+                            *ngIf=" ConvertStringToNumber(element[4]) >= ConvertStringToNumber(element[5]) && ConvertStringToNumber(element[4])<= ConvertStringToNumber(element[6])">
+                            {{ element[4] | number:'0.1-2' }}
+                        </div>
+                    
+                        <div class="yz_red" *ngIf=" ConvertStringToNumber(element[4]) > ConvertStringToNumber(element[6]) ">
+                            {{ element[4] | number:'0.1-2' }}
+                        </div>
+                    </td>
+                    
+                   
+
+                    <td class="tbody__td--limit">{{ element[6] }}</td>
                     <td class="tbody__td--trigger">
                         <tr class="tbody__td__tr yz_green">
                             <td class="tbody__td--compareValues">
-                                < {{ element.min }} </td>
+                                < {{ ConvertStringToNumber(element[5]) }} </td>
 
                         </tr>
                         <tr class="tbody__td__tr yz_yellow">
                             <td class="tbody__td--compareValues">
-                                {{ element.limit }} -
-                                {{ element.min }}
+                                {{ ConvertStringToNumber(element[5]) }} - {{ ConvertStringToNumber(element[6]) }}
                             </td>
                         </tr>
                         <tr class="tbody__td__tr yz_red">
                             <td class="tbody__td--compareValues">
-                                > {{ element.limit }}
+                                > {{ ConvertStringToNumber(element[6]) }}
                             </td>
                         </tr>
                     </td>

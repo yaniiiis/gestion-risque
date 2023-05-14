@@ -1,29 +1,10 @@
 import { DatePipe } from "@angular/common";
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from "@angular/core";
+import { Component, OnChanges, OnInit, SimpleChanges } from "@angular/core";
+import moment from "moment";
+import { Observable } from "rxjs";
+import { RapportLiquiditeService } from "src/app/_services/RapportLiquiditeService/rapport-liquidite.service";
 import { AnalysePortfeuilleServicesService } from "src/app/_services/analysePrtfeuille/analyse-portfeuille-services.service";
-import { IndicateurService } from "src/app/_services/indicateur.service";
-import { RisqueLiquiditeService } from "src/app/_services/risque-liquidite.service";
-interface indicateur {
-  id: number;
-  description: string;
-  valeurMinimum: number;
-  valeurLimite: number;
-  dateEffet: Date;
-}
 
-interface Ratios {
-  value: number;
-  limit: number;
-  label: string;
-  min: number;
-  unit: string;
-}
 @Component({
   selector: "app-rapport-kris-liquidite",
   templateUrl: "./rapport-kris-liquidite.component.html",
@@ -31,30 +12,20 @@ interface Ratios {
 })
 export class RapportKrisLiquiditeComponent implements OnInit, OnChanges {
   selectedDate = "";
-  dateTransforme: string;
+  dateTransforme: string = "2021-03-31";
+  premierMoisDuTrimestre;
+  deuxiemeMoisDuTrimestre;
+  decembrePrecedent;
 
   header: string[] = ["Limit", "Trigger", "Rating"];
-  data: Ratios[] = [];
-  indicateur1: indicateur = {
-    id: 0,
-    description: "",
-    dateEffet: null,
-    valeurLimite: 0,
-    valeurMinimum: 0,
-  };
+  data: Observable<any[]>;
 
-  indicateur2: indicateur = {
-    id: 0,
-    description: "",
-    dateEffet: null,
-    valeurLimite: 0,
-    valeurMinimum: 0,
-  };
-
+  year: number;
+  month: number;
+  day: number;
   constructor(
-    private indicateurService: IndicateurService,
     private servicesRepo: AnalysePortfeuilleServicesService,
-    private risqueLiquiditeService: RisqueLiquiditeService
+    private rapportLiquiditeService: RapportLiquiditeService
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
     console.log("changes " + changes.selectedDate.currentValue);
@@ -67,173 +38,49 @@ export class RapportKrisLiquiditeComponent implements OnInit, OnChanges {
     var datePipe = new DatePipe("en-US");
     this.dateTransforme = datePipe.transform(this.selectedDate, "yyyy-MM-dd");
     console.log("sele : " + this.dateTransforme);
+    const myDate = moment(this.selectedDate, "YYYY-MM-DD").toDate();
 
-    //Coeficient de liquidité
-    this.indicateurService.getIndicateurById(14).subscribe({
-      next: (data) => {
-        this.indicateur1 = data;
+    this.year = myDate.getFullYear();
+    this.month = myDate.getMonth() - 1;
+    this.day = this.lastday(myDate.getFullYear(), myDate.getMonth() - 1);
 
-        // calcul de la valeur de l'indicateur R1- Coefficient de liquidité
+    this.deuxiemeMoisDuTrimestre =
+      this.year.toString() +
+      "-" +
+      (this.month + 1).toString().padStart(2, "0") +
+      "-" +
+      this.day.toString();
 
-        this.risqueLiquiditeService
-          .getRatiosByDate(this.dateTransforme)
-          .subscribe({
-            next: (result) => {
-              const a = {
-                value: Number.parseFloat(result[0][1]),
-                limit: data.valeurLimite,
-                label: data.description,
-                min: data.valeurMinimum,
-                unit: "%",
-              };
-              console.log(result[0][1]);
-              this.data.push(a);
-            },
-          });
-      },
-    });
+    this.month = myDate.getMonth() - 2;
+    this.day = this.lastday(myDate.getFullYear(), myDate.getMonth() - 2);
 
-    //R2- Actif liquide / Total Actif
-    this.indicateurService.getIndicateurById(19).subscribe({
-      next: (data) => {
-        this.indicateur1 = data;
+    this.premierMoisDuTrimestre =
+      this.year.toString() +
+      "-" +
+      (this.month + 1).toString().padStart(2, "0") +
+      "-" +
+      this.day.toString();
 
-        this.indicateurService.getIndicateurById(19).subscribe({
-          next: (response) => {
-            // recuperation de la valeur de l'indicateur du backend
-            // R2- Actif liquide / Total Actif
-            this.risqueLiquiditeService
-              .getRatioActifLiquideByDate(this.dateTransforme)
-              .subscribe({
-                next: (result) => {
-                  const a = {
-                    value: Number.parseFloat(result[0][3]),
-                    limit: data.valeurLimite,
-                    label: response.description,
-                    min: data.valeurMinimum,
-                    unit: "%",
-                  };
-                  console.log("result[0][3]" + result[0][3]);
-                  this.data.push(a);
-                },
-              });
-          },
-        });
-      },
-    });
+    this.decembrePrecedent =
+      (this.year - 1).toString() + "-" + "12" + "-" + "31";
 
-    //Ratio 3 : LTD (Loans to Deposits)
-    this.indicateurService.getIndicateurById(20).subscribe((data) => {
-      this.indicateur1 = data;
-
-      this.indicateurService.getIndicateurById(20).subscribe({
-        next: (response) => {
-          // recuperation de la valeur de l'indicateur du backend
-
-          this.risqueLiquiditeService
-            .getRatio3LoansToDepositsByDate(this.dateTransforme)
-            .subscribe({
-              next: (result) => {
-                const a = {
-                  value: Number.parseFloat(result),
-                  limit: data.valeurLimite,
-                  label: response.description,
-                  min: data.valeurMinimum,
-                  unit: "%",
-                };
-                console.log("result : " + result);
-                this.data.push(a);
-              },
-            });
-        },
-      });
-    });
-
-    //Ratio4 : Crédits immobiliers/Dépôts clientèle en dinars Algériens
-    this.indicateurService.getIndicateurById(21).subscribe((data) => {
-      this.indicateur1 = data;
-      if (this.dateTransforme != null) {
-        this.indicateurService.getIndicateurById(21).subscribe({
-          next: (response) => {
-            // recuperation de la valeur de l'indicateur du backend
-
-            this.risqueLiquiditeService
-              .getRatio4CrimDepotClienteleByDate(this.dateTransforme)
-              .subscribe({
-                next: (result) => {
-                  const a = {
-                    value: Number.parseFloat(result),
-                    limit: data.valeurLimite,
-                    label: response.description,
-                    min: data.valeurMinimum,
-                    unit: "%",
-                  };
-                  console.log("result : " + result);
-                  this.data.push(a);
-                },
-              });
-          },
-        });
-      }
-    });
-    //Ratio5 : Emplois/Ressources
-    this.indicateurService.getIndicateurById(22).subscribe((data) => {
-      this.indicateur1 = data;
-      if (this.dateTransforme != null) {
-        this.indicateurService.getIndicateurById(22).subscribe({
-          next: (response) => {
-            // recuperation de la valeur de l'indicateur du backend
-            // R2- Actif liquide / Total Actif
-            this.risqueLiquiditeService
-              .getRatio5EmploisSurRessources(this.dateTransforme)
-              .subscribe({
-                next: (result) => {
-                  const a = {
-                    value: result,
-                    limit: data.valeurLimite,
-                    label: response.description,
-                    min: data.valeurMinimum,
-                    unit: "%",
-                  };
-                  this.data.push(a);
-                },
-              });
-          },
-        });
-      }
-    });
-
-    //Ratio6 : Investissement sous forme de placements interbancaires
-    this.indicateurService.getIndicateurById(23).subscribe((data) => {
-      this.indicateur1 = data;
-      this.indicateurService.getIndicateurById(23).subscribe({
-        next: (response) => {
-          // recuperation de la valeur de l'indicateur du backend
-          // R2- Actif liquide / Total Actif
-          this.risqueLiquiditeService
-            .getRatio6InvestissementSousFormeDePlacementsInterbancaires(
-              this.dateTransforme
-            )
-            .subscribe({
-              next: (result) => {
-                const a = {
-                  value: result,
-                  limit: data.valeurLimite,
-                  label: response.description,
-                  min: data.valeurMinimum,
-                  unit: "%",
-                };
-                console.log("result : " + result);
-                this.data.push(a);
-              },
-            });
-        },
-      });
-    });
+    this.data = this.rapportLiquiditeService.getRapportLiquiditeByDate(
+      this.dateTransforme
+    );
   }
+  lastday = function (y, m) {
+    return new Date(y, m + 1, 0).getDate();
+  };
 
   ngOnInit(): void {
     // Risque de liquidite code 6
     this.servicesRepo.currentAnalyseType = 6;
+  }
+
+  ConvertStringToNumber(input: string) {
+    if (input.trim().length == 0) {
+      return NaN;
+    }
+    return Number(input);
   }
 }

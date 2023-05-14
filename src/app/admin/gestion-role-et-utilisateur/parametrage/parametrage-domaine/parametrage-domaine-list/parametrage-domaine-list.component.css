@@ -1,4 +1,4 @@
-.myContainer {
+/* .myContainer {
   display: flex;
   justify-content: space-between;
 }
@@ -31,14 +31,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+} */
+
 /* 
 .list_item:hover {
   background-color: blue;
   color: white;
 } */
 
-.addDiv {
+/* .addDiv {
   width: 37px;
   height: 37px;
   border-radius: 50px;
@@ -56,4 +57,4 @@
 
 mat-checkbox {
   margin-top: 5.5px;
-}
+} */

@@ -1,0 +1,103 @@
+.container-key-value {
+  width: 100%;
+}
+
+.my-form-row {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.my-form-column {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 5px;
+}
+
+.my-form-label {
+  color: black;
+  font-weight: 500;
+}
+
+.my-rapport-form-input-list {
+  outline: none;
+  border: 0.5px solid rgb(184, 181, 181);
+  border-radius: 5px;
+  width: 100%;
+  height: 40px;
+  padding: 5px;
+  box-shadow: 1px 1px 2px rgb(102 68 68 / 20%);
+}
+
+.list_content {
+  position: absolute;
+  top: 70px;
+  left: 0px;
+  padding-right: 6px;
+  padding-left: 6px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  width: 100%;
+  background-color: white;
+  z-index: 10;
+  box-shadow: 1px 1px 2px rgb(204, 204, 204);
+  max-height: 150px;
+  overflow-y: scroll;
+}
+
+.list_item {
+  padding: 6px;
+  margin-right: 2px;
+  margin-left: 2px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list_item:hover {
+  background: rgb(72, 72, 245);
+  color: white;
+  font-weight: 500;
+}
+
+mat-radio-group {
+  display: flex;
+  align-items: center;
+  height: 40px;
+}
+
+mat-radio-button {
+  margin-right: 20px;
+}
+.x-delete {
+  color: red;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.span-error {
+  color: red;
+  font-size: 13px;
+}
+
+.plus-icon {
+  width: 40px;
+  height: 40px;
+  background-color: rgb(184, 181, 181);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 1px 1px 2px rgb(224, 224, 224);
+  border: 0.5px solid rgb(184, 181, 181);
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 22px;
+  color: white;
+  cursor: pointer;
+}

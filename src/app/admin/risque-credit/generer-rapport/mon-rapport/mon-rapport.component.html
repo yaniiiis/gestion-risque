@@ -1,0 +1,34 @@
+<div class="container">
+  <div>
+    <div class="container-page-title">
+      <h3 class="page-title">{{ rapportTypeName }}</h3>
+    </div>
+  </div>
+  <div class="under-type-div">
+    <div
+      class="under-type-item"
+      *ngFor="let item of underTypesNames; let i = index"
+      (click)="handleUnderTypeChange(item)"
+    >
+      <span class="my-test" [ngClass]="{ myBorderBottom: i === selectedIndex }">
+        {{ item }}
+      </span>
+    </div>
+  </div>
+  <div class="rapport-card">
+    <div class="under-rapport-title-container">
+      <div class="my-title">{{ choosedUnderType }}</div>
+    </div>
+    <!-- <div class="rapport-items-header">
+      <div class="header-item">Code</div>
+      <div class="header-item">Valeur</div>
+    </div> -->
+    <div
+      class="rapport-items-div"
+      *ngFor="let item of underTypeLinesToDisplay | keyvalue"
+    >
+      <p class="rappor-item-key">{{ item.key }}</p>
+      <p class="rappor-item-title">{{ item.value }} DZD</p>
+    </div>
+  </div>
+</div>

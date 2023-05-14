@@ -1,5 +1,6 @@
-
+import { Component } from "@angular/core";
 import { Routes } from "@angular/router";
+import path from "path";
 import { AddPermissionComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-roles/add-permission/add-permission.component";
 import { AjouterDesRolesComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-roles/ajouter-des-roles/ajouter-des-roles.component";
 import { AjouterNiveauComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-roles/ajouter-niveau/ajouter-niveau.component";
@@ -12,9 +13,11 @@ import { AjouterDesUtilisateusComponent } from "src/app/admin/gestion-role-et-ut
 import { GestionUtilisateurComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-utilisateur/gestion-utilisateur.component";
 import { ListAgencesComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-utilisateur/list-agences/list-agences.component";
 import { ListeUtilisateursComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-utilisateur/liste-utilisateurs/liste-utilisateurs.component";
+import { ParametrageColumnComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/column/column.component";
 import { ParametrageAnalysePortfeuilleComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-analyse-portfeuille/parametrage-analyse-portfeuille.component";
 import { ParametrageDomaineHomeComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-domaine/parametrage-domaine-home/parametrage-domaine-home.component";
 import { ParametrageIndirectComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-indirect/parametrage-indirect.component";
+import { HomeComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-rapport/home/home.component";
 import { ParametrageRapportComponent } from "src/app/admin/gestion-role-et-utilisateur/parametrage/parametrage-rapport/parametrage-rapport.component";
 import { ActionDeRecouvermentComponent } from "src/app/admin/risque-credit/analyse-portfeuille/action-de-recouverment/action-de-recouverment.component";
 import { ActionJusticeComponent } from "src/app/admin/risque-credit/analyse-portfeuille/action-justice/action-justice.component";
@@ -28,10 +31,16 @@ import { CreationDouteuseComponent } from "src/app/admin/risque-credit/analyse-p
 import { DurationComponent } from "src/app/admin/risque-credit/analyse-portfeuille/durations/duration.component";
 import { KriComponent } from "src/app/admin/risque-credit/analyse-portfeuille/kri/kri.component";
 import { PortefeuilDirectComponent } from "src/app/admin/risque-credit/analyse-portfeuille/portefeuil-direct/portefeuil-direct.component";
+import { GenererRapportComponent } from "src/app/admin/risque-credit/generer-rapport/generer-rapport.component";
+import { MonRapportComponent } from "src/app/admin/risque-credit/generer-rapport/mon-rapport/mon-rapport.component";
 import { GestionDesResqueClientComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/gestion-des-resque-client.component";
 import { RepartitionParSecteurComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/repartition-par-secteur/repartition-par-secteur.component";
 import { RepartitionParZoneComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/repartition-par-zone/repartition-par-zone.component";
 import { GraphicComponent } from "src/app/admin/risque-credit/graphic/graphic.component";
+import { ConcentrationDetailsComponent } from "src/app/admin/risque-credit/kris/concentration-details/concentration-details.component";
+import { ConcentrationComponent } from "src/app/admin/risque-credit/kris/concentration/concentration.component";
+import { IndicateursRisqueCreditComponent } from "src/app/admin/risque-credit/kris/indicateurs-risque-credit/indicateurs-risque-credit.component";
+import { KRIsComponent } from "src/app/admin/risque-credit/kris/kris.component";
 import { ScenarioComponent } from "src/app/admin/risque-credit/stress-test/scenario/scenario.component";
 import { Scenario1Component } from "src/app/admin/risque-credit/stress-test/scenario1/scenario1.component";
 import { Scenario2Component } from "src/app/admin/risque-credit/stress-test/scenario2/scenario2.component";
@@ -69,20 +78,15 @@ import { RatioLiquiditeTrimestrielComponent } from "src/app/admin/risque-liquidi
 import { DashboardComponent } from "src/app/dashboard/dashboard.component";
 import { FileUploadComponent } from "src/app/file-upload/file-upload.component";
 
-
-
-
-
 export const AdminLayoutRoutes: Routes = [
- 
   {
     path: "",
     children: [
       {
         path: "",
         component: DashboardComponent,
-      }
-    ]
+      },
+    ],
   },
   {
     path: "dashboard",
@@ -105,7 +109,7 @@ export const AdminLayoutRoutes: Routes = [
           },
           {
             path: "UpdateUser",
-            component: AjouterDesUtilisateusComponent
+            component: AjouterDesUtilisateusComponent,
           },
           {
             path: "AjouterDesAgences",
@@ -115,7 +119,7 @@ export const AdminLayoutRoutes: Routes = [
             path: "ListAgences",
             component: ListAgencesComponent,
           },
-        ]
+        ],
       },
       {
         path: "GestionDesRoles",
@@ -145,8 +149,8 @@ export const AdminLayoutRoutes: Routes = [
           {
             path: "ListNiveaux",
             component: ListNiveauComponent,
-          }
-        ]
+          },
+        ],
       },
 
       {
@@ -158,25 +162,36 @@ export const AdminLayoutRoutes: Routes = [
         path: "parametrageAnalysePrtfeuille",
         component: ParametrageAnalysePortfeuilleComponent,
         children: [
+          // {
+          //   path: "ParametrageIndirect",
+          //   component: ParametrageIndirectComponent,
+          // },
           {
-            path: "ParametrageIndirect",
-            component: ParametrageIndirectComponent,
+            path: "Rapport",
+            component: HomeComponent,
           },
           {
             path: "ParametrageDomaine",
             component: ParametrageDomaineHomeComponent,
           },
-          {
-            path: "rapport",
-            component: ParametrageRapportComponent,
-          }
-        ]
-      }
-    ]
+
+          { path: "columns", component: ParametrageColumnComponent },
+        ],
+      },
+    ],
   },
   {
     path: "",
     children: [
+      {
+        path: "generer-rapport",
+        component: GenererRapportComponent,
+      },
+      {
+        path: "mon-rapport",
+        component: MonRapportComponent,
+      },
+
       {
         path: "AnalysePortfeuille",
         component: AnalysePortfeuilleComponent,
@@ -194,7 +209,6 @@ export const AdminLayoutRoutes: Routes = [
             path: "CommentaireAnalysePfIndirect",
             component: CommentaireAnalysePfIndirectComponent,
           },
-
 
           {
             path: "GraphePortfeuilleindirect",
@@ -248,7 +262,21 @@ export const AdminLayoutRoutes: Routes = [
       },
       {
         path: "Kri",
-        component: KriComponent,
+        component: KRIsComponent,
+        children: [
+          {
+            path: "concentration",
+            component: ConcentrationComponent,
+          },
+          {
+            path: "concentration/:type/:id/:date",
+            component: ConcentrationDetailsComponent,
+          },
+          {
+            path: "indicateurs-risque-credit",
+            component: IndicateursRisqueCreditComponent,
+          },
+        ],
       },
       {
         path: "StressTest",
@@ -265,7 +293,7 @@ export const AdminLayoutRoutes: Routes = [
           {
             path: "scenario3",
             component: Scenario3Component,
-          }
+          },
         ],
       },
 
@@ -293,77 +321,74 @@ export const AdminLayoutRoutes: Routes = [
       },
     ],
   },
-    {
-      path: '',
-     // canActivate : [AuthPermissionsGuard],
+  {
+    path: "",
+    // canActivate : [AuthPermissionsGuard],
     //  data :{
     // expectedPermission:['ConsulterRessources']
-   //}
-   
-      children: [
-        {
-        path: 'AnalyseDesDepots',
+    //}
+
+    children: [
+      {
+        path: "AnalyseDesDepots",
         // component:
-        component:AnalyseDesDepotsComponent
+        component: AnalyseDesDepotsComponent,
       },
       {
-        path: 'AnalyseQualitativeETQuantitative',
+        path: "AnalyseQualitativeETQuantitative",
         // component:
       },
       {
-        path: 'KRIsLiQuidite',
+        path: "KRIsLiQuidite",
         // component: ,
       },
       {
-        path: 'StressTestLiquidite',
+        path: "StressTestLiquidite",
         // component:
       },
       {
-        path: 'SurveillanceDeLaTreoserie',
+        path: "SurveillanceDeLaTreoserie",
         // component:
       },
 
       {
-        path: 'ConsultationRatios1Liquidite',
-        component: ConsultationRatio1LiquiditeComponent
-      }
-      ,
-
+        path: "ConsultationRatios1Liquidite",
+        component: ConsultationRatio1LiquiditeComponent,
+      },
       {
-        path: 'ConsultationRatio2Liquidite',
-        component: ConsultationRatio2LiquiditeComponent
+        path: "ConsultationRatio2Liquidite",
+        component: ConsultationRatio2LiquiditeComponent,
       },
 
       {
-        path: 'ConsultationRatio3Liquidite',
-        component: ConsultationRatio3LiquiditeComponent
+        path: "ConsultationRatio3Liquidite",
+        component: ConsultationRatio3LiquiditeComponent,
       },
       {
-        path: 'ConsultationRatio4Liquidite',
-        component: ConsultationRatio4LiquiditeComponent
+        path: "ConsultationRatio4Liquidite",
+        component: ConsultationRatio4LiquiditeComponent,
       },
       {
-        path: 'ConsultationRatio5Liquidite',
-        component: ConsultationRatio5LiquiditeComponent
+        path: "ConsultationRatio5Liquidite",
+        component: ConsultationRatio5LiquiditeComponent,
       },
       {
-        path: 'ConsultationRatio6Liquidite',
-        component: ConsultationRatio6LiquiditeComponent
-      }
-      ,
-      {
-        path: 'ConsultationRapportKrisLiquidite',
-        component: ConsultationRapportKrisLiquiditeComponent
-      }
-    ]
+        path: "ConsultationRatio6Liquidite",
+        component: ConsultationRatio6LiquiditeComponent,
       },
-    {
-      path: 'KRIsDeChange',
-      component: KRIsDeChangeComponent,
-     // canActivate : [AuthPermissionsGuard],
-      data :{
-    // expectedPermission:['ConsulterRessources']
-   },
+      {
+        path: "ConsultationRapportKrisLiquidite",
+        component: ConsultationRapportKrisLiquiditeComponent,
+      },
+    ],
+  },
+  {
+    path: "KRIsDeChange",
+    component: KRIsDeChangeComponent,
+    // canActivate : [AuthPermissionsGuard],
+    data: {
+      // expectedPermission:['ConsulterRessources']
+    },
     //   children: [
     //     {
     //     path: 'EvaluationDesTAuxDeCharges',
@@ -383,134 +408,125 @@ export const AdminLayoutRoutes: Routes = [
     //   },
 
     // ]
+  },
+  {
+    path: "ConsultationPositionDeChange",
+    component: ConsultationComponent,
+
+    children: [
+      {
+        path: "PositionParDate",
+        component: PositionParDateComponent,
       },
       {
-        path: 'ConsultationPositionDeChange',
-        component: ConsultationComponent,
-
-        children: [
-          {
-          path:'PositionParDate',
-          component: PositionParDateComponent,
-          },
-          {
-            path:'PositionParPlusieursDates',
-          component: PositionParPlusieursDatesComponent,
-
-          }
-
-        ]
-
+        path: "PositionParPlusieursDates",
+        component: PositionParPlusieursDatesComponent,
+      },
+    ],
+  },
+  {
+    path: "ConsultationRatios1Liquidite",
+    component: ConsultationRatio1LiquiditeComponent,
+    children: [
+      {
+        path: "RatioLiquiditeQuotidien",
+        component: RatioLiquiditeQuotidienComponent,
       },
       {
-        path:"ConsultationRatios1Liquidite",
-        component: ConsultationRatio1LiquiditeComponent,
-        children: [
-          {
-          path:'RatioLiquiditeQuotidien',
-          component: RatioLiquiditeQuotidienComponent,
-          },
-          {
-            path:'RatioLiquiditeMensuel',
-          component: RatioLiquiditeMensuelComponent,
+        path: "RatioLiquiditeMensuel",
+        component: RatioLiquiditeMensuelComponent,
+      },
+      {
+        path: "RatioLiquiditeTrimestriel",
+        component: RatioLiquiditeTrimestrielComponent,
+      },
+    ],
+  },
 
-          },
-          {
-            path:'RatioLiquiditeTrimestriel',
-          component: RatioLiquiditeTrimestrielComponent,
+  {
+    path: "ConsultationRatio2Liquidite",
+    component: ConsultationRatio2LiquiditeComponent,
+    children: [
+      {
+        path: "ConsultationR2",
+        component: ConsultationR2Component,
+      },
+    ],
+  },
+  {
+    path: "ConsultationRatio3Liquidite",
+    component: ConsultationRatio3LiquiditeComponent,
+    children: [
+      {
+        path: "ConsultationR3",
+        component: ConsultationR3Component,
+      },
+    ],
+  },
+  {
+    path: "ConsultationRatio4Liquidite",
+    component: ConsultationRatio4LiquiditeComponent,
+    children: [
+      {
+        path: "ConsultationR4",
+        component: ConsultationR4Component,
+      },
+    ],
+  },
+  {
+    path: "ConsultationRatio5Liquidite",
+    component: ConsultationRatio5LiquiditeComponent,
+    children: [
+      {
+        path: "ConsultationR5",
+        component: ConsultationR5Component,
+      },
+    ],
+  },
+  {
+    path: "ConsultationRatio6Liquidite",
+    component: ConsultationRatio6LiquiditeComponent,
+    children: [
+      {
+        path: "ConsultationR6",
+        component: ConsultationR6Component,
+      },
+    ],
+  },
+  {
+    path: "ConsultationRapportKrisLiquidite",
+    component: ConsultationRapportKrisLiquiditeComponent,
+    children: [
+      {
+        path: "ConsultationRapport",
+        component: RapportKrisLiquiditeComponent,
+      },
+    ],
+  },
 
-          }
-
-        ]
-      },
-
-      {
-        path:"ConsultationRatio2Liquidite",
-        component: ConsultationRatio2LiquiditeComponent,
-        children: [
-          {
-          path:'ConsultationR2',
-          component: ConsultationR2Component,
-          }
-        ]
-      },
-      {
-        path:"ConsultationRatio3Liquidite",
-        component: ConsultationRatio3LiquiditeComponent,
-        children: [
-          {
-          path:'ConsultationR3',
-          component: ConsultationR3Component,
-          }
-        ]
-      },
-      {
-        path:"ConsultationRatio4Liquidite",
-        component: ConsultationRatio4LiquiditeComponent,
-        children: [
-          {
-          path:'ConsultationR4',
-          component: ConsultationR4Component,
-          }
-        ]
-      },
-      {
-        path:"ConsultationRatio5Liquidite",
-        component: ConsultationRatio5LiquiditeComponent,
-        children: [
-          {
-          path:'ConsultationR5',
-          component: ConsultationR5Component,
-          }
-        ]
-      },
-      {
-        path:"ConsultationRatio6Liquidite",
-        component: ConsultationRatio6LiquiditeComponent,
-        children: [
-          {
-          path:'ConsultationR6',
-          component: ConsultationR6Component,
-          }
-        ]
-      },
-      {
-        path:"ConsultationRapportKrisLiquidite",
-        component: ConsultationRapportKrisLiquiditeComponent,
-        children: [
-          {
-          path:'ConsultationRapport',
-          component: RapportKrisLiquiditeComponent,
-          }
-        ]
-      },
-
-      
-      {
-        path: '',
-       // canActivate : [AuthPermissionsGuard],
-        data :{
+  {
+    path: "",
+    // canActivate : [AuthPermissionsGuard],
+    data: {
       // expectedPermission:['ConsulterRessources']
-     },
-        children: [
-          {
-          path: 'Invertissements',
-          // component:
-        },
-        {
-          path: 'LimitesBanque',
-          // component:
-        },
-        {
-          path: 'NotionsBanques',
-          // component: ,
-        },
-        {
-          path: 'NotionsPays',
-          // component:
-        },
-  
-      ]
-        }
-  
+    },
+    children: [
+      {
+        path: "Invertissements",
+        // component:
+      },
+      {
+        path: "LimitesBanque",
+        // component:
+      },
+      {
+        path: "NotionsBanques",
+        // component: ,
+      },
+      {
+        path: "NotionsPays",
+        // component:
+      },
+    ],
+  },
 ];

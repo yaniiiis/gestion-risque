@@ -18,8 +18,7 @@ export class DeleteDialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-  okClick() {
-    console.log("ok is clicked and domaine is : ", this.data.domaine);
-    this.parametrageService.removeFromMapOfDomaines(this.data.domaine);
-  }
+  // okClick() {
+  //   this.parametrageService.removeFromMapOfDomaines(this.data.domaine);
+  // }
 }

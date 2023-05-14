@@ -1,0 +1,100 @@
+<div class="my-container">
+  <div class="header-choice-of-concentration-container">
+    <div class="header-choice-of-concentration">
+      <div
+        class="concentration-item-container"
+        *ngFor="let item of choicesOfConcentration; let i = index"
+      >
+        <div
+          class="choice-item"
+          [ngClass]="{ 'my-active': i == selectedChoiceIndex }"
+          (click)="changeConcentrationChoice(item)"
+        >
+          {{ item }}
+        </div>
+        <div
+          class="header-item-divider"
+          *ngIf="i != choicesOfConcentration.length - 1"
+        ></div>
+      </div>
+    </div>
+  </div>
+  <div class="my-body">
+    <div class="date-and-id-container">
+      <div class="my-date-container">
+        <label class="my-label" for="date-arrete">Date arreté</label>
+        <input
+          type="date"
+          id="date-arrete"
+          class="my-input"
+          [(ngModel)]="date"
+          (change)="dateChanged()"
+        />
+      </div>
+      <div class="id-client-or-group-container">
+        <label class="my-label" for="id-client-or-group">{{
+          inputListTitle
+        }}</label>
+        <app-my-input-list
+          [list]="listOfIds"
+          [listToDisplay]="listOfIds"
+          (callbackFunction)="idClientClicked($event)"
+          [hasError]="myListInputHasError"
+          [title]="inputListTitle"
+        ></app-my-input-list>
+      </div>
+    </div>
+
+    <div class="fonds-reglementaire-container">
+      <div class="fond-container">
+        <label class="my-label" for="fonds">Fond propres réglementaires</label>
+        <input
+          type="text"
+          id="fonds"
+          class="my-input"
+          [(ngModel)]="fondPropres"
+        />
+      </div>
+
+      <div class="my-button-calculer-container">
+        <button class="my-button-calculer" (click)="calculerClicked()">
+          Calculer
+        </button>
+      </div>
+    </div>
+
+    <div class="">
+      <div
+        class="my-table-container"
+        *ngIf="header && dataFinal.length > 0; else noData"
+      >
+        <table class="my-table">
+          <tr class="my-table-row">
+            <th class="my-table-head" *ngFor="let item of header">
+              {{ item }}
+            </th>
+          </tr>
+          <tr *ngFor="let d of dataFinal">
+            <td
+              *ngFor="let item of d; let i = index"
+              (click)="i == d.length - 1 && tauxClicked(item)"
+            >
+              <span [ngClass]="{ 'taux-span': i == d.length - 1 }">{{
+                item ? item : "/"
+              }}</span>
+            </td>
+          </tr>
+        </table>
+        <div class="my-detail-text-container">
+          <span (click)="detailsClicked()">détails </span>
+        </div>
+      </div>
+
+      <ng-template #noData>
+        <div class="no-data-container">
+          {{ textNoData }}
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="my-dialog-container">
+  <h3 class="DialogTitle" mat-dialog-title>Ajouter la clause</h3>
+  <div mat-dialog-content>
+    <div class="x-dialog" (click)="closeDialog()">x</div>
+    <form [formGroup]="formGroup">
+      <div class="inputs-div">
+        <div class="form-div">
+          <input
+            class="form-input-list"
+            type="text"
+            placeholder="Champ"
+            name="feild"
+            autocomplete="off"
+            (click)="toggleListClause()"
+            (clickOutside)="closeListClause()"
+            formControlName="selection"
+          />
+          <span
+            class="span-error"
+            *ngIf="addIsClicked && filed.invalid && filed.dirty"
+            >Veuillez choisir un champ</span
+          >
+          <div class="clause-list-content" #clauseList *ngIf="isListClauseOpen">
+            <div
+              class="caluse-item"
+              *ngFor="let item of clausesList"
+              (click)="selectSelection(item)"
+            >
+              <span class="item_name">{{ item }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-div">
+          <input
+            class="form-input-list"
+            type="text"
+            placeholder="Opération"
+            name="operation"
+            autocomplete="off"
+            (click)="toggleListClauseOperation()"
+            (clickOutside)="closeListOperation()"
+            formControlName="field"
+          />
+          <div
+            class="clause-operation-content"
+            #clauseOperationList
+            *ngIf="isListClauseOperationOpen"
+          >
+            <div
+              class="operation-item"
+              *ngFor="let item of operations"
+              (click)="selectFiled(item)"
+            >
+              <span class="item_name" #itemText>{{ item }}</span>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="choosedFeild"
+          (click)="addToChoosedClauses()"
+          class="plus-icon"
+        >
+          +
+        </div>
+      </div>
+
+      <div *ngIf="choosedClauses.length > 0">
+        <div
+          class="form-choosed-clause-list"
+          *ngFor="let item of choosedClauses"
+        >
+          <div>
+            <span *ngIf="item.selection"> ({{ item.filed }}) </span>
+            {{ item.selection }}
+          </div>
+          <mat-icon class="x-delete" (click)="deleteFromChoosedClauses(item)">
+            delete_forever
+          </mat-icon>
+        </div>
+      </div>
+      <div class="myActionsContainer">
+        <button mat-button (click)="closeDialog()" class="deleteAction">
+          Annuler
+        </button>
+        <button
+          mat-button
+          cdkFocusInitial
+          [mat-dialog-close]="{
+            clauses: choosedClauses
+          }"
+          class="clauses-save-button"
+        >
+          Sauvgarder
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

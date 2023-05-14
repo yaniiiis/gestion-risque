@@ -11,7 +11,7 @@ import { RisqueLiquiditeService } from "src/app/_services/risque-liquidite.servi
 export class RatioLiquiditeTrimestrielComponent implements OnInit {
   constructor() {}
 
-  selectedDate;
+  selectedDate: string = "2021-03-31";
 
   ngOnInit(): void {}
 }

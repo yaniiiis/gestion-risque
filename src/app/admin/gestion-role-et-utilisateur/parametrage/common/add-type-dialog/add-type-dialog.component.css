@@ -1,0 +1,67 @@
+.inputs-div {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.form-div {
+  position: relative;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-checkbox {
+  margin: 0px !important; /* set the margin to whatever value you need */
+}
+
+.form-input-list {
+  outline: none;
+  border: 0.5px solid rgb(184, 181, 181);
+  border-radius: 5px;
+  height: 40px;
+  padding: 5px;
+  box-shadow: 1px 1px 2px rgb(102 68 68 / 20%);
+  width: 100%;
+  margin-right: 15px;
+}
+
+.clause-list-content,
+.clause-operation-content {
+  position: absolute;
+  top: 40px;
+  left: 0px;
+  padding-right: 6px;
+  padding-left: 6px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  width: 100%;
+  background-color: white;
+  z-index: 10;
+  box-shadow: 1px 1px 2px rgb(211, 211, 211);
+  max-height: 150px;
+  overflow-y: hidden;
+}
+
+.caluse-item,
+.operation-item {
+  padding: 6px;
+  margin-right: 2px;
+  margin-left: 2px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+}
+.caluse-item:hover,
+.operation-item:hover {
+  background-color: rgb(36, 36, 230);
+  color: white;
+  font-weight: 500;
+}
+
+.form-choosed-clause-list {
+  display: flex;
+  justify-content: space-between;
+}

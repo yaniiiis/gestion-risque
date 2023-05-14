@@ -56,8 +56,8 @@ export const MY_FORMATS = {
 })
 export class RatioLiquiditeQuotidienComponent implements OnInit {
   date = new FormControl(moment());
-  year: number;
-  month: number;
+  year: number = 2021;
+  month: number = 2;
 
   setMonthAndYear(
     normalizedMonthAndYear: Moment,
@@ -67,13 +67,21 @@ export class RatioLiquiditeQuotidienComponent implements OnInit {
     ctrlValue.month(normalizedMonthAndYear.month());
     ctrlValue.year(normalizedMonthAndYear.year());
     this.date.setValue(ctrlValue);
-    console.log("year " + normalizedMonthAndYear.year());
-    console.log("Month " + normalizedMonthAndYear.month() + 1);
     this.year = normalizedMonthAndYear.year();
     this.month = normalizedMonthAndYear.month() + 1;
     datepicker.close();
   }
+  setMonthAndYearInitial() {
+    const ctrlValue = this.date.value!;
+    ctrlValue.month(2);
+    ctrlValue.year(2021);
+    this.date.setValue(ctrlValue);
+    this.year = 2021;
+    this.month = 3;
+  }
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.setMonthAndYearInitial();
+  }
 }

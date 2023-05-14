@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Domaine } from "src/app/Models/Domaine";
-import { ParametrageService } from "src/app/_services/ParametrageService/parametrage.service";
 import { duration } from "moment";
 import { Subscription } from "rxjs";
+import { Domaine } from "src/app/Models/Domaine";
+import { ParametrageService } from "src/app/_services/ParametrageService/parametrage.service";
 import { AddToDialogComponent } from "../../common/add-to-dialog/add-to-dialog.component";
 import { DeleteDialogComponent } from "../../common/delete-dialog/delete-dialog.component";
 import { EditDomaineDialogComponent } from "../../common/edit-domaine-dialog/edit-domaine-dialog.component";
@@ -12,7 +12,7 @@ import { EditDomaineDialogComponent } from "../../common/edit-domaine-dialog/edi
 @Component({
   selector: "app-parametrage-domaine-table",
   templateUrl: "./parametrage-domaine-table.component.html",
-  styleUrls: ["./parametrage-domaine-table.component.css"],
+  styleUrls: ["../../table-css.css"],
 })
 export class ParametrageDomaineTableComponent implements OnInit {
   constructor(
@@ -28,7 +28,7 @@ export class ParametrageDomaineTableComponent implements OnInit {
   doaminesToUpdate: Domaine[] = [];
   domainesToDelete: number[] = [];
   domainsTofilter: Domaine[];
-  isOpen: boolean = true;
+  isOpen: boolean = false;
 
   // operations booleans
   isDeleteLoading: boolean = false;
@@ -113,27 +113,6 @@ export class ParametrageDomaineTableComponent implements OnInit {
         });
         this.domains = newDomaines;
         this.domainsTofilter = this.domains;
-
-        // this.isDeleteLoading = true;
-        // this.parametrageService.removeFromMapOfDomaines(result).subscribe({
-        //   next: (response) => {
-        //     this.domains = this.domains.filter((d) => d.id != result.id);
-        //     this.isDeleteLoading = false;
-        //     this.isDeleteSuccess = true;
-        //     this.snackBar.open("Supprimé avec succés", null, {
-        //       duration: 3000,
-        //       panelClass: ["success-snackbar"],
-        //     });
-        //   },
-        //   error: (error) => {
-        //     this.isDeleteLoading = false;
-        //     this.isDeleteError = true;
-        //     this.snackBar.open("Erreur lors de la supression", null, {
-        //       duration: 3000,
-        //       panelClass: ["error-snackbar"],
-        //     });
-        //   },
-        // });
       }
     });
   }
@@ -235,29 +214,6 @@ export class ParametrageDomaineTableComponent implements OnInit {
             d.domainCode == domaine.domainCode
         );
         this.domains[indexInDisplayedDomaines] = dm;
-
-        // this.parametrageService
-        //   .editDomaineFromMapOfdomaines(domaine)
-        //   .subscribe({
-        //     next: (response) => {
-        //       const index = this.domains.findIndex((d) => d.id == domaine.id);
-        //       this.domains[index] = response;
-        //       this.isEditLoading = false;
-        //       this.isEditSuccess = true;
-        //       this.snackBar.open("Modfier avec succée", null, {
-        //         duration: 3000,
-        //         panelClass: ["success-snackbar"],
-        //       });
-        //     },
-        //     error: (error) => {
-        //       this.isEditLoading = false;
-        //       this.isEditError = true;
-        //       this.snackBar.open("Erreur lors de la modification", null, {
-        //         duration: 3000,
-        //         panelClass: ["error-snackbar"],
-        //       });
-        //     },
-        //   });
       }
     });
   }

@@ -14,7 +14,7 @@ import { ParametrageService } from "src/app/_services/ParametrageService/paramet
 @Component({
   selector: "app-add-to-dialog",
   templateUrl: "./add-to-dialog.component.html",
-  styleUrls: ["./add-to-dialog.component.css"],
+  styleUrls: ["../add-edit-domaine.css"],
 })
 export class AddToDialogComponent implements OnInit {
   constructor(
@@ -46,12 +46,12 @@ export class AddToDialogComponent implements OnInit {
   formGroup = new FormGroup({
     code: new FormControl("", [
       Validators.required,
-      Validators.pattern("[a-zA-Z0-9]+$"),
-      this.createPasswordStrengthValidator(),
+      //Validators.pattern("[a-zA-Z0-9]+$"),
+      this.createCodeValidator(),
     ]),
     description: new FormControl("", [
       Validators.required,
-      Validators.pattern("[a-zA-Z0-9]+$"),
+      // Validators.pattern("[a-zA-Z0-9]+$"),
     ]),
     date: new FormControl("", [Validators.required]),
     checked: new FormControl(""),
@@ -77,7 +77,7 @@ export class AddToDialogComponent implements OnInit {
   //   console.log(item + " checked : " + ob.checked);
   // }
 
-  createPasswordStrengthValidator(): ValidatorFn {
+  createCodeValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const value = control.value;
 

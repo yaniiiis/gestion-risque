@@ -1,0 +1,30 @@
+<div class="title-and-delete-icon" mat-dialog-title>
+  <h3 class="DialogTitle">Ajouter Un type</h3>
+  <mat-icon (click)="onNoClick()" class="delete-x">cancel</mat-icon>
+</div>
+
+<div mat-dialog-content>
+  <form class="addForm" [formGroup]="formGroup">
+    <input
+      class="formInput"
+      type="text"
+      placeholder="Sous type"
+      name="underType"
+      formControlName="underType"
+    />
+    <span *ngIf="underType.touched && underType.invalid" class="span-error">
+      Champ invalid
+    </span>
+  </form>
+</div>
+<div class="myActionsContainer">
+  <button
+    mat-button
+    cdkFocusInitial
+    [mat-dialog-close]="{ underType: underType.value.trim() }"
+    [ngClass]="formGroup.invalid ? 'my-add-button-disabled' : 'my-add-button'"
+    [disabled]="formGroup.invalid"
+  >
+    Ajouter
+  </button>
+</div>
