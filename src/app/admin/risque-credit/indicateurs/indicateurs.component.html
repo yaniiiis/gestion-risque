@@ -1,0 +1,69 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        <app-navigation-menu
+          [navigationItems]="menuItems"
+        ></app-navigation-menu>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card-body">
+            <div class="date-and-id-container">
+              <div class="my-date-container">
+                <label class="my-label" for="date-arrete">Date arreté</label>
+                <input
+                  type="date"
+                  id="date-arrete"
+                  class="my-input"
+                  [(ngModel)]="date"
+                  (change)="dateChanged()"
+                />
+              </div>
+            </div>
+
+            <router-outlet></router-outlet>
+
+            <div class="my-comment-container">
+              <label class="my-label" for="">Commentaire</label>
+              <textarea
+                class="comment-textarea"
+                name=""
+                id=""
+                cols="30"
+                rows="5"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="my-container">
+    <div class="date-and-id-container">
+      <div class="my-date-container">
+        <label class="my-label" for="date-arrete">Date arreté</label>
+        <input
+          type="date"
+          id="date-arrete"
+          class="my-input"
+          [(ngModel)]="date"
+          (change)="dateChanged()"
+        />
+      </div>
+    </div>
+    <app-concentration-table-row></app-concentration-table-row> -->
+<!-- <router-outlet></router-outlet> -->
+<!-- <div class="my-comment-container">
+      <label class="my-label" for="">Commentaire</label>
+      <textarea
+        class="comment-textarea"
+        name=""
+        id=""
+        cols="30"
+        rows="5"
+      ></textarea>
+    </div>
+  </div> -->

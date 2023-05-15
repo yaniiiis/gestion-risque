@@ -1,43 +1,43 @@
-<table *ngFor="let d of data">
+<table>
   <thead>
     <th *ngFor="let item of header">{{ item }}</th>
   </thead>
   <tbody>
     <tr>
-      <td class="tbody__td--label">{{ d.Indice }}</td>
-      <td class="tbody__td" *ngFor="let v of d.values; let i = index">
+      <td class="tbody__td--label">{{ data["indice"] }}</td>
+      <td class="tbody__td" *ngFor="let v of data['values']; let i = index">
         <!-- <h1>{{ v[dates[i]] }}</h1> -->
         <tr class="tbody__td__tr yz_green">
           {{
-            v[dates[i]] < d.min ? v[dates[i]].toString() + d.unit : ""
+            v[dates[i]] < data.min ? v[dates[i]].toString() + data.unit : ""
           }}
         </tr>
         <tr class="tbody__td__tr yz_yellow">
           {{
-            v[dates[i]] >= d.min && v[dates[i]] <= d.limit
-              ? v[dates[i]].toString() + d.unit
+            v[dates[i]] >= data.min && v[dates[i]] <= data.limit
+              ? v[dates[i]].toString() + data.unit
               : ""
           }}
         </tr>
         <tr class="tbody__td__tr yz_red">
           {{
-            v[dates[i]] > d.limit ? v[dates[i]].toString() + d.unit : ""
+            v[dates[i]] > data.limit ? v[dates[i]].toString() + data.unit : ""
           }}
         </tr>
       </td>
-      <td class="tbody__td--limit">{{ d.limit }}</td>
+      <td class="tbody__td--limit">{{ data["limit"] }}</td>
       <td class="tbody__td--trigger">
         <tr class="tbody__td__tr yz_green">
-          <td class="tbody__td--compareValues">< {{ d.min }}</td>
+          <td class="tbody__td--compareValues">< {{ data["min"] }}</td>
         </tr>
         <tr class="tbody__td__tr yz_yellow">
           <td class="tbody__td--compareValues">
-            {{ d.limit }} -
-            {{ d.min }}
+            {{ data["limit"] }} -
+            {{ data["min"] }}
           </td>
         </tr>
         <tr class="tbody__td__tr yz_red">
-          <td class="tbody__td--compareValues">> {{ d.limit }}</td>
+          <td class="tbody__td--compareValues">> {{ data["limit"] }}</td>
         </tr>
       </td>
 
@@ -54,8 +54,8 @@
       </td>
 
       <!-- <td class="tbody__td--commentaire">
-        {{ d.commentaire }}
-      </td> -->
+          {{ d.commentaire }}
+        </td> -->
     </tr>
   </tbody>
   <tfoot></tfoot>

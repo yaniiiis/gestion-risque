@@ -76,7 +76,6 @@ import { GestionDesResqueClientComponent } from "./risque-credit/gestion-des-res
 import { GestionRisqueClientContentComponent } from "./risque-credit/gestion-des-resque-client/gestion-risque-client-content/gestion-risque-client-content.component";
 import { RepartitionParSecteurComponent } from "./risque-credit/gestion-des-resque-client/repartition-par-secteur/repartition-par-secteur.component";
 import { RepartitionParZoneComponent } from "./risque-credit/gestion-des-resque-client/repartition-par-zone/repartition-par-zone.component";
-import { KRIsComponent } from "./risque-credit/kris/kris.component";
 import { StressTestContentComponent } from "./risque-credit/stress-test/stress-test-content/stress-test-content.component";
 import { StressTestComponent } from "./risque-credit/stress-test/stress-test.component";
 import { DixPlusGrandClientAConcentrationComponent } from "./risque-credit/top10/dix-plus-grand-client-a-concentration/dix-plus-grand-client-a-concentration.component";
@@ -131,10 +130,12 @@ import { GenererRapportComponent } from "./risque-credit/generer-rapport/generer
 import { MonRapportComponent } from "./risque-credit/generer-rapport/mon-rapport/mon-rapport.component";
 import { MyInputListComponent } from "./gestion-role-et-utilisateur/parametrage/common/my-input-list/my-input-list.component";
 import { SecondDeleteDialogComponent } from "./gestion-role-et-utilisateur/parametrage/common/second-delete-dialog/second-delete-dialog.component";
-import { ConcentrationComponent } from "./risque-credit/kris/concentration/concentration.component";
-import { IndicateursRisqueCreditComponent } from "./risque-credit/kris/indicateurs-risque-credit/indicateurs-risque-credit.component";
-import { ConcentrationDetailsComponent } from "./risque-credit/kris/concentration-details/concentration-details.component";
-import { ConcentrationTableRowComponent } from './risque-credit/kris/indicateurs-risque-credit/concentration-table-row/concentration-table-row.component';
+import { ConcentrationComponent } from "./risque-credit/concentration/concentration.component";
+import { ConcentrationDetailsComponent } from "./risque-credit/concentration/concentration-details/concentration-details.component";
+import { ConcentrationClientComponent } from "./risque-credit/concentration/concentration-client/concentration-client.component";
+import { ConcentrationGroupeComponent } from "./risque-credit/concentration/concentration-groupe/concentration-groupe.component";
+import { IndicateursComponent } from "./risque-credit/indicateurs/indicateurs.component";
+import { IndicateurTableComponent } from "./risque-credit/indicateurs/indicateur-table/indicateur-table.component";
 
 @NgModule({
   declarations: [
@@ -193,7 +194,7 @@ import { ConcentrationTableRowComponent } from './risque-credit/kris/indicateurs
     GestionRisqueClientContentComponent,
     RepartitionParSecteurComponent,
     RepartitionParZoneComponent,
-    KRIsComponent,
+
     Scenario1Component,
     Scenario2Component,
     StressTestContentComponent,
@@ -259,9 +260,13 @@ import { ConcentrationTableRowComponent } from './risque-credit/kris/indicateurs
     MyInputListComponent,
     SecondDeleteDialogComponent,
     ConcentrationComponent,
-    IndicateursRisqueCreditComponent,
+    IndicateursComponent,
     ConcentrationDetailsComponent,
-    ConcentrationTableRowComponent,
+    ConcentrationClientComponent,
+    ConcentrationGroupeComponent,
+    IndicateursComponent,
+    IndicateurTableComponent,
+    IndicateurTableComponent,
   ],
   imports: [
     CommonModule,

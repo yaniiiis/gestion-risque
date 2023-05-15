@@ -83,10 +83,16 @@ export const ROUTES: RouteInfo[] = [
         ab: "GS",
       },
       {
-        path: "Kri",
-        title: "Gestion des KRIs",
-        ab: "KRI",
+        path: "concentration",
+        title: "Concentration",
+        ab: "C",
       },
+      {
+        path: "indicateurs",
+        title: "Indicateurs",
+        ab: "I",
+      },
+
       {
         path: "StressTest",
         title: "Gestion des Stress Tests",
