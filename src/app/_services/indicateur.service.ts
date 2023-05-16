@@ -32,6 +32,7 @@ export class IndicateurService {
           this.dataSubject.value["values"] &&
           this.dataSubject.value["values"].length < 1
         ) {
+          console.log("yooooooow existtte");
           const obj = {
             indice: res.indice,
             values: [{ [res.date]: res.value }],
@@ -49,6 +50,22 @@ export class IndicateurService {
           this.dataSubject.next({ ...currentValue, values: updatedValues });
         }
       });
+  }
+
+  unCheckDate(item: string) {
+    //   const currentValue = this.dataSubject.getValue();
+    //   const newValues = currentValue.values.filter((v: string) => v != item);
+    //  // const updatedValues = { ...currentValue.values, newValues };
+    //   this.dataSubject.next(updatedValues);
+
+    const updatedValues = this.dataSubject.value.values.filter(
+      (item: string) => !item
+    );
+    this.dataSubject.next({ ...this.dataSubject.value, values: updatedValues });
+  }
+
+  getAllDates() {
+    return this.httpClient.get(environment.baseUrl + "/allDate");
   }
 
   datesSubject$ = this.datesSubject.asObservable();

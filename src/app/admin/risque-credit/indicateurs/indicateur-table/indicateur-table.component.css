@@ -104,3 +104,14 @@ thead th {
 .yz_bgRed {
   background-color: red;
 }
+.no-data-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 150px;
+  align-items: center;
+  font-size: 19px;
+  font-weight: bold;
+  border: solid 0.5px #767676;
+  border-radius: 5px;
+}

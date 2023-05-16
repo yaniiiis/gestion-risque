@@ -1,4 +1,4 @@
-<table>
+<table *ngIf="data['values'].length > 0; else noData">
   <thead>
     <th *ngFor="let item of header">{{ item }}</th>
   </thead>
@@ -9,19 +9,19 @@
         <!-- <h1>{{ v[dates[i]] }}</h1> -->
         <tr class="tbody__td__tr yz_green">
           {{
-            v[dates[i]] < data.min ? v[dates[i]].toString() + data.unit : ""
+            v[dates[i]] < data.min ? v[dates[i]].toString() : ""
           }}
         </tr>
         <tr class="tbody__td__tr yz_yellow">
           {{
             v[dates[i]] >= data.min && v[dates[i]] <= data.limit
-              ? v[dates[i]].toString() + data.unit
+              ? v[dates[i]].toString()
               : ""
           }}
         </tr>
         <tr class="tbody__td__tr yz_red">
           {{
-            v[dates[i]] > data.limit ? v[dates[i]].toString() + data.unit : ""
+            v[dates[i]] > data.limit ? v[dates[i]].toString() : ""
           }}
         </tr>
       </td>
@@ -60,3 +60,8 @@
   </tbody>
   <tfoot></tfoot>
 </table>
+<ng-template #noData>
+  <div class="no-data-container">
+    {{ dataText }}
+  </div>
+</ng-template>

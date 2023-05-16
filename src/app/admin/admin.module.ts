@@ -128,7 +128,7 @@ import { AddUnderTypeComponent } from "./gestion-role-et-utilisateur/parametrage
 import { DeleteTypeComponent } from "./gestion-role-et-utilisateur/parametrage/common/delete-type/delete-type.component";
 import { GenererRapportComponent } from "./risque-credit/generer-rapport/generer-rapport.component";
 import { MonRapportComponent } from "./risque-credit/generer-rapport/mon-rapport/mon-rapport.component";
-import { MyInputListComponent } from "./gestion-role-et-utilisateur/parametrage/common/my-input-list/my-input-list.component";
+import { MyInputListComponent } from "./commons/my-input-list/my-input-list.component";
 import { SecondDeleteDialogComponent } from "./gestion-role-et-utilisateur/parametrage/common/second-delete-dialog/second-delete-dialog.component";
 import { ConcentrationComponent } from "./risque-credit/concentration/concentration.component";
 import { ConcentrationDetailsComponent } from "./risque-credit/concentration/concentration-details/concentration-details.component";
@@ -136,6 +136,7 @@ import { ConcentrationClientComponent } from "./risque-credit/concentration/conc
 import { ConcentrationGroupeComponent } from "./risque-credit/concentration/concentration-groupe/concentration-groupe.component";
 import { IndicateursComponent } from "./risque-credit/indicateurs/indicateurs.component";
 import { IndicateurTableComponent } from "./risque-credit/indicateurs/indicateur-table/indicateur-table.component";
+import { MyInputListWithCheckboxComponent } from './commons/my-input-list-with-checkbox/my-input-list-with-checkbox.component';
 
 @NgModule({
   declarations: [
@@ -267,6 +268,7 @@ import { IndicateurTableComponent } from "./risque-credit/indicateurs/indicateur
     IndicateursComponent,
     IndicateurTableComponent,
     IndicateurTableComponent,
+    MyInputListWithCheckboxComponent,
   ],
   imports: [
     CommonModule,

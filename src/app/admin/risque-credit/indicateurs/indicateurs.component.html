@@ -12,13 +12,15 @@
             <div class="date-and-id-container">
               <div class="my-date-container">
                 <label class="my-label" for="date-arrete">Date arreté</label>
-                <input
-                  type="date"
-                  id="date-arrete"
-                  class="my-input"
-                  [(ngModel)]="date"
-                  (change)="dateChanged()"
-                />
+                <app-my-input-list-with-checkbox
+                  [list]="listOfDates"
+                  [listToDisplay]="listOfDates"
+                  (callbackFunction)="dateClicked($event)"
+                  [hasError]="myListInputHasError"
+                  [title]="inputListTitle"
+                  [inputValue]="selectedDateText"
+                  [checkedDates]="selectedDates"
+                ></app-my-input-list-with-checkbox>
               </div>
             </div>
 

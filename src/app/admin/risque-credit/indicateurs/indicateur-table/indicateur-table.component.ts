@@ -12,11 +12,13 @@ export class IndicateurTableComponent implements OnInit {
   header = ["Indice"];
   data = {};
   dates: string[] = [];
+  dataText: string = "veuillez ajouter une date";
 
   ngOnInit(): void {
     // this.indicateurService.getData();
     this.indicateurService.dataSubject$.subscribe((res) => {
-      console.log("response : ", res);
+      console.log("console : ", res);
+      this.dates = [];
       this.data = res;
       this.header = ["Indice"];
       for (let index = 0; index < res["values"].length; index++) {
@@ -30,8 +32,6 @@ export class IndicateurTableComponent implements OnInit {
       if (!this.header.includes("Limit")) this.header.push("Limit");
       if (!this.header.includes("Trigger")) this.header.push("Trigger");
       if (!this.header.includes("Ratting")) this.header.push("Ratting");
-
-      console.log("header : ", this.header);
     });
   }
 }
