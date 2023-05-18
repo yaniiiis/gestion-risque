@@ -1,6 +1,4 @@
-import { Component } from "@angular/core";
 import { Routes } from "@angular/router";
-import path from "path";
 import { AddPermissionComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-roles/add-permission/add-permission.component";
 import { AjouterDesRolesComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-roles/ajouter-des-roles/ajouter-des-roles.component";
 import { AjouterNiveauComponent } from "src/app/admin/gestion-role-et-utilisateur/gestion-roles/ajouter-niveau/ajouter-niveau.component";
@@ -58,6 +56,12 @@ import { PositionParPlusieursDatesComponent } from "src/app/admin/risque-de-chan
 import { EvaluationTauxChangeComponent } from "src/app/admin/risque-de-change/evaluation-taux-change/evaluation-taux-change.component";
 
 import { KRIsDeChangeComponent } from "src/app/admin/risque-de-change/kris-de-change/kris-de-change.component";
+import { ListeBeneficiaireComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/liste-beneficiaire/liste-beneficiaire.component";
+import { ListeLimiteComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/liste-limite/liste-limite.component";
+import { SurveillanceLimiteComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/surveillance-limite/surveillance-limite.component";
+import { SurveillanceMensuelleComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/surveillance-mensuelle/surveillance-mensuelle.component";
+import { LimiteBanqueComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque.component";
+import { RisqueDeMarcheComponent } from "src/app/admin/risque-de-marche/risque-de-marche.component";
 import { AnalyseDesDepotsComponent } from "src/app/admin/risque-liquidite/analyse-des-depots/analyse-des-depots.component";
 import { ConsultationRapportKrisLiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-rapport-kris-liquidite/consultation-rapport-kris-liquidite.component";
 import { RapportKrisLiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-rapport-kris-liquidite/rapport-kris-liquidite/rapport-kris-liquidite.component";
@@ -505,27 +509,29 @@ export const AdminLayoutRoutes: Routes = [
   },
 
   {
-    path: "",
+    path: "LimiteBanque",
+    component: LimiteBanqueComponent,
     // canActivate : [AuthPermissionsGuard],
-    data: {
-      // expectedPermission:['ConsulterRessources']
-    },
+    // data: {
+    //   // expectedPermission:['ConsulterRessources']
+    // },
     children: [
       {
-        path: "Invertissements",
-        // component:
+        path: "ListeLimites",
+        component: ListeLimiteComponent,
+      },
+
+      {
+        path: "ListeBeneficiaire",
+        component: ListeBeneficiaireComponent,
       },
       {
-        path: "LimitesBanque",
-        // component:
+        path: "SurveillanceLimites",
+        component: SurveillanceLimiteComponent,
       },
       {
-        path: "NotionsBanques",
-        // component: ,
-      },
-      {
-        path: "NotionsPays",
-        // component:
+        path: "SurveillanceMensuelle",
+        component: SurveillanceMensuelleComponent,
       },
     ],
   },

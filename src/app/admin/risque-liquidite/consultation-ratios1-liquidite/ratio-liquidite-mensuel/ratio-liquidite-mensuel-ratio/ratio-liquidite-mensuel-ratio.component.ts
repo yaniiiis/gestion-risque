@@ -54,7 +54,7 @@ export class RatioLiquiditeMensuelRatioComponent implements OnInit, OnChanges {
     this.indicateurService.getIndicateurById(14).subscribe({
       next: (data) => {
         this.indicateur1 = data;
-
+        console.log("dans indicateur");
         // calcul de la valeur de l'indicateur R1- Coefficient de liquidité
         var datePipe = new DatePipe("en-US");
 

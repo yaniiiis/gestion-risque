@@ -57,6 +57,7 @@ export class ConsultationRatio2LiquiditeRatioComponent
     this.dateTransforme = datePipe.transform(this.selectedDate, "yyyy-MM-dd");
     this.indicateurService.getIndicateurById(19).subscribe({
       next: (response) => {
+        console.log("dans indicateur");
         // recuperation de la valeur de l'indicateur du backend
         // R2- Actif liquide / Total Actif
         this.risqueLiquiditeService

@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+    
+    <mat-form-field appearance="fill">
+        <mat-label>Bénéficiaire</mat-label>
+        <input matInput placeholder="Taper le code beneficiaire" [(ngModel)]="data.beneficiaire">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Fermer</button>
+    <button mat-button (click)="onOkClick()" [mat-dialog-close]="data.beneficiaire" cdkFocusInitial>Enregistrer</button>
+</div>

@@ -213,24 +213,9 @@ export const ROUTES: RouteInfo[] = [
     forAdmin: false,
     children: [
       {
-        path: "Invertissements",
-        title: "Gestion Des Invertissements",
-        ab: "GDI",
-      },
-      {
-        path: "LimitesBanque",
+        path: "LimiteBanque",
         title: "Les Limites de Banques",
         ab: "LB",
-      },
-      {
-        path: "NotionsBanques",
-        title: "Gestion des Notations des banques ",
-        ab: "GNB",
-      },
-      {
-        path: "NotionsPays",
-        title: "Gestion des Notations des pays",
-        ab: "GNP",
       },
     ],
   },

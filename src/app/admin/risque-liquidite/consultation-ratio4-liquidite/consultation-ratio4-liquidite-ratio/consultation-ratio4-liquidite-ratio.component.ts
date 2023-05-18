@@ -62,7 +62,7 @@ export class ConsultationRatio4LiquiditeRatioComponent
       this.indicateurService.getIndicateurById(21).subscribe({
         next: (response) => {
           // recuperation de la valeur de l'indicateur du backend
-
+          console.log("dans indicateur");
           this.risqueLiquiditeService
             .getRatio4CrimDepotClienteleByDate(this.dateTransforme)
             .subscribe({

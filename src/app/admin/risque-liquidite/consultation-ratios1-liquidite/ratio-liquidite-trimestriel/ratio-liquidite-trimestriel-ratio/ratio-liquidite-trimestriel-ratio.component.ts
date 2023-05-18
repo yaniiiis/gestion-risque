@@ -94,6 +94,7 @@ export class RatioLiquiditeTrimestrielRatioComponent
           if (i == 15) {
             // recuperation de la valeur de l'indicateur du backend
             // Coefficient de liquidité à un mois (cf. modèle 5002)
+            console.log("dans indicateur");
             this.indicateur1 = response;
             this.risqueLiquiditeService
               .getRatiosByDate(this.dateTransforme)

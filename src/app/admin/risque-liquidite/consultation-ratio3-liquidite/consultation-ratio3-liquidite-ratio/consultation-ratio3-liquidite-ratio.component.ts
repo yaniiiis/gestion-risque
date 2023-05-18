@@ -63,6 +63,7 @@ export class ConsultationRatio3LiquiditeRatioComponent
 
     this.indicateurService.getIndicateurById(20).subscribe({
       next: (response) => {
+        console.log("dans indicateur");
         // recuperation de la valeur de l'indicateur du backend
         // R2- Actif liquide / Total Actif
         this.risqueLiquiditeService
