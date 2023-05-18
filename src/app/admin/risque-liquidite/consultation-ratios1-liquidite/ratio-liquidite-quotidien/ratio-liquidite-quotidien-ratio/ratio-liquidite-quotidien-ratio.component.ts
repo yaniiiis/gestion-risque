@@ -80,11 +80,13 @@ export class RatioLiquiditeQuotidienRatioComponent
               data_inf.push(100);
               data_sup.push(110);
             }
+            console.log("Limite inferieure");
             this.chartData.push({
               data: data_inf,
               label: "Limite inferieure",
               borderColor: "green",
             });
+            console.log("Limite superieure");
             this.chartData.push({
               data: data,
               label: "Ratio",
@@ -95,6 +97,7 @@ export class RatioLiquiditeQuotidienRatioComponent
               label: "Limite superieure",
               borderColor: "red",
             });
+            console.log("before refresh");
             this.refresh_chart();
           },
         });
@@ -105,6 +108,7 @@ export class RatioLiquiditeQuotidienRatioComponent
     this.servicesRepo.currentAnalyseType = 6;
   }
   refresh_chart() {
+    console.log("refresh");
     setTimeout(() => {
       if (this.chart && this.chart.chart && this.chart.chart.config) {
         this.chart.chart.config.data.labels = this.chartLabels;

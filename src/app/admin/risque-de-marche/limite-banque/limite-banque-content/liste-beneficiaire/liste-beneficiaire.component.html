@@ -1,0 +1,53 @@
+<div class="container">
+        <ng-container *ngIf="beneficiaire$ | async as result" [ngSwitch]="result.dataState">
+            <ng-container *ngSwitchCase="DataStateEnum.LOADING">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="DataStateEnum.LOADED">
+                <div class="form-group">
+                    <label for="beneficiaire"> Béneficiaire </label>
+                    <select class="btn" formControlName="beneficiaire" name="beneficiaire" [(ngModel)]="selectedBeneficiaire" (change)="onChange($event.target.value)">
+                        <option *ngFor="let beneficiaire of result.data" value="{{ beneficiaire[0] }}">
+                            {{ beneficiaire[0] }}
+                        </option>
+                    </select>
+                </div>
+            </ng-container>
+        </ng-container>
+ 
+</div>
+
+
+<table class="table">
+    <thead>
+        <th class="text-center p-1" *ngFor="let head of Head">
+            {{ head }}
+        </th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataTable of Data | async " class="text-center text-dark fw-normal">
+            <td class="tbody__td">
+                {{ dataTable.type }}
+            </td>
+            <td class="tbody__td">
+                {{ dataTable.montantLimite | number:'1.1-2' }}
+            </td>
+            <td class="tbody__td">
+                {{ dataTable.durreMaximalePlacement }}
+            </td>
+            <td class="tbody__td">
+                {{ dataTable.dateEcheance | date:'dd-MM-yyyy' }}
+            </td> 
+
+            <td class="tbody__td">
+                {{ dataTable.dateDerniereRevision | date:'dd-MM-yyyy' }} 
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+

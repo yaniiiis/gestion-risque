@@ -89,7 +89,6 @@ import { EvaluationTauxChangeComponent } from "./risque-de-change/evaluation-tau
 import { KRIsDeChangeComponent } from "./risque-de-change/kris-de-change/kris-de-change.component";
 import { StrsseTestDeChangeComponent } from "./risque-de-change/strsse-test-de-change/strsse-test-de-change.component";
 import { InvertissementsComponent } from "./risque-de-marche/invertissements/invertissements.component";
-import { LimitesBanquesComponent } from "./risque-de-marche/limites-banques/limites-banques.component";
 import { NotionsBanquesComponent } from "./risque-de-marche/notions-banques/notions-banques.component";
 import { NotionsPaysComponent } from "./risque-de-marche/notions-pays/notions-pays.component";
 import { RisqueDeMarcheComponent } from "./risque-de-marche/risque-de-marche.component";
@@ -180,6 +179,13 @@ import { ConsultationRatio5LiquiditeRatioComponent } from "./risque-liquidite/co
 import { ConsultationRatio5LiquiditeCommentaireComponent } from "./risque-liquidite/consultation-ratio5-liquidite/consultation-ratio5-liquidite-commentaire/consultation-ratio5-liquidite-commentaire.component";
 import { ConsultationRatio6LiquiditeCommentaireComponent } from "./risque-liquidite/consultation-ratio6-liquidite/consultation-ratio6-liquidite-commentaire/consultation-ratio6-liquidite-commentaire.component";
 import { ConsultationRatio6LiquiditeRatioComponent } from "./risque-liquidite/consultation-ratio6-liquidite/consultation-ratio6-liquidite-ratio/consultation-ratio6-liquidite-ratio.component";
+import { LimiteBanqueComponent } from "./risque-de-marche/limite-banque/limite-banque.component";
+import { LimiteBanqueContentComponent } from "./risque-de-marche/limite-banque/limite-banque-content/limite-banque-content.component";
+import { ListeLimiteComponent } from "./risque-de-marche/limite-banque/limite-banque-content/liste-limite/liste-limite.component";
+import { SurveillanceLimiteComponent } from "./risque-de-marche/limite-banque/limite-banque-content/surveillance-limite/surveillance-limite.component";
+import { SurveillanceMensuelleComponent } from "./risque-de-marche/limite-banque/limite-banque-content/surveillance-mensuelle/surveillance-mensuelle.component";
+import { ListeBeneficiaireComponent } from './risque-de-marche/limite-banque/limite-banque-content/liste-beneficiaire/liste-beneficiaire.component';
+import { DialogueCreationLimiteComponent } from './risque-de-marche/limite-banque/limite-banque-content/liste-limite/dialogue-creation-limite/dialogue-creation-limite.component';
 
 @NgModule({
   declarations: [
@@ -255,7 +261,7 @@ import { ConsultationRatio6LiquiditeRatioComponent } from "./risque-liquidite/co
     StrsseTestDeChangeComponent,
     RisqueDeMarcheComponent,
     InvertissementsComponent,
-    LimitesBanquesComponent,
+    LimiteBanqueComponent,
     NotionsBanquesComponent,
     NotionsPaysComponent,
     AnalyseDesDepotsComponent,
@@ -351,6 +357,14 @@ import { ConsultationRatio6LiquiditeRatioComponent } from "./risque-liquidite/co
     IndicateursRisqueCreditComponent,
     ConcentrationDetailsComponent,
     ConcentrationTableRowComponent,
+    LimiteBanqueComponent,
+    LimiteBanqueContentComponent,
+    ListeLimiteComponent,
+    SurveillanceLimiteComponent,
+    SurveillanceMensuelleComponent,
+    SurveillanceMensuelleComponent,
+    ListeBeneficiaireComponent,
+    DialogueCreationLimiteComponent,
   ],
   imports: [
     CommonModule,

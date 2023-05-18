@@ -1,0 +1,58 @@
+<div>
+    <mat-form-field appearance="fill">
+        <mat-label>Selectionner une date</mat-label>
+        <input matInput [(ngModel)]="selectedDate" [matDatepicker]="picker" (dateInput)="addEvent('input', $event)"
+            (dateChange)="addEvent('change', $event)" />
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+</div>
+
+<table class="table">
+    <thead>
+        <th class="text-center p-1" *ngFor="let head of Head">
+            {{ head }}
+        </th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let p of placements | async " class="text-center text-dark fw-normal">
+            <td class="tbody__td">
+                {{ p[0] | date:'dd-MM-yyyy' }}
+            </td>
+            <td class="tbody__td">
+                {{ p[1] | date:'dd-MM-yyyy' }}
+            </td>
+            <td class="tbody__td">
+                {{ p[2] }}
+            </td>
+            <td class="tbody__td">
+                {{ p[3]  }}
+            </td>
+            <td class="tbody__td">
+                {{ p[4] | number:'1.1-2' }}
+            </td>
+
+            <td class="tbody__td yz_green" *ngIf="p[5]==='Respect'">
+                {{p[5]}}
+            </td>
+            <td class="tbody__td yz_red" *ngIf="p[5]!=='Respect'">
+                {{p[5]}}
+            </td>
+            <td class="tbody__td yz_green" *ngIf="p[6]==='Respect de la durée maximale de placement'">
+                {{p[6]}}
+            </td>
+            <td class="tbody__td yz_green" *ngIf="p[6]!=='Respect de la durée maximale de placement'">
+                {{p[6]}}
+            </td>
+            <td class="tbody__td yz_green" *ngIf="p[7]==='Pas de dépassement'">
+                {{p[7]}}
+            </td>
+            <td class="tbody__td yz_green" *ngIf="p[7]!=='Pas de dépassement'">
+                {{p[7]}}
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+

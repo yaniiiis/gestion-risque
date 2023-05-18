@@ -22,8 +22,8 @@ export class FileUploadComponent {
   progress: number = 0;
   uploadSub: Subscription;
   selectedOption;
-  url:string;
-  textChargement:string ="";
+  url: string;
+  textChargement: string = "";
   constructor(private http: HttpClient) {}
 
   onFileSelected(event) {
@@ -34,20 +34,19 @@ export class FileUploadComponent {
       const formData = new FormData();
       formData.append("file", file);
 
-      if(this.selectedOption==="1")
-      this.url="/seed"
-      else if (this.selectedOption==="2")
-       this.url="/seedSoldeCompte"
-      else if (this.selectedOption==="3")
-       this.url="/seedRisqLiqDepot" 
-      else if (this.selectedOption==="4")
-       this.url="/seedRisqLiqDonneesSources" 
-       else if (this.selectedOption==="5")
-       this.url="/seedRisqLiqRatiosDeLiquidite" 
-      else if (this.selectedOption==="6")
-       this.url="/seedRisqLiqDonneesActifLiquide"   
-      else if (this.selectedOption==="7")
-       this.url="/seedRisqLiqPlacements" 
+      if (this.selectedOption === "1") this.url = "/seed";
+      else if (this.selectedOption === "2") this.url = "/seedSoldeCompte";
+      else if (this.selectedOption === "3") this.url = "/seedRisqLiqDepot";
+      else if (this.selectedOption === "4")
+        this.url = "/seedRisqLiqDonneesSources";
+      else if (this.selectedOption === "5")
+        this.url = "/seedRisqLiqRatiosDeLiquidite";
+      else if (this.selectedOption === "6")
+        this.url = "/seedRisqLiqDonneesActifLiquide";
+      else if (this.selectedOption === "7") this.url = "/seedRisqLiqPlacements";
+      else if (this.selectedOption === "8")
+        this.url = "/seedRisqMarchePlacement";
+      else if (this.selectedOption === "9") this.url = "/seedRisqMarcheLimite";
 
       const upload$ = this.http
         .post(environment.baseUrl + this.url, formData, {
@@ -58,28 +57,28 @@ export class FileUploadComponent {
 
       this.uploadSub = upload$.subscribe((event) => {
         switch (event.type) {
-          case HttpEventType.Sent:{
+          case HttpEventType.Sent: {
             console.log("Request has been made!");
-            this.textChargement = "Chargement en cours !"
+            this.textChargement = "Chargement en cours !";
             break;
           }
           case HttpEventType.ResponseHeader:
             console.log("Response header has been received!");
             break;
-          case HttpEventType.UploadProgress:{
+          case HttpEventType.UploadProgress: {
             this.progress = Math.round((event.loaded / event.total) * 100);
             console.log(`Uploaded! ${this.progress}%`);
             break;
-            this.textChargement+='.'
+            this.textChargement += ".";
           }
-          case HttpEventType.Response:{
+          case HttpEventType.Response: {
             console.log("User successfully created!", event.body);
             alert("Fichier importé avec succes!");
 
             setTimeout(() => {
               this.progress = 0;
             }, 1500);
-            this.textChargement = "Chargement terminé."
+            this.textChargement = "Chargement terminé.";
           }
         }
       });
@@ -96,7 +95,7 @@ export class FileUploadComponent {
     this.uploadSub = null;
   }
 
-  click(){
-    alert
+  click() {
+    alert;
   }
 }

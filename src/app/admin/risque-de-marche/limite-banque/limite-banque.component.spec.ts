@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LimitesBanquesComponent } from './limites-banques.component';
+import { LimiteBanqueComponent } from './limite-banque.component';
 
-describe('LimitesBanquesComponent', () => {
-  let component: LimitesBanquesComponent;
-  let fixture: ComponentFixture<LimitesBanquesComponent>;
+describe('LimiteBanqueComponent', () => {
+  let component: LimiteBanqueComponent;
+  let fixture: ComponentFixture<LimiteBanqueComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LimitesBanquesComponent ]
+      declarations: [ LimiteBanqueComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(LimitesBanquesComponent);
+    fixture = TestBed.createComponent(LimiteBanqueComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
