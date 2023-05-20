@@ -57,6 +57,7 @@ import { EvaluationTauxChangeComponent } from "src/app/admin/risque-de-change/ev
 
 import { KRIsDeChangeComponent } from "src/app/admin/risque-de-change/kris-de-change/kris-de-change.component";
 import { ListeBeneficiaireComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/liste-beneficiaire/liste-beneficiaire.component";
+import { CreationLimiteComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/liste-limite/creation-limite/creation-limite.component";
 import { ListeLimiteComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/liste-limite/liste-limite.component";
 import { SurveillanceLimiteComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/surveillance-limite/surveillance-limite.component";
 import { SurveillanceMensuelleComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/surveillance-mensuelle/surveillance-mensuelle.component";
@@ -519,6 +520,10 @@ export const AdminLayoutRoutes: Routes = [
       {
         path: "ListeLimites",
         component: ListeLimiteComponent,
+      },
+      {
+        path: "CreationLimite",
+        component: CreationLimiteComponent,
       },
 
       {

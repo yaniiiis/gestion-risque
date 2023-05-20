@@ -52,4 +52,22 @@ export class RisqueDeMarcheService {
       }
     );
   }
+
+  public AddLimit(formData) {
+    return this.http.post(baseUrl + "limits/save", formData, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.storageSer.getToken(),
+      }),
+    });
+  }
+
+  public UpdateLimit(id: number, formData) {
+    return this.http.put(baseUrl + `limit/update/${id}`, formData, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.storageSer.getToken(),
+      }),
+    });
+  }
 }

@@ -184,8 +184,8 @@ import { LimiteBanqueContentComponent } from "./risque-de-marche/limite-banque/l
 import { ListeLimiteComponent } from "./risque-de-marche/limite-banque/limite-banque-content/liste-limite/liste-limite.component";
 import { SurveillanceLimiteComponent } from "./risque-de-marche/limite-banque/limite-banque-content/surveillance-limite/surveillance-limite.component";
 import { SurveillanceMensuelleComponent } from "./risque-de-marche/limite-banque/limite-banque-content/surveillance-mensuelle/surveillance-mensuelle.component";
-import { ListeBeneficiaireComponent } from './risque-de-marche/limite-banque/limite-banque-content/liste-beneficiaire/liste-beneficiaire.component';
-import { DialogueCreationLimiteComponent } from './risque-de-marche/limite-banque/limite-banque-content/liste-limite/dialogue-creation-limite/dialogue-creation-limite.component';
+import { ListeBeneficiaireComponent } from "./risque-de-marche/limite-banque/limite-banque-content/liste-beneficiaire/liste-beneficiaire.component";
+import { CreationLimiteComponent } from './risque-de-marche/limite-banque/limite-banque-content/liste-limite/creation-limite/creation-limite.component';
 
 @NgModule({
   declarations: [
@@ -364,7 +364,7 @@ import { DialogueCreationLimiteComponent } from './risque-de-marche/limite-banqu
     SurveillanceMensuelleComponent,
     SurveillanceMensuelleComponent,
     ListeBeneficiaireComponent,
-    DialogueCreationLimiteComponent,
+    CreationLimiteComponent,
   ],
   imports: [
     CommonModule,
