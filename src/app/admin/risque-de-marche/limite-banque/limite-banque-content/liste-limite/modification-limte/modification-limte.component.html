@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="card card-plain">
       <div class="card-header card-header-primary">
-        <h4 class="card-title">Création de la limite</h4>
+        <h4 class="card-title">Modification de la limite</h4>
       </div>
       <div class="card-body">
         <div class="container">
@@ -62,7 +62,7 @@
                       <option
                         *ngFor="let b of result.data"
                         [value]="b.code"
-                        [selected]="b"
+                        [selected]=""
                       >
                         {{ b.description }}
                       </option>
@@ -107,7 +107,7 @@
                       <option
                         *ngFor="let t of result1.data"
                         [value]="t.code"
-                        [selected]="t"
+                        [selected]=""
                       >
                         {{ t.description }}
                       </option>

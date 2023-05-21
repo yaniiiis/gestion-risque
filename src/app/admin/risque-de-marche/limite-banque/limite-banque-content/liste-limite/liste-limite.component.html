@@ -1,52 +1,63 @@
-
-<td >
-    <button class="btn btn-default btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-            mat-raised-button
-            (click)="creerLimite()" [disabled]="false">
-        Créer une limite
-    </button>
+<td>
+  <button
+    class="btn btn-default btn-sm"
+    data-bs-toggle="modal"
+    data-bs-target="#staticBackdrop"
+    mat-raised-button
+    (click)="creerLimite()"
+    [disabled]="false"
+  >
+    Créer une limite
+  </button>
 </td>
 
 <table class="table">
-    <thead>
-        <th class="text-center p-1" *ngFor="let head of Head">
-            {{ head }}
-        </th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let dataTable of Data | async " class="text-center text-dark fw-normal">
-            <td class="tbody__td">
-                {{ dataTable.beneficiaire  }}
-            </td> 
-            <td class="tbody__td">
-                {{ dataTable.type }}
-            </td>
-            <td class="tbody__td">
-                {{ dataTable.montantLimite | number:'1.1-2' }}
-            </td>
-            <td class="tbody__td">
-                {{ dataTable.dateDecision | date:'dd-MM-yyyy'}}
-            </td>
-            <td class="tbody__td">
-                {{ dataTable.dateEcheance | date:'dd-MM-yyyy' }}
-            </td>
-            <td class="tbody__td">
-                {{ dataTable.durreMaximalePlacement }}
-            </td>
-            <td class="tbody__td">
-                {{ dataTable.dateDerniereRevision | date:'dd-MM-yyyy' }}
-            </td>
-            <td class="tbody__td">
-                <button class="btn btn-default btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="modifier(dataTable)">
-                    modifier
-                </button>
-            </td>
-            <td class="tbody__td">
-                <button class="btn btn-danger btn-sm" (click)="desactiver(dataTable)">
-                    desactiver
-                </button>
-            </td>
-            </tr>
-        
-    </tbody>
+  <thead>
+    <th class="text-center p-1" *ngFor="let head of Head">
+      {{ head }}
+    </th>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let dataTable of Data | async"
+      class="text-center text-dark fw-normal"
+    >
+      <td class="tbody__td">
+        {{ dataTable.beneficiaire }}
+      </td>
+      <td class="tbody__td">
+        {{ dataTable.type }}
+      </td>
+      <td class="tbody__td">
+        {{ dataTable.montantLimite | number : "1.1-2" }}
+      </td>
+      <td class="tbody__td">
+        {{ dataTable.dateDecision | date : "dd-MM-yyyy" }}
+      </td>
+      <td class="tbody__td">
+        {{ dataTable.dateEcheance | date : "dd-MM-yyyy" }}
+      </td>
+      <td class="tbody__td">
+        {{ dataTable.durreMaximalePlacement }}
+      </td>
+      <td class="tbody__td">
+        {{ dataTable.dateDerniereRevision | date : "dd-MM-yyyy" }}
+      </td>
+      <td class="tbody__td">
+        <button
+          class="btn btn-default btn-sm"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+          (click)="modifierLimite(dataTable.id)"
+        >
+          modifier
+        </button>
+      </td>
+      <td class="tbody__td">
+        <button class="btn btn-danger btn-sm" (click)="desactiver(dataTable)">
+          desactiver
+        </button>
+      </td>
+    </tr>
+  </tbody>
 </table>

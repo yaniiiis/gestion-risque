@@ -34,7 +34,16 @@ export class RisqueDeMarcheService {
   }
 
   findAllBeneficiaires() {
-    return this.http.get<string[]>(baseUrl + "/findAllBeneficiaire", {
+    return this.http.get<any[]>(baseUrl + "/beneficiaire/findAll", {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.storageSer.getToken(),
+      }),
+    });
+  }
+
+  findAllTypePlacement() {
+    return this.http.get<any[]>(baseUrl + "/TypePlacement/findAll", {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + this.storageSer.getToken(),
@@ -54,7 +63,7 @@ export class RisqueDeMarcheService {
   }
 
   public AddLimit(formData) {
-    return this.http.post(baseUrl + "limits/save", formData, {
+    return this.http.post(baseUrl + "/limit/addLimit", formData, {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + this.storageSer.getToken(),
@@ -63,7 +72,23 @@ export class RisqueDeMarcheService {
   }
 
   public UpdateLimit(id: number, formData) {
-    return this.http.put(baseUrl + `limit/update/${id}`, formData, {
+    return this.http.put(baseUrl + `/limit/updateLimit/${id}`, formData, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.storageSer.getToken(),
+      }),
+    });
+  }
+  public disableLimit(id: number, formData) {
+    return this.http.put(baseUrl + `/limit/disableLimit/${id}`, formData, {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + this.storageSer.getToken(),
+      }),
+    });
+  }
+  public findLimitById(id: number) {
+    return this.http.get(baseUrl + `/findLimitById/${id}`, {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
         Authorization: "Bearer " + this.storageSer.getToken(),

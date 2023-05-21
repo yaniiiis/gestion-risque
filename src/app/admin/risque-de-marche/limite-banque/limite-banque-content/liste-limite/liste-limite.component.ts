@@ -37,11 +37,18 @@ export class ListeLimiteComponent implements OnInit {
     alert("Modifier " + item.id);
   }
   desactiver(item) {
-    alert("Désactiver " + item.id);
+    this.route.navigateByUrl(
+      "Admin/LimiteBanque/DesactivationLimite?id=" + item.id
+    );
   }
 
   creerLimite() {
-    alert("Créer une limite ");
     this.route.navigateByUrl("Admin/LimiteBanque/CreationLimite");
+  }
+  modifierLimite(id) {
+    this.route.navigateByUrl("Admin/LimiteBanque/ModificationLimite?id=" + id);
+    // this.route.navigate(["/Admin/LimiteBanque/ModificationLimite"], {
+    //   queryParams: { id: 1 },
+    // });
   }
 }
