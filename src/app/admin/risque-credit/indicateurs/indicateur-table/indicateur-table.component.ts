@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { IndicateurService } from "src/app/_services/indicateur.service";
+import { InputWithCheckboxEvent } from "src/app/admin/commons/my-input-list-with-checkbox/my-input-list-with-checkbox.component";
 
 @Component({
   selector: "app-indicateur-table",
@@ -7,15 +9,36 @@ import { IndicateurService } from "src/app/_services/indicateur.service";
   styleUrls: ["./indicateur-table.component.css"],
 })
 export class IndicateurTableComponent implements OnInit {
-  constructor(private indicateurService: IndicateurService) {}
+  constructor(
+    private indicateurService: IndicateurService,
+    private router: Router
+  ) {}
   indicOnHeader = [];
   header = ["Indice"];
   data = {};
   dates: string[] = [];
   dataText: string = "veuillez ajouter une date";
 
+  listOfDates: string[] = [];
+  myListInputHasError: boolean = false;
+  inputListTitle: string = "Dates";
+  selectedDateText: string;
+  selectedDates = [];
+  title: string;
+  show: boolean = false;
+
   ngOnInit(): void {
-    // this.indicateurService.getData();
+    this.indicateurService.resetData();
+    this.title = this.myTitleMapper[this.getLastStringFromUrl(this.router.url)];
+    this.indicateurService.getAllDates().subscribe((res: string[]) => {
+      this.listOfDates = res;
+    });
+
+    this.show = this.listOfPossibleLastUrls.includes(
+      this.getLastStringFromUrl(this.router.url)
+    );
+
+    console.log("the urlk is : ", this.getLastStringFromUrl(this.router.url));
     this.indicateurService.dataSubject$.subscribe((res) => {
       console.log("console : ", res);
       this.dates = [];
@@ -34,6 +57,40 @@ export class IndicateurTableComponent implements OnInit {
       if (!this.header.includes("Ratting")) this.header.push("Ratting");
     });
   }
+
+  getLastStringFromUrl(url: string): string {
+    const segments = url.split("/");
+    return segments[segments.length - 1];
+  }
+
+  dateClicked(event: InputWithCheckboxEvent) {
+    if (event.checked) {
+      this.selectedDates.push(event.item);
+      this.indicateurService.getData(
+        this.getLastStringFromUrl(this.router.url),
+        event.item
+      );
+    } else {
+      this.selectedDates = this.selectedDates.filter((d) => d != event.item);
+      this.indicateurService.unCheckDate(event.item);
+    }
+  }
+
+  myTitleMapper = {
+    "taux-defaut": "Taux de defaut",
+    "concentration-25": "Concentration 25%",
+    "concentration-grands-risques": "Concentration grand risques",
+    "concentration-top-10": "Concentration top 10",
+    "concentration-decouverts-comptes": "Concentration découverts en comptes",
+  };
+
+  listOfPossibleLastUrls = [
+    "taux-defaut",
+    "concentration-25",
+    "concentration-grands-risques",
+    "concentration-top-10",
+    "concentration-decouverts-comptes",
+  ];
 }
 
 // selectedData = {

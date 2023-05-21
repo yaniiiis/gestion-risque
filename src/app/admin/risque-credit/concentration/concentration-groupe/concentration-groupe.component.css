@@ -153,7 +153,7 @@ td {
 .my-detail-text-container {
   width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: start;
   padding: 10px 15px;
   color: blue;
   font-weight: bold;
@@ -170,4 +170,12 @@ td {
   border: 0.5px solid;
   margin-top: 20px;
   border-radius: 5px;
+}
+
+.my-loading-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
 }

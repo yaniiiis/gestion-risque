@@ -25,15 +25,15 @@ export class IndicateursComponent implements OnInit {
     });
   }
 
-  dateClicked(event: InputWithCheckboxEvent) {
-    if (event.checked) {
-      this.selectedDates.push(event.item);
-      this.indicateurService.getData();
-    } else {
-      this.selectedDates = this.selectedDates.filter((d) => d != event.item);
-      this.indicateurService.unCheckDate(event.item);
-    }
-  }
+  // dateClicked(event: InputWithCheckboxEvent) {
+  //   if (event.checked) {
+  //     this.selectedDates.push(event.item);
+  //     //this.indicateurService.getData();
+  //   } else {
+  //     this.selectedDates = this.selectedDates.filter((d) => d != event.item);
+  //     this.indicateurService.unCheckDate(event.item);
+  //   }
+  // }
 
   protected menuItems = [
     {
@@ -43,6 +43,19 @@ export class IndicateursComponent implements OnInit {
     {
       menuItem: "Concentration 25%",
       path: "concentration-25",
+    },
+
+    {
+      menuItem: "Concentration grand risques",
+      path: "concentration-grands-risques",
+    },
+    {
+      menuItem: "Concentration top 10",
+      path: "concentration-top-10",
+    },
+    {
+      menuItem: "Concentration découverts en comptes",
+      path: "concentration-decouverts-comptes",
     },
   ];
 

@@ -13,6 +13,35 @@ table {
   width: 100%;
 }
 
+.date-and-id-container {
+  display: flex;
+  justify-content: space-between;
+  height: 75px;
+  align-items: end;
+  margin-bottom: 10px;
+}
+
+.my-date-container,
+.id-client-or-group-container,
+.fond-container {
+  display: flex;
+  width: 300px;
+  padding: 4px;
+  justify-content: start;
+  align-items: center;
+}
+
+.my-input {
+  outline: none;
+  border: 0.5px solid rgb(184, 181, 181);
+  border-radius: 5px;
+  height: 40px;
+  padding: 5px;
+  box-shadow: 1px 1px 2px rgb(102 68 68 / 20%);
+  width: 200px;
+  margin-right: 15p;
+}
+
 th {
   height: 45px;
 }
@@ -54,8 +83,8 @@ thead th {
   height: 25px;
   overflow-y: hidden;
   line-height: 18px;
-  min-width: 350px;
   max-height: 50px;
+  font-weight: 500;
 }
 
 .tbody__td__tr {
@@ -66,11 +95,12 @@ thead th {
   align-items: center;
   border-bottom: 1px solid rgb(165, 165, 165);
   font-weight: 600;
-  font-size: 10px;
+  font-size: 12px;
 }
 .tbody__td--limit {
   text-align: center;
   font-size: 14px;
+  font-weight: 600;
 }
 .tbody__td--commentaire {
   width: 100px;
@@ -113,5 +143,40 @@ thead th {
   font-size: 19px;
   font-weight: bold;
   border: solid 0.5px #767676;
+  border-radius: 5px;
+}
+
+.my-comment-container {
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.comment-textarea {
+  width: 100%;
+}
+.my-label {
+  font-size: 14px;
+  line-height: 1.42857;
+  font-weight: 400;
+  color: black;
+  font-weight: bold;
+  margin-top: 5px;
+  width: 100px;
+  margin-right: 3px;
+}
+
+.my-title-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.my-title-text {
+  box-shadow: 1px 2px 2px #cbc8c8;
+  font-size: 19px;
+  padding: 15px 25px;
   border-radius: 5px;
 }

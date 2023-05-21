@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, skip } from "rxjs";
 import { ConcentrationService } from "src/app/_services/ConcentrationService/concentration-service.service";
 
 @Component({
@@ -31,13 +31,21 @@ export class ConcentrationGroupeComponent implements OnInit {
     "Veuillez selectionner les information ci-dessus pour afficher les données";
   taux: number;
   selectedIdText: string = "";
+  calculateIsClicked = false;
+  isLoading = false;
 
   ngOnInit(): void {
     this.concentrationService.listOfGroupIds$.subscribe((l) => {
       this.listOfIds = l;
     });
 
+    this.concentrationService.groupeIsLoading$.subscribe((l) => {
+      this.isLoading = l;
+    });
+
     this.concentrationService.dataGroup$.subscribe((d) => {
+      if (d.length == 0 && this.calculateIsClicked)
+        this.textNoData = "Données non disponible pour ce groupe";
       this.dataFinal = d;
     });
 
@@ -52,7 +60,10 @@ export class ConcentrationGroupeComponent implements OnInit {
   }
 
   calculerClicked() {
-    if (this.selectedId && this.fondPropres) {
+    if (!this.selectedId) {
+      this.myListInputHasError = true;
+    } else if (this.selectedId && this.fondPropres) {
+      this.calculateIsClicked = true;
       this.calculateConcentration();
     }
   }

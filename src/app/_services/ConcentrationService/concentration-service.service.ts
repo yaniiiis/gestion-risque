@@ -27,10 +27,18 @@ export class ConcentrationService {
   selectedDateGroupe: string;
   selectedIdTextGroupe: string;
   fondPropresGroupe: number;
+  textNoData: string;
+  clientIsLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
+  groupeIsLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
 
   dataClient: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
   getConcentrationClient(id: string, date: string, fondPropres: number) {
+    this.clientIsLoading.next(true);
     this.selectedIdClient = id;
     this.selectedDateClient = date;
     this.selectedIdText = id;
@@ -41,8 +49,10 @@ export class ConcentrationService {
       .post<any>(environment.baseUrl + `/concentration/parClient`, {
         id: id,
         dateSelect: date,
+        fpr: fondPropres,
       })
       .subscribe((response) => {
+        this.clientIsLoading.next(false);
         this.dataClient.next([]);
         // if (response.length == 0) this.textNoData = "Données non disponibles ";
         response.forEach((element: any) => {
@@ -64,6 +74,7 @@ export class ConcentrationService {
   }
 
   getConcentrationByGroup(id: string, date: string, fondPropres: number) {
+    this.groupeIsLoading.next(true);
     this.selectedDateGroupe = date;
     this.selectedChoice = "groupe";
     this.selectedChoiceIndex = 1;
@@ -76,10 +87,12 @@ export class ConcentrationService {
       .post<any>(environment.baseUrl + `/concentration/parGroup/`, {
         id: id,
         dateSelect: date,
+        fpr: fondPropres,
       })
       .subscribe((response) => {
+        this.groupeIsLoading.next(false);
         this.dataGroup.next([]);
-        // if (response.length == 0) this.textNoData = "Données non disponibles ";
+        if (response.length == 0) this.textNoData = "Données non disponibles ";
         response.forEach((element: any) => {
           let dd: any[] = [date];
           for (const key in element) {
@@ -137,6 +150,8 @@ export class ConcentrationService {
   dataClient$ = this.dataClient.asObservable();
   dataGroup$ = this.dataGroup.asObservable();
   header$ = this.header.asObservable();
+  clientIsLoading$ = this.clientIsLoading.asObservable();
+  groupeIsLoading$ = this.groupeIsLoading.asObservable();
 
   myMapper = {
     date: "Date",

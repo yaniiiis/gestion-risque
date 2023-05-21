@@ -22,11 +22,9 @@ export class IndicateurService {
     this.datesSubject.next([...this.datesSubject.value, date]);
   }
 
-  getData() {
+  getData(url: string, date: string) {
     this.httpClient
-      .get(
-        environment.baseUrl + `/concentration/limiteConcentration/2021-03-31`
-      )
+      .get(environment.baseUrl + `/concentration/${url}/${date}`)
       .subscribe((res: any) => {
         if (
           this.dataSubject.value["values"] &&
@@ -47,6 +45,11 @@ export class IndicateurService {
 
           const currentValue = this.dataSubject.getValue();
           const updatedValues = [...currentValue.values, obj];
+          updatedValues.sort((a, b) => {
+            const dateA = new Date(Object.keys(a)[0]);
+            const dateB = new Date(Object.keys(b)[0]);
+            return dateA.getTime() - dateB.getTime();
+          });
           this.dataSubject.next({ ...currentValue, values: updatedValues });
         }
       });
@@ -58,10 +61,20 @@ export class IndicateurService {
     //  // const updatedValues = { ...currentValue.values, newValues };
     //   this.dataSubject.next(updatedValues);
 
-    const updatedValues = this.dataSubject.value.values.filter(
-      (item: string) => !item
-    );
+    const updatedValues = this.dataSubject.value.values.filter((v: string) => {
+      console.log("v fromm filtring : ", Object.keys(v)[0]);
+      return Object.keys(v)[0] != item;
+    });
     this.dataSubject.next({ ...this.dataSubject.value, values: updatedValues });
+  }
+
+  resetData() {
+    this.dataSubject.next({
+      indice: "",
+      values: [],
+      limit: "",
+      min: "",
+    });
   }
 
   getAllDates() {

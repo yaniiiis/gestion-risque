@@ -264,11 +264,27 @@ export const AdminLayoutRoutes: Routes = [
         component: IndicateursComponent,
         children: [
           {
+            path: "",
+            component: IndicateurTableComponent,
+          },
+          {
             path: "taux-defaut",
             component: IndicateurTableComponent,
           },
           {
             path: "concentration-25",
+            component: IndicateurTableComponent,
+          },
+          {
+            path: "concentration-grands-risques",
+            component: IndicateurTableComponent,
+          },
+          {
+            path: "concentration-top-10",
+            component: IndicateurTableComponent,
+          },
+          {
+            path: "concentration-decouverts-comptes",
             component: IndicateurTableComponent,
           },
         ],

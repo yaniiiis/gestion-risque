@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, skip } from "rxjs";
 import { ConcentrationService } from "src/app/_services/ConcentrationService/concentration-service.service";
 
 @Component({
@@ -30,13 +30,21 @@ export class ConcentrationClientComponent implements OnInit {
     "Veuillez selectionner les information ci-dessus pour afficher les données";
   taux: number;
   selectedIdText: string = "";
+  calculateIsClicked = false;
+  isLoading = false;
 
   ngOnInit(): void {
     this.concentrationService.listOfIds$.subscribe((l) => {
       this.listOfIds = l;
     });
+    this.concentrationService.clientIsLoading$.subscribe((b) => {
+      this.isLoading = b;
+    });
 
     this.concentrationService.dataClient$.subscribe((d) => {
+      console.log("DDDDDDD : ", d);
+      if (d.length == 0 && this.calculateIsClicked)
+        this.textNoData = "Données non disponible pour ce client";
       this.dataFinal = d;
     });
 

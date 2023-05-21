@@ -1,67 +1,100 @@
-<table *ngIf="data['values'].length > 0; else noData">
-  <thead>
-    <th *ngFor="let item of header">{{ item }}</th>
-  </thead>
-  <tbody>
-    <tr>
-      <td class="tbody__td--label">{{ data["indice"] }}</td>
-      <td class="tbody__td" *ngFor="let v of data['values']; let i = index">
-        <!-- <h1>{{ v[dates[i]] }}</h1> -->
-        <tr class="tbody__td__tr yz_green">
-          {{
-            v[dates[i]] < data.min ? v[dates[i]].toString() : ""
-          }}
-        </tr>
-        <tr class="tbody__td__tr yz_yellow">
-          {{
-            v[dates[i]] >= data.min && v[dates[i]] <= data.limit
-              ? v[dates[i]].toString()
-              : ""
-          }}
-        </tr>
-        <tr class="tbody__td__tr yz_red">
-          {{
-            v[dates[i]] > data.limit ? v[dates[i]].toString() : ""
-          }}
-        </tr>
-      </td>
-      <td class="tbody__td--limit">{{ data["limit"] }}</td>
-      <td class="tbody__td--trigger">
-        <tr class="tbody__td__tr yz_green">
-          <td class="tbody__td--compareValues">< {{ data["min"] }}</td>
-        </tr>
-        <tr class="tbody__td__tr yz_yellow">
-          <td class="tbody__td--compareValues">
-            {{ data["limit"] }} -
-            {{ data["min"] }}
-          </td>
-        </tr>
-        <tr class="tbody__td__tr yz_red">
-          <td class="tbody__td--compareValues">> {{ data["limit"] }}</td>
-        </tr>
-      </td>
-
-      <td class="tbody__td--trigger">
-        <tr class="tbody__td__tr yz_green">
-          <td class="tbody__td--colors yz_bgGreen"></td>
-        </tr>
-        <tr class="tbody__td__tr yz_yellow">
-          <td class="tbody__td--colors yz_bgYellow"></td>
-        </tr>
-        <tr class="tbody__td__tr yz_red">
-          <td class="tbody__td--colors yz_bgRed"></td>
-        </tr>
-      </td>
-
-      <!-- <td class="tbody__td--commentaire">
-          {{ d.commentaire }}
-        </td> -->
-    </tr>
-  </tbody>
-  <tfoot></tfoot>
-</table>
-<ng-template #noData>
-  <div class="no-data-container">
-    {{ dataText }}
+<div *ngIf="show">
+  <div class="my-title-container">
+    <span class="my-title-text">{{ title }}</span>
   </div>
-</ng-template>
+
+  <div class="date-and-id-container">
+    <div class="my-date-container">
+      <label class="my-label" for="date-arrete">Date arreté</label>
+      <app-my-input-list-with-checkbox
+        [list]="listOfDates"
+        [listToDisplay]="listOfDates"
+        (callbackFunction)="dateClicked($event)"
+        [hasError]="myListInputHasError"
+        [title]="inputListTitle"
+        [inputValue]="selectedDateText"
+        [checkedDates]="selectedDates"
+      ></app-my-input-list-with-checkbox>
+    </div>
+  </div>
+
+  <table *ngIf="data['values'].length > 0; else noData">
+    <thead>
+      <th *ngFor="let item of header">{{ item }}</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tbody__td--label">{{ data["indice"] }}</td>
+        <td class="tbody__td" *ngFor="let v of data['values']; let i = index">
+          <!-- <h1>{{ v[dates[i]] }}</h1> -->
+          <tr class="tbody__td__tr yz_green">
+            {{
+              v[dates[i]] < data.min ? v[dates[i]].toString() : ""
+            }}
+          </tr>
+          <tr class="tbody__td__tr yz_yellow">
+            {{
+              v[dates[i]] >= data.min && v[dates[i]] <= data.limit
+                ? v[dates[i]].toString()
+                : ""
+            }}
+          </tr>
+          <tr class="tbody__td__tr yz_red">
+            {{
+              v[dates[i]] > data.limit ? v[dates[i]].toString() : ""
+            }}
+          </tr>
+        </td>
+        <td class="tbody__td--limit">{{ data["limit"] }}</td>
+        <td class="tbody__td--trigger">
+          <tr class="tbody__td__tr yz_green">
+            <td class="tbody__td--compareValues">< {{ data["min"] }}</td>
+          </tr>
+          <tr class="tbody__td__tr yz_yellow">
+            <td class="tbody__td--compareValues">
+              {{ data["limit"] }} -
+              {{ data["min"] }}
+            </td>
+          </tr>
+          <tr class="tbody__td__tr yz_red">
+            <td class="tbody__td--compareValues">> {{ data["limit"] }}</td>
+          </tr>
+        </td>
+
+        <td class="tbody__td--trigger">
+          <tr class="tbody__td__tr yz_green">
+            <td class="tbody__td--colors yz_bgGreen"></td>
+          </tr>
+          <tr class="tbody__td__tr yz_yellow">
+            <td class="tbody__td--colors yz_bgYellow"></td>
+          </tr>
+          <tr class="tbody__td__tr yz_red">
+            <td class="tbody__td--colors yz_bgRed"></td>
+          </tr>
+        </td>
+
+        <!-- <td class="tbody__td--commentaire">
+            {{ d.commentaire }}
+          </td> -->
+      </tr>
+    </tbody>
+    <tfoot></tfoot>
+  </table>
+
+  <div class="my-comment-container">
+    <label class="my-label" for="">Commentaire</label>
+    <textarea
+      class="comment-textarea"
+      name=""
+      id=""
+      cols="30"
+      rows="5"
+    ></textarea>
+  </div>
+
+  <ng-template #noData>
+    <div class="no-data-container">
+      {{ dataText }}
+    </div>
+  </ng-template>
+</div>
