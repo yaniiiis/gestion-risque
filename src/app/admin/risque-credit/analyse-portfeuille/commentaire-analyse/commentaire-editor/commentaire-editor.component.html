@@ -10,13 +10,21 @@
             </form>
             </div>
   </div>  -->
-
+<div class="row">
   <mat-form-field class="col-md-12">
     <form [formGroup]="form" (ngSubmit)="enregistrer()">
-      <textarea placeholder="Commentaire" matInput formControlName="commentaire" ></textarea>
+      <textarea
+        placeholder="Commentaire"
+        matInput
+        formControlName="commentaire"
+      ></textarea>
       <button
         class="btn btn-default btn-sm"
-        mat-raised-button [disabled]="boutonEnregistrerStatus"
-      >Enregistrer</button>
+        mat-raised-button
+        [disabled]="boutonEnregistrerStatus"
+      >
+        Enregistrer
+      </button>
     </form>
-  </mat-form-field> 
+  </mat-form-field>
+</div>

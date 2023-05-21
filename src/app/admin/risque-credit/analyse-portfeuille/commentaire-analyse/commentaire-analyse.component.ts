@@ -26,7 +26,10 @@ import { default as _rollupMoment, Moment } from "moment";
 import { REportD } from "src/app/Models/REportD";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogueMotifComponent } from "./dialogue-motif/dialogue-motif.component";
-import { Commentaire, CommentaireService } from "src/app/_services/CommentaireService/commentaire-service";
+import {
+  Commentaire,
+  CommentaireService,
+} from "src/app/_services/CommentaireService/commentaire-service";
 import { StorageSService } from "src/app/_services/storageService/storage-s.service";
 import { Observable } from "rxjs";
 import { IndicateurService } from "src/app/_services/indicateur.service";
@@ -85,16 +88,6 @@ export class CommentaireAnalyseComponent implements OnInit {
   selectedYear!: string;
   selectedUnit!: string;
   formule: string = "empty";
-  commentaireSubordonne: Observable<Commentaire>;
-  commentaireSub: string;
-  idCommentaireSub: number;
-
-  commentaireSubAccepte: boolean = false;
-  commentaireSubRejete: boolean = false;
-
-
-
-  disabledGenerateReport : boolean = true;
   divUnit: number = 1;
   headers: string[] = [
     "Credit Particulier",
@@ -137,17 +130,11 @@ export class CommentaireAnalyseComponent implements OnInit {
     creditEntreprise: {} as CreditRisqueRapport,
   } as AllSelected;
 
-
   unites: Unite[] = [
     { value: "D", viewValue: "Dinars" },
     { value: "ML", viewValue: "Milliard de dinars" },
   ];
 
-  motif: string;
-  title: string = "Confirmation";
-
-  showAccept = true;
- 
   l_total_credit_direct = 0;
   l_creances_douteuses = 0;
   l_creances_courantes = 0;
@@ -167,42 +154,10 @@ export class CommentaireAnalyseComponent implements OnInit {
     private commentaireService: CommentaireService,
     private storageSer: StorageSService,
     private indicateurService: IndicateurService
-  ) { }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogueMotifComponent, {
-      data: { motif: this.motif, title: this.title },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log("The dialog was closed");
-      this.motif = result;
-    });
-  }
+  ) {}
 
   ngOnInit(): void {
-    moment.locale('us');
-    var today = moment().format("DD-MM-YYYYTHH:mm:SS[Z]")
-    var year = moment().year();
-    var month = moment().month() + 1;
-    if (this.storageSer.getUser().roles.id === 4)
-    this.showAccept = false;
-
-    this.commentaireSubordonne = this.commentaireService.findCommentaireSubordonneByDateAndTypeAnalyse(this.servicesRepo.currentAnalyseType, this.storageSer.getUser().roles.id, year, month);
-    
-   this.commentaireSubordonne.subscribe({
-      next: (data) => {
-        if(data!=null){
-        this.commentaireSub = data.commentaire
-        this.idCommentaireSub = data.id
-        this.commentaireSubAccepte = (data.acceptedOn==undefined && data.rejectedOn==undefined)?false:true;
-        this.commentaireSubRejete = (data.rejectedOn==undefined && data.acceptedOn==undefined)?false:true;
-        }
-           },
-       error: (error) =>{
-        console.log(error.error.text)
-       }    
-      });
+    moment.locale("us");
     this.creditReportFix.creditParticulier = {};
     this.creditReportFix.creditEntreprise = {};
     this.creditReportFix.datereportfix = {};
@@ -214,58 +169,49 @@ export class CommentaireAnalyseComponent implements OnInit {
     if (this.selectedYear === undefined) {
       this.selectedYear = String(this.years + 1);
     }
-
-   
-
     this.slectedPeriods = [];
+    this.handelGetAllReportDate(this.selctPeriodElt);
+    // this.stateChanged();
 
-   
-    this.handelGetAllReportDate(this.selctPeriodElt)
-   // this.stateChanged();
-  
-   if (this.storageSer.userHasGenererRapport())
-   this.disabledGenerateReport = false;
-   
-   this.indicateurService.getIndicateurById(1).subscribe((response) =>{
-       this.l_total_credit_direct = response.valeurLimite;
-   });
+    this.indicateurService.getIndicateurById(1).subscribe((response) => {
+      this.l_total_credit_direct = response.valeurLimite;
+    });
 
-   this.indicateurService.getIndicateurById(2).subscribe((response) =>{
-    this.l_creances_douteuses = response.valeurLimite;
-   });
+    this.indicateurService.getIndicateurById(2).subscribe((response) => {
+      this.l_creances_douteuses = response.valeurLimite;
+    });
 
-   this.indicateurService.getIndicateurById(3).subscribe((response) =>{
-    this.l_creances_courantes = response.valeurLimite;;
-   });
+    this.indicateurService.getIndicateurById(3).subscribe((response) => {
+      this.l_creances_courantes = response.valeurLimite;
+    });
 
-   this.indicateurService.getIndicateurById(4).subscribe((response) =>{
-    this.l_interets_reserves = response.valeurLimite;;
-   });
+    this.indicateurService.getIndicateurById(4).subscribe((response) => {
+      this.l_interets_reserves = response.valeurLimite;
+    });
 
-   this.indicateurService.getIndicateurById(5).subscribe((response) =>{
-    this.l_provisions = response.valeurLimite;;
-   });
+    this.indicateurService.getIndicateurById(5).subscribe((response) => {
+      this.l_provisions = response.valeurLimite;
+    });
 
-   this.indicateurService.getIndicateurById(6).subscribe((response) =>{
-    this.l_taux_creances_douteuses = response.valeurLimite;;
-   });
+    this.indicateurService.getIndicateurById(6).subscribe((response) => {
+      this.l_taux_creances_douteuses = response.valeurLimite;
+    });
 
-   this.indicateurService.getIndicateurById(7).subscribe((response) =>{
-    this.l_taux_de_couverture = response.valeurLimite;;
-   });
+    this.indicateurService.getIndicateurById(7).subscribe((response) => {
+      this.l_taux_de_couverture = response.valeurLimite;
+    });
 
-   this.indicateurService.getIndicateurById(8).subscribe((response) =>{
-    this.l_interets_reserves_creances_douteuses = response.valeurLimite;;
-   });
+    this.indicateurService.getIndicateurById(8).subscribe((response) => {
+      this.l_interets_reserves_creances_douteuses = response.valeurLimite;
+    });
 
-   this.indicateurService.getIndicateurById(9).subscribe((response) =>{
-    this.l_creances_douteuses_net_interets_reserves = response.valeurLimite;;
-   });
+    this.indicateurService.getIndicateurById(9).subscribe((response) => {
+      this.l_creances_douteuses_net_interets_reserves = response.valeurLimite;
+    });
 
-   this.indicateurService.getIndicateurById(10).subscribe((response) =>{
-    this.l_credit_direct_net_interet_reserves = response.valeurLimite;;
-   });
-  
+    this.indicateurService.getIndicateurById(10).subscribe((response) => {
+      this.l_credit_direct_net_interet_reserves = response.valeurLimite;
+    });
   }
 
   // filte by year and get report fix
@@ -278,146 +224,183 @@ export class CommentaireAnalyseComponent implements OnInit {
     this.handelGetCreditPeriodFixe();
   }
 
-   a1 = {} as AllSelected;
-   
+  a1 = {} as AllSelected;
+
   handelGetAllReportDate(selctPeriodElt: AllSelected) {
     var datePipe = new DatePipe("en-US");
     console.log("this .select year ", this.selectedYear);
     this.availablePeriods = [];
 
-    
     this.dateTransforme = datePipe.transform(
-            selctPeriodElt.datereporte,
-            "yyyy-MM-dd"
-          );
+      selctPeriodElt.datereporte,
+      "yyyy-MM-dd"
+    );
 
-          this.dateTransforme = "2021-03-31";
-          this.years = 2020;
+    this.dateTransforme = "2021-03-31";
+    this.years = 2020;
 
-          this.creditReportFix.datereportfix = this.years + "-12-31";
-          this.servicesRepo
-            .getCreditParticulierParPeriode(this.years + "-12-31")
-            .subscribe((response) => {
-              response.creanceCourant = response.creanceCourant / this.divUnit;
-              response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
-              response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
-              response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
-              response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
-              response.interetReserve = response.interetReserve / this.divUnit;
-              response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
-              response.provisions = response.provisions / this.divUnit;
-              this.creditReportFix.creditParticulier = response;
-              this.servicesRepo
-                .getCreditEntreParPeriode(this.lastYear + "-12-31")
-                .subscribe((response) => {
-                  response.creanceCourant = response.creanceCourant / this.divUnit;
-                  response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
-                  response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
-                  response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
-                  response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
-                  response.interetReserve = response.interetReserve / this.divUnit;
-                  response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
-                  response.provisions = response.provisions / this.divUnit;
-                  this.creditReportFix.creditEntreprise = response;
-                  this.creditReportFix.totalFix = {};
-                  this.getTotalForPeriod(
-                    this.creditReportFix.creditParticulier,
-                    this.creditReportFix.creditEntreprise,
-                    this.creditReportFix.totalFix,
-                    this.getSomme
+    this.creditReportFix.datereportfix = this.years + "-12-31";
+    this.servicesRepo
+      .getCreditParticulierParPeriode(this.years + "-12-31")
+      .subscribe((response) => {
+        response.creanceCourant = response.creanceCourant / this.divUnit;
+        response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
+        response.creanceDouteuseNets =
+          response.creanceDouteuseNets / this.divUnit;
+        response.creditDirectNetInteretReserve =
+          response.creditDirectNetInteretReserve / this.divUnit;
+        response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
+        response.interetReserve = response.interetReserve / this.divUnit;
+        response.interetreservesCreancesDouteuse =
+          response.interetreservesCreancesDouteuse / this.divUnit;
+        response.provisions = response.provisions / this.divUnit;
+        this.creditReportFix.creditParticulier = response;
+        this.servicesRepo
+          .getCreditEntreParPeriode(this.lastYear + "-12-31")
+          .subscribe((response) => {
+            response.creanceCourant = response.creanceCourant / this.divUnit;
+            response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
+            response.creanceDouteuseNets =
+              response.creanceDouteuseNets / this.divUnit;
+            response.creditDirectNetInteretReserve =
+              response.creditDirectNetInteretReserve / this.divUnit;
+            response.creditTotaldirect =
+              response.creditTotaldirect / this.divUnit;
+            response.interetReserve = response.interetReserve / this.divUnit;
+            response.interetreservesCreancesDouteuse =
+              response.interetreservesCreancesDouteuse / this.divUnit;
+            response.provisions = response.provisions / this.divUnit;
+            this.creditReportFix.creditEntreprise = response;
+            this.creditReportFix.totalFix = {};
+            this.getTotalForPeriod(
+              this.creditReportFix.creditParticulier,
+              this.creditReportFix.creditEntreprise,
+              this.creditReportFix.totalFix,
+              this.getSomme
+            );
+
+            this.creditReportAnalysePortfeuille.creditReportFix =
+              this.creditReportFix;
+            this.servicesRepo.creditReportFix = this.creditReportFix;
+
+            this.servicesRepo
+              .getCreditParticulierParPeriode(this.dateTransforme)
+              .subscribe({
+                next: (response) => {
+                  console.log(
+                    "dans getCreditParticulierParPeriode" +
+                      response.creanceCourant
                   );
-    
-                  this.creditReportAnalysePortfeuille.creditReportFix =
-                    this.creditReportFix;
-                  this.servicesRepo.creditReportFix =   this.creditReportFix;  
+                  response.creanceCourant =
+                    response.creanceCourant / this.divUnit;
+                  response.creanceDouteuse =
+                    response.creanceDouteuse / this.divUnit;
+                  response.creanceDouteuseNets =
+                    response.creanceDouteuseNets / this.divUnit;
+                  response.creditDirectNetInteretReserve =
+                    response.creditDirectNetInteretReserve / this.divUnit;
+                  response.creditTotaldirect =
+                    response.creditTotaldirect / this.divUnit;
+                  response.interetReserve =
+                    response.interetReserve / this.divUnit;
+                  response.interetreservesCreancesDouteuse =
+                    response.interetreservesCreancesDouteuse / this.divUnit;
+                  response.provisions = response.provisions / this.divUnit;
+                  selctPeriodElt.creditParticulier = response;
 
+                  console.log(
+                    "selctPeriodElt.creditParticulier.creanceCourant : " +
+                      selctPeriodElt.creditParticulier.creanceCourant
+                  );
 
-                 this.servicesRepo
-            .getCreditParticulierParPeriode(this.dateTransforme)
-            .subscribe({
-              next: (response) => {
-                console.log("dans getCreditParticulierParPeriode" + response.creanceCourant)
-                response.creanceCourant = response.creanceCourant / this.divUnit;
-                response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
-                response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
-                response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
-                response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
-                response.interetReserve = response.interetReserve / this.divUnit;
-                response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
-                response.provisions = response.provisions / this.divUnit;
-                selctPeriodElt.creditParticulier = response;
+                  this.servicesRepo
+                    .getCreditEntreParPeriode(this.dateTransforme)
+                    .subscribe({
+                      next: (response) => {
+                        response.creanceCourant =
+                          response.creanceCourant / this.divUnit;
+                        response.creanceDouteuse =
+                          response.creanceDouteuse / this.divUnit;
+                        response.creanceDouteuseNets =
+                          response.creanceDouteuseNets / this.divUnit;
+                        response.creditDirectNetInteretReserve =
+                          response.creditDirectNetInteretReserve / this.divUnit;
+                        response.creditTotaldirect =
+                          response.creditTotaldirect / this.divUnit;
+                        response.interetReserve =
+                          response.interetReserve / this.divUnit;
+                        response.interetreservesCreancesDouteuse =
+                          response.interetreservesCreancesDouteuse /
+                          this.divUnit;
+                        response.provisions =
+                          response.provisions / this.divUnit;
+                        selctPeriodElt.creditEntreprise = response;
+                        let resultTotal = this.getTotalForPeriod(
+                          selctPeriodElt.creditParticulier,
+                          selctPeriodElt.creditEntreprise,
+                          {},
+                          this.getSomme
+                        );
 
-                console.log("selctPeriodElt.creditParticulier.creanceCourant : " + selctPeriodElt.creditParticulier.creanceCourant)
+                        var resultVariation = this.getTotalForPeriod(
+                          resultTotal,
+                          this.creditReportAnalysePortfeuille.creditReportFix
+                            .totalFix,
+                          {},
+                          this.getvariationmontant
+                        );
+                        this.creditReportAnalysePortfeuille.variationMontant =
+                          resultVariation;
+                        var resultPourcentage = this.getTotalForPeriod(
+                          resultVariation,
+                          this.creditReportAnalysePortfeuille.creditReportFix
+                            .totalFix,
+                          {},
+                          this.getPourcentage
+                        );
 
-                this.servicesRepo
-                .getCreditEntreParPeriode(this.dateTransforme)
-                .subscribe({
-                  next: (response) => {
-                    response.creanceCourant = response.creanceCourant / this.divUnit;
-                    response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
-                    response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
-                    response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
-                    response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
-                    response.interetReserve = response.interetReserve / this.divUnit;
-                    response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
-                    response.provisions = response.provisions / this.divUnit;
-                    selctPeriodElt.creditEntreprise = response;
-                    let resultTotal = this.getTotalForPeriod(
-                      selctPeriodElt.creditParticulier,
-                      selctPeriodElt.creditEntreprise,
-                      {},
-                      this.getSomme
-                    );  
-                  
-                    var resultVariation = this.getTotalForPeriod(
-                      resultTotal,
-                      this.creditReportAnalysePortfeuille.creditReportFix.totalFix,
-                      {},
-                      this.getvariationmontant
-                    );
-                    this.creditReportAnalysePortfeuille.variationMontant = resultVariation;
-                    var resultPourcentage = this.getTotalForPeriod(
-                      resultVariation,
-                      this.creditReportAnalysePortfeuille.creditReportFix.totalFix,
-                      {},
-                      this.getPourcentage
-                    );
-              
-                 
-                  this.creditReportTotal.push(resultTotal);         
-                       
-                  this.creditReportAnalysePortfeuille.resultPourcentage = resultPourcentage;
-                  this.creditReportAnalysePortfeuille.creditReportTotal = {};
-                  this.creditReportAnalysePortfeuille.creditReportTotal = this.creditReportTotal;
-                  this.creditReportAnalysePortfeuille.slectedPeriods = this.slectedPeriods;
-              
-                  if (this.creditReportAnalysePortfeuille.creditReportTotal.length === 0) {
-                    this.creditReportAnalysePortfeuille.creditPourcentage = [];
-                    this.creditReportAnalysePortfeuille.creditVariation = [];
-                  }
+                        this.creditReportTotal.push(resultTotal);
 
-                  if (this.slectedPeriods.includes(selctPeriodElt)) {
-                    console.log("existe");
-                  }
-                  
-                  //this.availablePeriods.push(selctPeriodElt);
-                  this.slectedPeriods.push(selctPeriodElt);
-                selctPeriodElt.id = 0;
-                selctPeriodElt.checked = true               
-                  },
-                  error: (err) => {
-                    this.errormessage = err.error.message;
-                  },
-                });
-              },
-              error: (err) => {
-                this.errormessage = err.error.message;
-              },
-            });
-                });
-            });         
+                        this.creditReportAnalysePortfeuille.resultPourcentage =
+                          resultPourcentage;
+                        this.creditReportAnalysePortfeuille.creditReportTotal =
+                          {};
+                        this.creditReportAnalysePortfeuille.creditReportTotal =
+                          this.creditReportTotal;
+                        this.creditReportAnalysePortfeuille.slectedPeriods =
+                          this.slectedPeriods;
+
+                        if (
+                          this.creditReportAnalysePortfeuille.creditReportTotal
+                            .length === 0
+                        ) {
+                          this.creditReportAnalysePortfeuille.creditPourcentage =
+                            [];
+                          this.creditReportAnalysePortfeuille.creditVariation =
+                            [];
+                        }
+
+                        if (this.slectedPeriods.includes(selctPeriodElt)) {
+                          console.log("existe");
+                        }
+
+                        //this.availablePeriods.push(selctPeriodElt);
+                        this.slectedPeriods.push(selctPeriodElt);
+                        selctPeriodElt.id = 0;
+                        selctPeriodElt.checked = true;
+                      },
+                      error: (err) => {
+                        this.errormessage = err.error.message;
+                      },
+                    });
+                },
+                error: (err) => {
+                  this.errormessage = err.error.message;
+                },
+              });
+          });
+      });
   }
-
 
   showCheckboxes() {
     this.visible = !this.visible;
@@ -429,10 +412,12 @@ export class CommentaireAnalyseComponent implements OnInit {
   handelGetCreditPeriodFixe() {
     this.creditReportFix.datereportfix = {};
     this.lastYear = parseInt("2021") - 1;
-    console.log('service selected unit : '+this.servicesRepo.selectedUnit)
-    if (this.servicesRepo.selectedUnit==="D"){
-    this.divUnit = 1;}
-    else {this.divUnit = 1000000000;}
+    console.log("service selected unit : " + this.servicesRepo.selectedUnit);
+    if (this.servicesRepo.selectedUnit === "D") {
+      this.divUnit = 1;
+    } else {
+      this.divUnit = 1000000000;
+    }
 
     if (this.lastYear === undefined) {
       this.creditReportFix.datereportfix = this.years + "-12-31";
@@ -441,23 +426,32 @@ export class CommentaireAnalyseComponent implements OnInit {
         .subscribe((response) => {
           response.creanceCourant = response.creanceCourant / this.divUnit;
           response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
-          response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
-          response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
-          response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
+          response.creanceDouteuseNets =
+            response.creanceDouteuseNets / this.divUnit;
+          response.creditDirectNetInteretReserve =
+            response.creditDirectNetInteretReserve / this.divUnit;
+          response.creditTotaldirect =
+            response.creditTotaldirect / this.divUnit;
           response.interetReserve = response.interetReserve / this.divUnit;
-          response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
+          response.interetreservesCreancesDouteuse =
+            response.interetreservesCreancesDouteuse / this.divUnit;
           response.provisions = response.provisions / this.divUnit;
           this.creditReportFix.creditParticulier = response;
           this.servicesRepo
             .getCreditEntreParPeriode(this.lastYear + "-12-31")
             .subscribe((response) => {
               response.creanceCourant = response.creanceCourant / this.divUnit;
-              response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
-              response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
-              response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
-              response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
+              response.creanceDouteuse =
+                response.creanceDouteuse / this.divUnit;
+              response.creanceDouteuseNets =
+                response.creanceDouteuseNets / this.divUnit;
+              response.creditDirectNetInteretReserve =
+                response.creditDirectNetInteretReserve / this.divUnit;
+              response.creditTotaldirect =
+                response.creditTotaldirect / this.divUnit;
               response.interetReserve = response.interetReserve / this.divUnit;
-              response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
+              response.interetreservesCreancesDouteuse =
+                response.interetreservesCreancesDouteuse / this.divUnit;
               this.creditReportFix.creditEntreprise = response;
               this.creditReportFix.totalFix = {};
               this.getTotalForPeriod(
@@ -469,9 +463,8 @@ export class CommentaireAnalyseComponent implements OnInit {
 
               this.creditReportAnalysePortfeuille.creditReportFix =
                 this.creditReportFix;
-           //  console.log('dans handle fix '+ this.creditReportAnalysePortfeuille.creditReportFix.totalFix.creditTotaldirect)   
-             this.servicesRepo.creditReportFix =   this.creditReportFix;  
-
+              //  console.log('dans handle fix '+ this.creditReportAnalysePortfeuille.creditReportFix.totalFix.creditTotaldirect)
+              this.servicesRepo.creditReportFix = this.creditReportFix;
             });
         });
     } else {
@@ -481,22 +474,31 @@ export class CommentaireAnalyseComponent implements OnInit {
         .subscribe((response) => {
           response.creanceCourant = response.creanceCourant / this.divUnit;
           response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
-          response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
-          response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
-          response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
+          response.creanceDouteuseNets =
+            response.creanceDouteuseNets / this.divUnit;
+          response.creditDirectNetInteretReserve =
+            response.creditDirectNetInteretReserve / this.divUnit;
+          response.creditTotaldirect =
+            response.creditTotaldirect / this.divUnit;
           response.interetReserve = response.interetReserve / this.divUnit;
-          response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
+          response.interetreservesCreancesDouteuse =
+            response.interetreservesCreancesDouteuse / this.divUnit;
           this.creditReportFix.creditParticulier = response;
           this.servicesRepo
             .getCreditEntreParPeriode(this.lastYear + "-12-31")
             .subscribe((response) => {
               response.creanceCourant = response.creanceCourant / this.divUnit;
-          response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
-          response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
-          response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
-          response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
-          response.interetReserve = response.interetReserve / this.divUnit;
-          response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
+              response.creanceDouteuse =
+                response.creanceDouteuse / this.divUnit;
+              response.creanceDouteuseNets =
+                response.creanceDouteuseNets / this.divUnit;
+              response.creditDirectNetInteretReserve =
+                response.creditDirectNetInteretReserve / this.divUnit;
+              response.creditTotaldirect =
+                response.creditTotaldirect / this.divUnit;
+              response.interetReserve = response.interetReserve / this.divUnit;
+              response.interetreservesCreancesDouteuse =
+                response.interetreservesCreancesDouteuse / this.divUnit;
               this.creditReportFix.creditEntreprise = response;
               this.creditReportFix.totalFix = {};
               this.getTotalForPeriod(
@@ -508,16 +510,14 @@ export class CommentaireAnalyseComponent implements OnInit {
 
               this.creditReportAnalysePortfeuille.creditReportFix =
                 this.creditReportFix;
-                this.servicesRepo.creditReportFix =   this.creditReportFix;
-               // console.log('dans handle fix '+this.creditReportAnalysePortfeuille.creditReportFix.totalFix.creditTotaldirect)  
-                  
+              this.servicesRepo.creditReportFix = this.creditReportFix;
+              // console.log('dans handle fix '+this.creditReportAnalysePortfeuille.creditReportFix.totalFix.creditTotaldirect)
             });
         });
     }
-  //  console.log("prtf ", this.creditReportAnalysePortfeuille);
+    //  console.log("prtf ", this.creditReportAnalysePortfeuille);
   }
 
- 
   getTotalForPeriod(arg1: any, arg2: any, result: any, operation: any) {
     result.creditTotaldirect = operation(
       arg1.creditTotaldirect,
@@ -767,41 +767,7 @@ export class CommentaireAnalyseComponent implements OnInit {
     datepicker.close();
   }
 
- 
-  
- accepter(){
-  moment.locale('fr');
-  var today = moment().format("DD-MM-YYYYTHH:mm:SS[Z]")
-  var year = moment().year();
-  var month = moment().month() + 1;
-  
-  this.commentaireService.accepter(this.idCommentaireSub).subscribe({
-    next: () => {
-    //  this.commentaireService.updateCommentaireSub(commentaire) 
-    this.commentaireSubordonne = this.commentaireService.findCommentaireSubordonneByDateAndTypeAnalyse(this.servicesRepo.currentAnalyseType, this.storageSer.getUser().roles.id, year, month);
-    
-    this.commentaireSubordonne.subscribe({
-       next: (data) => {
-         if(data!=null){
-         this.commentaireSub = data.commentaire
-         this.idCommentaireSub = data.id
-         this.commentaireSubAccepte = (data.acceptedOn==undefined && data.rejectedOn==undefined)?false:true;
-         this.commentaireSubRejete = (data.rejectedOn==undefined && data.acceptedOn==undefined)?false:true;
-         }
-            },
-        error: (error) =>{
-         console.log(error.error.text)
-        }    
-       });
-      alert("Commentaire Accepté ! ");
-              },
-    error: (error) => {
-       console.log(error);    
-    },
-  });
- }
-
- generateReport(){
-  alert('Generation Rapport finale')
- }
+  generateReport() {
+    alert("Generation Rapport finale");
+  }
 }

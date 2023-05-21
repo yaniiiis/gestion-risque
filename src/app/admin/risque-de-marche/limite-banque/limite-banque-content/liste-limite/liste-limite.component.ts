@@ -1,9 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
-import { MatDialog } from "@angular/material/dialog";
+import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { RisqueDeMarcheService } from "src/app/_services/risque-de-marche.service";
-import { DialogueCreationLimiteComponent } from "./dialogue-creation-limite/dialogue-creation-limite.component";
 
 @Component({
   selector: "app-liste-limite",
@@ -26,20 +25,10 @@ export class ListeLimiteComponent implements OnInit {
   constructor(
     private risqueDeMarcheService: RisqueDeMarcheService,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog
+    private route: Router
   ) {}
   title: string = "Confirmation";
   beneficiaire: string = "";
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogueCreationLimiteComponent, {
-      data: { title: this.title },
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log("The dialog was closed");
-      this.beneficiaire = result;
-    });
-  }
 
   ngOnInit(): void {
     this.Data = this.risqueDeMarcheService.findAllLimiteBanque();
@@ -48,10 +37,18 @@ export class ListeLimiteComponent implements OnInit {
     alert("Modifier " + item.id);
   }
   desactiver(item) {
-    alert("Désactiver " + item.id);
+    this.route.navigateByUrl(
+      "Admin/LimiteBanque/DesactivationLimite?id=" + item.id
+    );
   }
 
   creerLimite() {
-    alert("Créer une limite ");
+    this.route.navigateByUrl("Admin/LimiteBanque/CreationLimite");
+  }
+  modifierLimite(id) {
+    this.route.navigateByUrl("Admin/LimiteBanque/ModificationLimite?id=" + id);
+    // this.route.navigate(["/Admin/LimiteBanque/ModificationLimite"], {
+    //   queryParams: { id: 1 },
+    // });
   }
 }
