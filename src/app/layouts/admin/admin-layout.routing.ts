@@ -29,16 +29,19 @@ import { CreationDouteuseComponent } from "src/app/admin/risque-credit/analyse-p
 import { DurationComponent } from "src/app/admin/risque-credit/analyse-portfeuille/durations/duration.component";
 import { KriComponent } from "src/app/admin/risque-credit/analyse-portfeuille/kri/kri.component";
 import { PortefeuilDirectComponent } from "src/app/admin/risque-credit/analyse-portfeuille/portefeuil-direct/portefeuil-direct.component";
+import { ConcentrationClientComponent } from "src/app/admin/risque-credit/concentration/concentration-client/concentration-client.component";
+import { ConcentrationDetailsComponent } from "src/app/admin/risque-credit/concentration/concentration-details/concentration-details.component";
+import { ConcentrationGroupeComponent } from "src/app/admin/risque-credit/concentration/concentration-groupe/concentration-groupe.component";
+import { ConcentrationComponent } from "src/app/admin/risque-credit/concentration/concentration.component";
 import { GenererRapportComponent } from "src/app/admin/risque-credit/generer-rapport/generer-rapport.component";
 import { MonRapportComponent } from "src/app/admin/risque-credit/generer-rapport/mon-rapport/mon-rapport.component";
 import { GestionDesResqueClientComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/gestion-des-resque-client.component";
 import { RepartitionParSecteurComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/repartition-par-secteur/repartition-par-secteur.component";
 import { RepartitionParZoneComponent } from "src/app/admin/risque-credit/gestion-des-resque-client/repartition-par-zone/repartition-par-zone.component";
 import { GraphicComponent } from "src/app/admin/risque-credit/graphic/graphic.component";
-import { ConcentrationDetailsComponent } from "src/app/admin/risque-credit/kris/concentration-details/concentration-details.component";
-import { ConcentrationComponent } from "src/app/admin/risque-credit/kris/concentration/concentration.component";
-import { IndicateursRisqueCreditComponent } from "src/app/admin/risque-credit/kris/indicateurs-risque-credit/indicateurs-risque-credit.component";
-import { KRIsComponent } from "src/app/admin/risque-credit/kris/kris.component";
+import { IndicateurTableComponent } from "src/app/admin/risque-credit/indicateurs/indicateur-table/indicateur-table.component";
+import { IndicateursComponent } from "src/app/admin/risque-credit/indicateurs/indicateurs.component";
+
 import { ScenarioComponent } from "src/app/admin/risque-credit/stress-test/scenario/scenario.component";
 import { Scenario1Component } from "src/app/admin/risque-credit/stress-test/scenario1/scenario1.component";
 import { Scenario2Component } from "src/app/admin/risque-credit/stress-test/scenario2/scenario2.component";
@@ -268,20 +271,50 @@ export const AdminLayoutRoutes: Routes = [
         component: GraphicComponent,
       },
       {
-        path: "Kri",
-        component: KRIsComponent,
+        path: "concentration",
+        component: ConcentrationComponent,
         children: [
           {
-            path: "concentration",
-            component: ConcentrationComponent,
+            path: "concentration-client",
+            component: ConcentrationClientComponent,
           },
           {
-            path: "concentration/:type/:id/:date",
+            path: "concentration-groupe",
+            component: ConcentrationGroupeComponent,
+          },
+          {
+            path: "concentration-details/:type/:id/:date",
             component: ConcentrationDetailsComponent,
           },
+        ],
+      },
+      {
+        path: "indicateurs",
+        component: IndicateursComponent,
+        children: [
           {
-            path: "indicateurs-risque-credit",
-            component: IndicateursRisqueCreditComponent,
+            path: "",
+            component: IndicateurTableComponent,
+          },
+          {
+            path: "taux-defaut",
+            component: IndicateurTableComponent,
+          },
+          {
+            path: "concentration-25",
+            component: IndicateurTableComponent,
+          },
+          {
+            path: "concentration-grands-risques",
+            component: IndicateurTableComponent,
+          },
+          {
+            path: "concentration-top-10",
+            component: IndicateurTableComponent,
+          },
+          {
+            path: "concentration-decouverts-comptes",
+            component: IndicateurTableComponent,
           },
         ],
       },

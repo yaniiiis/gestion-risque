@@ -1,5 +1,6 @@
 .my-container {
   padding: 8px;
+  position: relative;
 }
 
 .header-choice-of-concentration-container {
@@ -74,6 +75,7 @@
 }
 
 .my-table-container {
+  position: relative;
   width: 100%;
   overflow-x: auto;
 }
@@ -153,7 +155,7 @@ td {
 .my-detail-text-container {
   width: 100%;
   display: flex;
-  justify-content: end;
+  justify-content: start;
   padding: 10px 15px;
   color: blue;
   font-weight: bold;

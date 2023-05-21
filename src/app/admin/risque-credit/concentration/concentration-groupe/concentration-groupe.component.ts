@@ -1,24 +1,25 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable, Subscription } from "rxjs";
+import { Observable, skip } from "rxjs";
 import { ConcentrationService } from "src/app/_services/ConcentrationService/concentration-service.service";
 
 @Component({
-  selector: "app-concentration",
-  templateUrl: "./concentration.component.html",
-  styleUrls: ["./concentration.component.css"],
+  selector: "app-concentration-groupe",
+  templateUrl: "./concentration-groupe.component.html",
+  styleUrls: ["./concentration-groupe.component.css"],
 })
-export class ConcentrationComponent implements OnInit {
+export class ConcentrationGroupeComponent implements OnInit {
   constructor(
     private router: Router,
     private concentrationService: ConcentrationService
   ) {}
+
   dataFinal = [];
-  selectedChoice: string = "client";
+
   selectedId: string;
   selectedIdGroup: number;
   myListInputHasError: boolean = false;
-  inputListTitle = "Client";
+  inputListTitle = "Groupes";
   selectedChoiceIndex: number = 0;
   data: any;
   header = ["Date"];
@@ -29,86 +30,57 @@ export class ConcentrationComponent implements OnInit {
   textNoData: string =
     "Veuillez selectionner les information ci-dessus pour afficher les données";
   taux: number;
+  selectedIdText: string = "";
+  calculateIsClicked = false;
+  isLoading = false;
 
   ngOnInit(): void {
-    this.concentrationService.listOfIds$.subscribe((l) => {
+    this.concentrationService.listOfGroupIds$.subscribe((l) => {
       this.listOfIds = l;
     });
+
+    this.concentrationService.groupeIsLoading$.subscribe((l) => {
+      this.isLoading = l;
+    });
+
+    this.concentrationService.dataGroup$.subscribe((d) => {
+      if (d.length == 0 && this.calculateIsClicked)
+        this.textNoData = "Données non disponible pour ce groupe";
+      this.dataFinal = d;
+    });
+
+    this.concentrationService.header$.subscribe((h) => {
+      this.header = h;
+    });
+
+    this.date = this.concentrationService.selectedDateGroupe;
+    this.selectedId = this.concentrationService.selectedIdGroup;
+    this.selectedIdText = this.concentrationService.selectedIdTextGroupe;
+    this.fondPropres = this.concentrationService.fondPropresGroupe;
   }
 
   calculerClicked() {
-    if (this.selectedId && this.fondPropres) {
+    if (!this.selectedId) {
+      this.myListInputHasError = true;
+    } else if (this.selectedId && this.fondPropres) {
+      this.calculateIsClicked = true;
       this.calculateConcentration();
     }
   }
 
   calculateConcentration() {
     let subsraption: Observable<any>;
-    if ((this.selectedChoice = "client")) {
-      subsraption = this.concentrationService.getConcentrationClient(
-        this.selectedId,
-        this.date
-      );
-    } else {
-      subsraption = this.concentrationService.getConcentrationByGroup(
-        this.selectedId,
-        this.date
-      );
-    }
-    subsraption.subscribe((response) => {
-      this.dataFinal = [];
-      if (response.length == 0) this.textNoData = "Données non disponibles ";
-      response.forEach((element: any) => {
-        console.log("response : ", response);
-        let dd: any[] = [this.date];
-        for (const key in element) {
-          if (!this.header.includes(this.myMapper[key])) {
-            this.header.push(this.myMapper[key]);
-          }
-          dd.push(element[key]);
-        }
-        dd.push(element["risquePendree"] / this.fondPropres);
-        this.dataFinal.push(dd);
-      });
-      console.log("Data final : ", this.dataFinal);
-      if (!this.header.includes("Taux")) this.header.push("Taux");
-    });
+
+    this.concentrationService.getConcentrationByGroup(
+      this.selectedId,
+      this.date,
+      this.fondPropres
+    );
   }
 
   dateChanged() {
-    if (this.selectedChoice == "client") {
-      this.concentrationService.getClientByDate(this.date);
-      console.log("Date changed : ", this.listOfIds);
-    } else {
-      this.concentrationService.getGroupByDate(this.date);
-    }
-  }
-
-  choicesOfConcentration = [
-    "Concentration par client",
-    "Concentration par groupe",
-  ];
-
-  changeConcentrationChoice(item: string) {
-    this.selectedChoice = item;
-    this.dataFinal = [];
-    this.selectedId = undefined;
-    this.date = "";
-    this.listOfIds = [];
-    this.fondPropres = undefined;
-    if (item.toLocaleLowerCase() == "concentration par client") {
-      this.inputListTitle = "Client";
-      this.data = this.tableData;
-      this.selectedChoice = "client";
-      this.header = this.tableHeaders;
-    } else {
-      this.inputListTitle = "Groupe";
-      this.data = this.tableDataGroupe;
-      this.selectedChoice = "groupe";
-      this.header = this.tableHeadersGroupe;
-    }
-
-    this.selectedChoiceIndex = this.choicesOfConcentration.indexOf(item);
+    this.concentrationService.getGroupByDate(this.date);
+    console.log("Date changed : ", this.listOfIds);
   }
 
   idClientClicked(idClient: string) {
@@ -124,14 +96,14 @@ export class ConcentrationComponent implements OnInit {
     // );
     // if (item.toLocaleLowerCase().trim() == "taux de concentration") {
     this.router.navigate([
-      `/Admin/Kri/concentration/${this.selectedChoice}/${this.selectedId}/${this.date}`,
+      `/Admin/Kri/concentration/groupe/${this.selectedId}/${this.date}`,
     ]);
     // }
   }
 
   detailsClicked() {
     this.router.navigate([
-      `/Admin/Kri/concentration/${this.selectedChoice}/${this.selectedId}/${this.date}`,
+      `/Admin/concentration/concentration-details/group/${this.selectedId}/${this.date}`,
     ]);
   }
 
@@ -226,4 +198,9 @@ export class ConcentrationComponent implements OnInit {
     "Risque net": 700000,
     "Taux de concentration": "11%",
   };
+
+  choicesOfConcentration = [
+    "Concentration par client",
+    "Concentration par groupe",
+  ];
 }

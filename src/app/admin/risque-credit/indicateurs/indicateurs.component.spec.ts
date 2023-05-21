@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KRIsComponent } from './kris.component';
+import { IndicateursComponent } from './indicateurs.component';
 
-describe('KRIsComponent', () => {
-  let component: KRIsComponent;
-  let fixture: ComponentFixture<KRIsComponent>;
+describe('IndicateursComponent', () => {
+  let component: IndicateursComponent;
+  let fixture: ComponentFixture<IndicateursComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ KRIsComponent ]
+      declarations: [ IndicateursComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(KRIsComponent);
+    fixture = TestBed.createComponent(IndicateursComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

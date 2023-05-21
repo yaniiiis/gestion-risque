@@ -20,17 +20,18 @@ export class ConcentrationDetailsComponent implements OnInit {
   id = this.activatedRoute.snapshot.paramMap.get("id");
   date = this.activatedRoute.snapshot.paramMap.get("date");
   type = this.activatedRoute.snapshot.paramMap.get("type");
+  idTextForObj: string;
   ngOnInit(): void {
     console.log("selected type : ", this.type);
-
+    if (this.type == "client") this.idTextForObj = "ID Client";
+    else this.idTextForObj = "ID Groupe";
     this.concentrationService
       .getConcentrationClientDetails(this.id, this.date, this.type)
       .subscribe((response: any[]) => {
         response.forEach((element) => {
-          console.log("Response from details : ", response);
           const obj = {
             Date: this.date,
-            "ID Client": this.id,
+            [this.idTextForObj]: this.id,
             Agence: element["desc_AGENCE"],
             "Numero compte": element["numero_COMPTE"],
             "Type engagement": element["type_ENGAGEMENT"],
@@ -48,7 +49,7 @@ export class ConcentrationDetailsComponent implements OnInit {
 
   header = [
     "Date",
-    this.type == "client" ? "ID Client" : "ID Client",
+    this.type == "client" ? "ID Client" : "ID Groupe",
     "Agence",
     "Numero compte",
     "Type engagement",

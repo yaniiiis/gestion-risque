@@ -15,10 +15,10 @@ export class MyInputListComponent implements OnInit {
   @Input() list: any[];
   @Input() listToDisplay: any[];
   @Input() title: string;
+  @Input() inputValue: string;
   @Output() callbackFunction = new EventEmitter<string>();
 
   isListOpen: boolean = false;
-  inputValue: string;
   listToFilter: any[];
 
   ngOnInit(): void {}
