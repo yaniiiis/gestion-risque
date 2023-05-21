@@ -1,24 +1,24 @@
 <div class="my-container">
-  <div class="header-choice-of-concentration-container">
-    <div class="header-choice-of-concentration">
-      <div
-        class="concentration-item-container"
-        *ngFor="let item of choicesOfConcentration; let i = index"
-      >
+  <!-- <div class="header-choice-of-concentration-container">
+      <div class="header-choice-of-concentration">
         <div
-          class="choice-item"
-          [ngClass]="{ 'my-active': i == selectedChoiceIndex }"
-          (click)="changeConcentrationChoice(item)"
+          class="concentration-item-container"
+          *ngFor="let item of choicesOfConcentration; let i = index"
         >
-          {{ item }}
+          <div
+            class="choice-item"
+            [ngClass]="{ 'my-active': i == selectedChoiceIndex }"
+            (click)="changeConcentrationChoice(item)"
+          >
+            {{ item }}
+          </div>
+          <div
+            class="header-item-divider"
+            *ngIf="i != choicesOfConcentration.length - 1"
+          ></div>
         </div>
-        <div
-          class="header-item-divider"
-          *ngIf="i != choicesOfConcentration.length - 1"
-        ></div>
       </div>
-    </div>
-  </div>
+    </div> -->
   <div class="my-body">
     <div class="date-and-id-container">
       <div class="my-date-container">
@@ -41,6 +41,7 @@
           (callbackFunction)="idClientClicked($event)"
           [hasError]="myListInputHasError"
           [title]="inputListTitle"
+          [inputValue]="selectedIdText"
         ></app-my-input-list>
       </div>
     </div>
@@ -86,7 +87,7 @@
           </tr>
         </table>
         <div class="my-detail-text-container">
-          <span (click)="detailsClicked()">détails </span>
+          <span (click)="detailsClicked()">détails</span>
         </div>
       </div>
 

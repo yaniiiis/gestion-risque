@@ -26,8 +26,8 @@ h3 {
 .back-to-previous-page-container {
   width: 100%;
   display: flex;
-  justify-content: end;
-  color: rgb(18, 102, 151);
+  justify-content: start;
+  color: blue;
   font-weight: bold;
   padding: 8px;
   cursor: pointer;
