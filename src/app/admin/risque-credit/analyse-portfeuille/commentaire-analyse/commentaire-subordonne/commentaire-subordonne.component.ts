@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import {
   Commentaire,
@@ -23,6 +23,7 @@ export class CommentaireSubordonneComponent implements OnInit {
   commentaireSubordonne: Observable<Commentaire>;
   commentaireSub: string;
   idCommentaireSub: number;
+  @Input("currentAnalyseType") currentAnalyseType: number;
   showAccept = true;
   disabledGenerateReport: boolean = true;
   motif: string;
@@ -43,7 +44,7 @@ export class CommentaireSubordonneComponent implements OnInit {
     if (this.storageSer.getUser().roles.id === 4) this.showAccept = false;
     this.commentaireSubordonne =
       this.commentaireService.findCommentaireSubordonneByDateAndTypeAnalyse(
-        this.servicesRepo.currentAnalyseType,
+        this.currentAnalyseType,
         this.storageSer.getUser().roles.id,
         year,
         month
@@ -83,7 +84,7 @@ export class CommentaireSubordonneComponent implements OnInit {
         //  this.commentaireService.updateCommentaireSub(commentaire)
         this.commentaireSubordonne =
           this.commentaireService.findCommentaireSubordonneByDateAndTypeAnalyse(
-            this.servicesRepo.currentAnalyseType,
+            this.currentAnalyseType,
             this.storageSer.getUser().roles.id,
             year,
             month
@@ -117,7 +118,11 @@ export class CommentaireSubordonneComponent implements OnInit {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogueMotifComponent, {
-      data: { motif: this.motif, title: this.title },
+      data: {
+        motif: this.motif,
+        title: this.title,
+        typeAnalyse: this.currentAnalyseType,
+      },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
