@@ -107,7 +107,9 @@ export class ConcentrationGroupeComponent implements OnInit {
 
   detailsClicked() {
     this.router.navigate([
-      `/Admin/concentration/concentration-details/group/${this.selectedId}/${this.date}`,
+      `/Admin/concentration/concentration-details/group/${
+        this.selectedId
+      }/${this.datePipe.transform(this.date, "yyyy-MM-dd")}`,
     ]);
   }
 

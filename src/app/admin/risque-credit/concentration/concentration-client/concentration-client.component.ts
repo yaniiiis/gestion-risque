@@ -109,7 +109,9 @@ export class ConcentrationClientComponent implements OnInit {
 
   detailsClicked() {
     this.router.navigate([
-      `/Admin/concentration/concentration-details/client/${this.selectedId}/${this.date}`,
+      `/Admin/concentration/concentration-details/client/${
+        this.selectedId
+      }/${this.datePipe.transform(this.date, "yyyy-MM-dd")}`,
     ]);
   }
 
