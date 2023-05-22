@@ -1,3 +1,4 @@
+import { DatePipe } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { Observable, skip } from "rxjs";
@@ -11,7 +12,8 @@ import { ConcentrationService } from "src/app/_services/ConcentrationService/con
 export class ConcentrationGroupeComponent implements OnInit {
   constructor(
     private router: Router,
-    private concentrationService: ConcentrationService
+    private concentrationService: ConcentrationService,
+    private datePipe: DatePipe
   ) {}
 
   dataFinal = [];
@@ -73,13 +75,15 @@ export class ConcentrationGroupeComponent implements OnInit {
 
     this.concentrationService.getConcentrationByGroup(
       this.selectedId,
-      this.date,
+      this.datePipe.transform(this.date, "yyyy-MM-dd"),
       this.fondPropres
     );
   }
 
   dateChanged() {
-    this.concentrationService.getGroupByDate(this.date);
+    this.concentrationService.getGroupByDate(
+      this.datePipe.transform(this.date, "yyyy-MM-dd")
+    );
     console.log("Date changed : ", this.listOfIds);
   }
 
