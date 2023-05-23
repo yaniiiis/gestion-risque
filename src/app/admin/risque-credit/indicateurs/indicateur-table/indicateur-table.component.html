@@ -82,14 +82,20 @@
   </table>
 
   <div class="my-comment-container">
-    <label class="my-label" for="">Commentaire</label>
+    <!-- <label class="my-label" for="">Commentaire</label>
     <textarea
       class="comment-textarea"
       name=""
       id=""
       cols="30"
       rows="5"
-    ></textarea>
+    ></textarea> -->
+    <div class="col-md-12">
+      <app-commentaire-subordonne
+        [currentAnalyseType]="1"
+      ></app-commentaire-subordonne>
+      <app-commentaire-editor [currentAnalyseType]="1"></app-commentaire-editor>
+    </div>
   </div>
 
   <ng-template #noData>
