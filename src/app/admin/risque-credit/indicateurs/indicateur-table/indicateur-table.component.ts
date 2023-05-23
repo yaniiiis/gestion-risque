@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { IndicateurService } from "src/app/_services/indicateur.service";
 import { InputWithCheckboxEvent } from "src/app/admin/commons/my-input-list-with-checkbox/my-input-list-with-checkbox.component";
@@ -11,7 +12,8 @@ import { InputWithCheckboxEvent } from "src/app/admin/commons/my-input-list-with
 export class IndicateurTableComponent implements OnInit {
   constructor(
     private indicateurService: IndicateurService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {}
   indicOnHeader = [];
   header = ["Indice"];
@@ -32,6 +34,15 @@ export class IndicateurTableComponent implements OnInit {
     this.title = this.myTitleMapper[this.getLastStringFromUrl(this.router.url)];
     this.indicateurService.getAllDates().subscribe((res: string[]) => {
       this.listOfDates = res;
+    });
+
+    this.indicateurService.dataHasError$.subscribe((b) => {
+      if (b) {
+        this.snackBar.open("les données pour cette date n'éxistent pas", null, {
+          duration: 6000,
+          panelClass: ["error-snackbar"],
+        });
+      }
     });
 
     this.show = this.listOfPossibleLastUrls.includes(
