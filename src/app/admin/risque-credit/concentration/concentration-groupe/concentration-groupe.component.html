@@ -98,9 +98,9 @@
               *ngFor="let item of d; let i = index"
               (click)="i == d.length - 1 && tauxClicked(item)"
             >
-              <span [ngClass]="{ 'taux-span': i == d.length - 1 }">{{
-                item ? item : "/"
-              }}</span>
+              <span [ngClass]="{ 'taux-span': i == d.length - 1 }"
+                >{{ item ? item : header[i] == "Nom Groupe" ? "/" : "0" }}
+              </span>
             </td>
           </tr>
         </table>
