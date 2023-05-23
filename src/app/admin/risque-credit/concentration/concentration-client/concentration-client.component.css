@@ -173,3 +173,13 @@ td {
   margin-top: 20px;
   border-radius: 5px;
 }
+::ng-deep .mat-form-field-flex {
+  margin-top: -6px;
+}
+.custom-form-field {
+  width: 200px;
+  height: 40px;
+  border: 1px solid #b8b5b5;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px rgb(102 68 68 / 20%);
+}

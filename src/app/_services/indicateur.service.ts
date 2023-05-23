@@ -30,6 +30,7 @@ export class IndicateurService {
   }
 
   datesSubject = new BehaviorSubject<string[]>([]);
+  dataHasError = new BehaviorSubject<boolean>(false);
 
   dataSubject = new BehaviorSubject<any>({
     indice: "",
@@ -43,35 +44,44 @@ export class IndicateurService {
   }
 
   getData(url: string, date: string) {
+    this.dataHasError.next(false);
     this.httpClient
       .get(environment.baseUrl + `/concentration/${url}/${date}`)
-      .subscribe((res: any) => {
-        if (
-          this.dataSubject.value["values"] &&
-          this.dataSubject.value["values"].length < 1
-        ) {
-          console.log("yooooooow existtte");
-          const obj = {
-            indice: res.indice,
-            values: [{ [res.date]: res.value }],
-            limit: res.limiteMax,
-            min: res.limiteMin,
-          };
-          this.dataSubject.next(obj);
-        } else {
-          const obj = {
-            [res.date]: res.value,
-          };
+      .subscribe({
+        next: (res: any) => {
+          if (
+            this.dataSubject.value["values"] &&
+            this.dataSubject.value["values"].length < 1
+          ) {
+            console.log("yooooooow existtte");
+            const obj = {
+              indice: res.indice,
+              values: [{ [res.date]: res.value }],
+              limit: res.limiteMax,
+              min: res.limiteMin,
+            };
+            this.dataSubject.next(obj);
+          } else {
+            const obj = {
+              [res.date]: res.value,
+            };
 
-          const currentValue = this.dataSubject.getValue();
-          const updatedValues = [...currentValue.values, obj];
-          updatedValues.sort((a, b) => {
-            const dateA = new Date(Object.keys(a)[0]);
-            const dateB = new Date(Object.keys(b)[0]);
-            return dateA.getTime() - dateB.getTime();
-          });
-          this.dataSubject.next({ ...currentValue, values: updatedValues });
-        }
+            const currentValue = this.dataSubject.getValue();
+            const updatedValues = [...currentValue.values, obj];
+            updatedValues.sort((a, b) => {
+              const dateA = new Date(Object.keys(a)[0]);
+              const dateB = new Date(Object.keys(b)[0]);
+              return dateA.getTime() - dateB.getTime();
+            });
+            this.dataSubject.next({ ...currentValue, values: updatedValues });
+          }
+        },
+        error: (err) => {
+          console.log("Error yasmiiiine : ", err.status);
+          if (err.status == 404) {
+            this.dataHasError.next(true);
+          }
+        },
       });
   }
 
@@ -102,8 +112,9 @@ export class IndicateurService {
   }
 
   datesSubject$ = this.datesSubject.asObservable();
-
   dataSubject$ = this.dataSubject.asObservable();
+  dataHasError$ = this.dataHasError.asObservable();
+
   // dataSubject$ = of([
   //   {
   //     Indice: "text",
