@@ -28,6 +28,6 @@ export class PortfeuilleIndirectservicesService {
     );
   }
   gettRepportType(): Observable<string> {
-    return this.http.get<string>(baseUrl + "/allRapportType/");
+    return this.http.get<string>(baseUrl + "/parametrageRapport/bySousType");
   }
 }
