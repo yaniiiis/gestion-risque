@@ -12,12 +12,12 @@ export class ParametrageAnalysePortfeuilleComponent implements OnInit {
       path: "Rapport",
     },
     {
-      menuItem: "Domaines ",
+      menuItem: "Domaines",
       path: "ParametrageDomaine",
     },
 
     {
-      menuItem: "Columns ",
+      menuItem: "Colonnes",
       path: "columns",
     },
   ];

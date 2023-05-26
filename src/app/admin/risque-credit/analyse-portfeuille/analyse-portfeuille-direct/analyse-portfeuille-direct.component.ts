@@ -160,7 +160,7 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
 
   handelGetAllReportDate() {
     var datePipe = new DatePipe("en-US");
-    console.log("this .selecyt yar ", this.selectedYear);
+    // console.log("this .selecyt yar ", this.selectedYear);
     this.availablePeriods = [];
     this.servicesRepo.getDateReporting(this.selectedYear).subscribe({
       next: (dataPeriods) => {
@@ -225,18 +225,18 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
                 this.errormessage = err.error.message;
               },
             });
-          if (this.availablePeriods.includes(a1)) {
-            console.log("existe");
-          }
+          // if (this.availablePeriods.includes(a1)) {
+          //   console.log("existe");
+          // }
           this.availablePeriods.push(a1);
         }
-        console.log("available periods : ", this.availablePeriods);
+        // console.log("available periods : ", this.availablePeriods);
       },
       error: (err) => {
         this.errormessage = err;
       },
       complete: () => {
-        console.log("dhaguiii ", this.availablePeriods);
+        // console.log("dhaguiii ", this.availablePeriods);
         this.filterAvailablePeriods = this.availablePeriods.filter((p) => {
           return p.datereporte.substring(0, 4) == this.selectedYear;
         });
@@ -281,7 +281,7 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
         {},
         this.getvariationmontant
       );
-      console.log("result ", resultVariation);
+      //console.log("result ", resultVariation);
       this.creditReportAnalysePortfeuille.variationMontant = resultVariation;
       var resultPourcentage = this.getTotalForPeriod(
         resultVariation,
@@ -312,7 +312,7 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
   }
 
   handelGetCreditPeriodFixe() {
-    console.log("unit : " + this.selectedUnit);
+    //  console.log("unit : " + this.selectedUnit);
     if (this.selectedUnit === "D") this.divUnit = 1;
     else this.divUnit = 1000000000;
     this.creditReportFix.datereportfix = {};
@@ -397,7 +397,7 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
             });
         });
     }
-    console.log("prtf ", this.creditReportAnalysePortfeuille);
+    //console.log("prtf ", this.creditReportAnalysePortfeuille);
   }
 
   getTotalForPeriod(arg1: any, arg2: any, result: any, operation: any) {
@@ -446,7 +446,7 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
   // }
 
   genrerRapportAnalysePortefeuilleDirect() {
-    console.log("portfeille<< ", this.creditReportAnalysePortfeuille);
+    //console.log("portfeille<< ", this.creditReportAnalysePortfeuille);
     this.checkSelectPeriode =
       this.creditReportAnalysePortfeuille.slectedPeriods !== undefined
         ? true
@@ -526,7 +526,7 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
 
   //retrivePeriode
   getPeriodes(json, periodeOptions, jsonFix) {
-    var periodes = ["Portefeuille des crédits direct (en milliards de DZD)"];
+    var periodes = ["Portefeuille des crédits directs (en milliards de DZD)"];
 
     periodes.push(jsonFix.dateReportFix);
     if (this.checkSelectPeriode) {
@@ -546,11 +546,11 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
   //getFix columns
   getFixColumnNames() {
     var table = [
-      { propertyCol: "Total Crédits Directs" },
+      { propertyCol: "Total crédits directs" },
       { propertyCol: "Créances douteuses" },
       { propertyCol: "Créances courantes" },
       { propertyCol: "Créances douteuses net d'intérêts réservés" },
-      { propertyCol: "Crédit Direct Net d'intérêts réservés" },
+      { propertyCol: "Crédits direct net d'intérêts réservés" },
       { propertyCol: "Provisions" },
       { propertyCol: "Taux de créances douteuses" },
       { propertyCol: "Taux de couverture" },

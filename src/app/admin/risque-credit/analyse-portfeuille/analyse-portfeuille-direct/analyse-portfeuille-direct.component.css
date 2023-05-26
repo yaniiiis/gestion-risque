@@ -103,15 +103,99 @@ tbody tr th:first-child {
 
 th{
   padding:10px;
+  
 }
 .head th{
-  font-size: 13px;
+  font-size: 11px;
+  border: 1px solid rgb(83, 82, 82);
 }
 .table th, .table td {
   vertical-align: middle!important;
       padding: 3px;
+      border: 1px solid rgb(83, 82, 82);
 }
 .table > tr:not(.head) th:first-child {
   text-align: left;
-  font-size: 13px!important;
+  font-size: 11px!important;
+}
+
+table {
+  border-collapse: collapse;
+  overflow-x: scroll;
+  border: 1px solid rgb(155, 154, 154);
+  background-color: white;
+}
+
+table thead th,
+table tbody td {
+  border-collapse: collapse;
+}
+
+table thead th,
+.tbody__td--label,
+.tbody__td,
+.tbody__td--limit,
+.tbody__td--commentaire,
+.tbody__td--trigger {
+  border: 1px solid rgb(83, 82, 82);
+
+}
+
+thead {
+  background-color: lightgray
+}
+
+thead th {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 11px;
+  text-align: center;
+}
+
+.theed__th--indicateur {
+  font-size: 15px;
+  text-align: center;
+}
+
+.tbody__td {
+  font-size: 12px;
+}
+
+.tbody__td--label {
+  font-size: 10px;
+  padding-left: 2px;
+  padding-right: 2px;
+  height: 25px;
+  overflow-y: hidden;
+  line-height: 18px;
+  min-width: 200px;
+  max-height: 50px;
+}
+
+.tbody__td__tr {
+  width: 100%;
+  height: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgb(165, 165, 165);
+  font-weight: 600;
+  font-size: 10px;
+}
+
+
+
+
+
+.tbody__td--colors {
+  width: 50px;
+  height: 15px;
+  border-bottom: 1px solid rgb(165, 165, 165);
+}
+
+.theed__th--indicateur {
+  font-size: 15px;
+  text-align: center;
 }
