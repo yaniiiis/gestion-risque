@@ -32,7 +32,7 @@ export class ListeBeneficiaireComponent implements OnInit {
 
   public BeneficiaireForm!: FormGroup;
   readonly DataStateEnum = DataStateEnum;
-  public beneficiaire$?: Observable<AppDataState<Banques[]>> | null = null;
+  public beneficiaire$?: Observable<AppDataState<any[]>> | null = null;
 
   ngOnInit(): void {
     this.BeneficiaireForm = this.formBuilder.group({

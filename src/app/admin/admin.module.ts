@@ -76,7 +76,6 @@ import { GestionDesResqueClientComponent } from "./risque-credit/gestion-des-res
 import { GestionRisqueClientContentComponent } from "./risque-credit/gestion-des-resque-client/gestion-risque-client-content/gestion-risque-client-content.component";
 import { RepartitionParSecteurComponent } from "./risque-credit/gestion-des-resque-client/repartition-par-secteur/repartition-par-secteur.component";
 import { RepartitionParZoneComponent } from "./risque-credit/gestion-des-resque-client/repartition-par-zone/repartition-par-zone.component";
-import { KRIsComponent } from "./risque-credit/kris/kris.component";
 import { StressTestContentComponent } from "./risque-credit/stress-test/stress-test-content/stress-test-content.component";
 import { StressTestComponent } from "./risque-credit/stress-test/stress-test.component";
 import { DixPlusGrandClientAConcentrationComponent } from "./risque-credit/top10/dix-plus-grand-client-a-concentration/dix-plus-grand-client-a-concentration.component";
@@ -128,12 +127,8 @@ import { AddUnderTypeComponent } from "./gestion-role-et-utilisateur/parametrage
 import { DeleteTypeComponent } from "./gestion-role-et-utilisateur/parametrage/common/delete-type/delete-type.component";
 import { GenererRapportComponent } from "./risque-credit/generer-rapport/generer-rapport.component";
 import { MonRapportComponent } from "./risque-credit/generer-rapport/mon-rapport/mon-rapport.component";
-import { MyInputListComponent } from "./gestion-role-et-utilisateur/parametrage/common/my-input-list/my-input-list.component";
+import { MyInputListComponent } from "./commons/my-input-list/my-input-list.component";
 import { SecondDeleteDialogComponent } from "./gestion-role-et-utilisateur/parametrage/common/second-delete-dialog/second-delete-dialog.component";
-import { ConcentrationComponent } from "./risque-credit/kris/concentration/concentration.component";
-import { IndicateursRisqueCreditComponent } from "./risque-credit/kris/indicateurs-risque-credit/indicateurs-risque-credit.component";
-import { ConcentrationDetailsComponent } from "./risque-credit/kris/concentration-details/concentration-details.component";
-import { ConcentrationTableRowComponent } from "./risque-credit/kris/indicateurs-risque-credit/concentration-table-row/concentration-table-row.component";
 import { NgMultiSelectDropDownModule } from "ng-multiselect-dropdown";
 import { EvaluationTauxChangeContentComponent } from "./risque-de-change/evaluation-taux-change/evaluation-taux-change-content/evaluation-taux-change-content.component";
 import { ConsultationComponent } from "./risque-de-change/consultation/consultation.component";
@@ -184,8 +179,18 @@ import { LimiteBanqueContentComponent } from "./risque-de-marche/limite-banque/l
 import { ListeLimiteComponent } from "./risque-de-marche/limite-banque/limite-banque-content/liste-limite/liste-limite.component";
 import { SurveillanceLimiteComponent } from "./risque-de-marche/limite-banque/limite-banque-content/surveillance-limite/surveillance-limite.component";
 import { SurveillanceMensuelleComponent } from "./risque-de-marche/limite-banque/limite-banque-content/surveillance-mensuelle/surveillance-mensuelle.component";
-import { ListeBeneficiaireComponent } from './risque-de-marche/limite-banque/limite-banque-content/liste-beneficiaire/liste-beneficiaire.component';
-import { DialogueCreationLimiteComponent } from './risque-de-marche/limite-banque/limite-banque-content/liste-limite/dialogue-creation-limite/dialogue-creation-limite.component';
+import { ListeBeneficiaireComponent } from "./risque-de-marche/limite-banque/limite-banque-content/liste-beneficiaire/liste-beneficiaire.component";
+import { CreationLimiteComponent } from "./risque-de-marche/limite-banque/limite-banque-content/liste-limite/creation-limite/creation-limite.component";
+import { CommentaireSubordonneComponent } from "./risque-credit/analyse-portfeuille/commentaire-analyse/commentaire-subordonne/commentaire-subordonne.component";
+import { ModificationLimteComponent } from "./risque-de-marche/limite-banque/limite-banque-content/liste-limite/modification-limte/modification-limte.component";
+import { DesactivationLimiteComponent } from "./risque-de-marche/limite-banque/limite-banque-content/liste-limite/desactivation-limite/desactivation-limite.component";
+import { ConcentrationComponent } from "./risque-credit/concentration/concentration.component";
+import { ConcentrationDetailsComponent } from "./risque-credit/concentration/concentration-details/concentration-details.component";
+import { ConcentrationClientComponent } from "./risque-credit/concentration/concentration-client/concentration-client.component";
+import { ConcentrationGroupeComponent } from "./risque-credit/concentration/concentration-groupe/concentration-groupe.component";
+import { IndicateursComponent } from "./risque-credit/indicateurs/indicateurs.component";
+import { IndicateurTableComponent } from "./risque-credit/indicateurs/indicateur-table/indicateur-table.component";
+import { MyInputListWithCheckboxComponent } from "./commons/my-input-list-with-checkbox/my-input-list-with-checkbox.component";
 
 @NgModule({
   declarations: [
@@ -244,7 +249,7 @@ import { DialogueCreationLimiteComponent } from './risque-de-marche/limite-banqu
     GestionRisqueClientContentComponent,
     RepartitionParSecteurComponent,
     RepartitionParZoneComponent,
-    KRIsComponent,
+
     Scenario1Component,
     Scenario2Component,
     StressTestContentComponent,
@@ -354,9 +359,8 @@ import { DialogueCreationLimiteComponent } from './risque-de-marche/limite-banqu
     MyInputListComponent,
     SecondDeleteDialogComponent,
     ConcentrationComponent,
-    IndicateursRisqueCreditComponent,
+    IndicateursComponent,
     ConcentrationDetailsComponent,
-    ConcentrationTableRowComponent,
     LimiteBanqueComponent,
     LimiteBanqueContentComponent,
     ListeLimiteComponent,
@@ -364,7 +368,16 @@ import { DialogueCreationLimiteComponent } from './risque-de-marche/limite-banqu
     SurveillanceMensuelleComponent,
     SurveillanceMensuelleComponent,
     ListeBeneficiaireComponent,
-    DialogueCreationLimiteComponent,
+    CreationLimiteComponent,
+    CommentaireSubordonneComponent,
+    ModificationLimteComponent,
+    DesactivationLimiteComponent,
+    ConcentrationClientComponent,
+    ConcentrationGroupeComponent,
+    IndicateursComponent,
+    IndicateurTableComponent,
+    IndicateurTableComponent,
+    MyInputListWithCheckboxComponent,
   ],
   imports: [
     CommonModule,

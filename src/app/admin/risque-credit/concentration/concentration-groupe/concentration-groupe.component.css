@@ -1,0 +1,192 @@
+.my-container {
+  padding: 8px;
+}
+
+.header-choice-of-concentration-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-choice-of-concentration {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(221, 221, 221);
+  align-items: center;
+  height: 70px;
+  border-radius: 5px;
+}
+
+.choice-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin: 0px 10px; */
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  transition: all 50ms;
+  padding: 0px 6px;
+}
+
+.header-item-divider {
+  height: 50px;
+  width: 2px;
+  font-weight: bold;
+  background-color: #6c757d;
+  margin: 0px 10px;
+}
+
+.concentration-item-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.date-and-id-container {
+  display: flex;
+  justify-content: space-between;
+  height: 120px;
+  align-items: end;
+  margin-bottom: 10px;
+}
+
+.my-date-container,
+.id-client-or-group-container,
+.fond-container {
+  display: flex;
+  width: 300px;
+  padding: 4px;
+  justify-content: start;
+  align-items: center;
+}
+
+.my-input {
+  outline: none;
+  border: 0.5px solid rgb(184, 181, 181);
+  border-radius: 5px;
+  height: 40px;
+  padding: 5px;
+  box-shadow: 1px 1px 2px rgb(102 68 68 / 20%);
+  width: 200px;
+  margin-right: 15p;
+}
+
+.my-table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.my-label {
+  font-size: 14px;
+  line-height: 1.42857;
+  font-weight: 400;
+  color: black;
+  font-weight: bold;
+  margin-top: 5px;
+  width: 100px;
+  margin-right: 3px;
+}
+
+table {
+  width: 100%;
+  overflow: auto;
+  margin-top: 40px;
+  overflow-x: auto;
+}
+
+th,
+td,
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+  white-space: nowrap;
+}
+
+.my-table-head {
+  background-color: #dddddd;
+}
+th,
+td {
+  padding: 10px;
+  line-height: 20px;
+}
+
+.my-active {
+  color: white;
+  background-color: #666768;
+  height: 97%;
+  border-radius: 5px 0px 0px 5px;
+}
+.selec-client-and-date-text {
+  text-align: center;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.taux-span {
+  cursor: pointer;
+}
+
+.fonds-reglementaire-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.my-button-calculer-container {
+  width: 300px;
+  padding: 4px;
+  display: flex;
+  justify-content: end;
+  margin-right: 15px;
+  align-items: center;
+}
+
+.my-button-calculer {
+  width: 150px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #bcbcbd;
+}
+
+.my-detail-text-container {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  padding: 10px 15px;
+  color: blue;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.no-data-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 25px 0px;
+  font-weight: bold;
+  font-size: 17px;
+  border: 0.5px solid;
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.my-loading-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+}
+
+::ng-deep .mat-form-field-flex {
+  margin-top: -6px;
+}
+.custom-form-field {
+  width: 200px;
+  height: 40px;
+  border: 1px solid #b8b5b5;
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px rgb(102 68 68 / 20%);
+}

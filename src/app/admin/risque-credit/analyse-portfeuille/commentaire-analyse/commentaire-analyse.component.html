@@ -1,6 +1,11 @@
 <!-- <body ng-app="myapp" ng-controller="ListController1"> -->
 <div [ngClass]="loading ? ['container', 'progress5'] : 'container'"></div>
+<!-- <body ng-app="myapp" ng-controller="ListController1"> -->
+<div [ngClass]="loading ? ['container', 'progress5'] : 'container'"></div>
 
+<div class="container">
+  <div class="row">
+    <!-- <div class="col-lg-16">
 <div class="container">
   <div class="row">
     <!-- <div class="col-lg-16">
@@ -23,6 +28,10 @@
           <col />
           <colgroup span="2"></colgroup>
           <colgroup span="2"></colgroup>
+
+          <tr class="head">
+            <td rowspan="2"></td>
+          </tr>
 
           <tr class="head">
             <td rowspan="2"></td>
@@ -792,47 +801,9 @@
       </form>
     </div>
 
-    <mat-form-field class="col-md-12" *ngIf="showAccept">
-      <textarea matInput placeholder="Commentaire subordonné">{{
-        commentaireSub
-      }}</textarea>
-    </mat-form-field>
-
     <div class="col-md-12">
-      <div class="row">
-        <div class="col-md-2" *ngIf="showAccept">
-          <button
-            class="btn btn-default btn-sm"
-            mat-raised-button
-            (click)="accepter()"
-            [disabled]="commentaireSubAccepte"
-          >
-            Accepter
-          </button>
-        </div>
-
-        <div class="col-md-2" *ngIf="showAccept">
-          <button
-            class="btn btn-default btn-sm"
-            mat-raised-button
-            (click)="openDialog()"
-            [disabled]="commentaireSubRejete"
-          >
-            Rejeter
-          </button>
-        </div>
-        <div class="col-md-2" *ngIf="showAccept">
-          <button
-            class="btn btn-default btn-sm"
-            mat-raised-button
-            (click)="genrerRapportAnalysePortefeuilleDirect()"
-            [disabled]="disabledGenerateReport"
-          >
-            Generer rapport final
-          </button>
-        </div>
-      </div>
-      <app-commentaire-editor></app-commentaire-editor>
+      <app-commentaire-subordonne></app-commentaire-subordonne>
+      <app-commentaire-editor [currentAnalyseType]="1"></app-commentaire-editor>
     </div>
   </div>
 </div>

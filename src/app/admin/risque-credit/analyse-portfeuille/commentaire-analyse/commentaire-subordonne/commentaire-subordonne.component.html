@@ -1,0 +1,39 @@
+<div class="row">
+  <mat-form-field class="col-md-12" *ngIf="showAccept">
+    <textarea matInput placeholder="Commentaire subordonné">{{
+      commentaireSub
+    }}</textarea>
+  </mat-form-field>
+
+  <div class="col-md-2" *ngIf="showAccept">
+    <button
+      class="btn btn-default btn-sm"
+      mat-raised-button
+      (click)="accepter()"
+      [disabled]="commentaireSubAccepte"
+    >
+      Accepter
+    </button>
+  </div>
+
+  <div class="col-md-2" *ngIf="showAccept">
+    <button
+      class="btn btn-default btn-sm"
+      mat-raised-button
+      (click)="openDialog()"
+      [disabled]="commentaireSubRejete"
+    >
+      Rejeter
+    </button>
+  </div>
+  <div class="col-md-2" *ngIf="showAccept">
+    <button
+      class="btn btn-default btn-sm"
+      mat-raised-button
+      (click)="genrerRapportAnalysePortefeuilleDirect()"
+      [disabled]="disabledGenerateReport"
+    >
+      Generer rapport final
+    </button>
+  </div>
+</div>
