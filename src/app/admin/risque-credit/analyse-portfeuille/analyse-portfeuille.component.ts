@@ -8,11 +8,11 @@ import { Component, OnInit } from "@angular/core";
 export class AnalysePortfeuilleComponent implements OnInit {
   protected menuItems = [
     {
-      menuItem: "Portfeuille direct",
+      menuItem: "Portefeuille direct",
       path: "Portfeuilledirect",
     },
     {
-      menuItem: "Portfeuille indirect",
+      menuItem: "Portefeuille indirect",
       path: "AnalysePortfeuilleInDirect",
     },
     {
@@ -20,15 +20,15 @@ export class AnalysePortfeuilleComponent implements OnInit {
       path: "Duration",
     },
     {
-      menuItem: "Créances Douteuses",
+      menuItem: "Créances douteuses",
       path: "CreanceDuteuse",
     },
     {
-      menuItem: "Actions De Recouverment",
+      menuItem: "Actions de recouverment",
       path: "ActionDeRecouverment",
     },
     {
-      menuItem: "Actions De Justice  ",
+      menuItem: "Actions De Justice",
       path: "ActionDeJustices",
     },
   ];

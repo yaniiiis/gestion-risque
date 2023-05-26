@@ -21,7 +21,7 @@ export class CreditNetComponent implements OnInit {
 
   ngOnInit(): void {
     this.creditNetSubscription = this.portefeuilleDirectService
-      .creditNet("2020-06-10", "2022-08-20","28","FUND", "Retail")
+      .creditNet("2020-06-10", "2022-08-20", "28", "FUND", "Retail")
       .subscribe({
         next: (response: any) => {
           this.creditDirectHasError = false;
@@ -86,7 +86,7 @@ export class CreditNetComponent implements OnInit {
         plugins: {
           title: {
             display: true,
-            text: "Crédit Direct Net d'Interets Réservés en milliards de DZD",
+            text: "Crédit direct net d'Interets réservés en milliards de DZD",
             padding: {
               bottom: 30,
               top: 10,

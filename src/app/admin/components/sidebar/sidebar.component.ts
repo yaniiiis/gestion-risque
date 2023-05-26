@@ -56,7 +56,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: "/Admin",
-    title: "Risque credit",
+    title: "Risque crédit",
     icontype: "payments",
     type: "sub",
     collapse: "RisqueCredit",
@@ -69,7 +69,7 @@ export const ROUTES: RouteInfo[] = [
       },
       {
         path: "AnalysePortfeuille",
-        title: "Analyse du portfeuille",
+        title: "Analyse du portefeuille",
         ab: "AP",
       },
       {
@@ -187,21 +187,21 @@ export const ROUTES: RouteInfo[] = [
       //   title: "Gestion D'évaluation Des Taux De Change",
       //   ab:'GETC'
       // },
-      {
-        path: "SurveillanceDesSessionsDevise",
-        title: "Surveillance Des Cessions Devises",
-        ab: "SCD",
-      },
+      // {
+      //   path: "SurveillanceDesSessionsDevise",
+      //   title: "Surveillance Des Cessions Devises",
+      //   ab: "SCD",
+      // },
       {
         path: "KRIsDeChange",
         title: "Gestion des KRIs",
         ab: "GDK",
       },
-      {
-        path: "StressTestDeChange",
-        title: "Gestion des Stress Tests",
-        ab: "GST",
-      },
+      // {
+      //   path: "StressTestDeChange",
+      //   title: "Gestion des Stress Tests",
+      //   ab: "GST",
+      // },
     ],
   },
   {

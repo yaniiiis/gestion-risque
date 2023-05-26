@@ -27,7 +27,7 @@ export class KriComponent implements OnInit {
     {
       value: [5, 90, 1, 30, 70, 10, 54, 32, 21, 45],
       limit: 5,
-      label: "Créance douteuse",
+      label: "Créances douteuses",
       min: 4.5,
       unit: "%",
       commentaire: "",
@@ -43,7 +43,8 @@ export class KriComponent implements OnInit {
     {
       value: [40, 49.6, 22.5, 35, 27.6, 19, 55.9, 48.2, 52.7, 32.9],
       limit: 35,
-      label: "Concentration 10 plus grands clients/Total portefeuille courant",
+      label:
+        "Concentration des 10 plus grands clients/Total portefeuille courant",
       min: 30,
       unit: "%",
       commentaire: "",
