@@ -1,11 +1,6 @@
 <!-- <body ng-app="myapp" ng-controller="ListController1"> -->
 <div [ngClass]="loading ? ['container', 'progress5'] : 'container'"></div>
-<!-- <body ng-app="myapp" ng-controller="ListController1"> -->
-<div [ngClass]="loading ? ['container', 'progress5'] : 'container'"></div>
 
-<div class="container">
-  <div class="row">
-    <!-- <div class="col-lg-16">
 <div class="container">
   <div class="row">
     <!-- <div class="col-lg-16">
@@ -31,10 +26,6 @@
 
           <tr class="head">
             <td rowspan="2"></td>
-          </tr>
-
-          <tr class="head">
-            <td rowspan="2"></td>
 
             <th
               *ngFor="let head of headers"
@@ -46,20 +37,20 @@
           </tr>
           <tr class="head">
             <th scope="col">
-              {{ lastYear ? "31/12/" + lastYear : "31/12/" + years }}
+              {{ lastYear ? lastYear + "-12-31" : years + "-12-31" }}
             </th>
             <th scope="col" *ngFor="let sel of slectedPeriods">
               {{ sel.datereporte | date : "yyyy-MM-dd" }}
             </th>
 
             <th scope="col">
-              {{ lastYear ? "31/12/" + lastYear : "31/12/" + years }}
+              {{ lastYear ? lastYear + "-12-31" : years + "-12-31" }}
             </th>
             <th scope="col" *ngFor="let sel of slectedPeriods">
               {{ sel.datereporte | date : "yyyy-MM-dd" }}
             </th>
             <th scope="col">
-              {{ lastYear ? "31/12/" + lastYear : "31/12/" + years }}
+              {{ lastYear ? lastYear + "-12-31" : years + "-12-31" }}
             </th>
             <th scope="col" *ngFor="let sel of slectedPeriods">
               {{ sel.datereporte | date : "yyyy-MM-dd" }}
@@ -70,7 +61,7 @@
           </tr>
 
           <tr>
-            <th scope="row">Total crédits directs</th>
+            <th scope="row">Total credits Direct</th>
             <td>
               {{
                 creditReportFix.creditParticulier.creditTotaldirect
@@ -143,7 +134,7 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">Créances doutouses</th>
+            <th scope="row">Creances doutouse</th>
             <td>
               {{
                 creditReportFix.creditParticulier.creanceDouteuse
@@ -652,9 +643,7 @@
           </tr>
 
           <tr>
-            <th scope="row" class="tbody__td--label">
-              Créances douteuses net d'intérêts réservés
-            </th>
+            <th scope="row">Créances douteuses net d'intérêts réservés</th>
             <td>
               {{
                 creditReportFix.creditParticulier.creanceDouteuseNets
@@ -726,7 +715,7 @@
           </tr>
 
           <tr>
-            <th scope="row">Crédits directs net d'intérêts réservés</th>
+            <th scope="row">Crédit Direct Net d'intérêts réservés</th>
             <td>
               {{
                 creditReportFix.creditParticulier.creditDirectNetInteretReserve
@@ -802,7 +791,9 @@
     </div>
 
     <div class="col-md-12">
-      <app-commentaire-subordonne></app-commentaire-subordonne>
+      <app-commentaire-subordonne
+        [currentAnalyseType]="1"
+      ></app-commentaire-subordonne>
       <app-commentaire-editor [currentAnalyseType]="1"></app-commentaire-editor>
     </div>
   </div>

@@ -237,6 +237,8 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
                 )
                 .subscribe({
                   next: (res) => {
+                    res.ouvertureLettreCredit =
+                      res.ouvertureLettreCredit / 1000000000;
                     a1.engagementHb = res;
                   },
                 });
@@ -248,6 +250,8 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
                 )
                 .subscribe({
                   next: (res) => {
+                    res.ouvertureLettreCredit =
+                      res.ouvertureLettreCredit / 1000000000;
                     a1.deportEngagement = res;
                   },
                 });
@@ -274,6 +278,7 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
       param1.obligationCautionneeDuanee,
       param2.obligationCautionneeDuanee
     );
+
     return result;
   }
   getSomme(params: any, arg: any) {
@@ -335,6 +340,8 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
           this.lastYear + "-12-31"
         )
         .subscribe((response) => {
+          response.ouvertureLettreCredit =
+            response.ouvertureLettreCredit / 1000000000;
           this.indirectfix.engagementHb = response;
 
           this.totalIndirect.engagementhbTotal = this.getTotalSomme(
@@ -347,6 +354,8 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
               this.lastYear + "-12-31"
             )
             .subscribe((response) => {
+              response.ouvertureLettreCredit =
+                response.ouvertureLettreCredit / 1000000000;
               this.indirectfix.depotsgarantie = response;
               this.totalIndirect.depotsgarantieTotal = this.getTotalSomme(
                 this.indirectfix.depotsgarantie
@@ -370,6 +379,8 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
           this.years + "-12-31"
         )
         .subscribe((response) => {
+          response.ouvertureLettreCredit =
+            response.ouvertureLettreCredit / 1000000000;
           this.indirectfix.engagementHb = response;
 
           this.totalIndirect.engagementhbTotal = this.getTotalSomme(
@@ -382,6 +393,8 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
               this.years + "-12-31"
             )
             .subscribe((response) => {
+              response.ouvertureLettreCredit =
+                response.ouvertureLettreCredit / 1000000000;
               this.indirectfix.depotsgarantie = response;
               this.totalIndirect.depotsgarantieTotal = this.getTotalSomme(
                 this.indirectfix.depotsgarantie
