@@ -86,7 +86,6 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
     private route: Router,
     private portfeuilleIndirectserrvices: PortfeuilleIndirectservicesService,
     private portfeuilleDirectServices: AnalysePortfeuilleServicesService
-    
   ) {}
 
   ngOnInit(): void {
@@ -104,7 +103,6 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
     console.log(" year select ", this.selectedYear);
     this.portfeuilleDirectServices.currentAnalyseType = 2;
     this.HandelGetRapportType();
-   
   }
 
   graphePortefeuilinDirect() {
@@ -234,7 +232,7 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
             for (let i = 0; i <= this.rapportType.length; i++) {
               this.portfeuilleIndirectserrvices
                 .getReportPortfeuilleIndirect(
-                  this.rapportType[0],
+                  this.rapportType[1],
                   dateTransforme
                 )
                 .subscribe({
@@ -245,7 +243,7 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
 
               this.portfeuilleIndirectserrvices
                 .getReportPortfeuilleIndirect(
-                  this.rapportType[1],
+                  this.rapportType[0],
                   dateTransforme
                 )
                 .subscribe({
@@ -279,7 +277,7 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
     return result;
   }
   getSomme(params: any, arg: any) {
-    var reslt = params + arg;
+    var reslt = params - arg;
     return reslt;
   }
   getvariationmontant(params: any, arg: any) {
@@ -328,11 +326,12 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
     datepicker.close();
   }
   getPortefeulleIndire() {
+    console.log("rapport  ", this.rapportType);
     if (!(this.lastYear === undefined)) {
       console.log("laste year here", this.lastYear);
       this.portfeuilleIndirectserrvices
         .getReportPortfeuilleIndirect(
-          this.rapportType[0],
+          this.rapportType[1],
           this.lastYear + "-12-31"
         )
         .subscribe((response) => {
@@ -344,7 +343,7 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
 
           this.portfeuilleIndirectserrvices
             .getReportPortfeuilleIndirect(
-              this.rapportType[1],
+              this.rapportType[0],
               this.lastYear + "-12-31"
             )
             .subscribe((response) => {
@@ -367,7 +366,7 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
     } else {
       this.portfeuilleIndirectserrvices
         .getReportPortfeuilleIndirect(
-          this.rapportType[0],
+          this.rapportType[1],
           this.years + "-12-31"
         )
         .subscribe((response) => {
@@ -379,7 +378,7 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
 
           this.portfeuilleIndirectserrvices
             .getReportPortfeuilleIndirect(
-              this.rapportType[1],
+              this.rapportType[0],
               this.years + "-12-31"
             )
             .subscribe((response) => {
@@ -402,6 +401,8 @@ export class AnalysePortfeuilleInDirectComponent implements OnInit {
     }
   }
   commentaireAnalysePfIndirect() {
-    this.route.navigateByUrl("Admin/AnalysePortfeuille/CommentaireAnalysePfIndirect");
+    this.route.navigateByUrl(
+      "Admin/AnalysePortfeuille/CommentaireAnalysePfIndirect"
+    );
   }
 }
