@@ -19,7 +19,7 @@
 
     <div class="col-md-12">
       <form ng-submit="addNew()">
-        <table class="table table-bordered table-striped">
+        <table class="table">
           <col />
           <colgroup span="2"></colgroup>
           <colgroup span="2"></colgroup>
@@ -37,23 +37,23 @@
           </tr>
           <tr class="head">
             <th scope="col">
-              {{ lastYear ? lastYear + "-12-31" : years + "-12-31" }}
+              {{ lastYear ? "31/12/" + lastYear : "31/12/" + years }}
             </th>
             <th scope="col" *ngFor="let sel of slectedPeriods">
-              {{ sel.datereporte | date : "yyyy-MM-dd" }}
+              {{ sel.datereporte | date : "dd/MM/yyyy" }}
             </th>
 
             <th scope="col">
-              {{ lastYear ? lastYear + "-12-31" : years + "-12-31" }}
+              {{ lastYear ? "31/12/" + lastYear : "31/12/" + years }}
             </th>
             <th scope="col" *ngFor="let sel of slectedPeriods">
-              {{ sel.datereporte | date : "yyyy-MM-dd" }}
+              {{ sel.datereporte | date : "dd/MM/yyyy" }}
             </th>
             <th scope="col">
-              {{ lastYear ? lastYear + "-12-31" : years + "-12-31" }}
+              {{ lastYear ? "31/12/" + lastYear : "31/12/" + years }}
             </th>
             <th scope="col" *ngFor="let sel of slectedPeriods">
-              {{ sel.datereporte | date : "yyyy-MM-dd" }}
+              {{ sel.datereporte | date : "dd/MM/yyyy" }}
             </th>
 
             <th scope="col">Montant</th>
@@ -61,7 +61,7 @@
           </tr>
 
           <tr>
-            <th scope="row">Total credits Direct</th>
+            <th scope="row">Total crédits directs</th>
             <td>
               {{
                 creditReportFix.creditParticulier.creditTotaldirect
@@ -134,7 +134,7 @@
             </td>
           </tr>
           <tr>
-            <th scope="row">Creances doutouse</th>
+            <th scope="row">Créances doutouses</th>
             <td>
               {{
                 creditReportFix.creditParticulier.creanceDouteuse
@@ -715,7 +715,7 @@
           </tr>
 
           <tr>
-            <th scope="row">Crédit Direct Net d'intérêts réservés</th>
+            <th scope="row">Crédits directs net d'intérêts réservés</th>
             <td>
               {{
                 creditReportFix.creditParticulier.creditDirectNetInteretReserve

@@ -90,9 +90,9 @@ export class CommentaireAnalyseComponent implements OnInit {
   formule: string = "empty";
   divUnit: number = 1;
   headers: string[] = [
-    "Credit Particulier",
-    "Credit Entreprise",
-    "Total ",
+    "Crédit Particulier",
+    "Crédit Entreprise",
+    "Total",
     "Variation",
   ];
 
@@ -125,7 +125,7 @@ export class CommentaireAnalyseComponent implements OnInit {
   selctPeriodElt = {
     id: 0,
     checked: true,
-    datereporte: "2021-03-31",
+    datereporte: "2022-03-31",
     creditParticulier: {} as CreditRisqueRapport,
     creditEntreprise: {} as CreditRisqueRapport,
   } as AllSelected;
@@ -228,7 +228,7 @@ export class CommentaireAnalyseComponent implements OnInit {
 
   handelGetAllReportDate(selctPeriodElt: AllSelected) {
     var datePipe = new DatePipe("en-US");
-    console.log("this .select year ", this.selectedYear);
+    //  console.log("this .select year ", this.selectedYear);
     this.availablePeriods = [];
 
     this.dateTransforme = datePipe.transform(
@@ -236,8 +236,8 @@ export class CommentaireAnalyseComponent implements OnInit {
       "yyyy-MM-dd"
     );
 
-    this.dateTransforme = "2021-03-31";
-    this.years = 2020;
+    this.dateTransforme = "2022-03-31";
+    this.years = 2021;
 
     this.creditReportFix.datereportfix = this.years + "-12-31";
     this.servicesRepo
@@ -287,10 +287,10 @@ export class CommentaireAnalyseComponent implements OnInit {
               .getCreditParticulierParPeriode(this.dateTransforme)
               .subscribe({
                 next: (response) => {
-                  console.log(
-                    "dans getCreditParticulierParPeriode" +
-                      response.creanceCourant
-                  );
+                  // console.log(
+                  //   "dans getCreditParticulierParPeriode" +
+                  //     response.creanceCourant
+                  // );
                   response.creanceCourant =
                     response.creanceCourant / this.divUnit;
                   response.creanceDouteuse =
@@ -308,10 +308,10 @@ export class CommentaireAnalyseComponent implements OnInit {
                   response.provisions = response.provisions / this.divUnit;
                   selctPeriodElt.creditParticulier = response;
 
-                  console.log(
-                    "selctPeriodElt.creditParticulier.creanceCourant : " +
-                      selctPeriodElt.creditParticulier.creanceCourant
-                  );
+                  // console.log(
+                  //   "selctPeriodElt.creditParticulier.creanceCourant : " +
+                  //     selctPeriodElt.creditParticulier.creanceCourant
+                  // );
 
                   this.servicesRepo
                     .getCreditEntreParPeriode(this.dateTransforme)
@@ -380,9 +380,9 @@ export class CommentaireAnalyseComponent implements OnInit {
                             [];
                         }
 
-                        if (this.slectedPeriods.includes(selctPeriodElt)) {
-                          console.log("existe");
-                        }
+                        // if (this.slectedPeriods.includes(selctPeriodElt)) {
+                        //   console.log("existe");
+                        // }
 
                         //this.availablePeriods.push(selctPeriodElt);
                         this.slectedPeriods.push(selctPeriodElt);
@@ -411,8 +411,8 @@ export class CommentaireAnalyseComponent implements OnInit {
 
   handelGetCreditPeriodFixe() {
     this.creditReportFix.datereportfix = {};
-    this.lastYear = parseInt("2021") - 1;
-    console.log("service selected unit : " + this.servicesRepo.selectedUnit);
+    this.lastYear = this.years - 1;
+    // console.log("service selected unit : " + this.servicesRepo.selectedUnit);
     if (this.servicesRepo.selectedUnit === "D") {
       this.divUnit = 1;
     } else {
@@ -452,6 +452,7 @@ export class CommentaireAnalyseComponent implements OnInit {
               response.interetReserve = response.interetReserve / this.divUnit;
               response.interetreservesCreancesDouteuse =
                 response.interetreservesCreancesDouteuse / this.divUnit;
+              response.provisions = response.provisions / this.divUnit;
               this.creditReportFix.creditEntreprise = response;
               this.creditReportFix.totalFix = {};
               this.getTotalForPeriod(
@@ -564,7 +565,7 @@ export class CommentaireAnalyseComponent implements OnInit {
   // }
 
   genrerRapportAnalysePortefeuilleDirect() {
-    console.log("portfeille<< ", this.creditReportAnalysePortfeuille);
+    // console.log("portfeille<< ", this.creditReportAnalysePortfeuille);
     this.checkSelectPeriode =
       this.creditReportAnalysePortfeuille.slectedPeriods !== undefined
         ? true
@@ -620,7 +621,7 @@ export class CommentaireAnalyseComponent implements OnInit {
     console.log("globalObject", globalObject);
 
     this.servicesRepo.uploadReport(globalObject).subscribe((res) => {
-      console.log("res", res);
+      // console.log("res", res);
       var file = new Blob([res], { type: "application/pdf" });
       var fileURL = URL.createObjectURL(file);
       window.open(fileURL);
@@ -644,7 +645,7 @@ export class CommentaireAnalyseComponent implements OnInit {
 
   //retrivePeriode
   getPeriodes(json, periodeOptions, jsonFix) {
-    var periodes = ["Portefeuille des crédits direct (en milliards de DZD)"];
+    var periodes = ["Portefeuille des crédits directs (en milliards de DZD)"];
 
     periodes.push(jsonFix.dateReportFix);
     if (this.checkSelectPeriode) {
@@ -664,11 +665,11 @@ export class CommentaireAnalyseComponent implements OnInit {
   //getFix columns
   getFixColumnNames() {
     var table = [
-      { propertyCol: "Total Crédits Directs" },
+      { propertyCol: "Total crédits directs" },
       { propertyCol: "Créances douteuses" },
       { propertyCol: "Créances courantes" },
-      { propertyCol: "Créances douteuses net d'intérêts réservés" },
-      { propertyCol: "Crédit Direct Net d'intérêts réservés" },
+      { propertyCol: "Créances douteuses nets d'intérêts réservés" },
+      { propertyCol: "Crédits directs nets d'intérêts réservés" },
       { propertyCol: "Provisions" },
       { propertyCol: "Taux de créances douteuses" },
       { propertyCol: "Taux de couverture" },
