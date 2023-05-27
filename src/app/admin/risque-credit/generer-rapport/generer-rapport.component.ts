@@ -53,30 +53,37 @@ export class GenererRapportComponent implements OnInit {
   selectedType: string;
   choosedRapportType: RapportType;
   generateIsLoading: boolean = false;
+  generateHasError: boolean = false;
 
   typesList = ["aaa", "eeeee"];
 
   handleGenerate() {
-    this.generateIsLoading = true;
-
-    this.rapportGenerationService
-      .generateRapport(
-        this.choosedRapportType.id,
-        this.datePipe.transform(this.selectedDate, "yyyy-MM-dd")
-      )
-      .subscribe({
-        next: (response) => {
-          this.generateIsLoading = false;
-          this.rapportGenerationService.setGeneratedRapport(
-            response,
-            this.choosedRapportType.titreRapport
-          );
-          this.router.navigate(["../mon-rapport"], { relativeTo: this.route });
-        },
-        error: (err) => {
-          console.log("Generate error : ", err);
-        },
-      });
+    this.generateIsClicked = true;
+    if (this.type && this.date) {
+      this.generateIsLoading = true;
+      this.rapportGenerationService
+        .generateRapport(
+          this.choosedRapportType.id,
+          this.datePipe.transform(this.selectedDate, "yyyy-MM-dd")
+        )
+        .subscribe({
+          next: (response) => {
+            this.generateHasError = false;
+            this.generateIsLoading = false;
+            this.rapportGenerationService.setGeneratedRapport(
+              response,
+              this.choosedRapportType.titreRapport
+            );
+            this.router.navigate(["../mon-rapport"], {
+              relativeTo: this.route,
+            });
+          },
+          error: (err) => {
+            console.log("Generate error : ", err);
+            this.generateHasError = true;
+          },
+        });
+    }
   }
 
   toggleListTypes() {
