@@ -3,137 +3,273 @@
     <div class="container-fluid">
       <div class="card">
         <div class="card-header"> -->
-          <div class="yz_container">
-            <div class="row">
-              <div class="col-md-2">
-               
-                      <mat-form-field appearance="fill">
-                        <mat-label>Selectionner une date</mat-label>
-                        <input
-                          matInput
-                          [(ngModel)]="selectedDate"
-                          [matDatepicker]="picker1"
-                          (dateInput)="addEvent('input', $event)"
-                          (dateChange)="addEvent('change', $event)"
-                        />
-                        <mat-hint>DD/MM/YYYY</mat-hint>
-                        <mat-datepicker-toggle
-                          matIconSuffix
-                          [for]="picker1"
-                        ></mat-datepicker-toggle>
-                        <mat-datepicker #picker1></mat-datepicker>
-                      </mat-form-field> 
-              </div>
-    
-              <div class="col-md-4">
-              
-                <ng-multiselect-dropdown
-                [placeholder]="'Selectionner la devise'"
-                [settings]="dropdownSettings"
-                [data]="dropdownList"
-                [(ngModel)]="selectedItems"
-                (onSelect)="onItemSelect($event)"
-                (onDeSelect)="onItemDeSelect($event)"
-                (onSelectAll)="onSelectAll($event)"
-                (onDeSelectAll)="onDeSelectAll($event)"
-              >
-              </ng-multiselect-dropdown>
-                
-            
-              </div>
-    
-            </div>
-           
-          </div>
+<div class="yz_container">
+  <div class="row">
+    <div class="col-md-2">
+      <mat-form-field appearance="fill">
+        <mat-label>Selectionner une date</mat-label>
+        <input
+          matInput
+          [(ngModel)]="selectedDate"
+          [matDatepicker]="picker1"
+          (dateInput)="addEvent('input', $event)"
+          (dateChange)="addEvent('change', $event)"
+        />
+        <mat-hint>DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
 
+    <div class="col-md-4">
+      <ng-multiselect-dropdown
+        [placeholder]="'Selectionner la devise'"
+        [settings]="dropdownSettings"
+        [data]="dropdownList"
+        [(ngModel)]="selectedItems"
+        (onSelect)="onItemSelect($event)"
+        (onDeSelect)="onItemDeSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+        (onDeSelectAll)="onDeSelectAll($event)"
+      >
+      </ng-multiselect-dropdown>
+    </div>
+  </div>
+</div>
 
-          <div class="yz_container">
-            <div>
-              <label>Fonts propres</label>
-              <!-- <input type="decimal" [(ngModel)]="fp" style="text-align: right;" id="fp" (keyup)="calculIndicateur()"> -->
-              {{ fp | number:'4.1-2'}}
-            </div>
-           
-            <table>
-              <thead>
-                <th class="theed__th--indicateur">DEVISE</th>
-                <th *ngFor="let h of header1">{{ h }}</th>
-              </thead>
-              <tbody>              
-                <tr *ngFor="let y of listAffichePosition">
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: center;font-size: 13px;">{{ y.devise }}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;font-size: 13px;">{{ y.positionCourte | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;font-size: 13px;">{{ y.positionLongue | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;font-size: 13px;">{{ y.positionNetteCourte | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;font-size: 13px;">{{ y.positionNetteLongue | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;font-size: 13px;">{{ fp | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0);  text-align: center; color: green; font-weight: bold;font-size: 13px;" *ngIf="y.ratio<indicateur2.valeurMinimum">
-                      {{
-                         y.ratio | number:'4.1-2'
-                      }}                   
-                  </td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: center; color: orange; font-weight: bold;font-size: 13px;" *ngIf="y.ratio>=indicateur2.valeurMinimum && y.ratio<indicateur2.valeurLimite">
-                    {{
-                       y.ratio | number:'4.1-2'
-                    }}                   
-                  </td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: center; color: red; font-weight: bold;font-size: 13px;" *ngIf="y.ratio>indicateur2.valeurLimite">
-                    {{
-                       y.ratio | number:'4.1-2'
-                    }}                   
-                  </td>
-                  
-                </tr>
-              </tbody>
-              <tfoot></tfoot>
-            </table>
+<div class="yz_container">
+  <div>
+    <label>Fonts propres</label>
+    <!-- <input type="decimal" [(ngModel)]="fp" style="text-align: right;" id="fp" (keyup)="calculIndicateur()"> -->
+    {{ fp | number : "1.1-2" }}
+  </div>
 
-            <div style="margin-top: 20px;">
-            <table>
-              <thead>
-                <th class="theed__th--indicateur">DEVISE</th>
-                <th *ngFor="let h of header1">{{ h }}</th>
-              </thead>
-              <tbody>              
-                <tr >
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: center;font-size: 13px;">{{ totalAffichePosition.devise }}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;font-size: 13px;">{{ totalAffichePosition.positionCourte | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;font-size: 13px;">{{ totalAffichePosition.positionLongue | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;font-size: 13px;">{{ totalAffichePosition.positionNetteCourte | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;font-size: 13px;">{{ totalAffichePosition.positionNetteLongue | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: right;font-size: 13px;">{{ totalAffichePosition.fpn | number:'4.1-2'}}</td>
-                  <td style="border: 1px solid rgb(0, 0, 0);  text-align: center;font-size: 13px; color: green; font-weight: bold" *ngIf="totalAffichePosition.ratio<indicateur3.valeurMinimum">
-                      {{
-                        totalAffichePosition.ratio | number:'4.1-2'
-                      }}                   
-                  </td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: center;font-size: 13px; color: orange; font-weight: bold" *ngIf="totalAffichePosition.ratio>=indicateur3.valeurMinimum && totalAffichePosition.ratio<indicateur3.valeurLimite">
-                    {{
-                      totalAffichePosition.ratio | number:'4.1-2'
-                    }}                   
-                  </td>
-                  <td style="border: 1px solid rgb(0, 0, 0); text-align: center;font-size: 13px; color: red; font-weight: bold" *ngIf="totalAffichePosition.ratio>indicateur3.valeurLimite">
-                    {{
-                      totalAffichePosition.ratio | number:'4.1-2'
-                    }}                   
-                  </td>                  
-                </tr>
-              </tbody>
-              <tfoot></tfoot>
-            </table>
-            <div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card-body">
-              <app-commentaire-editor></app-commentaire-editor>
+  <table>
+    <thead>
+      <th class="theed__th--indicateur">Devise</th>
+      <th *ngFor="let h of header1">{{ h | titlecase }}</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let y of listAffichePosition">
+        <td
+          style="
+            border: 1px solid rgb(0, 0, 0);
+            text-align: center;
+            font-size: 13px;
+          "
+        >
+          {{ y.devise }}
+        </td>
+        <td
+          style="
+            border: 1px solid rgb(0, 0, 0);
+            text-align: right;
+            font-size: 13px;
+          "
+        >
+          {{ y.positionCourte | number : "1.1-2" }}
+        </td>
+        <td
+          style="
+            border: 1px solid rgb(0, 0, 0);
+            text-align: right;
+            font-size: 13px;
+          "
+        >
+          {{ y.positionLongue | number : "1.1-2" }}
+        </td>
+        <td
+          style="
+            border: 1px solid rgb(0, 0, 0);
+            text-align: right;
+            font-size: 13px;
+          "
+        >
+          {{ y.positionNetteCourte | number : "1.1-2" }}
+        </td>
+        <td
+          style="
+            border: 1px solid rgb(0, 0, 0);
+            text-align: right;
+            font-size: 13px;
+          "
+        >
+          {{ y.positionNetteLongue | number : "1.1-2" }}
+        </td>
+        <td
+          style="
+            border: 1px solid rgb(0, 0, 0);
+            text-align: right;
+            font-size: 13px;
+          "
+        >
+          {{ fp | number : "1.1-2" }}
+        </td>
+        <td
+          style="
+            border: 1px solid rgb(0, 0, 0);
+            text-align: center;
+            color: green;
+            font-weight: bold;
+            font-size: 13px;
+          "
+          *ngIf="y.ratio < indicateur2.valeurMinimum"
+        >
+          {{ y.ratio | number : "1.1-2" }}
+        </td>
+        <td
+          style="
+            border: 1px solid rgb(0, 0, 0);
+            text-align: center;
+            color: orange;
+            font-weight: bold;
+            font-size: 13px;
+          "
+          *ngIf="
+            y.ratio >= indicateur2.valeurMinimum &&
+            y.ratio < indicateur2.valeurLimite
+          "
+        >
+          {{ y.ratio | number : "1.1-2" }}
+        </td>
+        <td
+          style="
+            border: 1px solid rgb(0, 0, 0);
+            text-align: center;
+            color: red;
+            font-weight: bold;
+            font-size: 13px;
+          "
+          *ngIf="y.ratio > indicateur2.valeurLimite"
+        >
+          {{ y.ratio | number : "1.1-2" }}
+        </td>
+      </tr>
+    </tbody>
+    <tfoot></tfoot>
+  </table>
 
-              <router-outlet></router-outlet>
-            </div>
-          </div>
-        <!-- </div>
+  <div style="margin-top: 20px">
+    <table>
+      <thead>
+        <th class="theed__th--indicateur">Devise</th>
+        <th *ngFor="let h of header1">{{ h | titlecase }}</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td
+            style="
+              border: 1px solid rgb(0, 0, 0);
+              text-align: center;
+              font-size: 13px;
+            "
+          >
+            {{ totalAffichePosition.devise }}
+          </td>
+          <td
+            style="
+              border: 1px solid rgb(0, 0, 0);
+              text-align: right;
+              font-size: 13px;
+            "
+          >
+            {{ totalAffichePosition.positionCourte | number : "1.1-2" }}
+          </td>
+          <td
+            style="
+              border: 1px solid rgb(0, 0, 0);
+              text-align: right;
+              font-size: 13px;
+            "
+          >
+            {{ totalAffichePosition.positionLongue | number : "1.1-2" }}
+          </td>
+          <td
+            style="
+              border: 1px solid rgb(0, 0, 0);
+              text-align: right;
+              font-size: 13px;
+            "
+          >
+            {{ totalAffichePosition.positionNetteCourte | number : "1.1-2" }}
+          </td>
+          <td
+            style="
+              border: 1px solid rgb(0, 0, 0);
+              text-align: right;
+              font-size: 13px;
+            "
+          >
+            {{ totalAffichePosition.positionNetteLongue | number : "1.1-2" }}
+          </td>
+          <td
+            style="
+              border: 1px solid rgb(0, 0, 0);
+              text-align: right;
+              font-size: 13px;
+            "
+          >
+            {{ totalAffichePosition.fpn | number : "1.1-2" }}
+          </td>
+          <td
+            style="
+              border: 1px solid rgb(0, 0, 0);
+              text-align: center;
+              font-size: 13px;
+              color: green;
+              font-weight: bold;
+            "
+            *ngIf="totalAffichePosition.ratio < indicateur3.valeurMinimum"
+          >
+            {{ totalAffichePosition.ratio | number : "1.1-2" }}
+          </td>
+          <td
+            style="
+              border: 1px solid rgb(0, 0, 0);
+              text-align: center;
+              font-size: 13px;
+              color: orange;
+              font-weight: bold;
+            "
+            *ngIf="
+              totalAffichePosition.ratio >= indicateur3.valeurMinimum &&
+              totalAffichePosition.ratio < indicateur3.valeurLimite
+            "
+          >
+            {{ totalAffichePosition.ratio | number : "1.1-2" }}
+          </td>
+          <td
+            style="
+              border: 1px solid rgb(0, 0, 0);
+              text-align: center;
+              font-size: 13px;
+              color: red;
+              font-weight: bold;
+            "
+            *ngIf="totalAffichePosition.ratio > indicateur3.valeurLimite"
+          >
+            {{ totalAffichePosition.ratio | number : "1.1-2" }}
+          </td>
+        </tr>
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+    <div></div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card-body">
+        <app-commentaire-editor></app-commentaire-editor>
+
+        <!-- <router-outlet></router-outlet> -->
+      </div>
+    </div>
+    <!-- </div>
       </div>
     </div>
   </div> -->
-  
+  </div>
+</div>

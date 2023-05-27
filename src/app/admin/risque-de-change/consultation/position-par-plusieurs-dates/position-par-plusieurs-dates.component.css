@@ -107,3 +107,8 @@ thead th {
 .ourClass {
   display: flex;
 }
+
+tbody tr td:first-child {
+  text-align: center;
+  padding: 12px !important;
+}

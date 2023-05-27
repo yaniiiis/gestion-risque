@@ -1,20 +1,26 @@
 <div class="yz_container">
-    <div class="row">
-      <div class="col-md-2">
+  <div class="row">
+    <div class="col-md-2">
+      <mat-form-field appearance="outline">
+        <mat-label>Année</mat-label>
+        <input
+          [(ngModel)]="selectYear"
+          [formControl]="dateForm"
+          matInput
+          [matDatepicker]="picker"
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker
+          #picker
+          startView="multi-year"
+          (yearSelected)="chosenYearHandler($event, picker)"
+        >
+        </mat-datepicker>
+      </mat-form-field>
+    </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Année</mat-label>
-                <input [(ngModel)]="selectYear" [formControl]="dateForm" matInput [matDatepicker]="picker" />
-                <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
-                <mat-datepicker #picker startView="multi-year" (yearSelected)="chosenYearHandler($event, picker)">
-                </mat-datepicker>
-            </mat-form-field>
-
-      </div>
-      
-      <div class="col-md-4">
-              
-        <ng-multiselect-dropdown
+    <div class="col-md-4">
+      <ng-multiselect-dropdown
         [placeholder]="'Selectionner les dates'"
         [settings]="dateDropdownSettings"
         [(data)]="dateDropdownList"
@@ -25,13 +31,10 @@
         (onDeSelectAll)="onDateDeSelectAll($event)"
       >
       </ng-multiselect-dropdown>
-        
-    
-      </div>  
+    </div>
 
-      <div class="col-md-6">
-              
-        <ng-multiselect-dropdown
+    <div class="col-md-6">
+      <ng-multiselect-dropdown
         [placeholder]="'Selectionner la devise'"
         [settings]="deviseDropdownSettings"
         [data]="deviseDropdownList"
@@ -42,58 +45,114 @@
         (onDeSelectAll)="onDeviseDeSelectAll($event)"
       >
       </ng-multiselect-dropdown>
-        
-    
-      </div> 
-      
-      
-      <table class="table">
-        <thead>
-            <th class="theed__th--indicateur">Devise</th>
-            <th class="theed__th--indicateur" *ngFor="let d of dateSelectedItems">{{ d.item_id }}</th>        
-        </thead>
-
-        <tbody>
-            <tr *ngFor="let devise of deviseSelectedItems, i as index">
-            <td class="tbody__td">{{ devise.item_id }}</td>    
-            <td class="tbody__td" *ngFor="let date of dateSelectedItems" style="border: 1px solid rgb(0, 0, 0);  text-align: right;">
-              <div style="text-align: right; color: green; font-weight: bold" *ngIf="getRatioByDevise(date.item_id, devise.item_id)<indicateur2.valeurMinimum">{{ getRatioByDevise(date.item_id, devise.item_id)  | number:'1.1-8' }}%</div>
-              <div style="text-align: right;color: orange; font-weight: bold" *ngIf="getRatioByDevise(date.item_id, devise.item_id)>=indicateur2.valeurMinimum && getRatioByDevise(date.item_id, devise.item_id)<indicateur2.valeurLimite">{{ getRatioByDevise(date.item_id, devise.item_id)  | number:'1.1-8' }}% </div> 
-              <div style="text-align: right;color: red; font-weight: bold" *ngIf="getRatioByDevise(date.item_id, devise.item_id)>indicateur2.valeurLimite">{{ getRatioByDevise(date.item_id, devise.item_id)  | number:'1.1-8' }}%</div></td> 
-              
-          </tr>       
-        </tbody>
-      </table>
-    </div> 
-    
-    <div class="row">
-      <table class="table">
-         <thead>
-            <th class="theed__th--indicateur">Devise</th>
-            <th class="theed__th--indicateur" *ngFor="let d of dateSelectedItems">{{ d.item_id }}</th>        
-        </thead>
-
-        <tbody>
-            <tr>
-            <td class="tbody__td">Toutes les devises</td>    
-            <td class="tbody__td" *ngFor="let date of dateSelectedItems">
-              <div style="text-align: right; color: green; font-weight: bold" *ngIf="getRatioGlobal(date.item_id)<indicateur3.valeurMinimum"> {{ getRatioGlobal(date.item_id)  | number:'1.1-8' }}%</div>
-              <div style="text-align: right;color: orange; font-weight: bold" *ngIf="getRatioGlobal(date.item_id)>=indicateur3.valeurMinimum && getRatioGlobal(date.item_id)<indicateur3.valeurLimite"> {{ getRatioGlobal(date.item_id)  | number:'1.1-8' }}%</div> 
-              <div style="text-align: right;color: red; font-weight: bold" *ngIf="getRatioGlobal(date.item_id)>indicateur3.valeurLimite"> {{ getRatioGlobal(date.item_id)  | number:'1.1-8' }}%</div>
-            </td>  
-          </tr>       
-        </tbody>
-      </table> 
     </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card-body">
-          <app-commentaire-editor></app-commentaire-editor>
-          <router-outlet></router-outlet>
-        </div>
-      </div>
-    </div> 
-   
-</div>          
+    <table class="table">
+      <thead>
+        <th class="theed__th--indicateur">Devise</th>
+        <th class="theed__th--indicateur" *ngFor="let d of dateSelectedItems">
+          {{ d.item_text }}
+        </th>
+      </thead>
 
+      <tbody>
+        <tr *ngFor="let devise of deviseSelectedItems; i as index">
+          <td class="tbody__td">{{ devise.item_id }}</td>
+          <td
+            class="tbody__td"
+            *ngFor="let date of dateSelectedItems"
+            style="border: 1px solid rgb(0, 0, 0); text-align: right"
+          >
+            <div
+              style="text-align: right; color: green; font-weight: bold"
+              *ngIf="
+                getRatioByDevise(date.item_id, devise.item_id) <
+                indicateur2.valeurMinimum
+              "
+            >
+              {{
+                getRatioByDevise(date.item_id, devise.item_id)
+                  | number : "1.1-8"
+              }}%
+            </div>
+            <div
+              style="text-align: right; color: orange; font-weight: bold"
+              *ngIf="
+                getRatioByDevise(date.item_id, devise.item_id) >=
+                  indicateur2.valeurMinimum &&
+                getRatioByDevise(date.item_id, devise.item_id) <
+                  indicateur2.valeurLimite
+              "
+            >
+              {{
+                getRatioByDevise(date.item_id, devise.item_id)
+                  | number : "1.1-8"
+              }}%
+            </div>
+            <div
+              style="text-align: right; color: red; font-weight: bold"
+              *ngIf="
+                getRatioByDevise(date.item_id, devise.item_id) >
+                indicateur2.valeurLimite
+              "
+            >
+              {{
+                getRatioByDevise(date.item_id, devise.item_id)
+                  | number : "1.1-8"
+              }}%
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <table class="table">
+      <thead>
+        <th class="theed__th--indicateur">Devise</th>
+        <th class="theed__th--indicateur" *ngFor="let d of dateSelectedItems">
+          {{ d.item_text }}
+        </th>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td class="tbody__td">Toutes les devises</td>
+          <td class="tbody__td" *ngFor="let date of dateSelectedItems">
+            <div
+              style="text-align: right; color: green; font-weight: bold"
+              *ngIf="getRatioGlobal(date.item_id) < indicateur3.valeurMinimum"
+            >
+              {{ getRatioGlobal(date.item_id) | number : "1.1-8" }}%
+            </div>
+            <div
+              style="text-align: right; color: orange; font-weight: bold"
+              *ngIf="
+                getRatioGlobal(date.item_id) >= indicateur3.valeurMinimum &&
+                getRatioGlobal(date.item_id) < indicateur3.valeurLimite
+              "
+            >
+              {{ getRatioGlobal(date.item_id) | number : "1.1-8" }}%
+            </div>
+            <div
+              style="text-align: right; color: red; font-weight: bold"
+              *ngIf="getRatioGlobal(date.item_id) > indicateur3.valeurLimite"
+            >
+              {{ getRatioGlobal(date.item_id) | number : "1.1-8" }}%
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card-body">
+        <app-commentaire-editor></app-commentaire-editor>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
