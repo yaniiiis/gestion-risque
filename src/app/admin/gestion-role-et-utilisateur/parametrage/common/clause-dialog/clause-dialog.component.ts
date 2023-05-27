@@ -159,7 +159,7 @@ export class ClauseDialogComponent implements OnInit {
   clausesList = [
     "NOMINAL_EXPOSURE",
     "INT_RESERVES",
-    "soldeBalance",
+    //"soldeBalance",
     "PROVISIONS",
     "VALEUR_CASH",
   ];

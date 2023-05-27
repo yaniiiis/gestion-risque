@@ -89,7 +89,7 @@ export class EvolutionDirectComponent implements OnInit {
         plugins: {
           title: {
             display: true,
-            text: "Evolutions du portefeuile directs en milliards de DZD",
+            text: "Evolutions du portefeuille direct en milliards de DZD",
             padding: {
               bottom: 30,
               top: 10,

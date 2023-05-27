@@ -49,14 +49,14 @@ export const ROUTES: RouteInfo[] = [
       },
       {
         path: "parametrageAnalysePrtfeuille",
-        title: "Parametrage Analyse des portefeuilles",
+        title: "Paramétrage analyse des portefeuilles",
         ab: "PR",
       },
     ],
   },
   {
     path: "/Admin",
-    title: "Risque credit",
+    title: "Risque crédit",
     icontype: "payments",
     type: "sub",
     collapse: "RisqueCredit",
@@ -69,7 +69,7 @@ export const ROUTES: RouteInfo[] = [
       },
       {
         path: "AnalysePortfeuille",
-        title: "Analyse du portfeuille",
+        title: "Analyse du portefeuille",
         ab: "AP",
       },
       {
@@ -95,7 +95,7 @@ export const ROUTES: RouteInfo[] = [
 
       {
         path: "StressTest",
-        title: "Gestion des Stress Tests",
+        title: "Gestion des stress tests",
         ab: "GST",
       },
       {
@@ -107,7 +107,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: "/Admin",
-    title: "Risque Liquidite",
+    title: "Risque liquidité",
     icontype: "Task",
     type: "sub",
     collapse: "RisqueLiquidite",
@@ -140,44 +140,44 @@ export const ROUTES: RouteInfo[] = [
       // },
       {
         path: "ConsultationRatios1Liquidite",
-        title: "Consultation Ratio 1",
+        title: "Consultation ratio 1",
         ab: "CON1",
       },
       {
         path: "ConsultationRatio2Liquidite",
-        title: "Consultation Ratio 2",
+        title: "Consultation ratio 2",
         ab: "CON2",
       },
       {
         path: "ConsultationRatio3Liquidite",
-        title: "Consultation Ratio 3",
+        title: "Consultation ratio 3",
         ab: "CON3",
       },
       {
         path: "ConsultationRatio4Liquidite",
-        title: "Consultation Ratio 4",
+        title: "Consultation ratio 4",
         ab: "CON4",
       },
       {
         path: "ConsultationRatio5Liquidite",
-        title: "Consultation Ratio 5",
+        title: "Consultation ratio 5",
         ab: "CON5",
       },
       {
         path: "ConsultationRatio6Liquidite",
-        title: "Consultation Ratio 6",
+        title: "Consultation ratio 6",
         ab: "CON6",
       },
       {
         path: "ConsultationRapportKrisLiquidite",
-        title: "Consultation Rapport",
+        title: "Consultation rapport",
         ab: "Rapp",
       },
     ],
   },
   {
     path: "/Admin",
-    title: "Risque De Change",
+    title: "Risque de change",
     icontype: "Task",
     type: "sub",
     collapse: "RisqueDeChange",
@@ -193,26 +193,26 @@ export const ROUTES: RouteInfo[] = [
       //   title: "Gestion D'évaluation Des Taux De Change",
       //   ab:'GETC'
       // },
-      {
-        path: "SurveillanceDesSessionsDevise",
-        title: "Surveillance Des Cessions Devises",
-        ab: "SCD",
-      },
+      // {
+      //   path: "SurveillanceDesSessionsDevise",
+      //   title: "Surveillance Des Cessions Devises",
+      //   ab: "SCD",
+      // },
       {
         path: "KRIsDeChange",
         title: "Gestion des KRIs",
         ab: "GDK",
       },
-      {
-        path: "StressTestDeChange",
-        title: "Gestion des Stress Tests",
-        ab: "GST",
-      },
+      // {
+      //   path: "StressTestDeChange",
+      //   title: "Gestion des Stress Tests",
+      //   ab: "GST",
+      // },
     ],
   },
   {
     path: "/Admin",
-    title: "Risques Du Marché",
+    title: "Risques du marché",
     icontype: "Task",
     type: "sub",
     collapse: "RisqueDeMarche",
@@ -220,7 +220,7 @@ export const ROUTES: RouteInfo[] = [
     children: [
       {
         path: "LimiteBanque",
-        title: "Les Limites de Banques",
+        title: "Les limites de banques",
         ab: "LB",
       },
     ],

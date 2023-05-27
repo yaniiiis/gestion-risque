@@ -58,7 +58,7 @@ interface Unite {
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
     },
 
-    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS }
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
 })
 export class AnalysePortfeuilleDirectComponent implements OnInit {
@@ -81,8 +81,8 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
   formule: string = "empty";
   dateNow: Date = new Date();
   headers: string[] = [
-    "Credit Particulier",
-    "Credit Entreprise",
+    "Crédit Particulier",
+    "Crédit Entreprise",
     "Total ",
     "Variation",
   ];
@@ -111,17 +111,13 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
   public dateYear!: FormGroup;
   reportD!: REportD;
 
- 
   uniteControl = new FormControl<Unite | null>(null, Validators.required);
-  selectFormControl = new FormControl('', Validators.required);
+  selectFormControl = new FormControl("", Validators.required);
   unites: Unite[] = [
     { value: "D", viewValue: "Dinars" },
     { value: "ML", viewValue: "Milliard de dinars" },
   ];
   divUnit: number = 1;
-
-
-  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -142,8 +138,8 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
     if (this.selectedYear === undefined) {
       this.selectedYear = String(this.years + 1);
     }
-    this.servicesRepo.selectedUnit = 'ML';
-    //Portefeuille directe
+    this.servicesRepo.selectedUnit = "ML";
+    //Portefeuille direct
     this.servicesRepo.currentAnalyseType = 1;
   }
 
@@ -158,13 +154,13 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
   }
 
   selectUnit(event: Event) {
-    this.selectedUnit= (event.target as HTMLSelectElement).value;
+    this.selectedUnit = (event.target as HTMLSelectElement).value;
     this.servicesRepo.selectedUnit = this.selectedUnit;
   }
 
   handelGetAllReportDate() {
     var datePipe = new DatePipe("en-US");
-    console.log("this .selecyt yar ", this.selectedYear);
+    // console.log("this .selecyt yar ", this.selectedYear);
     this.availablePeriods = [];
     this.servicesRepo.getDateReporting(this.selectedYear).subscribe({
       next: (dataPeriods) => {
@@ -183,13 +179,20 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
             .getCreditParticulierParPeriode(this.dateTransforme)
             .subscribe({
               next: (response) => {
-                response.creanceCourant = response.creanceCourant / this.divUnit;
-                response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
-                response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
-                response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
-                response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
-                response.interetReserve = response.interetReserve / this.divUnit;
-                response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
+                response.creanceCourant =
+                  response.creanceCourant / this.divUnit;
+                response.creanceDouteuse =
+                  response.creanceDouteuse / this.divUnit;
+                response.creanceDouteuseNets =
+                  response.creanceDouteuseNets / this.divUnit;
+                response.creditDirectNetInteretReserve =
+                  response.creditDirectNetInteretReserve / this.divUnit;
+                response.creditTotaldirect =
+                  response.creditTotaldirect / this.divUnit;
+                response.interetReserve =
+                  response.interetReserve / this.divUnit;
+                response.interetreservesCreancesDouteuse =
+                  response.interetreservesCreancesDouteuse / this.divUnit;
                 response.provisions = response.provisions / this.divUnit;
                 a1.creditParticulier = response;
               },
@@ -201,13 +204,20 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
             .getCreditEntreParPeriode(this.dateTransforme)
             .subscribe({
               next: (response) => {
-                response.creanceCourant = response.creanceCourant / this.divUnit;
-                response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
-                response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
-                response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
-                response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
-                response.interetReserve = response.interetReserve / this.divUnit;
-                response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
+                response.creanceCourant =
+                  response.creanceCourant / this.divUnit;
+                response.creanceDouteuse =
+                  response.creanceDouteuse / this.divUnit;
+                response.creanceDouteuseNets =
+                  response.creanceDouteuseNets / this.divUnit;
+                response.creditDirectNetInteretReserve =
+                  response.creditDirectNetInteretReserve / this.divUnit;
+                response.creditTotaldirect =
+                  response.creditTotaldirect / this.divUnit;
+                response.interetReserve =
+                  response.interetReserve / this.divUnit;
+                response.interetreservesCreancesDouteuse =
+                  response.interetreservesCreancesDouteuse / this.divUnit;
                 response.provisions = response.provisions / this.divUnit;
                 a1.creditEntreprise = response;
               },
@@ -215,26 +225,24 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
                 this.errormessage = err.error.message;
               },
             });
-          if (this.availablePeriods.includes(a1)) {
-            console.log("existe");
-          }
+          // if (this.availablePeriods.includes(a1)) {
+          //   console.log("existe");
+          // }
           this.availablePeriods.push(a1);
         }
-        console.log("available periods : ", this.availablePeriods);
+        // console.log("available periods : ", this.availablePeriods);
       },
       error: (err) => {
         this.errormessage = err;
       },
       complete: () => {
-        console.log("dhaguiii ", this.availablePeriods);
+        // console.log("dhaguiii ", this.availablePeriods);
         this.filterAvailablePeriods = this.availablePeriods.filter((p) => {
           return p.datereporte.substring(0, 4) == this.selectedYear;
         });
       },
     });
   }
-
-  
 
   showCheckboxes() {
     this.visible = !this.visible;
@@ -273,7 +281,7 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
         {},
         this.getvariationmontant
       );
-      console.log("result ", resultVariation);
+      //console.log("result ", resultVariation);
       this.creditReportAnalysePortfeuille.variationMontant = resultVariation;
       var resultPourcentage = this.getTotalForPeriod(
         resultVariation,
@@ -304,10 +312,9 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
   }
 
   handelGetCreditPeriodFixe() {
-    console.log("unit : "+this.selectedUnit)
-    if (this.selectedUnit==="D")
-    this.divUnit = 1
-    else  this.divUnit = 1000000000
+    //  console.log("unit : " + this.selectedUnit);
+    if (this.selectedUnit === "D") this.divUnit = 1;
+    else this.divUnit = 1000000000;
     this.creditReportFix.datereportfix = {};
     if (this.lastYear === undefined) {
       this.creditReportFix.datereportfix = this.years + "-12-31";
@@ -331,7 +338,7 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
 
               this.creditReportAnalysePortfeuille.creditReportFix =
                 this.creditReportFix;
-                this.servicesRepo.creditReportFix =   this.creditReportFix;
+              this.servicesRepo.creditReportFix = this.creditReportFix;
             });
         });
     } else {
@@ -341,31 +348,42 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
         .subscribe((response) => {
           response.creanceCourant = response.creanceCourant / this.divUnit;
           response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
-          response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
-          response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
-          response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
+          response.creanceDouteuseNets =
+            response.creanceDouteuseNets / this.divUnit;
+          response.creditDirectNetInteretReserve =
+            response.creditDirectNetInteretReserve / this.divUnit;
+          response.creditTotaldirect =
+            response.creditTotaldirect / this.divUnit;
           response.interetReserve = response.interetReserve / this.divUnit;
-          response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
+          response.interetreservesCreancesDouteuse =
+            response.interetreservesCreancesDouteuse / this.divUnit;
           response.provisions = response.provisions / this.divUnit;
-          response.tauxCreanceDouteuse = response.tauxCreanceDouteuse / this.divUnit;
+          response.tauxCreanceDouteuse =
+            response.tauxCreanceDouteuse / this.divUnit;
           response.tauxOuverture = response.tauxOuverture / this.divUnit;
           this.creditReportFix.creditParticulier = response;
           this.servicesRepo
             .getCreditEntreParPeriode(this.lastYear + "-12-31")
             .subscribe((response) => {
               response.creanceCourant = response.creanceCourant / this.divUnit;
-              response.creanceDouteuse = response.creanceDouteuse / this.divUnit;
-              response.creanceDouteuseNets = response.creanceDouteuseNets/ this.divUnit;
-              response.creditDirectNetInteretReserve = response.creditDirectNetInteretReserve / this.divUnit;
-              response.creditTotaldirect = response.creditTotaldirect / this.divUnit;
+              response.creanceDouteuse =
+                response.creanceDouteuse / this.divUnit;
+              response.creanceDouteuseNets =
+                response.creanceDouteuseNets / this.divUnit;
+              response.creditDirectNetInteretReserve =
+                response.creditDirectNetInteretReserve / this.divUnit;
+              response.creditTotaldirect =
+                response.creditTotaldirect / this.divUnit;
               response.interetReserve = response.interetReserve / this.divUnit;
-              response.interetreservesCreancesDouteuse = response.interetreservesCreancesDouteuse / this.divUnit;
+              response.interetreservesCreancesDouteuse =
+                response.interetreservesCreancesDouteuse / this.divUnit;
               response.provisions = response.provisions / this.divUnit;
-              response.tauxCreanceDouteuse = response.tauxCreanceDouteuse / this.divUnit;
+              response.tauxCreanceDouteuse =
+                response.tauxCreanceDouteuse / this.divUnit;
               response.tauxOuverture = response.tauxOuverture / this.divUnit;
               this.creditReportFix.creditEntreprise = response;
               this.creditReportFix.totalFix = {};
-                           
+
               this.getTotalForPeriod(
                 this.creditReportFix.creditParticulier,
                 this.creditReportFix.creditEntreprise,
@@ -375,13 +393,12 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
 
               this.creditReportAnalysePortfeuille.creditReportFix =
                 this.creditReportFix;
-                this.servicesRepo.creditReportFix =   this.creditReportFix;
+              this.servicesRepo.creditReportFix = this.creditReportFix;
             });
         });
     }
-    console.log("prtf ", this.creditReportAnalysePortfeuille);
+    //console.log("prtf ", this.creditReportAnalysePortfeuille);
   }
- 
 
   getTotalForPeriod(arg1: any, arg2: any, result: any, operation: any) {
     result.creditTotaldirect = operation(
@@ -429,7 +446,7 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
   // }
 
   genrerRapportAnalysePortefeuilleDirect() {
-    console.log("portfeille<< ", this.creditReportAnalysePortfeuille);
+    //console.log("portfeille<< ", this.creditReportAnalysePortfeuille);
     this.checkSelectPeriode =
       this.creditReportAnalysePortfeuille.slectedPeriods !== undefined
         ? true
@@ -509,7 +526,7 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
 
   //retrivePeriode
   getPeriodes(json, periodeOptions, jsonFix) {
-    var periodes = ["Portefeuille des crédits direct (en milliards de DZD)"];
+    var periodes = ["Portefeuille des crédits directs (en milliards de DZD)"];
 
     periodes.push(jsonFix.dateReportFix);
     if (this.checkSelectPeriode) {
@@ -529,11 +546,11 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
   //getFix columns
   getFixColumnNames() {
     var table = [
-      { propertyCol: "Total Crédits Directs" },
+      { propertyCol: "Total crédits directs" },
       { propertyCol: "Créances douteuses" },
       { propertyCol: "Créances courantes" },
       { propertyCol: "Créances douteuses net d'intérêts réservés" },
-      { propertyCol: "Crédit Direct Net d'intérêts réservés" },
+      { propertyCol: "Crédits direct net d'intérêts réservés" },
       { propertyCol: "Provisions" },
       { propertyCol: "Taux de créances douteuses" },
       { propertyCol: "Taux de couverture" },
@@ -578,7 +595,6 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
     return table;
   }
 
-  
   getSomme(params: any, arg: any) {
     var reslt = params + arg;
     return reslt;
@@ -632,5 +648,4 @@ export class AnalysePortfeuilleDirectComponent implements OnInit {
 
     datepicker.close();
   }
- 
 }

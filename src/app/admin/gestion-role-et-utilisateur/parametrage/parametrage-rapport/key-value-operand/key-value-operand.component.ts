@@ -259,6 +259,7 @@ export class KeyValueOperandComponent implements OnInit {
     "Supérieur ou égale",
     "Inférieur",
     "Inférieur ou égale",
+    "Commence par",
   ];
   operationsMap = {
     Egale: "=",
@@ -266,6 +267,7 @@ export class KeyValueOperandComponent implements OnInit {
     "Supérieur ou égale": ">=",
     Inférieur: "<",
     "Inférieur ou égale": "<=",
+    "Commence par": "like",
   };
   operationsMapOpposit = {
     "=": "Egale",
@@ -273,5 +275,6 @@ export class KeyValueOperandComponent implements OnInit {
     ">=": "Supérieur ou égale",
     "<": "Inférieur",
     "<=": "Inférieur ou égale",
+    like: "Commence par",
   };
 }

@@ -13,155 +13,151 @@
             <h4 class="card-title">Duration</h4>
           </div> -->
 
-          <div class="card-body">
-            <div class="choose_date mt-5">
-              <p class="text-bold fw-bold text-decoration-underline">
-                Analyse Portefeuile au :
-              </p>
-              <div class="ml-5">
-                <select
-                  class="form-select date-picker"
-                  #datePicker
-                  aria-label="Default select example"
-                >
-                  <option
-                    *ngFor="let SelectDate of selectingDate"
-                    [selected]="SelectDate.my_date"
-                  >
-                    {{ SelectDate }}
-                  </option>
-                </select>
-              </div>
-            </div>
+<div class="card-body">
+  <div class="choose_date mt-5">
+    <p class="text-bold fw-bold text-decoration-underline">
+      Analyse Portefeuile au :
+    </p>
+    <div class="ml-5">
+      <select
+        class="form-select date-picker"
+        #datePicker
+        aria-label="Default select example"
+      >
+        <option
+          *ngFor="let SelectDate of selectingDate"
+          [selected]="SelectDate.my_date"
+        >
+          {{ SelectDate }}
+        </option>
+      </select>
+    </div>
+  </div>
 
-            <div class="mt-5" id="accordion">
-              <div id="headingOne">
-                <h5 class="mb-0">
-                  <a
-                    class="btn btn-default w-100"
-                    data-toggle="collapse"
-                    data-target="#collapseOne"
-                    aria-expanded="false"
-                    aria-controls="collapseOne"
-                  >
-                    Table Total du portefeuille direct
-                  </a>
-                </h5>
-              </div>
+  <div class="mt-5" id="accordion">
+    <div id="headingOne">
+      <h5 class="mb-0">
+        <a
+          class="btn btn-default w-100"
+          data-toggle="collapse"
+          data-target="#collapseOne"
+          aria-expanded="false"
+          aria-controls="collapseOne"
+        >
+          Table Total du portefeuille direct
+        </a>
+      </h5>
+    </div>
 
-              <div
-                id="collapseOne"
-                class="collapse"
-                aria-labelledby="headingOne"
-                data-parent="#accordion"
-              >
-                <table
-                  class="table table-bordered border border-2 table-striped"
-                >
-                  <thead>
-                    <th class="active text-center">En milliards de DZD</th>
-                    <th *ngFor="let date of dateHead">{{ date }}</th>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let dataTable of dataTablePortefeuille">
-                      <th class="p-0-2">
-                        {{ dataTable.lable }}
-                      </th>
-                      <td
-                        *ngFor="let data of dataTable.value"
-                        class=" text-center text-dark fw-normal"
-                      >
-                        {{ data }}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+    <div
+      id="collapseOne"
+      class="collapse"
+      aria-labelledby="headingOne"
+      data-parent="#accordion"
+    >
+      <table class="table table-bordered border border-2 table-striped">
+        <thead>
+          <th class="active text-center">En milliards de DZD</th>
+          <th *ngFor="let date of dateHead">{{ date }}</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dataTable of dataTablePortefeuille">
+            <th class="p-0-2">
+              {{ dataTable.lable }}
+            </th>
+            <td
+              *ngFor="let data of dataTable.value"
+              class="text-center text-dark fw-normal"
+            >
+              {{ data }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-              <div id="headingTwo">
-                <h5 class="mb-0">
-                  <a
-                    class="btn btn-default w-100"
-                    data-toggle="collapse"
-                    data-target="#collapseTwo"
-                    aria-expanded="false"
-                    aria-controls="collapseTwo"
-                  >
-                    Total du portefeuille direct Islamiques
-                  </a>
-                </h5>
-              </div>
-              <div
-                id="collapseTwo"
-                class="collapse"
-                aria-labelledby="headingTwo"
-                data-parent="#accordion"
-              >
-                <table class="table table-bordered table-striped">
-                  <thead>
-                    <th class="active text-center">En milliards de DZD</th>
-                    <th *ngFor="let date of dateHead">{{ date }}</th>
-                  </thead>
-                  <tbody>
-                    <tr
-                      *ngFor="let dataTable of dataTablePortefeuilleIslamique"
-                    >
-                      <th class="p-0-2">
-                        {{ dataTable.lable }}
-                      </th>
-                      <td
-                        *ngFor="let data of dataTable.value"
-                        class=" text-center text-dark fw-normal"
-                      >
-                        {{ data }}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+    <div id="headingTwo">
+      <h5 class="mb-0">
+        <a
+          class="btn btn-default w-100"
+          data-toggle="collapse"
+          data-target="#collapseTwo"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+        >
+          Total du portefeuille direct Islamiques
+        </a>
+      </h5>
+    </div>
+    <div
+      id="collapseTwo"
+      class="collapse"
+      aria-labelledby="headingTwo"
+      data-parent="#accordion"
+    >
+      <table class="table table-bordered table-striped">
+        <thead>
+          <th class="active text-center">En milliards de DZD</th>
+          <th *ngFor="let date of dateHead">{{ date }}</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dataTable of dataTablePortefeuilleIslamique">
+            <th class="p-0-2">
+              {{ dataTable.lable }}
+            </th>
+            <td
+              *ngFor="let data of dataTable.value"
+              class="text-center text-dark fw-normal"
+            >
+              {{ data }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
-              <div id="headingThree">
-                <h5 class="mb-0">
-                  <a
-                    class="btn btn-default w-100"
-                    data-toggle="collapse"
-                    data-target="#collapseThree"
-                    aria-expanded="false"
-                    aria-controls="collapseThree"
-                  >
-                    Total du portefeuille direct Leasing
-                  </a>
-                </h5>
-              </div>
-              <div
-                id="collapseThree"
-                class="collapse"
-                aria-labelledby="headingThree"
-                data-parent="#accordion"
-              >
-                <table class="table table-bordered  table-striped">
-                  <thead>
-                    <th class="active text-center">En milliards de DZD</th>
-                    <th *ngFor="let date of dateHead">{{ date }}</th>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let dataTable of dataTablePortefeuilleLeasing">
-                      <th class="p-0-2">
-                        {{ dataTable.lable }}
-                      </th>
-                      <td
-                        *ngFor="let data of dataTable.value"
-                        class=" text-center text-dark fw-normal"
-                      >
-                        {{ data }}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        <!-- </div>
+    <div id="headingThree">
+      <h5 class="mb-0">
+        <a
+          class="btn btn-default w-100"
+          data-toggle="collapse"
+          data-target="#collapseThree"
+          aria-expanded="false"
+          aria-controls="collapseThree"
+        >
+          Total du portefeuille direct Leasing
+        </a>
+      </h5>
+    </div>
+    <div
+      id="collapseThree"
+      class="collapse"
+      aria-labelledby="headingThree"
+      data-parent="#accordion"
+    >
+      <table class="table table-bordered table-striped">
+        <thead>
+          <th class="active text-center">En milliards de DZD</th>
+          <th *ngFor="let date of dateHead">{{ date }}</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dataTable of dataTablePortefeuilleLeasing">
+            <th class="p-0-2">
+              {{ dataTable.lable }}
+            </th>
+            <td
+              *ngFor="let data of dataTable.value"
+              class="text-center text-dark fw-normal"
+            >
+              {{ data }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!-- </div>
       </div>
     </div>
   </div>
