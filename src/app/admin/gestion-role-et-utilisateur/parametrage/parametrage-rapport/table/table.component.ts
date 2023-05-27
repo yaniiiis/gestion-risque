@@ -192,6 +192,7 @@ export class TableComponent implements OnInit {
       },
     });
     dialogRef.afterClosed().subscribe((result) => {
+      console.log("here are the result : ", result);
       if (result) {
         result.kvoo_s[result.kvoo_s.length - 1].operand = "";
         const t: RapportLine = {

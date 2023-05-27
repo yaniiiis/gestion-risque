@@ -49,6 +49,7 @@ export class KvooForEditComponent implements OnInit {
   givenValueSubscraption: Subscription;
 
   ngOnInit(): void {
+    console.log("Existing kvoos : ", this.existingKvoos);
     this.formGroupe = new FormGroup({
       key: new FormControl(this.kVOO.key, [Validators.required]),
       value: new FormControl(this.kVOO.value, [Validators.required]),
@@ -186,6 +187,16 @@ export class KvooForEditComponent implements OnInit {
       this.parametrageService.setSubmitIsDisabled(false);
   }
 
+  operandChange(event: any) {
+    if (this.existingKvoos.find((k) => k.id == this.kVOO.id)) {
+      if (event.value == "AND") {
+        this.kVOO.operand = "true";
+      } else {
+        this.kVOO.operand = "false";
+      }
+    }
+  }
+
   filterKeys(input: string) {
     this.choosedKey = undefined;
     this.keysToDisplay = this.keysToFilter.filter((k) => k.includes(input));
@@ -219,6 +230,7 @@ export class KvooForEditComponent implements OnInit {
   keys = ["GL_SUBHEAD", "TYPE_ENGAGEMENT", "customerType", "MAIN_PROD_DESC"];
   operations = [
     "Egale",
+    "Like",
     "Supérieur",
     "Supérieur ou égale",
     "Inférieur",
@@ -227,6 +239,7 @@ export class KvooForEditComponent implements OnInit {
 
   operationsMap = {
     Egale: "=",
+    Like: "like",
     Supérieur: ">",
     "Supérieur ou égale": ">=",
     Inférieur: "<",
@@ -235,6 +248,7 @@ export class KvooForEditComponent implements OnInit {
 
   operationsMapOpposit = {
     "=": "Egale",
+    like: "Like",
     ">": "Supérieur",
     ">=": "Supérieur ou égale",
     "<": "Inférieur",

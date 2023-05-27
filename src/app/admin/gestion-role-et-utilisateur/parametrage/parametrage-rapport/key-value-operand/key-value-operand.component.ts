@@ -20,6 +20,7 @@ export class KeyValueOperandComponent implements OnInit {
   // formGroupe = this.parametrageService.formGroup;
 
   @Input() kVOO: keyValueOperationOperand;
+  KVOOList: keyValueOperationOperand[];
   formGroupe: FormGroup;
   operandClicked: boolean = false;
 
@@ -69,6 +70,10 @@ export class KeyValueOperandComponent implements OnInit {
 
     this.operationsToDisplay = this.operations;
     this.operationsToFilter = this.operations;
+
+    // this.parametrageService.KVOOListSubject$.subscribe((kl) => {
+    //   this.KVOOList = kl;
+    // });
   }
 
   plusClick() {
@@ -97,44 +102,6 @@ export class KeyValueOperandComponent implements OnInit {
     }
   }
 
-  operandChange() {
-    this.operandClicked = true;
-    if (
-      this.choosedKey &&
-      this.choosedOperation &&
-      this.givenValue &&
-      this.operand.valid
-    ) {
-      this.parametrageService.setSubmitIsDisabled(false);
-      const newKVOO: keyValueOperationOperand = {
-        id: this.kVOO.id,
-        key: this.choosedKey,
-        value: this.value.value,
-        operation: this.choosedOperation,
-        operand: this.operand.value,
-      };
-      //  this.parametrageService.setSubmitIsDisabled(false);
-      //  this.parametrageService.setKVOO(newKVOO);
-
-      if (this.operand.value.trim() != "Aucun") {
-        this.parametrageService.addToKVOOList(newKVOO);
-      } else {
-        this.parametrageService.deleteAfterKVOO(this.kVOO.id);
-      }
-      this.operationHasError = false;
-      this.keyHasError = false;
-    } else {
-      if (!this.choosedOperation) this.operationHasError = true;
-      if (!this.choosedKey) this.keyHasError = true;
-      this.snackBar.open("requete invalide", null, {
-        duration: 2000,
-        panelClass: ["error-snackbar"],
-      });
-      this.formGroupe.patchValue({
-        operand: undefined,
-      });
-    }
-  }
   oClick() {
     console.log("operand clicked");
   }
@@ -222,6 +189,14 @@ export class KeyValueOperandComponent implements OnInit {
       this.parametrageService.setSubmitIsDisabled(false);
   }
 
+  operandCahnge(event: any) {
+    if (event.value == "AND") {
+      this.kVOO.operand = "true";
+    } else {
+      this.kVOO.operand = "false";
+    }
+  }
+
   filterKeys(input: string) {
     this.choosedKey = undefined;
     this.keysToDisplay = this.keysToFilter.filter((k) => k.includes(input));
@@ -255,6 +230,7 @@ export class KeyValueOperandComponent implements OnInit {
   keys = ["GL_SUBHEAD", "TYPE_ENGAGEMENT", "customerType", "MAIN_PROD_DESC"];
   operations = [
     "Egale",
+    "Like",
     "Supérieur",
     "Supérieur ou égale",
     "Inférieur",
@@ -262,6 +238,7 @@ export class KeyValueOperandComponent implements OnInit {
   ];
   operationsMap = {
     Egale: "=",
+    Like: "like",
     Supérieur: ">",
     "Supérieur ou égale": ">=",
     Inférieur: "<",
@@ -269,9 +246,49 @@ export class KeyValueOperandComponent implements OnInit {
   };
   operationsMapOpposit = {
     "=": "Egale",
+    like: "Like",
     ">": "Supérieur",
     ">=": "Supérieur ou égale",
     "<": "Inférieur",
     "<=": "Inférieur ou égale",
   };
+
+  // operandChange() {
+  //   this.operandClicked = true;
+  //   if (
+  //     this.choosedKey &&
+  //     this.choosedOperation &&
+  //     this.givenValue &&
+  //     this.operand.valid
+  //   ) {
+  //     this.parametrageService.setSubmitIsDisabled(false);
+  //     const newKVOO: keyValueOperationOperand = {
+  //       id: this.kVOO.id,
+  //       key: this.choosedKey,
+  //       value: this.value.value,
+  //       operation: this.choosedOperation,
+  //       operand: this.operand.value,
+  //     };
+  //     //  this.parametrageService.setSubmitIsDisabled(false);
+  //     //  this.parametrageService.setKVOO(newKVOO);
+
+  //     if (this.operand.value.trim() != "Aucun") {
+  //       this.parametrageService.addToKVOOList(newKVOO);
+  //     } else {
+  //       this.parametrageService.deleteAfterKVOO(this.kVOO.id);
+  //     }
+  //     this.operationHasError = false;
+  //     this.keyHasError = false;
+  //   } else {
+  //     if (!this.choosedOperation) this.operationHasError = true;
+  //     if (!this.choosedKey) this.keyHasError = true;
+  //     this.snackBar.open("requete invalide", null, {
+  //       duration: 2000,
+  //       panelClass: ["error-snackbar"],
+  //     });
+  //     this.formGroupe.patchValue({
+  //       operand: undefined,
+  //     });
+  //   }
+  // }
 }

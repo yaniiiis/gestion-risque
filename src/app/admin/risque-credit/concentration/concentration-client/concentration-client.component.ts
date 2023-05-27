@@ -61,6 +61,7 @@ export class ConcentrationClientComponent implements OnInit {
   }
 
   calculerClicked() {
+    this.calculateIsClicked = true;
     if (this.selectedId && this.fondPropres) {
       this.calculateConcentration();
     }
@@ -113,6 +114,14 @@ export class ConcentrationClientComponent implements OnInit {
         this.selectedId
       }/${this.datePipe.transform(this.date, "yyyy-MM-dd")}`,
     ]);
+  }
+
+  isValidNumber(item: any): boolean {
+    return !isNaN(Number(item));
+  }
+
+  isValidDate(item: string): boolean {
+    return !isNaN(new Date(item).getTime());
   }
 
   tableHeaders = [

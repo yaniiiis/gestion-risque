@@ -1,78 +1,69 @@
 <div class="my-container">
-  <!-- <div class="header-choice-of-concentration-container">
-      <div class="header-choice-of-concentration">
-        <div
-          class="concentration-item-container"
-          *ngFor="let item of choicesOfConcentration; let i = index"
-        >
-          <div
-            class="choice-item"
-            [ngClass]="{ 'my-active': i == selectedChoiceIndex }"
-            (click)="changeConcentrationChoice(item)"
-          >
-            {{ item }}
-          </div>
-          <div
-            class="header-item-divider"
-            *ngIf="i != choicesOfConcentration.length - 1"
-          ></div>
-        </div>
-      </div>
-    </div> -->
   <div class="my-body">
     <div class="date-and-id-container">
-      <div class="my-date-container">
-        <label class="my-label" for="date-arrete">Date arreté</label>
-        <mat-form-field
-          class="my-calender custom-form-field"
-          floatLabel="never"
+      <div class="input-and-error-container">
+        <div class="my-date-container">
+          <label class="my-label" for="date-arrete">Date arreté</label>
+          <mat-form-field
+            class="my-calender custom-form-field"
+            floatLabel="never"
+          >
+            <input
+              matInput
+              [matDatepicker]="picker"
+              placeholder="Sélectionner une date"
+              [(ngModel)]="date"
+              (ngModelChange)="dateChanged()"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+              style="align-self: center"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <span
+          class="span-error span-error-date"
+          *ngIf="calculateIsClicked && !date"
+          >Veuillez choisir une date</span
         >
-          <input
-            matInput
-            [matDatepicker]="picker"
-            placeholder="Sélectionner une date"
-            [(ngModel)]="date"
-            (ngModelChange)="dateChanged()"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="picker"
-            style="align-self: center"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <!-- <input
-          type="date"
-          id="date-arrete"
-          class="my-input"
-          [(ngModel)]="date"
-          (change)="dateChanged()"
-        /> -->
       </div>
+
       <div class="id-client-or-group-container">
         <label class="my-label" for="id-client-or-group">{{
           inputListTitle
         }}</label>
-        <app-my-input-list
-          [list]="listOfIds"
-          [listToDisplay]="listOfIds"
-          (callbackFunction)="idClientClicked($event)"
-          [hasError]="myListInputHasError"
-          [title]="inputListTitle"
-          [inputValue]="selectedIdText"
-        ></app-my-input-list>
+        <div class="input-and-error-container">
+          <app-my-input-list
+            [list]="listOfIds"
+            [listToDisplay]="listOfIds"
+            (callbackFunction)="idClientClicked($event)"
+            [hasError]="myListInputHasError"
+            [title]="inputListTitle"
+            [inputValue]="selectedIdText"
+          ></app-my-input-list>
+          <span class="span-error" *ngIf="calculateIsClicked && !selectedId"
+            >Veuillez choisir une date</span
+          >
+        </div>
       </div>
     </div>
 
     <div class="fonds-reglementaire-container">
       <div class="fond-container">
         <label class="my-label" for="fonds">Fond propres réglementaires</label>
-        <input
-          type="text"
-          id="fonds"
-          class="my-input"
-          [(ngModel)]="fondPropres"
-        />
+        <div class="input-and-error-container">
+          <input
+            type="text"
+            id="fonds"
+            class="my-input"
+            [(ngModel)]="fondPropres"
+          />
+          <span class="span-error" *ngIf="calculateIsClicked && !fondPropres"
+            >Veuillez définir un fond propre</span
+          >
+        </div>
       </div>
 
       <div class="my-button-calculer-container">
@@ -99,7 +90,15 @@
               (click)="i == d.length - 1 && tauxClicked(item)"
             >
               <span [ngClass]="{ 'taux-span': i == d.length - 1 }">{{
-                item ? item : header[i] == "Nom Groupe" ? "/" : "0"
+                header[i] == "Date"
+                  ? (item | date : "dd/MM/yyyy")
+                  : item
+                  ? isValidNumber(item)
+                    ? (item | number : "1.2-4")
+                    : item
+                  : header[i] == "Nom Groupe"
+                  ? "/"
+                  : "0"
               }}</span>
             </td>
           </tr>
