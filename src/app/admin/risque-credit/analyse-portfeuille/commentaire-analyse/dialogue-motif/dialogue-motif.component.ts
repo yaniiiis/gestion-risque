@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject, Input, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import {
   MatDialog,
@@ -13,6 +13,7 @@ import moment from "moment";
 export interface DialogData {
   motif: string;
   title: string;
+  typeAnalyse: number;
 }
 
 @Component({
@@ -24,6 +25,7 @@ export class DialogueMotifComponent implements OnInit {
   commentaireSubordonne: any;
   commentaireSub: any;
   idCommentaireSub: any;
+
   constructor(
     public dialogRef: MatDialogRef<DialogueMotifComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -31,19 +33,25 @@ export class DialogueMotifComponent implements OnInit {
     private storageSer: StorageSService
   ) {}
   ngOnInit(): void {
-    moment.locale('us');
-    var today = moment().format("DD-MM-YYYYTHH:mm:SS[Z]")
+    moment.locale("us");
+    var today = moment().format("DD-MM-YYYYTHH:mm:SS[Z]");
     var year = moment().year();
     var month = moment().month() + 1;
 
-    this.commentaireSubordonne = this.commentaireService.findCommentaireSubordonneByDateAndTypeAnalyse(1,this.storageSer.getUser().roles.id, year, month);
-    
-   this.commentaireSubordonne.subscribe({
+    this.commentaireSubordonne =
+      this.commentaireService.findCommentaireSubordonneByDateAndTypeAnalyse(
+        this.data.typeAnalyse,
+        this.storageSer.getUser().roles.id,
+        year,
+        month
+      );
+
+    this.commentaireSubordonne.subscribe({
       next: (data) => {
-        this.commentaireSub = data.commentaire
-        this.idCommentaireSub = data.id
-           }
-      });
+        this.commentaireSub = data.commentaire;
+        this.idCommentaireSub = data.id;
+      },
+    });
   }
 
   onNoClick(): void {
@@ -51,23 +59,22 @@ export class DialogueMotifComponent implements OnInit {
   }
 
   onOkClick(): void {
-    this.rejeter()
+    this.rejeter();
   }
-  
-  rejeter(){
-    moment.locale('us');
-    var today = moment().format("DD-MM-YYYYTHH:mm:SS[Z]")
-    
-    
-    this.commentaireService.rejeter(this.idCommentaireSub, this.data.motif).subscribe({
-      next: () => {
-         
-        alert("Commentaire Rejeté ! ");
-                },
-      error: (error) => {
-         console.log(error);
-      
-      },
-    });
-   }
+
+  rejeter() {
+    moment.locale("us");
+    var today = moment().format("DD-MM-YYYYTHH:mm:SS[Z]");
+
+    this.commentaireService
+      .rejeter(this.idCommentaireSub, this.data.motif)
+      .subscribe({
+        next: () => {
+          alert("Commentaire Rejeté ! ");
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+  }
 }
