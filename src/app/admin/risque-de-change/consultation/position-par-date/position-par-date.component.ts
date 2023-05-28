@@ -115,12 +115,12 @@ export class PositionParDateComponent implements OnInit {
     var dateNow = _moment.now();
 
     var datePipe = new DatePipe("en-US");
-    this.dateTransforme = datePipe.transform(this.selectedDate, "yyyy-MM-dd");
+    this.dateTransforme = datePipe.transform(dateNow, "yyyy-MM-dd");
 
     // Fonds propres
 
     this.fondsPropresServices
-      .getFondsPropresByDate(this.selectedDate)
+      .getFondsPropresByDate(this.dateTransforme)
       .subscribe((data) => {
         this.fp = data;
       });
@@ -263,6 +263,13 @@ export class PositionParDateComponent implements OnInit {
     var date1: Date;
     date1 = new Date(this.selectedDate);
     //console.log('selected date : '+ this.dateTransforme)
+    // Fonds propres
+
+    this.fondsPropresServices
+      .getFondsPropresByDate(this.dateTransforme)
+      .subscribe((data) => {
+        this.fp = data;
+      });
     this.calculIndicateur();
   }
 }
