@@ -32,16 +32,16 @@
         {{ dataTable.montantLimite | number : "1.1-2" }}
       </td>
       <td class="tbody__td">
-        {{ dataTable.dateDecision | date : "dd-MM-yyyy" }}
+        {{ dataTable.dateDecision | date : "dd/MM/yyyy" }}
       </td>
       <td class="tbody__td">
-        {{ dataTable.dateEcheance | date : "dd-MM-yyyy" }}
+        {{ dataTable.dateEcheance | date : "dd/MM/yyyy" }}
       </td>
       <td class="tbody__td">
         {{ dataTable.durreMaximalePlacement }}
       </td>
       <td class="tbody__td">
-        {{ dataTable.dateDerniereRevision | date : "dd-MM-yyyy" }}
+        {{ dataTable.dateDerniereRevision | date : "dd/MM/yyyy" }}
       </td>
       <td class="tbody__td">
         <button
@@ -50,12 +50,12 @@
           data-bs-target="#staticBackdrop"
           (click)="modifierLimite(dataTable.id)"
         >
-          modifier
+          Modifier
         </button>
       </td>
       <td class="tbody__td">
         <button class="btn btn-danger btn-sm" (click)="desactiver(dataTable)">
-          desactiver
+          Désactiver
         </button>
       </td>
     </tr>
