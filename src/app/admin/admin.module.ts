@@ -191,6 +191,7 @@ import { ConcentrationGroupeComponent } from "./risque-credit/concentration/conc
 import { IndicateursComponent } from "./risque-credit/indicateurs/indicateurs.component";
 import { IndicateurTableComponent } from "./risque-credit/indicateurs/indicateur-table/indicateur-table.component";
 import { MyInputListWithCheckboxComponent } from "./commons/my-input-list-with-checkbox/my-input-list-with-checkbox.component";
+import { IndicateurService } from "../_services/indicateur.service";
 
 @NgModule({
   declarations: [
@@ -403,7 +404,12 @@ import { MyInputListWithCheckboxComponent } from "./commons/my-input-list-with-c
     MatAutocompleteModule,
     NgMultiSelectDropDownModule.forRoot(),
   ],
-  providers: [authInterceptorProviders, MatDatepickerModule, DatePipe],
+  providers: [
+    authInterceptorProviders,
+    MatDatepickerModule,
+    DatePipe,
+    IndicateurService,
+  ],
   exports: [MatDatepickerModule],
 })
 export class AdminModule {}

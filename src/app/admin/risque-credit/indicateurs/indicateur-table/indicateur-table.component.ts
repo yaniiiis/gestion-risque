@@ -1,3 +1,4 @@
+import { DatePipe } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
@@ -13,7 +14,8 @@ export class IndicateurTableComponent implements OnInit {
   constructor(
     private indicateurService: IndicateurService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private datePipe: DatePipe
   ) {}
   indicOnHeader = [];
   header = ["Indice"];
@@ -85,6 +87,10 @@ export class IndicateurTableComponent implements OnInit {
       this.selectedDates = this.selectedDates.filter((d) => d != event.item);
       this.indicateurService.unCheckDate(event.item);
     }
+  }
+
+  isValidDate(item: string): boolean {
+    return !isNaN(new Date(item).getTime());
   }
 
   myTitleMapper = {
