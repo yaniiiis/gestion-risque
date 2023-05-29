@@ -9,52 +9,48 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-primary">
-            <h4 class="card-title">Graphic chart </h4>
+            <h4 class="card-title">Graphic chart</h4>
           </div>
 
           <div class="card-body">
-              <div class="row">
+            <div class="row">
+              <div>
+                <mat-form-field appearance="fill">
+                  <mat-label>Selectionner la date de debut</mat-label>
+                  <input
+                    matInput
+                    [(ngModel)]="selectedDate1"
+                    [matDatepicker]="picker1"
+                    (dateChange)="onDateChange1($event)"
+                  />
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="picker1"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div>
+                <mat-form-field appearance="fill">
+                  <mat-label>Selectionner la date de fin</mat-label>
+                  <input
+                    matInput
+                    [(ngModel)]="selectedDate2"
+                    [matDatepicker]="picker2"
+                    (dateChange)="onDateChange2($event)"
+                  />
+                  <mat-hint>DD/MM/YYYY</mat-hint>
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="picker2"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
 
-                <div>
-                  <mat-form-field appearance="fill">
-                    <mat-label>Selectionner la date de debut</mat-label>
-                    <input
-                      matInput
-                      [(ngModel)]="selectedDate1"
-                      [matDatepicker]="picker1"
-                      (dateInput)="addEvent1('input', $event)"
-                      (dateChange)="addEvent1('change', $event)"
-                    />
-                    <mat-hint>DD/MM/YYYY</mat-hint>
-                    <mat-datepicker-toggle
-                      matIconSuffix
-                      [for]="picker1"
-                    ></mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
-                  </mat-form-field>
-                </div>
-                <div>
-                  <mat-form-field appearance="fill">
-                    <mat-label>Selectionner la date de fin</mat-label>
-                    <input
-                      matInput
-                      [(ngModel)]="selectedDate2"
-                      [matDatepicker]="picker2"
-                      (dateInput)="addEvent2('input', $event)"
-                      (dateChange)="addEvent2('change', $event)"
-                    />
-                    <mat-hint>DD/MM/YYYY</mat-hint>
-                    <mat-datepicker-toggle
-                      matIconSuffix
-                      [for]="picker2"
-                    ></mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
-                  </mat-form-field>
-                </div>
-               
-              </div>   
-
-                <!-- <div class="col-lg-4 mt-2">
+            <!-- <div class="col-lg-4 mt-2">
                   <div class="d-flex">
                       <mat-label>Type du client</mat-label>
                       <select   class="btn btn-primary simple" (change)="selectTypeClient($event)" [formControl]="typeClient" > 
@@ -62,72 +58,116 @@
                       </select>
                     </div> 
                 </div>   -->
-             <div class="row">
-                  <div >
-                    <div class="form-group">
-                      <button class="btn btn-social dropdown-toggle btn-sm" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Type
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <div *ngFor="let parametre of graphParametre ; let i=index">
-                          <input class="mr-2 ml-2" type="checkbox"  value="{{parametre}}" (change)="onCheckboxChange($event)" id="{{parametre}}" />
-                          <label for="{{parametre}}">{{parametre}}</label>
-                        </div>
-                      </div>
+            <div class="row">
+              <div>
+                <div class="form-group">
+                  <button
+                    class="btn btn-social dropdown-toggle btn-sm"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Type
+                  </button>
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <div
+                      *ngFor="let parametre of graphParametre; let i = index"
+                    >
+                      <input
+                        class="mr-2 ml-2"
+                        type="checkbox"
+                        value="{{ parametre }}"
+                        (change)="onCheckboxChange($event)"
+                        id="{{ parametre }}"
+                      />
+                      <label for="{{ parametre }}">{{ parametre }}</label>
                     </div>
                   </div>
+                </div>
+              </div>
 
-                  <div >
-                    <div class="form-group">
-                      <button class="btn btn-social dropdown-toggle btn-sm" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Agences
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="myDropdown">
-                        <input type="text" placeholder="Search.." id="myInput" (keyup)="onSeachDropdownValue($event)">
-                        <div *ngFor="let agence of agences ; let i=index">
-                          <input class="mr-2 ml-2" type="checkbox"  value="{{agence.code}}" (change)="onCheckboxChange($event)" id="{{agence.code}}" />
-                          <label for="{{agence.code}}">{{agence.description}}</label>
-                        </div>
-                      </div>
-                      <select
+              <div>
+                <div class="form-group">
+                  <button
+                    class="btn btn-social dropdown-toggle btn-sm"
+                    type="button"
+                    id="dropdownMenuButton"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Agences
+                  </button>
+                  <div
+                    class="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                    id="myDropdown"
+                  >
+                    <input
+                      type="text"
+                      placeholder="Search.."
+                      id="myInput"
+                      (keyup)="onSeachDropdownValue($event)"
+                    />
+                    <div *ngFor="let agence of agences; let i = index">
+                      <input
+                        class="mr-2 ml-2"
+                        type="checkbox"
+                        value="{{ agence.code }}"
+                        (change)="onCheckboxChange($event)"
+                        id="{{ agence.code }}"
+                      />
+                      <label for="{{ agence.code }}">{{
+                        agence.description
+                      }}</label>
+                    </div>
+                  </div>
+                  <select
                     class="btn btn-sm mr-2 mt-2"
-                      #type (change)="onSelected(type)" >
-                    <option
-                      *ngFor="let type of grapheType"  [ngValue]="type" >
+                    #type
+                    (change)="onSelected(type)"
+                  >
+                    <option *ngFor="let type of grapheType" [ngValue]="type">
                       {{ type }}
                     </option>
                   </select>
-                    </div>
-                    
-                  </div>
-                
-              
-                  <div>
-                    <div >
-                    <!-- <label class="mr-2 mt-2 text-black"  for="text"></label>  -->
-                         
-                    </div>
-                  </div>
                 </div>
+              </div>
 
-                <div class="row" >
-                  <div class="chartCommentaire" *ngFor="let itemcheckedValue of checkedValue">
-                    <div class="col-lg-8">
-                      <app-graphe-chart [grapheParametre]="itemcheckedValue" [CurrentType]="CurrentType"  [LabelTextValue]="LabelTextValue"></app-graphe-chart>       
-                    </div>
-                    <div class="col-lg-4">
-                      <app-form-comentaire-analyste></app-form-comentaire-analyste>
-                    </div>
-           
-                  </div>
-                      </div>
-                    </div>
-                    </div>
-                  </div>  
+              <div>
+                <div>
+                  <!-- <label class="mr-2 mt-2 text-black"  for="text"></label>  -->
                 </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div
+                class="chartCommentaire"
+                *ngFor="let itemcheckedValue of checkedValue"
+              >
+                <div class="col-lg-8">
+                  <app-graphe-chart
+                    [fromDate]="selectedDate1 | date : 'yyyy-MM-dd'"
+                    [toDate]="selectedDate2 | date : 'yyyy-MM-dd'"
+                    [grapheParametre]="itemcheckedValue"
+                    [CurrentType]="CurrentType"
+                    [LabelTextValue]="LabelTextValue"
+                  ></app-graphe-chart>
+                </div>
+                <div class="col-lg-4">
+                  <app-form-comentaire-analyste></app-form-comentaire-analyste>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-
+      </div>
+    </div>
+  </div>
+</div>

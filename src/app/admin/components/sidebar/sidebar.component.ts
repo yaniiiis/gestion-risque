@@ -138,41 +138,7 @@ export const ROUTES: RouteInfo[] = [
       //   title: "Gestion des  Surveillances De La Tresoserie",
       //   ab:'GST'
       // },
-      {
-        path: "ConsultationRatios1Liquidite",
-        title: "Consultation ratio 1",
-        ab: "CON1",
-      },
-      {
-        path: "ConsultationRatio2Liquidite",
-        title: "Consultation ratio 2",
-        ab: "CON2",
-      },
-      {
-        path: "ConsultationRatio3Liquidite",
-        title: "Consultation ratio 3",
-        ab: "CON3",
-      },
-      {
-        path: "ConsultationRatio4Liquidite",
-        title: "Consultation ratio 4",
-        ab: "CON4",
-      },
-      {
-        path: "ConsultationRatio5Liquidite",
-        title: "Consultation ratio 5",
-        ab: "CON5",
-      },
-      {
-        path: "ConsultationRatio6Liquidite",
-        title: "Consultation ratio 6",
-        ab: "CON6",
-      },
-      {
-        path: "ConsultationRapportKrisLiquidite",
-        title: "Consultation rapport",
-        ab: "Rapp",
-      },
+      { path: "KRIsLiquidite", title: "Gestion des KRIs", ab: "KRIS" },
     ],
   },
   {

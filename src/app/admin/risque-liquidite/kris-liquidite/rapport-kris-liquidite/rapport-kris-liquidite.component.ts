@@ -45,24 +45,23 @@ export class RapportKrisLiquiditeComponent implements OnInit, OnChanges {
     this.day = this.lastday(myDate.getFullYear(), myDate.getMonth() - 1);
 
     this.deuxiemeMoisDuTrimestre =
-      this.year.toString() +
-      "-" +
+      this.day.toString() +
+      "/" +
       (this.month + 1).toString().padStart(2, "0") +
-      "-" +
-      this.day.toString();
+      "/" +
+      this.year.toString();
 
     this.month = myDate.getMonth() - 2;
     this.day = this.lastday(myDate.getFullYear(), myDate.getMonth() - 2);
 
     this.premierMoisDuTrimestre =
-      this.year.toString() +
-      "-" +
+      this.day.toString() +
+      "/" +
       (this.month + 1).toString().padStart(2, "0") +
-      "-" +
-      this.day.toString();
+      "/" +
+      this.year.toString();
 
-    this.decembrePrecedent =
-      (this.year - 1).toString() + "-" + "12" + "-" + "31";
+    this.decembrePrecedent = "31/12/" + (this.year - 1).toString();
 
     this.data = this.rapportLiquiditeService.getRapportLiquiditeByDate(
       this.dateTransforme
