@@ -41,8 +41,6 @@ import { RepartitionParZoneComponent } from "src/app/admin/risque-credit/gestion
 import { GraphicComponent } from "src/app/admin/risque-credit/graphic/graphic.component";
 import { IndicateurTableComponent } from "src/app/admin/risque-credit/indicateurs/indicateur-table/indicateur-table.component";
 import { IndicateursComponent } from "src/app/admin/risque-credit/indicateurs/indicateurs.component";
-
-import { ScenarioComponent } from "src/app/admin/risque-credit/stress-test/scenario/scenario.component";
 import { Scenario1Component } from "src/app/admin/risque-credit/stress-test/scenario1/scenario1.component";
 import { Scenario2Component } from "src/app/admin/risque-credit/stress-test/scenario2/scenario2.component";
 import { Scenario3Component } from "src/app/admin/risque-credit/stress-test/scenario3/scenario3.component";
@@ -59,6 +57,7 @@ import { PositionParPlusieursDatesComponent } from "src/app/admin/risque-de-chan
 import { EvaluationTauxChangeComponent } from "src/app/admin/risque-de-change/evaluation-taux-change/evaluation-taux-change.component";
 
 import { KRIsDeChangeComponent } from "src/app/admin/risque-de-change/kris-de-change/kris-de-change.component";
+import { LimiteBanqueContentComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/limite-banque-content.component";
 import { ListeBeneficiaireComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/liste-beneficiaire/liste-beneficiaire.component";
 import { CreationLimiteComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/liste-limite/creation-limite/creation-limite.component";
 import { DesactivationLimiteComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/liste-limite/desactivation-limite/desactivation-limite.component";
@@ -69,22 +68,15 @@ import { SurveillanceMensuelleComponent } from "src/app/admin/risque-de-marche/l
 import { LimiteBanqueComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque.component";
 import { RisqueDeMarcheComponent } from "src/app/admin/risque-de-marche/risque-de-marche.component";
 import { AnalyseDesDepotsComponent } from "src/app/admin/risque-liquidite/analyse-des-depots/analyse-des-depots.component";
-import { ConsultationRapportKrisLiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-rapport-kris-liquidite/consultation-rapport-kris-liquidite.component";
-import { RapportKrisLiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-rapport-kris-liquidite/rapport-kris-liquidite/rapport-kris-liquidite.component";
-import { ConsultationR2Component } from "src/app/admin/risque-liquidite/consultation-ratio2-liquidite/consultation-r2/consultation-r2.component";
-import { ConsultationRatio2LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratio2-liquidite/consultation-ratio2-liquidite.component";
-import { ConsultationR3Component } from "src/app/admin/risque-liquidite/consultation-ratio3-liquidite/consultation-r3/consultation-r3.component";
-import { ConsultationRatio3LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratio3-liquidite/consultation-ratio3-liquidite.component";
-import { ConsultationR4Component } from "src/app/admin/risque-liquidite/consultation-ratio4-liquidite/consultation-r4/consultation-r4.component";
-import { ConsultationRatio4LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratio4-liquidite/consultation-ratio4-liquidite.component";
-import { ConsultationR5Component } from "src/app/admin/risque-liquidite/consultation-ratio5-liquidite/consultation-r5/consultation-r5.component";
-import { ConsultationRatio5LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratio5-liquidite/consultation-ratio5-liquidite.component";
-import { ConsultationR6Component } from "src/app/admin/risque-liquidite/consultation-ratio6-liquidite/consultation-r6/consultation-r6.component";
-import { ConsultationRatio6LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratio6-liquidite/consultation-ratio6-liquidite.component";
-import { ConsultationRatio1LiquiditeComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/consultation-ratio1-liquidite.component";
-import { RatioLiquiditeMensuelComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-mensuel/ratio-liquidite-mensuel.component";
-import { RatioLiquiditeQuotidienComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-quotidien/ratio-liquidite-quotidien.component";
-import { RatioLiquiditeTrimestrielComponent } from "src/app/admin/risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-trimestriel/ratio-liquidite-trimestriel.component";
+import { ConsultationR2Component } from "src/app/admin/risque-liquidite/kris-liquidite/consultation-r2/consultation-r2.component";
+import { ConsultationR3Component } from "src/app/admin/risque-liquidite/kris-liquidite/consultation-r3/consultation-r3.component";
+import { ConsultationR4Component } from "src/app/admin/risque-liquidite/kris-liquidite/consultation-r4/consultation-r4.component";
+import { ConsultationR5Component } from "src/app/admin/risque-liquidite/kris-liquidite/consultation-r5/consultation-r5.component";
+import { ConsultationR6Component } from "src/app/admin/risque-liquidite/kris-liquidite/consultation-r6/consultation-r6.component";
+
+import { KRisLiquiditeComponent } from "src/app/admin/risque-liquidite/kris-liquidite/kris-liquidite.component";
+import { RapportKrisLiquiditeComponent } from "src/app/admin/risque-liquidite/kris-liquidite/rapport-kris-liquidite/rapport-kris-liquidite.component";
+import { Ratio1Component } from "src/app/admin/risque-liquidite/kris-liquidite/ratio1/ratio1.component";
 import { DashboardComponent } from "src/app/dashboard/dashboard.component";
 import { FileUploadComponent } from "src/app/file-upload/file-upload.component";
 
@@ -378,10 +370,10 @@ export const AdminLayoutRoutes: Routes = [
         path: "AnalyseQualitativeETQuantitative",
         // component:
       },
-      {
-        path: "KRIsLiQuidite",
-        // component: ,
-      },
+      // {
+      //   path: "KRIsLiQuidite",
+      //   // component: ,
+      // },
       {
         path: "StressTestLiquidite",
         // component:
@@ -389,36 +381,6 @@ export const AdminLayoutRoutes: Routes = [
       {
         path: "SurveillanceDeLaTreoserie",
         // component:
-      },
-
-      {
-        path: "ConsultationRatios1Liquidite",
-        component: ConsultationRatio1LiquiditeComponent,
-      },
-      {
-        path: "ConsultationRatio2Liquidite",
-        component: ConsultationRatio2LiquiditeComponent,
-      },
-
-      {
-        path: "ConsultationRatio3Liquidite",
-        component: ConsultationRatio3LiquiditeComponent,
-      },
-      {
-        path: "ConsultationRatio4Liquidite",
-        component: ConsultationRatio4LiquiditeComponent,
-      },
-      {
-        path: "ConsultationRatio5Liquidite",
-        component: ConsultationRatio5LiquiditeComponent,
-      },
-      {
-        path: "ConsultationRatio6Liquidite",
-        component: ConsultationRatio6LiquiditeComponent,
-      },
-      {
-        path: "ConsultationRapportKrisLiquidite",
-        component: ConsultationRapportKrisLiquiditeComponent,
       },
     ],
   },
@@ -465,88 +427,43 @@ export const AdminLayoutRoutes: Routes = [
     ],
   },
   {
-    path: "ConsultationRatios1Liquidite",
-    component: ConsultationRatio1LiquiditeComponent,
+    path: "KRIsLiquidite",
+    component: KRisLiquiditeComponent,
     children: [
       {
-        path: "RatioLiquiditeQuotidien",
-        component: RatioLiquiditeQuotidienComponent,
+        path: "ConsultationRatios1Liquidite",
+        component: Ratio1Component,
       },
       {
-        path: "RatioLiquiditeMensuel",
-        component: RatioLiquiditeMensuelComponent,
-      },
-      {
-        path: "RatioLiquiditeTrimestriel",
-        component: RatioLiquiditeTrimestrielComponent,
-      },
-    ],
-  },
-
-  {
-    path: "ConsultationRatio2Liquidite",
-    component: ConsultationRatio2LiquiditeComponent,
-    children: [
-      {
-        path: "ConsultationR2",
+        path: "ConsultationRatios2Liquidite",
         component: ConsultationR2Component,
       },
-    ],
-  },
-  {
-    path: "ConsultationRatio3Liquidite",
-    component: ConsultationRatio3LiquiditeComponent,
-    children: [
       {
-        path: "ConsultationR3",
+        path: "ConsultationRatios3Liquidite",
         component: ConsultationR3Component,
       },
-    ],
-  },
-  {
-    path: "ConsultationRatio4Liquidite",
-    component: ConsultationRatio4LiquiditeComponent,
-    children: [
       {
-        path: "ConsultationR4",
+        path: "ConsultationRatios4Liquidite",
         component: ConsultationR4Component,
       },
-    ],
-  },
-  {
-    path: "ConsultationRatio5Liquidite",
-    component: ConsultationRatio5LiquiditeComponent,
-    children: [
       {
-        path: "ConsultationR5",
+        path: "ConsultationRatios5Liquidite",
         component: ConsultationR5Component,
       },
-    ],
-  },
-  {
-    path: "ConsultationRatio6Liquidite",
-    component: ConsultationRatio6LiquiditeComponent,
-    children: [
       {
-        path: "ConsultationR6",
+        path: "ConsultationRatios6Liquidite",
         component: ConsultationR6Component,
       },
-    ],
-  },
-  {
-    path: "ConsultationRapportKrisLiquidite",
-    component: ConsultationRapportKrisLiquiditeComponent,
-    children: [
+
       {
-        path: "ConsultationRapport",
+        path: "ConsultationRapportLiquidite",
         component: RapportKrisLiquiditeComponent,
       },
     ],
   },
-
   {
     path: "LimiteBanque",
-    component: LimiteBanqueComponent,
+    component: LimiteBanqueContentComponent,
     // canActivate : [AuthPermissionsGuard],
     // data: {
     //   // expectedPermission:['ConsulterRessources']

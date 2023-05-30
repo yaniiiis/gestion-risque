@@ -90,6 +90,7 @@ registerLocaleData(localeFr);
     MatTooltipModule,
     MatNativeDateModule,
     MatOptionModule,
+    MatTabsModule,
   ],
   declarations: [],
 })
