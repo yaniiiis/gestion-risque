@@ -57,6 +57,7 @@ import { PositionParPlusieursDatesComponent } from "src/app/admin/risque-de-chan
 import { EvaluationTauxChangeComponent } from "src/app/admin/risque-de-change/evaluation-taux-change/evaluation-taux-change.component";
 
 import { KRIsDeChangeComponent } from "src/app/admin/risque-de-change/kris-de-change/kris-de-change.component";
+import { LimiteBanqueContentComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/limite-banque-content.component";
 import { ListeBeneficiaireComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/liste-beneficiaire/liste-beneficiaire.component";
 import { CreationLimiteComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/liste-limite/creation-limite/creation-limite.component";
 import { DesactivationLimiteComponent } from "src/app/admin/risque-de-marche/limite-banque/limite-banque-content/liste-limite/desactivation-limite/desactivation-limite.component";
@@ -461,25 +462,8 @@ export const AdminLayoutRoutes: Routes = [
     ],
   },
   {
-    // children: [
-    //   {
-    //     path: "RatioLiquiditeQuotidien",
-    //     component: RatioLiquiditeQuotidienComponent,
-    //   },
-    //   {
-    //     path: "RatioLiquiditeMensuel",
-    //     component: RatioLiquiditeMensuelComponent,
-    //   },
-    //   {
-    //     path: "RatioLiquiditeTrimestriel",
-    //     component: RatioLiquiditeTrimestrielComponent,
-    //   },
-    // ],
-  },
-
-  {
     path: "LimiteBanque",
-    component: LimiteBanqueComponent,
+    component: LimiteBanqueContentComponent,
     // canActivate : [AuthPermissionsGuard],
     // data: {
     //   // expectedPermission:['ConsulterRessources']
