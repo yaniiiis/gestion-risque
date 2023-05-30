@@ -135,45 +135,7 @@ import { ConsultationComponent } from "./risque-de-change/consultation/consultat
 import { ConsultationContentComponent } from "./risque-de-change/consultation/consultation-content/consultation-content.component";
 import { PositionParDateComponent } from "./risque-de-change/consultation/position-par-date/position-par-date.component";
 import { PositionParPlusieursDatesComponent } from "./risque-de-change/consultation/position-par-plusieurs-dates/position-par-plusieurs-dates.component";
-import { ConsultationRatio1LiquiditeComponent } from "./risque-liquidite/consultation-ratios1-liquidite/consultation-ratio1-liquidite.component";
-import { RatioLiquiditeQuotidienComponent } from "./risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-quotidien/ratio-liquidite-quotidien.component";
-import { RatioLiquiditeMensuelComponent } from "./risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-mensuel/ratio-liquidite-mensuel.component";
-import { RatioLiquiditeTrimestrielComponent } from "./risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-trimestriel/ratio-liquidite-trimestriel.component";
-import { ConsultationRatio1LiquiditeContentComponent } from "./risque-liquidite/consultation-ratios1-liquidite/consultation-ratios1-liquidite-content/consultation-ratio1-liquidite-content.component";
-import { ConsultationRatio2LiquiditeComponent } from "./risque-liquidite/consultation-ratio2-liquidite/consultation-ratio2-liquidite.component";
-import { ConsultationRatio2LiquiditeContentComponent } from "./risque-liquidite/consultation-ratio2-liquidite/consultation-ratio2-liquidite-content/consultation-ratio2-liquidite-content.component";
-import { ConsultationR2Component } from "./risque-liquidite/consultation-ratio2-liquidite/consultation-r2/consultation-r2.component";
-import { ConsultationRatio3LiquiditeComponent } from "./risque-liquidite/consultation-ratio3-liquidite/consultation-ratio3-liquidite.component";
-import { ConsultationRatio3LiquiditeContentComponent } from "./risque-liquidite/consultation-ratio3-liquidite/consultation-ratio3-liquidite-content/consultation-ratio3-liquidite-content.component";
-import { ConsultationR3Component } from "./risque-liquidite/consultation-ratio3-liquidite/consultation-r3/consultation-r3.component";
-import { ConsultationRatio4LiquiditeComponent } from "./risque-liquidite/consultation-ratio4-liquidite/consultation-ratio4-liquidite.component";
-import { ConsultationRatio4LiquiditeContentComponent } from "./risque-liquidite/consultation-ratio4-liquidite/consultation-ratio4-liquidite-content/consultation-ratio4-liquidite-content.component";
-import { ConsultationR4Component } from "./risque-liquidite/consultation-ratio4-liquidite/consultation-r4/consultation-r4.component";
-import { ConsultationRatio5LiquiditeComponent } from "./risque-liquidite/consultation-ratio5-liquidite/consultation-ratio5-liquidite.component";
-import { ConsultationRatio5LiquiditeContentComponent } from "./risque-liquidite/consultation-ratio5-liquidite/consultation-ratio5-liquidite-content/consultation-ratio5-liquidite-content.component";
-import { ConsultationR5Component } from "./risque-liquidite/consultation-ratio5-liquidite/consultation-r5/consultation-r5.component";
-import { ConsultationRatio6LiquiditeComponent } from "./risque-liquidite/consultation-ratio6-liquidite/consultation-ratio6-liquidite.component";
-import { ConsultationRatio6LiquiditeContentComponent } from "./risque-liquidite/consultation-ratio6-liquidite/consultation-ratio6-liquidite-content/consultation-ratio6-liquidite-content.component";
-import { ConsultationR6Component } from "./risque-liquidite/consultation-ratio6-liquidite/consultation-r6/consultation-r6.component";
-import { ConsultationRapportKrisLiquiditeComponent } from "./risque-liquidite/consultation-rapport-kris-liquidite/consultation-rapport-kris-liquidite.component";
-import { ConsultationRapportKrisLiquiditeContentComponent } from "./risque-liquidite/consultation-rapport-kris-liquidite/consultation-rapport-kris-liquidite-content/consultation-rapport-kris-liquidite-content.component";
-import { RapportKrisLiquiditeComponent } from "./risque-liquidite/consultation-rapport-kris-liquidite/rapport-kris-liquidite/rapport-kris-liquidite.component";
-import { RatioLiquiditeMensuelRatioComponent } from "./risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-mensuel/ratio-liquidite-mensuel-ratio/ratio-liquidite-mensuel-ratio.component";
-import { RatioLiquiditeMensuelCommentaireComponent } from "./risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-mensuel/ratio-liquidite-mensuel-commentaire/ratio-liquidite-mensuel-commentaire.component";
-import { ConsultationRatio2LiquiditeRatioComponent } from "./risque-liquidite/consultation-ratio2-liquidite/consultation-ratio2-liquidite-ratio/consultation-ratio2-liquidite-ratio.component";
-import { ConsultationRatio2LiquiditeCommentaireComponent } from "./risque-liquidite/consultation-ratio2-liquidite/consultation-ratio2-liquidite-commentaire/consultation-ratio2-liquidite-commentaire.component";
-import { RatioLiquiditeQuotidienRatioComponent } from "./risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-quotidien/ratio-liquidite-quotidien-ratio/ratio-liquidite-quotidien-ratio.component";
-import { RatioLiquiditeQuotidienCommentaireComponent } from "./risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-quotidien/ratio-liquidite-quotidien-commentaire/ratio-liquidite-quotidien-commentaire.component";
-import { RatioLiquiditeTrimestrielRatioComponent } from "./risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-trimestriel/ratio-liquidite-trimestriel-ratio/ratio-liquidite-trimestriel-ratio.component";
-import { RatioLiquiditeTrimestrielCommentaireComponent } from "./risque-liquidite/consultation-ratios1-liquidite/ratio-liquidite-trimestriel/ratio-liquidite-trimestriel-commentaire/ratio-liquidite-trimestriel-commentaire.component";
-import { ConsultationRatio3LiquiditeRatioComponent } from "./risque-liquidite/consultation-ratio3-liquidite/consultation-ratio3-liquidite-ratio/consultation-ratio3-liquidite-ratio.component";
-import { ConsultationRatio3LiquiditeCommentaireComponent } from "./risque-liquidite/consultation-ratio3-liquidite/consultation-ratio3-liquidite-commentaire/consultation-ratio3-liquidite-commentaire.component";
-import { ConsultationRatio4LiquiditeCommentaireComponent } from "./risque-liquidite/consultation-ratio4-liquidite/consultation-ratio4-liquidite-commentaire/consultation-ratio4-liquidite-commentaire.component";
-import { ConsultationRatio4LiquiditeRatioComponent } from "./risque-liquidite/consultation-ratio4-liquidite/consultation-ratio4-liquidite-ratio/consultation-ratio4-liquidite-ratio.component";
-import { ConsultationRatio5LiquiditeRatioComponent } from "./risque-liquidite/consultation-ratio5-liquidite/consultation-ratio5-liquidite-ratio/consultation-ratio5-liquidite-ratio.component";
-import { ConsultationRatio5LiquiditeCommentaireComponent } from "./risque-liquidite/consultation-ratio5-liquidite/consultation-ratio5-liquidite-commentaire/consultation-ratio5-liquidite-commentaire.component";
-import { ConsultationRatio6LiquiditeCommentaireComponent } from "./risque-liquidite/consultation-ratio6-liquidite/consultation-ratio6-liquidite-commentaire/consultation-ratio6-liquidite-commentaire.component";
-import { ConsultationRatio6LiquiditeRatioComponent } from "./risque-liquidite/consultation-ratio6-liquidite/consultation-ratio6-liquidite-ratio/consultation-ratio6-liquidite-ratio.component";
+
 import { LimiteBanqueComponent } from "./risque-de-marche/limite-banque/limite-banque.component";
 import { LimiteBanqueContentComponent } from "./risque-de-marche/limite-banque/limite-banque-content/limite-banque-content.component";
 import { ListeLimiteComponent } from "./risque-de-marche/limite-banque/limite-banque-content/liste-limite/liste-limite.component";
@@ -191,6 +153,33 @@ import { ConcentrationGroupeComponent } from "./risque-credit/concentration/conc
 import { IndicateursComponent } from "./risque-credit/indicateurs/indicateurs.component";
 import { IndicateurTableComponent } from "./risque-credit/indicateurs/indicateur-table/indicateur-table.component";
 import { MyInputListWithCheckboxComponent } from "./commons/my-input-list-with-checkbox/my-input-list-with-checkbox.component";
+import { Ratio1Component } from "./risque-liquidite/kris-liquidite/ratio1/ratio1.component";
+import { MatTabsModule } from "@angular/material/tabs";
+import { RatioLiquiditeMensuelCommentaireComponent } from "./risque-liquidite/kris-liquidite/ratio1/ratio-liquidite-mensuel/ratio-liquidite-mensuel-commentaire/ratio-liquidite-mensuel-commentaire.component";
+import { RatioLiquiditeMensuelRatioComponent } from "./risque-liquidite/kris-liquidite/ratio1/ratio-liquidite-mensuel/ratio-liquidite-mensuel-ratio/ratio-liquidite-mensuel-ratio.component";
+import { RatioLiquiditeMensuelComponent } from "./risque-liquidite/kris-liquidite/ratio1/ratio-liquidite-mensuel/ratio-liquidite-mensuel.component";
+import { RatioLiquiditeQuotidienCommentaireComponent } from "./risque-liquidite/kris-liquidite/ratio1/ratio-liquidite-quotidien/ratio-liquidite-quotidien-commentaire/ratio-liquidite-quotidien-commentaire.component";
+import { RatioLiquiditeQuotidienRatioComponent } from "./risque-liquidite/kris-liquidite/ratio1/ratio-liquidite-quotidien/ratio-liquidite-quotidien-ratio/ratio-liquidite-quotidien-ratio.component";
+import { RatioLiquiditeQuotidienComponent } from "./risque-liquidite/kris-liquidite/ratio1/ratio-liquidite-quotidien/ratio-liquidite-quotidien.component";
+import { RatioLiquiditeTrimestrielCommentaireComponent } from "./risque-liquidite/kris-liquidite/ratio1/ratio-liquidite-trimestriel/ratio-liquidite-trimestriel-commentaire/ratio-liquidite-trimestriel-commentaire.component";
+import { RatioLiquiditeTrimestrielRatioComponent } from "./risque-liquidite/kris-liquidite/ratio1/ratio-liquidite-trimestriel/ratio-liquidite-trimestriel-ratio/ratio-liquidite-trimestriel-ratio.component";
+import { RatioLiquiditeTrimestrielComponent } from "./risque-liquidite/kris-liquidite/ratio1/ratio-liquidite-trimestriel/ratio-liquidite-trimestriel.component";
+import { ConsultationR2Component } from "./risque-liquidite/kris-liquidite/consultation-r2/consultation-r2.component";
+import { ConsultationRatio2LiquiditeCommentaireComponent } from "./risque-liquidite/kris-liquidite/consultation-ratio2-liquidite-commentaire/consultation-ratio2-liquidite-commentaire.component";
+import { ConsultationRatio2LiquiditeRatioComponent } from "./risque-liquidite/kris-liquidite/consultation-ratio2-liquidite-ratio/consultation-ratio2-liquidite-ratio.component";
+import { ConsultationR3Component } from "./risque-liquidite/kris-liquidite/consultation-r3/consultation-r3.component";
+import { ConsultationR4Component } from "./risque-liquidite/kris-liquidite/consultation-r4/consultation-r4.component";
+import { ConsultationR5Component } from "./risque-liquidite/kris-liquidite/consultation-r5/consultation-r5.component";
+import { ConsultationR6Component } from "./risque-liquidite/kris-liquidite/consultation-r6/consultation-r6.component";
+import { ConsultationRatio3LiquiditeCommentaireComponent } from "./risque-liquidite/kris-liquidite/consultation-ratio3-liquidite-commentaire/consultation-ratio3-liquidite-commentaire.component";
+import { ConsultationRatio3LiquiditeRatioComponent } from "./risque-liquidite/kris-liquidite/consultation-ratio3-liquidite-ratio/consultation-ratio3-liquidite-ratio.component";
+import { ConsultationRatio4LiquiditeCommentaireComponent } from "./risque-liquidite/kris-liquidite/consultation-ratio4-liquidite-commentaire/consultation-ratio4-liquidite-commentaire.component";
+import { ConsultationRatio4LiquiditeRatioComponent } from "./risque-liquidite/kris-liquidite/consultation-ratio4-liquidite-ratio/consultation-ratio4-liquidite-ratio.component";
+import { ConsultationRatio5LiquiditeCommentaireComponent } from "./risque-liquidite/kris-liquidite/consultation-ratio5-liquidite-commentaire/consultation-ratio5-liquidite-commentaire.component";
+import { ConsultationRatio5LiquiditeRatioComponent } from "./risque-liquidite/kris-liquidite/consultation-ratio5-liquidite-ratio/consultation-ratio5-liquidite-ratio.component";
+import { ConsultationRatio6LiquiditeCommentaireComponent } from "./risque-liquidite/kris-liquidite/consultation-ratio6-liquidite-commentaire/consultation-ratio6-liquidite-commentaire.component";
+import { ConsultationRatio6LiquiditeRatioComponent } from "./risque-liquidite/kris-liquidite/consultation-ratio6-liquidite-ratio/consultation-ratio6-liquidite-ratio.component";
+import { RapportKrisLiquiditeComponent } from "./risque-liquidite/kris-liquidite/rapport-kris-liquidite/rapport-kris-liquidite.component";
 import { IndicateurService } from "../_services/indicateur.service";
 
 @NgModule({
@@ -289,28 +278,14 @@ import { IndicateurService } from "../_services/indicateur.service";
     PositionParPlusieursDatesComponent,
     ConsultationComponent,
     ConsultationContentComponent,
-    ConsultationRatio1LiquiditeComponent,
     RatioLiquiditeQuotidienComponent,
     RatioLiquiditeMensuelComponent,
     RatioLiquiditeTrimestrielComponent,
-    ConsultationRatio1LiquiditeContentComponent,
-    ConsultationRatio2LiquiditeComponent,
-    ConsultationRatio2LiquiditeContentComponent,
     ConsultationR2Component,
-    ConsultationRatio3LiquiditeComponent,
-    ConsultationRatio3LiquiditeContentComponent,
     ConsultationR3Component,
-    ConsultationRatio4LiquiditeComponent,
-    ConsultationRatio4LiquiditeContentComponent,
     ConsultationR4Component,
-    ConsultationRatio5LiquiditeComponent,
-    ConsultationRatio5LiquiditeContentComponent,
     ConsultationR5Component,
-    ConsultationRatio6LiquiditeComponent,
-    ConsultationRatio6LiquiditeContentComponent,
     ConsultationR6Component,
-    ConsultationRapportKrisLiquiditeComponent,
-    ConsultationRapportKrisLiquiditeContentComponent,
     RapportKrisLiquiditeComponent,
     RatioLiquiditeMensuelRatioComponent,
     RatioLiquiditeMensuelCommentaireComponent,
@@ -320,6 +295,7 @@ import { IndicateurService } from "../_services/indicateur.service";
     RatioLiquiditeQuotidienCommentaireComponent,
     RatioLiquiditeTrimestrielRatioComponent,
     RatioLiquiditeTrimestrielCommentaireComponent,
+    ConsultationRatio2LiquiditeRatioComponent,
     ConsultationRatio3LiquiditeRatioComponent,
     ConsultationRatio3LiquiditeCommentaireComponent,
     ConsultationRatio4LiquiditeCommentaireComponent,
@@ -379,6 +355,7 @@ import { IndicateurService } from "../_services/indicateur.service";
     IndicateurTableComponent,
     IndicateurTableComponent,
     MyInputListWithCheckboxComponent,
+    Ratio1Component,
   ],
   imports: [
     CommonModule,
@@ -402,6 +379,7 @@ import { IndicateurService } from "../_services/indicateur.service";
     NgChartsModule,
     ClickOutsideModule,
     MatAutocompleteModule,
+    MatTabsModule,
     NgMultiSelectDropDownModule.forRoot(),
   ],
   providers: [
