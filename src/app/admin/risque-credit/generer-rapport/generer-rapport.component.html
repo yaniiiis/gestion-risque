@@ -36,7 +36,7 @@
                     *ngIf="rapportTypesLoading"
                   ></mat-spinner>
                   <span class="span-error" *ngIf="generateIsClicked && !type"
-                    >Veuillez choisir un champ</span
+                    >Veuillez choisir un type</span
                   >
                   <div
                     class="autocomplete-list-content"
@@ -53,19 +53,26 @@
                   </div>
                 </div>
 
-                <mat-form-field class="my-calender" floatLabel="never">
-                  <input
-                    matInput
-                    [matDatepicker]="picker"
-                    placeholder="Sélectionner une date"
-                    [(ngModel)]="selectedDate"
-                  />
-                  <mat-datepicker-toggle
-                    matSuffix
-                    [for]="picker"
-                  ></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
+                <div class="date-container">
+                  <mat-form-field class="my-calender" floatLabel="never">
+                    <input
+                      matInput
+                      [matDatepicker]="picker"
+                      placeholder="Sélectionner une date"
+                      [(ngModel)]="selectedDate"
+                    />
+                    <mat-datepicker-toggle
+                      matSuffix
+                      [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                  <span
+                    class="span-error date-error"
+                    *ngIf="generateIsClicked && !type"
+                    >Veuillez choisir une date</span
+                  >
+                </div>
 
                 <button (click)="handleGenerate()" class="my-button-generate">
                   <mat-spinner
@@ -75,6 +82,10 @@
                   <ng-template #generer> Générer</ng-template>
                 </button>
               </div>
+            </div>
+            <div *ngIf="generateHasError" class="generate-error">
+              Ce rapport a été mal définit, veuillez revoir votre définition de
+              ce rapport
             </div>
             <router-outlet></router-outlet>
           </div>

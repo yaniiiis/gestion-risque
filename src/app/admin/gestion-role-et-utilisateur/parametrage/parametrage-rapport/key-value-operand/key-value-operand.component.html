@@ -78,6 +78,7 @@
         <mat-radio-group
           formControlName="operand"
           aria-label="Selectionnez un opérand"
+          (change)="operandCahnge($event)"
         >
           <mat-radio-button value="OR">OR</mat-radio-button>
           <mat-radio-button value="AND">AND</mat-radio-button>

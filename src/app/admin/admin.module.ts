@@ -180,6 +180,7 @@ import { ConsultationRatio5LiquiditeRatioComponent } from "./risque-liquidite/kr
 import { ConsultationRatio6LiquiditeCommentaireComponent } from "./risque-liquidite/kris-liquidite/consultation-ratio6-liquidite-commentaire/consultation-ratio6-liquidite-commentaire.component";
 import { ConsultationRatio6LiquiditeRatioComponent } from "./risque-liquidite/kris-liquidite/consultation-ratio6-liquidite-ratio/consultation-ratio6-liquidite-ratio.component";
 import { RapportKrisLiquiditeComponent } from "./risque-liquidite/kris-liquidite/rapport-kris-liquidite/rapport-kris-liquidite.component";
+import { IndicateurService } from "../_services/indicateur.service";
 
 @NgModule({
   declarations: [
@@ -381,7 +382,12 @@ import { RapportKrisLiquiditeComponent } from "./risque-liquidite/kris-liquidite
     MatTabsModule,
     NgMultiSelectDropDownModule.forRoot(),
   ],
-  providers: [authInterceptorProviders, MatDatepickerModule, DatePipe],
+  providers: [
+    authInterceptorProviders,
+    MatDatepickerModule,
+    DatePipe,
+    IndicateurService,
+  ],
   exports: [MatDatepickerModule],
 })
 export class AdminModule {}
