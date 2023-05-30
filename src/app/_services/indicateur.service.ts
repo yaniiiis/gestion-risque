@@ -53,7 +53,6 @@ export class IndicateurService {
             this.dataSubject.value["values"] &&
             this.dataSubject.value["values"].length < 1
           ) {
-            console.log("yooooooow existtte");
             const obj = {
               indice: res.indice,
               values: [{ [res.date]: res.value }],

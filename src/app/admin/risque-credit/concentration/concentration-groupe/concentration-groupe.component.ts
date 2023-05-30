@@ -62,9 +62,11 @@ export class ConcentrationGroupeComponent implements OnInit {
   }
 
   calculerClicked() {
-    if (!this.selectedId) {
-      this.myListInputHasError = true;
-    } else if (this.selectedId && this.fondPropres) {
+    // if (!this.selectedId) {
+    //   this.myListInputHasError = true;
+    // } else
+    this.calculateIsClicked = true;
+    if (this.selectedId && this.fondPropres) {
       this.calculateIsClicked = true;
       this.calculateConcentration();
     }
@@ -111,6 +113,10 @@ export class ConcentrationGroupeComponent implements OnInit {
         this.selectedId
       }/${this.datePipe.transform(this.date, "yyyy-MM-dd")}`,
     ]);
+  }
+
+  isValidNumber(item: any): boolean {
+    return !isNaN(Number(item));
   }
 
   tableHeaders = [

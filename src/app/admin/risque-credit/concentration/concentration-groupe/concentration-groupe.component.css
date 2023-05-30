@@ -190,3 +190,12 @@ td {
   border-radius: 5px;
   box-shadow: 1px 1px 2px rgb(102 68 68 / 20%);
 }
+
+.span-error {
+  font-size: 12px;
+  color: red;
+  font-weight: bold;
+}
+.span-error-date {
+  margin-left: 100px;
+}
