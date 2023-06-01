@@ -1,3 +1,4 @@
+import { Location } from "@angular/common";
 import { Component, Input, OnInit } from "@angular/core";
 import { RapportGenerationServiceService } from "src/app/_services/RapportService/rapport-generation-service.service";
 
@@ -8,7 +9,8 @@ import { RapportGenerationServiceService } from "src/app/_services/RapportServic
 })
 export class MonRapportComponent implements OnInit {
   constructor(
-    private rapportGenerationService: RapportGenerationServiceService
+    private rapportGenerationService: RapportGenerationServiceService,
+    private _location: Location
   ) {}
 
   data: Map<string, any> = new Map<string, any>();
@@ -22,14 +24,12 @@ export class MonRapportComponent implements OnInit {
   ngOnInit(): void {
     this.data = this.rapportGenerationService.generatedRapport;
     this.rapportTypeName = this.rapportGenerationService.rapportTypeName;
-    console.log("typoo : ", this.data);
+    if (!this.data || !this.rapportTypeName) return this._location.back();
     const r = this.data[this.rapportTypeName];
     for (const key in r) {
       this.underTypesNames.push(key);
       this.linesGroupedByUnderType.set(key, r[key]);
     }
-
-    console.log("table : ", this.underTypesNames);
 
     this.handleUnderTypeChange(this.underTypesNames[0]);
     let totalMap: Map<string, number> = new Map<string, number>();
